@@ -64,6 +64,10 @@ Ajoute : base de données, auth (login/signup/reset), middleware, Server Actions
 Activé quand le projet a besoin d'une base de données et/ou d'authentification.
 Voir `.tiple/starters/supabase-auth/README.md` pour le détail.
 
+### Canal MCP (`.tiple/starters/mcp/`)
+Ajoute : endpoint `/api/mcp` (Streamable HTTP stateless), tool démo câblé `schema Zod → service → tool`, helpers dual-meta + résultats, auth OAuth 2.1 (à activer avec supabase-auth), bridge widgets unique, widget exemple buildé par Vite (single-file), test unit `InMemoryTransport`.
+Activé pour tout produit MCP-first. Voir `.tiple/starters/mcp/README.md` pour le détail.
+
 ### Règles Supabase (quand activé)
 - **Supabase côté serveur uniquement pour les mutations.** Le browser client est réservé au realtime et à l'auth listener. Jamais de `.insert()/.update()/.delete()` depuis un Client Component.
 - **RLS activé sur toute table.** Pas d'exception sans ADR documenté. Le `service_role` client est interdit sauf cas explicitement documenté.
@@ -78,7 +82,7 @@ Voir `.tiple/starters/supabase-auth/README.md` pour le détail.
 4. **Tools authentifiés OAuth 2.1 via Supabase** (RFC 9728 + 401 `WWW-Authenticate` + `securitySchemes` par tool), client Supabase au nom de l'utilisateur (RLS active). `service_role` interdit dans les tools. Serveur **stateless** : jamais de sessions/push sans ADR.
 5. **Dual-host day one (Claude + ChatGPT)** : widgets déclarés avec les DEUX metas (`ui/resourceUri` standard + alias `openai/outputTemplate`) via un helper unique ; bridge unique (`widgets/shared/bridge.ts`) ; matrice de test des deux hosts avant push. Tout tool fonctionne sans widget (texte suffisant). Bundles Vite single-file (CSP hosts : zéro requête externe).
 6. **AX** : `instructions` serveur maintenu, descriptions "Use this when… / Do not use for…", `next_actions` dans chaque résultat ; toute évolution de tool/description rejoue les golden queries (`docs/mcp-golden-queries.md`, créé depuis `.tiple/templates/mcp-golden-queries.tmpl.md`) sur les deux hosts.
-7. Détail des patterns : `.tiple/conventions/mcp-patterns.md` (tag `mcp`). Les choix d'auth et de transport sont figés par ADR lors du cadrage (`/tm-plan`).
+7. Détail des patterns : `.tiple/conventions/mcp-patterns.md` (tag `mcp`). Squelette prêt à installer : `.tiple/starters/mcp/` (story S01). Les choix d'auth et de transport sont figés par ADR lors du cadrage (`/tm-plan`).
 
 ## Workflow quotidien
 1. Lire `.tiple/sprint/status.md` → identifier la prochaine story 🟢 Ready

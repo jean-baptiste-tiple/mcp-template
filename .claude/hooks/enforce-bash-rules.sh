@@ -3,23 +3,35 @@
 # Bloque les violations des règles d'exécution Bash (CLAUDE.md)
 # Hook PreToolUse — s'exécute AVANT chaque appel Bash
 # Exit 0 = autorisé, Exit 2 = bloqué (message affiché à Claude)
-# Compatible macOS + Windows (pas de dépendance jq)
+# Compatible macOS + Windows (Git Bash) : jq si disponible, sinon perl
 
 INPUT=$(cat)
 
 # --- Règle 1 : JAMAIS de run_in_background ---
-# Vérifie plusieurs formats possibles du JSON (avec/sans espaces, minifié ou pretty-printed)
-if echo "$INPUT" | grep -q '"run_in_background"'; then
-  # Le champ existe — vérifier s'il est true
-  if echo "$INPUT" | grep -qE '"run_in_background"\s*:\s*true'; then
-    echo "BLOQUÉ: run_in_background=true est INTERDIT. Relance en foreground avec timeout: 120000 (ou jusqu'à 600000 pour les builds longs). Voir CLAUDE.md règle 1." >&2
-    exit 2
-  fi
+if echo "$INPUT" | grep -qE '"run_in_background"\s*:\s*true'; then
+  echo "BLOQUÉ: run_in_background=true est INTERDIT. Relance en foreground avec timeout: 120000 (ou jusqu'à 600000 pour les builds longs). Voir CLAUDE.md règle 1." >&2
+  exit 2
 fi
 
-# Extraire la commande (entre les guillemets après "command":)
-# On utilise grep + sed car jq n'est pas toujours disponible
-COMMAND=$(echo "$INPUT" | grep -o '"command"[[:space:]]*:[[:space:]]*"[^"]*"' | sed 's/"command"[[:space:]]*:[[:space:]]*"//;s/"$//')
+# --- Extraction de tool_input.command ---
+# Doit gérer les guillemets échappés : une commande comme `grep "x" f | wc -l` arrive en JSON
+# sous la forme "command":"grep \"x\" f | wc -l" — une extraction naïve [^"]* s'arrête au
+# premier \" et laisse passer tout ce qui suit (pipe non détecté).
+if command -v jq >/dev/null 2>&1; then
+  COMMAND=$(printf '%s' "$INPUT" | jq -r '.tool_input.command // empty')
+elif command -v perl >/dev/null 2>&1; then
+  COMMAND=$(printf '%s' "$INPUT" | perl -0777 -ne '
+    if (/"command"\s*:\s*"((?:\\.|[^"\\])*)"/s) {
+      my $c = $1;
+      $c =~ s/\\n/\n/g;
+      $c =~ s/\\t/\t/g;
+      $c =~ s/\\(.)/$1/g;
+      print $c;
+    }')
+else
+  # Dernier recours (comportement historique, best effort sur commandes sans guillemets)
+  COMMAND=$(echo "$INPUT" | grep -o '"command"[[:space:]]*:[[:space:]]*"[^"]*"' | sed 's/"command"[[:space:]]*:[[:space:]]*"//;s/"$//')
+fi
 
 # --- Règle 2 : Aucun pipe vers des commandes de troncature/filtrage ---
 if echo "$COMMAND" | grep -qE '\|\s*(tail|head|grep|wc|tee|less|more|awk|sed)\b'; then

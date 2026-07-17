@@ -2,6 +2,7 @@
 
 > Tag : `mcp`
 > Lire ce fichier avant d'écrire un tool MCP, un widget MCP Apps, ou de toucher à `src/mcp/` / `widgets/`.
+> Squelette d'implémentation prêt : `.tiple/starters/mcp/` (installé en S01) — chaque fichier du starter référence la section qu'il implémente.
 > Les exemples ci-dessous utilisent un domaine fictif (gestion de documents) — adapter au domaine du projet.
 > Cibles : **Claude ET ChatGPT dès la V1** — toute règle ci-dessous s'applique aux deux hosts.
 

@@ -10,6 +10,24 @@
 **Fichiers :** Liste des fichiers créés/modifiés
 -->
 
+## [2026-07-17] — Starter Canal MCP + tests smoke + error.tsx + hook durci
+**Quoi :**
+- Nouveau starter `.tiple/starters/mcp/` (15 fichiers) : endpoint `/api/mcp` stateless (mcp-handler), chaîne démo complète `schema Zod partagé → service → tool get_status`, helpers `widget-meta` (dual-meta `ui/resourceUri` + `openai/outputTemplate`) et `tool-result` (deux formes + erreurs actionnables), `auth.ts` OAuth 2.1 (JWKS Supabase, à activer avec supabase-auth), route RFC 9728, bridge widgets unique deux dialectes, widget exemple `status-card` (états + thème) buildé par Vite single-file, test unit `InMemoryTransport`. Chaque fichier référence la section de `mcp-patterns.md` qu'il implémente, avec `TODO(S01)` sur les points à valider contre les versions épinglées.
+- Tests smoke ajoutés : `tests/e2e/smoke.spec.ts` (redirect home → /dashboard + design system, valide la config Playwright) et `tests/integration/dashboard-page.test.tsx` (RTL + jsdom + jest-dom). `tests/setup.ts` existait mais n'était pas branché — `setupFiles` câblé dans `vitest.config.ts`.
+- `src/app/error.tsx` global ajouté (EmptyState + Button, reset).
+- Hook `enforce-bash-rules.sh` durci : l'extraction de `tool_input.command` gérait mal les guillemets échappés (une commande avec `"…"` tronquait l'extraction au premier `\"` → un pipe interdit passait). Extraction via jq, fallback perl, dernier recours historique. Vérifié sur 3 cas (pipe caché par guillemets bloqué, commande propre OK, pipe dans `description` seule OK).
+- `commit-push.md` : trailer co-author neutre (plus de modèle hardcodé).
+- Docs synchronisées : README (table starters, structure, checks), CLAUDE.md (starter MCP), tech-stack.md (jose, vite-plugin-singlefile), mcp-patterns.md (pointeur starter).
+
+**Pourquoi :** suite de l'audit boilerplate — le cœur MCP du template ("mcp-template") était entièrement "à créer en S01" à chaque projet. Le starter fait gagner la story de setup et fixe les patterns par l'exemple.
+
+**Fichiers :**
+- `.tiple/starters/mcp/` (15 nouveaux fichiers)
+- `tests/e2e/smoke.spec.ts`, `tests/integration/dashboard-page.test.tsx`, `vitest.config.ts`
+- `src/app/error.tsx`
+- `.claude/hooks/enforce-bash-rules.sh`, `.claude/commands/commit-push.md`
+- `README.md`, `CLAUDE.md`, `.tiple/conventions/tech-stack.md`, `.tiple/conventions/mcp-patterns.md`
+
 ## [2026-07-17] — Audit boilerplate : 3 fixes (route `/` 404, config Tailwind morte, lint du build output)
 **Quoi :**
 - Route `/dashboard` créée : `src/app/(dashboard)/page.tsx` → `src/app/(dashboard)/dashboard/page.tsx`. Avant, cette page résolvait vers `/` (un route group ne crée pas de segment d'URL), était silencieusement masquée par `src/app/page.tsx`, et le `redirect("/dashboard")` de la home aboutissait à un 404 out of the box.

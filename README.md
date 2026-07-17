@@ -39,9 +39,10 @@ Le template est minimal par défaut. Les starters dans `.tiple/starters/` ajoute
 
 | Starter | Dossier | Ce qu'il ajoute |
 |---------|---------|-----------------|
+| **Canal MCP** | `.tiple/starters/mcp/` | Endpoint `/api/mcp` stateless, tool démo (`schema Zod → service → tool`), helpers dual-meta, auth OAuth 2.1 (RFC 9728), bridge widgets, widget exemple Vite single-file, test `InMemoryTransport` |
 | **Supabase + Auth** | `.tiple/starters/supabase-auth/` | Base de données, auth (login/signup/reset), middleware, Server Actions, pages auth, CI migrations |
 
-Pour un produit MCP-first, le starter Supabase + Auth est quasi obligatoire : c'est lui qui fournit la DB (RLS) et l'authorization server OAuth 2.1 du canal MCP.
+Pour un produit MCP-first, les deux starters vont ensemble : Supabase + Auth fournit la DB (RLS) et l'authorization server OAuth 2.1 du canal MCP ; le starter Canal MCP fournit le serveur, les widgets et le câblage auth (bloc à décommenter une fois Supabase en place).
 
 ## Quick Start
 
@@ -103,7 +104,7 @@ Le cadrage (`/tm-plan`) remplit la section "Canal MCP" de l'architecture (tools,
 │   ├── templates/               # Templates de documents (dont architecture avec section MCP, golden queries)
 │   ├── checklists/              # 5 checklists quality gates
 │   ├── conventions/             # Conventions par tags (23 fichiers dont mcp-patterns.md + _index.md)
-│   ├── starters/                # Starters optionnels (supabase-auth, ...)
+│   ├── starters/                # Starters optionnels (mcp, supabase-auth)
 │   └── sprint/status.md         # Sprint tracking
 ├── docs/
 │   ├── brief.md / prd.md / architecture.md   # Générés par /tm-plan
@@ -113,17 +114,17 @@ Le cadrage (`/tm-plan`) remplit la section "Canal MCP" de l'architecture (tools,
 │   └── decisions/               # ADRs (auth MCP, stateless, ... — créés au cadrage)
 ├── src/
 │   ├── app/
-│   │   ├── (dashboard)/         # Layout principal + page placeholder
+│   │   ├── (dashboard)/         # Layout principal + page /dashboard placeholder
 │   │   ├── design-system/       # Preview du design system
-│   │   └── api/mcp/             # (à créer en S01) Endpoint MCP — mcp-handler
-│   ├── mcp/                     # (à créer en S01) Serveur MCP : tools, auth, helpers
+│   │   └── api/mcp/             # (starter mcp, installé en S01) Endpoint MCP — mcp-handler
+│   ├── mcp/                     # (starter mcp, installé en S01) Serveur MCP : tools, auth, helpers
 │   ├── components/              # ui/ (34 Shadcn) + composants métier
 │   └── lib/                     # services/, schemas/, utils/
-├── widgets/                     # (à créer si widgets) Sources MCP Apps — Vite single-file + bridge partagé
-└── tests/                       # Unit, integration, e2e
+├── widgets/                     # (starter mcp, installé en S01) Sources MCP Apps — Vite single-file + bridge partagé
+└── tests/                       # Unit, integration, e2e (smoke fournis)
 ```
 
-Les dossiers marqués "à créer" ne sont pas pré-générés : ils naissent lors des stories de setup, guidés par `.tiple/conventions/mcp-patterns.md`.
+Les dossiers marqués "starter mcp" ne sont pas pré-générés : le squelette complet vit dans `.tiple/starters/mcp/` et s'installe lors de la story de setup (mapping fichier par fichier dans son README), guidé par `.tiple/conventions/mcp-patterns.md`.
 
 ## Personnaliser le template
 
@@ -155,6 +156,7 @@ Les conventions techniques sont dans `.tiple/conventions/` et chargées **automa
 | Check | Où | Quand |
 |---|---|---|
 | `pnpm type-check` + `pnpm lint` + `pnpm test` | **Local** (via `/commit-push`) | Avant chaque push |
+| `pnpm test:e2e` | **Local** (smoke Playwright fourni : redirect home + design system) | À la demande / avant release |
 | `pnpm build` | **CI GitHub** (`.github/workflows/ci.yml`) | Après chaque push — validation Vercel + catch des erreurs Linux |
 
 Pour les stories taguées `mcp` : en plus des checks ci-dessus, passer la **matrice de test dual-host** (§5.4 de `mcp-patterns.md`) et rejouer les **golden queries** sur Claude et ChatGPT (developer mode) si un tool ou une description a changé.

@@ -37,13 +37,13 @@ Ajouter une entrée en haut de `docs/changelog.md` (après le commentaire HTML) 
 - Rédiger un message de commit concis qui explique le **pourquoi** :
   - Préfixe : `fix:`, `feat:`, `refactor:`, `docs:`, `chore:`, `perf:`
   - 1-2 lignes max
-  - Terminer par `Co-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>`
+  - Terminer par `Co-Authored-By: Claude <noreply@anthropic.com>`
 - Créer le commit via HEREDOC :
   ```
   git commit -m "$(cat <<'EOF'
   prefixe: message concis
 
-  Co-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>
+  Co-Authored-By: Claude <noreply@anthropic.com>
   EOF
   )"
   ```

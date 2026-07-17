@@ -20,6 +20,7 @@
 
 ## Canal MCP (si le produit expose un serveur MCP)
 
+> Squelette prêt : `.tiple/starters/mcp/` (endpoint, tool démo, widgets, bridge, test) — installé en S01.
 > Versions `1.x` / `latest` à figer lors de l'installation (story S01 Setup) — mettre à jour ce tableau avec les versions exactes.
 
 | Techno | Version | Rôle | Justification |
@@ -28,7 +29,8 @@
 | mcp-handler | 1.x | Endpoint MCP dans Next.js (`/api/mcp`) | Transport Streamable HTTP sur route handler, compatible Vercel |
 | MCP Apps (SEP-1865) / @mcp-ui/* | latest | Widgets visuels dans Claude/ChatGPT | Bundles HTML `ui://`, double méta (`ui/resourceUri` + alias `openai/outputTemplate`), bridge unique `widgets/shared/bridge.ts` |
 | @anthropic-ai/sdk | latest | IA (si besoin : parsing, génération, adaptation) | PDF natif en entrée, structured outputs (Zod), prompt caching |
-| Vite | latest | Build des widgets en HTML single-file | CSP des hosts = zéro requête externe, tout inliné |
+| Vite + vite-plugin-singlefile | latest | Build des widgets en HTML single-file | CSP des hosts = zéro requête externe, tout inliné |
+| jose | latest | Validation JWT (JWKS Supabase) dans `src/mcp/auth.ts` | OAuth 2.1 resource server, RLS au JWT utilisateur |
 | playwright-core + @sparticuz/chromium | latest | Génération PDF (HTML → PDF), si applicable | Un seul composant React pour web / partage / widget / PDF |
 
 <!-- PERSONNALISER : modèles IA par défaut par opération (lib/ai/config.ts) — ex: extraction → claude-haiku-4-5 ; génération/traduction → claude-sonnet-5. Logger les coûts. -->
