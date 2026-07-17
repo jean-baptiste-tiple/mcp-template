@@ -1,0 +1,157 @@
+# CLAUDE.md — Tiple Method
+
+## Style de réponse (CRITIQUE)
+- **Réponses courtes, droit au but. Le minimum de mots possibles.**
+- Pas de récap qui répète ce que l'user vient de dire. Pas de tableaux décoratifs ni d'emojis sauf si demandé.
+- Pas de "voici ce que j'ai fait", pas de phrases d'intro/transition. État du résultat seulement.
+
+## Avant de coder (CRITIQUE)
+- **Surfacer les hypothèses, pas les masquer.** Si la story/fix est ambigu ou admet plusieurs interprétations : nommer le doute, proposer les options, demander — ne pas trancher en silence.
+- **Edits chirurgicaux.** Chaque ligne changée doit tracer à la demande. Pas de cleanup adjacent, pas de reformatage opportuniste, pas de refacto non demandé. Dead code repéré : le mentionner, pas le supprimer.
+- **Critères de succès vérifiables avant d'implémenter.** Reformuler la tâche en checks concrets (test qui reproduit le bug, assertion qui valide la feature, type-check qui passe). Pas de "make it work" flou.
+- **Push back quand justifié.** Si une approche plus simple existe ou si la demande crée une dette évidente, le dire avant d'exécuter.
+
+## Projet
+<!-- À REMPLIR : Nom du projet, description en 1 ligne -->
+
+## Stack
+Next.js 15 (App Router) + TypeScript strict + Tailwind CSS + Shadcn/ui
+Backend/DB optionnel : Supabase (à ajouter selon le projet — voir section "Supabase" ci-dessous).
+Canal MCP (si produit MCP-first) : `@modelcontextprotocol/sdk` + `mcp-handler` (endpoint `/api/mcp`), widgets MCP Apps buildés par Vite. IA optionnelle : Claude API (`@anthropic-ai/sdk`).
+Voir `.tiple/conventions/tech-stack.md` pour les versions exactes.
+
+## Méthode
+Ce projet suit la Tiple Method. La documentation dans `docs/` est la source de vérité. Lis les fichiers pertinents avant chaque action.
+
+## Règles absolues
+1. Ne JAMAIS coder sans story en statut 🟢 Ready dans `docs/stories/`
+2. TOUJOURS lire avant de coder : la story, la référence UI de la story (maquette, Figma, description — si applicable), `docs/architecture.md`, et les **conventions par tags** (voir ci-dessous)
+3. Ne JAMAIS créer un composant/hook/util sans vérifier le component-registry d'abord — s'il existe, réutiliser
+4. Ne JAMAIS modifier un invariant d'architecture sans créer un ADR dans `docs/decisions/`
+5. Les tests sont écrits AVEC le code, pas après — unit tests d'abord, puis intégration, puis e2e si applicable
+6. Après implémentation : remplir la section "Post-implémentation" de la story
+7. Après implémentation : passer `.tiple/checklists/code-review.md` point par point
+8. **`/tm-plan` = documentation uniquement.** Ne JAMAIS installer de dépendances, créer de fichiers de code ou exécuter de builds pendant un cadrage. Seuls les fichiers dans `docs/` et `.tiple/sprint/` sont modifiés.
+
+## Conventions par tags (chargement intelligent)
+
+Les conventions techniques sont dans `.tiple/conventions/`. Elles sont chargées **automatiquement** selon le contexte :
+
+- **Index :** `.tiple/conventions/_index.md` liste tous les tags et les fichiers associés
+- **Base (toujours lues) :** `coding-standards.md`, `component-registry.md`, `tech-stack.md`
+- **Mode story (`/tm-dev E01-S01`) :** le champ `Conventions` de la story déclare les tags → les fichiers correspondants sont chargés
+- **Mode libre (`/tm-dev` sans story) :** les tags sont déduits des fichiers touchés (ex: `lib/actions/` → `api`, `supabase/migrations/` → `database`)
+
+Tags disponibles : `auth`, `mcp`, `database`, `supabase`, `api`, `forms`, `realtime`, `security`, `nextjs`, `typescript`, `state`, `feedback`, `performance`, `tables`, `uploads`, `seo`, `a11y`, `i18n`, `datetime`, `monitoring`, `flags`, `deploy`, `testing`
+
+## Règles avant push
+1. **TOUJOURS utiliser `/commit-push`** pour commit et push. Cette commande exécute `pnpm type-check` + `pnpm lint` + `pnpm test` (3 checks locaux), met à jour le changelog, commit et push.
+2. **Type-check + lint + tests = vérifiés EN LOCAL** par `/commit-push` avant push. La CI ne lance plus que `pnpm build` (validation Vercel + catch des erreurs Linux). Pas de duplication.
+3. Ne JAMAIS commit/push en dehors de `/commit-push` sauf demande explicite de l'utilisateur
+
+## Règles Next.js
+1. **Server Components par défaut.** Pas de `"use client"` sauf si nécessaire (state, effects, event handlers). Pousser le `"use client"` le plus bas possible dans l'arbre.
+2. **Server Actions pour les mutations.** Pas d'API routes sauf webhooks/cron. Chaque action : vérifier auth → valider Zod → exécuter → `revalidatePath` → retourner `{data}` ou `{error}`.
+3. **Schemas Zod partagés.** Un schema dans `lib/schemas/` = validé côté form + côté action. Pas de double validation manuelle.
+4. **Route groups : toujours un `page.tsx`.**  Un route group (ex: `(dashboard)`) avec un `layout.tsx` DOIT avoir au moins un `page.tsx`, sinon le build Next.js échoue (`ENOENT: client-reference-manifest.js`). Si le route group n'est pas utilisé, supprimer le dossier entier.
+
+## Starters
+
+Le template est minimal par défaut. Les starters dans `.tiple/starters/` ajoutent des fonctionnalités complètes. Ils sont **identifiés** par `/tm-plan` (Phase 0) et **installés** par `/tm-dev` lors de la story E01-S01 (Setup technique).
+
+### Supabase + Auth (`.tiple/starters/supabase-auth/`)
+Ajoute : base de données, auth (login/signup/reset), middleware, Server Actions, pages auth, CI migrations.
+Activé quand le projet a besoin d'une base de données et/ou d'authentification.
+Voir `.tiple/starters/supabase-auth/README.md` pour le détail.
+
+### Règles Supabase (quand activé)
+- **Supabase côté serveur uniquement pour les mutations.** Le browser client est réservé au realtime et à l'auth listener. Jamais de `.insert()/.update()/.delete()` depuis un Client Component.
+- **RLS activé sur toute table.** Pas d'exception sans ADR documenté. Le `service_role` client est interdit sauf cas explicitement documenté.
+- **Migrations versionnées.** Chaque changement DB = `pnpm db:migrate [nom]` → fichier SQL dans `supabase/migrations/`. Jamais de modification en direct. CI auto-deploy via `.github/workflows/supabase-migrations.yml`.
+- **Auth vérifiée dans chaque Server Action** (pas seulement le middleware).
+
+## Règles MCP (si le produit expose un serveur MCP)
+
+1. **Parité par services partagés.** Toute capacité métier = 1 fonction dans `lib/services/` + 2 adaptateurs fins (Server Action web, tool MCP). Jamais de logique métier dans un tool.
+2. **Schemas Zod partagés = source de vérité** des entités échangées par les tools (`lib/schemas/`). Mêmes schemas côté form web et côté tool. Inputs de tools = non fiables → Zod partout.
+3. **Un rendu = un composant React unique.** Si une entité est affichée sur plusieurs surfaces (éditeur web, page publique, widget MCP, PDF), c'est le MÊME composant. Ne jamais dupliquer le rendu.
+4. **Tools authentifiés OAuth 2.1 via Supabase** (RFC 9728 + 401 `WWW-Authenticate` + `securitySchemes` par tool), client Supabase au nom de l'utilisateur (RLS active). `service_role` interdit dans les tools. Serveur **stateless** : jamais de sessions/push sans ADR.
+5. **Dual-host day one (Claude + ChatGPT)** : widgets déclarés avec les DEUX metas (`ui/resourceUri` standard + alias `openai/outputTemplate`) via un helper unique ; bridge unique (`widgets/shared/bridge.ts`) ; matrice de test des deux hosts avant push. Tout tool fonctionne sans widget (texte suffisant). Bundles Vite single-file (CSP hosts : zéro requête externe).
+6. **AX** : `instructions` serveur maintenu, descriptions "Use this when… / Do not use for…", `next_actions` dans chaque résultat ; toute évolution de tool/description rejoue les golden queries (`docs/mcp-golden-queries.md`, créé depuis `.tiple/templates/mcp-golden-queries.tmpl.md`) sur les deux hosts.
+7. Détail des patterns : `.tiple/conventions/mcp-patterns.md` (tag `mcp`). Les choix d'auth et de transport sont figés par ADR lors du cadrage (`/tm-plan`).
+
+## Workflow quotidien
+1. Lire `.tiple/sprint/status.md` → identifier la prochaine story 🟢 Ready
+2. Lire la story complète + ses refs (parcours PRD, référence UI, archi, conventions)
+3. Vérifier `.tiple/checklists/story-ready.md`
+4. Implémenter : schemas Zod → backend → tests unit → UI → tests unit UI → page → tests integ
+5. Écrire les tests (unit + integ) au fur et à mesure
+6. Vérifier que les tests de la story passent
+7. **Type-check** (OBLIGATOIRE) : `pnpm type-check` → doit passer sans erreur
+8. **Code Review en agent isolé** (OBLIGATOIRE — `/tm-review`) :
+   - Lancer un agent autonome séparé (regard neuf, sans biais d'implémentation)
+   - L'agent passe `.tiple/checklists/code-review.md` point par point
+   - Couvrir : sécurité, qualité, DRY, tests, conventions, architecture, documentation
+   - Si problèmes HAUTE/MOYENNE → corriger puis relancer l'étape 7, puis nouveau review agent
+9. Mettre à jour la story (post-implémentation)
+10. Mettre à jour `.tiple/conventions/component-registry.md` si nouveaux composants
+11. Mettre à jour `.tiple/sprint/status.md` → story ✅ Done
+12. Ajouter une entrée dans `docs/changelog.md` si changement significatif
+13. Résumer ce qui a été fait
+
+## Quand le PRD évolue
+1. Modifier `docs/prd.md` — parcours concerné, statut 🔶 Draft
+2. Passer `.tiple/checklists/prd-evolution.md` point par point
+3. Identifier les impacts : parcours, maquettes/références UI (si applicable), architecture, epics, stories, DB
+4. Mettre à jour `docs/architecture.md` (+ ADR si invariant touché)
+5. (si maquettes) Mettre à jour les maquettes si nécessaire (`docs/design/screens/`)
+6. Mettre à jour les epics et stories impactées
+7. Ajouter une entrée dans `docs/changelog.md`
+8. Lister les nouvelles stories à créer
+
+## Quand on crée un nouveau composant
+1. Vérifier `.tiple/conventions/component-registry.md` — s'il existe déjà, réutiliser
+2. Implémenter en suivant `.tiple/conventions/coding-standards.md`
+3. Ajouter au component-registry (nom, path, props, notes)
+4. Respecter `docs/design/system.md` pour les tokens visuels
+
+## Commandes disponibles
+
+Slash commands dans `.claude/commands/` :
+
+| Commande | Usage | Description |
+|----------|-------|-------------|
+| `/tm-plan` | Toute planification (initial ou évolution) | Cadrage complet : brief → PRD → archi → design → epics/stories → gate. Détecte auto le mode initial vs évolution (V2+). |
+| `/tm-dev` | Toute action code | Modes **story** (`E01-S01`/`next`), **fix**, **feature**, **refacto**, **explore** (read-only) — détectés auto depuis l'argument. |
+| `/tm-review` | Code review agent isolé | Review autonome passant `code-review.md` point par point. Appelé automatiquement par `/tm-dev`. |
+| `/tm-wrap-up` | Après un gros chantier | Capture les apprentissages méta (conventions, ADR, registry). Peut aussi être proposé auto par Claude. |
+| `/commit-push` | Commit & push | Type-check + lint + changelog + commit + push (OBLIGATOIRE pour tout push) |
+| ~~`/tm-fix`~~ | Déprécié | Alias rétro-compatible de `/tm-dev` en mode fix. Sera supprimé. |
+| ~~`/tm-feature`~~ | Déprécié | Remplacé par `/tm-plan` (cadrage) + `/tm-dev` mode feature (code). Sera supprimé. |
+
+## Design System
+
+Le projet inclut un design system violet corporate complet. Toujours s'y référer avant de créer un composant UI.
+
+- **Tokens & documentation :** `docs/design/system.md` — couleurs, typographie, spacing, radius, shadows
+- **Preview interactive :** route `/design-system` — tous les composants rendus
+- **Composants Shadcn/ui :** `src/components/ui/` — 34 composants installés (style new-york)
+- **Composants métier :** `src/components/` — PageContainer, EmptyState, StatCard, DataTable, ThemeToggle, ThemeProvider
+- **Registry complet :** `.tiple/conventions/component-registry.md` — TOUJOURS vérifier avant de créer un composant
+- **Thème :** Violet profond corporate, dark mode class-based (next-themes), Inter font
+- **CSS Variables :** `src/app/globals.css` — tous les tokens (light + dark)
+- **Tailwind config :** `tailwind.config.ts` — couleurs, radius, animations
+
+### Règles UI
+1. **Réutiliser les composants existants** — vérifier le registry et `src/components/ui/` avant de créer
+2. **Respecter les tokens** — utiliser les classes Tailwind sémantiques (`bg-primary`, `text-muted-foreground`, `border-border`)
+3. **Pas de couleurs en dur** — toujours passer par les CSS variables/tokens
+4. **Dark mode compatible** — tester les deux thèmes
+
+## Conventions
+- Index des tags : `.tiple/conventions/_index.md`
+- Coding standards : `.tiple/conventions/coding-standards.md`
+- Stack technique : `.tiple/conventions/tech-stack.md`
+- Stratégie de tests : `.tiple/conventions/testing-strategy.md`
+- Registry composants : `.tiple/conventions/component-registry.md`
+- Patterns API : `.tiple/conventions/api-patterns.md`
