@@ -1,4 +1,7 @@
 @import "tailwindcss";
+/* Charge tailwind.config.ts (Tailwind v4 ne lit AUCUN fichier config sans cette directive) :
+   darkMode "class" (next-themes), plugin tailwindcss-animate, keyframes accordion. */
+@config "../../tailwind.config.ts";
 
 /* ──────────────────────────────────────────────
    Design System — Violet Corporate SaaS

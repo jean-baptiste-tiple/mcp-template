@@ -10,6 +10,19 @@
 **Fichiers :** Liste des fichiers créés/modifiés
 -->
 
+## [2026-07-17] — Audit boilerplate : 3 fixes (route `/` 404, config Tailwind morte, lint du build output)
+**Quoi :**
+- Route `/dashboard` créée : `src/app/(dashboard)/page.tsx` → `src/app/(dashboard)/dashboard/page.tsx`. Avant, cette page résolvait vers `/` (un route group ne crée pas de segment d'URL), était silencieusement masquée par `src/app/page.tsx`, et le `redirect("/dashboard")` de la home aboutissait à un 404 out of the box.
+- `@config "../../tailwind.config.ts"` ajouté dans `globals.css`. Tailwind v4 ne lit aucun fichier config sans cette directive : `darkMode: "class"` était inactif (les `dark:` du ThemeToggle et d'Alert suivaient l'OS au lieu de la classe next-themes), le plugin `tailwindcss-animate` n'était pas chargé (animations des 8 composants overlay = no-op) et les keyframes accordion absents. Vérifié dans le CSS buildé : `@keyframes enter`, `@keyframes accordion-*`, `:is(.dark …)` présents.
+- `ignores` (`.next/`, `out/`, `build/`, `next-env.d.ts`) ajouté dans `eslint.config.mjs` : `eslint .` lintait le build output dès qu'un `pnpm build` local avait eu lieu → des centaines d'erreurs et `/commit-push` cassé.
+
+**Pourquoi :** audit "le template est-il prêt à démarrer un projet immédiatement" — les 4 checks (type-check, lint, test, build) passaient mais la home 404ait, le design system tournait sans animations ni dark mode class-based, et le lint cassait après un build local.
+
+**Fichiers :**
+- `src/app/(dashboard)/dashboard/page.tsx` (déplacé depuis `src/app/(dashboard)/page.tsx`)
+- `src/app/globals.css`
+- `eslint.config.mjs`
+
 ## [2026-05-02] — CLAUDE.md : ajout section "Avant de coder (CRITIQUE)"
 **Quoi :** Ajout d'une section "Avant de coder" en tête du CLAUDE.md avec 4 règles : surfacer les hypothèses (pas trancher en silence), edits chirurgicaux (chaque ligne trace à la demande), critères de succès vérifiables, push back quand justifié. Suppression de la référence orpheline à "Règles d'exécution Bash" dans "Règles avant push" (section déjà retirée).
 **Pourquoi :** cadrer le comportement de Claude en amont du code : éviter les implémentations trop larges, les refactos non demandés, et le "make it work" flou. Pousse l'agent à clarifier au lieu d'inventer.
