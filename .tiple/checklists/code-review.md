@@ -77,6 +77,22 @@
 - [ ] (si Supabase) Les erreurs Supabase ne sont pas exposées brutes au client
 - [ ] Les inputs sont validés côté serveur avec Zod
 - [ ] (si auth) Rate limiting en place sur les actions sensibles (login, signup, reset)
+- [ ] Fetch d'URL fournie par l'utilisateur : garde SSRF (https only, hôtes privés bloqués, timeout, cap taille)
+- [ ] `ilike`/recherche : métacaractères `%`/`_` échappés ; MIME d'upload requis ET allowlisté (vide ≠ pass)
+- [ ] Suppression RGPD : purge Storage paginée + meta nominatives des logs rédigées avant le delete
+- [ ] Sels/secrets sans fallback silencieux en prod (échec bruyant ou warning loggé)
+
+## MCP / AX (si canal MCP)
+
+- [ ] **Parité des garde-fous web ↔ MCP** : un audit/une validation du save MCP existe à l'identique sur le chemin web équivalent (mêmes fonctions)
+- [ ] Les paramètres d'audit d'un `save_*` sont re-dérivés côté serveur (jamais pris tels quels du modèle) ; save "transformé" sans transformation active = rejeté
+- [ ] Audit sur TOUTE la surface de l'entité (structuré + textes libres), matching à frontières de mots Unicode + accents (pas de sous-chaîne naïve)
+- [ ] Anti-invention par invariants/membership (renommer = inventer), pas par simple comptage
+- [ ] Annotations honnêtes : `readOnlyHint: true` sur les prepare purs ; tool destructif JAMAIS dans les `next_actions` ; graphe next_actions fermé (pas d'impasse, pas de tool inexistant)
+- [ ] `.describe()` sur CHAQUE champ d'input (y compris les ids) ; erreurs actionnables (ambiguïté → liste + « demandez à l'utilisateur »)
+- [ ] Éditions en deltas (`ops`/patch partiel), jamais de renvoi de l'entité complète exigé du modèle ; lecture partielle disponible
+- [ ] Widget déclaré sur le tool dont le payload le nourrit ; pas de widget sans données ; URLs de POST widget ABSOLUES ; deep links = routes réelles
+- [ ] Golden queries mises à jour et rejouées (les deux hosts) si tool/description touché
 
 ## Documentation
 

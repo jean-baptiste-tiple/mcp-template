@@ -17,7 +17,8 @@
 ## Stack
 Next.js 15 (App Router) + TypeScript strict + Tailwind CSS + Shadcn/ui
 Backend/DB optionnel : Supabase (à ajouter selon le projet — voir section "Supabase" ci-dessous).
-Canal MCP (si produit MCP-first) : `@modelcontextprotocol/sdk` + `mcp-handler` (endpoint `/api/mcp`), widgets MCP Apps buildés par Vite. IA optionnelle : Claude API (`@anthropic-ai/sdk`).
+Canal MCP (si produit MCP-first) : `@modelcontextprotocol/sdk` + `mcp-handler` (endpoint `/api/mcp`), widgets MCP Apps buildés par Vite.
+IA : **par défaut, zéro IA serveur** — les opérations intelligentes sont faites par le modèle de l'host (l'abonnement Claude/ChatGPT de l'utilisateur) via le pattern `prepare → modèle → save validé` (mcp-patterns §4 bis). Un appel LLM côté serveur (`@anthropic-ai/sdk`) = décision explicite par ADR au cadrage.
 Voir `.tiple/conventions/tech-stack.md` pour les versions exactes.
 
 ## Méthode
@@ -77,8 +78,10 @@ Voir `.tiple/starters/supabase-auth/README.md` pour le détail.
 3. **Un rendu = un composant React unique.** Si une entité est affichée sur plusieurs surfaces (éditeur web, page publique, widget MCP, PDF), c'est le MÊME composant. Ne jamais dupliquer le rendu.
 4. **Tools authentifiés OAuth 2.1 via Supabase** (RFC 9728 + 401 `WWW-Authenticate` + `securitySchemes` par tool), client Supabase au nom de l'utilisateur (RLS active). `service_role` interdit dans les tools. Serveur **stateless** : jamais de sessions/push sans ADR.
 5. **Dual-host day one (Claude + ChatGPT)** : widgets déclarés avec les DEUX metas (`ui/resourceUri` standard + alias `openai/outputTemplate`) via un helper unique ; bridge unique (`widgets/shared/bridge.ts`) ; matrice de test des deux hosts avant push. Tout tool fonctionne sans widget (texte suffisant). Bundles Vite single-file (CSP hosts : zéro requête externe).
-6. **AX** : `instructions` serveur maintenu, descriptions "Use this when… / Do not use for…", `next_actions` dans chaque résultat ; toute évolution de tool/description rejoue les golden queries (`docs/mcp-golden-queries.md`, créé depuis `.tiple/templates/mcp-golden-queries.tmpl.md`) sur les deux hosts.
-7. Détail des patterns : `.tiple/conventions/mcp-patterns.md` (tag `mcp`). Les choix d'auth et de transport sont figés par ADR lors du cadrage (`/tm-plan`).
+6. **AX** : `instructions` serveur maintenu, descriptions "Use this when… / Do not use for…" avec `.describe()` sur CHAQUE champ, `next_actions` dans chaque résultat (graphe fermé, jamais de tool destructif proposé) ; toute évolution de tool/description rejoue les golden queries (`docs/mcp-golden-queries.md`, créé depuis `.tiple/templates/mcp-golden-queries.tmpl.md`) sur les deux hosts.
+7. **Zéro IA serveur par défaut (ADR au cadrage)** : opérations intelligentes = pattern `prepare (tool) → modèle de l'host → save (tool validé)`. Le save ne fait JAMAIS confiance au modèle : Zod + audits déterministes dont les paramètres sont **re-dérivés côté serveur** (jamais pris du modèle), sur TOUTE la surface de l'entité, à frontières de mots Unicode/accents. Mêmes fonctions d'audit sur le canal web (parité des garde-fous). Détail : mcp-patterns §4 bis.
+8. **Économie de tokens** : les éditions sont des **deltas** (`ops` par section adressées par nom + `patch` deep-partial avec `null` = suppression), lecture partielle (`sections`), `structuredContent` compact, instructions/descriptions statiques (prompt caching). Le modèle ne relit ni ne réécrit jamais l'entité complète pour une mise à jour. Détail : mcp-patterns §4 ter.
+9. Détail des patterns : `.tiple/conventions/mcp-patterns.md` (tag `mcp`). Les choix d'auth et de transport sont figés par ADR lors du cadrage (`/tm-plan`).
 
 ## Workflow quotidien
 1. Lire `.tiple/sprint/status.md` → identifier la prochaine story 🟢 Ready
@@ -124,6 +127,7 @@ Slash commands dans `.claude/commands/` :
 | `/tm-plan` | Toute planification (initial ou évolution) | Cadrage complet : brief → PRD → archi → design → epics/stories → gate. Détecte auto le mode initial vs évolution (V2+). |
 | `/tm-dev` | Toute action code | Modes **story** (`E01-S01`/`next`), **fix**, **feature**, **refacto**, **explore** (read-only) — détectés auto depuis l'argument. |
 | `/tm-review` | Code review agent isolé | Review autonome passant `code-review.md` point par point. Appelé automatiquement par `/tm-dev`. |
+| `/tm-audit` | Revue totale à chaque jalon | 3 passes parallèles par agents isolés : code (checklist+ADRs), UI/UX (captures Playwright réelles + grille notée), AX (simulation de routage des golden queries sur métadonnées seules) → arbitrage, correction des HIGH/MED/quick wins, re-validation. |
 | `/tm-wrap-up` | Après un gros chantier | Capture les apprentissages méta (conventions, ADR, registry). Peut aussi être proposé auto par Claude. |
 | `/commit-push` | Commit & push | Type-check + lint + changelog + commit + push (OBLIGATOIRE pour tout push) |
 | ~~`/tm-fix`~~ | Déprécié | Alias rétro-compatible de `/tm-dev` en mode fix. Sera supprimé. |

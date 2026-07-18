@@ -82,10 +82,11 @@ a document name before get_document. Do not use to read a document's content (us
 Returns a paginated list (id, title, updated_at).`
 ```
 
-- **Inputs** : Zod avec `.describe()` sur CHAQUE champ, enums pour les valeurs fermées, exemples dans la description du champ, défauts explicites. Champs optionnels vraiment optionnels.
-- **Annotations** sur chaque tool : `readOnlyHint: true` pour les lectures, `destructiveHint` si suppression, `openWorldHint: false` (on ne touche pas au monde extérieur), `idempotentHint` quand vrai.
-- **`securitySchemes` par tool** (exigence ChatGPT pour déclencher l'UI de connexion) : tools authentifiés = `oauth2`. Sans cette déclaration, ChatGPT n'affiche jamais le bouton "Se connecter".
-- **Résolution par nom** : les tools acceptent un nom en plus des ids. Ambiguïté (2 résultats) → retourner les candidats possibles dans `structuredContent` et laisser le modèle demander.
+- **Inputs** : Zod avec `.describe()` sur CHAQUE champ — **y compris les champs d'identifiants** (`"Document id (or pass name)"`, `"Variant id (default: the latest)"`) : un champ nu est un champ que le modèle remplit mal. Enums pour les valeurs fermées, exemples dans la description du champ, défauts explicites. Champs optionnels vraiment optionnels.
+- **Annotations HONNÊTES** sur chaque tool : `readOnlyHint: true` pour les lectures **ET pour les tools "prepare" qui ne persistent rien** (un prepare est un calcul pur — le déclarer mutant fait sur-confirmer les hosts) ; `destructiveHint` si suppression ; `openWorldHint: false` sauf accès réseau externe réel (fetch d'URL, service tiers) ; `idempotentHint` quand vrai.
+- **`securitySchemes` par tool** (exigence ChatGPT pour déclencher l'UI de connexion) : tools authentifiés = `oauth2`. Sans cette déclaration, ChatGPT n'affiche jamais le bouton "Se connecter". Centraliser dans un helper `toolMeta()` — jamais à la main par tool.
+- **Résolution par nom** : les tools acceptent un nom en plus des ids (matching insensible casse **et accents**, métacaractères `%`/`_` échappés avant `ilike`). Ambiguïté (≥2 résultats) → retourner les candidats dans `structuredContent` **+ l'instruction explicite** « montrez la liste et demandez à l'utilisateur — ne devinez pas » (dans le message d'erreur ET dans les instructions serveur). 0 résultat → lister ce qui existe ou le tool à appeler.
+- **Un tool destructif n'apparaît JAMAIS dans les `next_actions`** d'un autre tool : une suppression se demande, elle ne se propose pas. Flow 2 temps obligatoire (1er appel = récapitulatif nominatif, 2ᵉ appel `confirm: true` seulement après accord explicite de l'utilisateur).
 
 ## 4. Résultats de tools
 
@@ -103,8 +104,35 @@ return {
 ```
 
 - `structuredContent` est **la** donnée : c'est ce que le modèle peut citer et ce que le widget reçoit (contrat identique sur les deux hosts). Compact : ids + résumé, **jamais** l'entité complète si le widget l'affiche (économie de contexte).
-- `next_actions` : liste des tools pertinents après celui-ci — c'est ce qui rend la conversation fluide et l'AX « guidée ».
+- `next_actions` : liste des tools pertinents après celui-ci — c'est ce qui rend la conversation fluide et l'AX « guidée ». **Tracer le graphe complet** : chaque chaîne canonique (import → save → transformer → exporter → partager) doit être fermée, sans impasse ni tool inexistant référencé.
 - **Erreurs actionnables** : pas de throw brut. `isError: true` + message qui dit quoi faire ("Aucun document trouvé pour 'X'. Utiliser search_documents pour lister."). Une erreur est une instruction de récupération pour l'agent, pas un stack trace.
+
+## 4 bis. Pattern « zéro IA serveur » : prepare → modèle de l'host → save validé
+
+**Le canal MCP EST une conversation avec un modèle frontier que l'utilisateur paie déjà** (son abonnement Claude/ChatGPT). Pour toute opération intelligente (structuration, réécriture, traduction, résumé), NE PAS appeler un LLM côté serveur : coût API nul, zéro clé à gérer, et l'utilisateur voit/corrige le travail en direct. À figer par ADR au cadrage. Le pattern :
+
+1. **`prepare_x` (tool)** : le serveur fait sa part **déterministe** (extraction de texte, masquages, calculs) et retourne les données + des **consignes statiques** (constantes versionnées dans `src/mcp/prompts/` — jamais générées par utilisateur, prompt caching oblige).
+2. **Le modèle travaille dans le chat** — c'est l'abonnement de l'utilisateur qui paie.
+3. **`save_x` (tool)** : le serveur est le **garde-fou** — validation Zod stricte + **audits déterministes**. Rejet = erreur actionnable listant exactement quoi corriger ; le modèle réessaie.
+
+Règles de garde-fous éprouvées (chaque point vient d'un contournement réel trouvé en review) :
+
+- **Ne JAMAIS faire confiance au contenu produit par le modèle** — le save revalide tout, comme un formulaire public.
+- **Les paramètres de l'audit sont re-dérivés CÔTÉ SERVEUR** (préférences org mergées avec les overrides fournis, clé par clé), jamais pris tels quels du modèle : des options vides ou affaiblies = audit trivialement contournable. Rejeter un save "transformé" sans aucune transformation active. Poser un **plancher** sur les options critiques (ce qui définit l'opération ne peut pas être désactivé par un override).
+- **Auditer TOUTE la surface de l'entité** (champs structurés + textes libres aplatis), pas seulement les champs "évidents" — le modèle a pu ne pas partir de la version préparée.
+- **Matching d'audit à frontières de mots Unicode + insensible casse/accents**, cibles < 3 caractères exclues du matching textuel (couvertes par les checks structurels). Un audit par sous-chaîne naïve produit des faux positifs bloquants (« Ali » dans « réalisation ») ou rate « Jose Garcia » pour « José García ».
+- **Anti-invention par INVARIANTS, pas par comptage** : vérifier que les éléments non-traduisibles (noms propres, dates, entités) du résultat appartiennent à l'original (membership), pas seulement que le nombre d'éléments n'a pas augmenté — renommer = inventer. Autoriser le retrait ciblé.
+- **Parité des garde-fous entre canaux** : si le web offre la même opération en mode déterministe, il passe par LES MÊMES fonctions d'audit que le save MCP. Un trou bouché côté MCP et laissé ouvert côté web reste un trou.
+
+## 4 ter. Économie de tokens — les éditions sont des DELTAS
+
+Chaque token que le modèle lit ou écrit coûte à l'utilisateur (latence + contexte + risque d'erreur de recopie). Règles :
+
+1. **Tool d'édition = opérations ciblées, jamais l'entité complète.** Exposer un paramètre `ops` (`append`/`update`/`remove` par section, élément adressé **par nom** — naturel pour le modèle et robuste aux réordonnancements — ou par index en secours) + un `patch` deep-partial pour les scalaires (avec `null` = suppression d'un champ optionnel). Chaque op est validée par le schéma de sa section, l'entité complète est revalidée après application. Ordre de grandeur : « ajoute une compétence » = 1 appel, ~40 tokens, sans lecture préalable.
+2. **Lecture partielle** : le tool de lecture accepte `sections: [...]` pour ne retourner qu'un sous-ensemble (et sans widget — c'est une lecture de donnée, pas un affichage).
+3. **Les instructions serveur enseignent le chemin léger** : « Edits are DELTAS — use ops addressed by name, never resend the full JSON, you usually don't need a read first ». Sans cette règle, le modèle retombe sur lire-tout/réécrire-tout.
+4. **`structuredContent` compact** (ids + résumé) quand un widget affiche l'entité ; l'entité complète uniquement quand le modèle en a besoin pour travailler (résultat d'un prepare).
+5. **Tout ce qui est statique doit le rester** (instructions, descriptions, consignes de prepare) — le prompt caching des hosts ne fonctionne que si rien ne varie par utilisateur ou par jour.
 
 ## 5. MCP Apps dual-host (Claude + ChatGPT) — conventions widgets
 
@@ -135,10 +163,17 @@ Règle : **aucun fichier hors `helpers/` ne manipule ces clés**. Quand ChatGPT 
 ### 5.3 Contraintes de build (CSP des hosts)
 
 - Bundle **Vite single-file** : JS/CSS inlinés, images en data-URI, **zéro requête réseau** (pas de CDN, pas de Google Fonts, pas de fetch d'API tierce). Les deux hosts sandboxent l'iframe avec une CSP stricte.
-- Exception possible : un widget peut POST sur NOTRE API (même produit) avec un token court fourni par le tool — vérifier que l'origine est autorisée par la CSP du host ; sinon prévoir un fallback texte (le tool le propose).
+- Exception possible : un widget peut POST sur NOTRE API (même produit) avec un token court fourni par le tool — **l'URL doit être ABSOLUE** (le widget tourne dans l'iframe sandbox du host : une URL relative se résout contre la mauvaise origine et le POST échoue silencieusement sur les deux hosts). Vérifier que l'origine est autorisée par la CSP du host ; sinon prévoir un fallback texte (le tool le propose).
+- **Les deep links du widget pointent les ROUTES RÉELLES de l'app** — attention aux route groups Next.js : `(dashboard)/cvs/[id]` s'atteint via `/cvs/[id]`, pas `/dashboard/cvs/[id]`. Tester chaque lien.
 - Poids cible < 300 Ko par bundle ; si un rendu existe côté web (composant React), le widget importe **le même composant**, pas une copie.
-- Thème : lire clair/sombre via le bridge, styler les deux. États loading / vide / erreur obligatoires.
+- Thème : lire clair/sombre via le bridge, styler les deux. États loading / vide / erreur obligatoires. A11y : zones cliquables focusables au clavier (`role="button"` + `tabIndex` + `onKeyDown`), `aria-label` sur les icônes.
 - **Dégradation** : tout tool doit être pleinement utilisable sans widget (le `content` texte suffit). Le widget est un bonus d'ergonomie, jamais le seul canal d'information.
+
+### 5.3 bis. Appariement widget ↔ tool : le widget vit sur le tool dont le payload le nourrit
+
+- Un widget se déclare sur le tool dont le `structuredContent` contient **les données qu'il affiche** — pas sur le tool "logiquement suivant". Un widget de revue d'options s'affiche sur le `prepare` (qui porte options/cibles/aperçu), pas sur le `save` (qui ne porte que des ids) : sinon widget vide avec des boutons morts.
+- **Pas de widget quand il n'y a rien à afficher** (un tool qui retourne un lien ou un compteur → texte seul). Un widget « Aucun contenu » après une action réussie est pire que pas de widget.
+- Tester chaque widget avec le **payload réel** de chaque tool qui le déclare (fixture = le `structuredContent` exact), pas seulement avec un payload idéal.
 
 ### 5.4 Matrice de test avant push (story taguée `mcp` + widgets)
 
@@ -160,6 +195,14 @@ Notre serveur = **resource server** ; Supabase Auth = **authorization server** (
 4. **Validation de token dans `src/mcp/auth.ts`** : signature via JWKS Supabase, `iss`, `exp`/`nbf`, scopes ; puis résolution `{userId, orgId, role}` (claims injectés par Custom Access Token Hook Supabase) → client Supabase **au JWT de l'utilisateur** → RLS active dans les tools comme au web. `service_role` interdit.
 5. **Redirect URIs autorisés** (dashboard Supabase) : `https://claude.ai/api/mcp/auth_callback` + `https://chatgpt.com/connector/oauth/*`. DCR ouvert = monitorer les clients enregistrés.
 6. Les inputs de tools restent **non fiables** (même statut qu'un formulaire public) : Zod partout, appartenance org garantie par RLS + checks service.
+
+### 6 bis. Durcissements systématiques (findings récurrents de review)
+
+- **Fetch d'URL fournie par l'utilisateur (SSRF)** : https only, hôtes loopback/privés/link-local/métadonnées cloud bloqués (`localhost`, `127.*`, `10.*`, `172.16-31.*`, `192.168.*`, `169.254.169.254`, `*.internal`), `redirect: "error"`, `AbortSignal.timeout(15s)`, cap de taille AVANT et APRÈS lecture. Un tool qui fetch une URL est un proxy de lecture pour un attaquant (ou un document prompt-injecté).
+- **Endpoint d'upload appelé par un widget** : token d'upload signé et scoppé au chemin (type `createSignedUploadUrl` Supabase) — jamais de `service_role`. MIME **requis ET** dans l'allowlist (un MIME vide ne contourne pas le contrôle), taille cappée, magic bytes re-vérifiés à l'extraction.
+- **Middleware** : si `/api` entier est public (le MCP gère sa propre auth), le COMMENTER — tout nouveau route handler naît public et doit implémenter sa propre auth.
+- **RGPD à la suppression** : purge Storage **paginée** (`.list()` est cappé à ~100), et rédiger les meta nominatives des logs d'activité AVANT le delete (les FK `SET NULL` rendent les lignes introuvables après) ; le log de suppression lui-même est non nominatif.
+- **`ilike`** : échapper `%`/`_` des saisies utilisateur ; sels/secrets (`IP_HASH_SALT`…) : échouer bruyamment si absents en prod, jamais de fallback silencieux.
 
 ## 7. Stateless
 

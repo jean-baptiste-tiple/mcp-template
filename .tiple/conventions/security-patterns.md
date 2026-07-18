@@ -150,6 +150,34 @@ $$ LANGUAGE sql SECURITY DEFINER;
 -- NE JAMAIS FAIRE : EXECUTE 'SELECT * FROM ' || table_name;
 ```
 
+## SSRF — fetch d'une URL fournie par l'utilisateur
+
+Tout endpoint/tool qui fetch une URL saisie par l'utilisateur (import de document, preview de lien) est un **proxy de lecture** potentiel vers le réseau interne. Garde obligatoire :
+
+```typescript
+function isForbiddenHost(hostname: string): boolean {
+  const h = hostname.toLowerCase()
+  if (h === "localhost" || h === "0.0.0.0" || h === "[::1]" || h === "::1") return true
+  if (h.endsWith(".internal") || h.endsWith(".local")) return true
+  if (h === "metadata.google.internal" || h === "169.254.169.254") return true
+  if (/^127\./.test(h) || /^10\./.test(h) || /^192\.168\./.test(h) || /^169\.254\./.test(h)) return true
+  if (/^172\.(1[6-9]|2\d|3[01])\./.test(h)) return true
+  return false
+}
+
+// https only + hôtes interdits + pas de redirect + timeout + cap de taille
+const resp = await fetch(url, { signal: AbortSignal.timeout(15_000), redirect: "error" })
+```
+
+Règles : `https:` uniquement ; `redirect: "error"` (une redirection peut pointer un hôte interne) ; vérifier `content-length` ET `byteLength` après lecture (cap explicite) ; message d'erreur actionnable ("Collez le texte directement").
+
+## Recherche, uploads & effacement — pièges récurrents
+
+- **`ilike`/`like`** : échapper `%` et `_` des saisies utilisateur (`s.replace(/[\\%_]/g, "\\$&")`) — sinon wildcard injection (résultats faux).
+- **Upload** : MIME **requis ET** dans l'allowlist (`!file.type || !ALLOWED.includes(file.type)` → refus ; un MIME vide ne doit jamais passer), taille cappée, magic bytes re-vérifiés au traitement. Écriture Storage par token signé scoppé au chemin — jamais `service_role`.
+- **Sels/secrets optionnels** (`IP_HASH_SALT`…) : jamais de fallback silencieux en prod — échec bruyant ou `console.error` au minimum.
+- **Suppression RGPD** : purge Storage **paginée** (les `.list()` sont cappés ~100) ; rédiger les meta nominatives des logs AVANT le delete (FK `SET NULL` = lignes introuvables après) ; le log de suppression lui-même est non nominatif.
+
 ## Auth Security Checklist
 
 - [ ] Middleware vérifie le token sur toutes les routes protégées
