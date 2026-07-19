@@ -1,12 +1,18 @@
 // Destination : src/mcp/tool-result.ts
-// Mise en forme des résultats de tools — mcp-patterns §4 : TOUJOURS les deux formes
-// (content texte pour le modèle, structuredContent pour le modèle ET le widget).
+// Mise en forme des résultats de tools — mcp-patterns §4 : TOUJOURS les deux formes.
+// ⚠️ CONTRAT (retour agents) : le `content` texte est la SEULE voie fiable vers le
+// modèle — certains hosts lui masquent `structuredContent` (qui alimente le widget).
+// Tout ce que le modèle doit lire ou exécuter (consignes, données source d'un
+// prepare, texte brut) va dans `text` ; dupliquer dans `structured` si le widget
+// en a besoin.
 import { widgetMeta, type WidgetName } from "./widget-meta"
 
 interface ToolResultOptions {
-  // Résumé 2-4 lignes max : ce que le modèle lit. Le widget affiche le détail.
+  // Ce que le modèle LIT. Résultat simple : résumé 2-4 lignes. Tool "prepare" :
+  // consignes complètes + données source (le modèle ne verra rien d'autre).
   text: string
-  // LA donnée : ids + résumé + next_actions. JAMAIS l'entité complète si le widget l'affiche.
+  // Canal du WIDGET (+ citable quand l'host l'expose) : ids + résumé + next_actions.
+  // JAMAIS l'entité complète si le widget l'affiche.
   structured: Record<string, unknown> & { next_actions?: string[] }
   widget?: WidgetName
 }

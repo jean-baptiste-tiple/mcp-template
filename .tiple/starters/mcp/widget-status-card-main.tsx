@@ -1,20 +1,16 @@
 // Destination : widgets/status-card/main.tsx
 // Widget DÉMO — montre le contrat d'un widget MCP Apps (mcp-patterns §5.2, §5.3) :
 //   - données d'entrée = le structuredContent du tool (identique Claude/ChatGPT)
-//   - n'importe QUE le bridge (jamais window.openai)
-//   - états loading / vide / erreur OBLIGATOIRES, thème clair/sombre
+//   - n'importe QUE le bridge/mount (jamais window.openai)
+//   - 4 états OBLIGATOIRES : loading / data / vide / erreur — et le loader n'est
+//     JAMAIS terminal (timeout ~12 s → erreur actionnable, retour agents)
+//   - thème clair/sombre via le bridge
 // Rappel §5.3 : si un rendu existe côté web, le widget importe le MÊME composant React.
+// Mock local : poser window.__MCP_TOOL_OUTPUT__ avant le chargement du module.
 import { useEffect, useState } from "react"
-import { createRoot } from "react-dom/client"
 
-import {
-  callTool,
-  getTheme,
-  getToolOutput,
-  initBridge,
-  onThemeChange,
-  onToolOutput,
-} from "../shared/bridge"
+import { callTool, getTheme, onThemeChange } from "../shared/bridge"
+import { mount, useToolOutput } from "../shared/mount"
 
 // = structuredContent de get_status (contrat §4 — voir src/mcp/tools/get-status.ts)
 interface StatusOutput {
@@ -26,31 +22,24 @@ interface StatusOutput {
 }
 
 function StatusCard() {
-  const [output, setOutput] = useState<StatusOutput | null>(null)
-  const [phase, setPhase] = useState<"loading" | "ready" | "error">("loading")
+  const output = useToolOutput<StatusOutput>()
   const [refreshing, setRefreshing] = useState(false)
 
+  // Le loader n'est JAMAIS un état terminal : après 12 s sans données, erreur
+  // actionnable (dire à l'utilisateur QUOI demander dans le chat) au lieu de
+  // tourner pour toujours.
+  const [timedOut, setTimedOut] = useState(false)
   useEffect(() => {
-    let cancelled = false
-    const offOutput = onToolOutput((o) => setOutput(o as unknown as StatusOutput))
-    const offTheme = onThemeChange((t) => {
+    if (output != null) return
+    const t = setTimeout(() => setTimedOut(true), 12000)
+    return () => clearTimeout(t)
+  }, [output])
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = getTheme()
+    return onThemeChange((t) => {
       document.documentElement.dataset.theme = t
     })
-
-    initBridge()
-      .then(() => {
-        if (cancelled) return
-        document.documentElement.dataset.theme = getTheme()
-        setOutput(getToolOutput<StatusOutput>())
-        setPhase("ready")
-      })
-      .catch(() => !cancelled && setPhase("error"))
-
-    return () => {
-      cancelled = true
-      offOutput()
-      offTheme()
-    }
   }, [])
 
   async function refresh() {
@@ -63,9 +52,16 @@ function StatusCard() {
     }
   }
 
-  if (phase === "loading") return <p style={styles.muted}>Chargement…</p>
-  if (phase === "error") return <p style={styles.muted}>Impossible de contacter l&apos;host.</p>
-  if (!output) return <p style={styles.muted}>Aucune donnée — lancer le tool get_status.</p>
+  if (output == null) {
+    return timedOut ? (
+      <p style={styles.muted}>
+        Impossible de charger l&apos;état. Les données sont probablement disponibles côté
+        serveur — demandez dans le chat : « relance get_status ».
+      </p>
+    ) : (
+      <p style={styles.muted}>Chargement…</p>
+    )
+  }
 
   return (
     <div style={styles.card}>
@@ -111,4 +107,4 @@ const styles = {
   } as const,
 }
 
-createRoot(document.getElementById("root") as HTMLElement).render(<StatusCard />)
+mount(<StatusCard />)

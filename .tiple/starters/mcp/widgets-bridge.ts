@@ -184,8 +184,24 @@ async function connectStandardHost(): Promise<void> {
   }
 }
 
+// ── Dialecte ChatGPT : les mises à jour (toolOutput, thème) arrivent via le
+// CustomEvent `openai:set_globals` sur window — PAS par postMessage. Sans cette
+// écoute, une donnée livrée APRÈS le premier render laisse le widget sur son
+// loader pour toujours (bug vécu : « Chargement… » infini sur ChatGPT).
+function handleSetGlobals(ev: Event): void {
+  try {
+    const globals = (ev as CustomEvent<{ globals?: Record<string, unknown> }>).detail?.globals
+    if (!globals) return
+    if (globals.toolOutput !== undefined) emitOutput(globals.toolOutput)
+    emitTheme(normalizeTheme(globals.theme))
+  } catch {
+    /* noop — jamais casser le rendu */
+  }
+}
+
 if (typeof window !== "undefined") {
   window.addEventListener("message", handleMessage)
+  window.addEventListener("openai:set_globals", handleSetGlobals as EventListener)
   void connectStandardHost()
 }
 

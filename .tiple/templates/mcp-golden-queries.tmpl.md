@@ -27,6 +27,16 @@
 
 ## Journal des révisions de métadonnées
 
+> ⚠️ Les hosts CACHENT instructions et descriptions : déconnecter/reconnecter le connecteur avant de tester une révision, sinon on évalue l'ancienne version.
+
 | Date | Champ modifié | Raison (quel prompt échouait) | Résultat |
 |------|---------------|-------------------------------|----------|
 | — | — | — | — |
+
+## Rapports de frictions agent (mcp-patterns §8)
+
+> Après chaque évolution significative : demander à l'agent hôte un rapport structuré — déroulé step-by-step, points de blocage/ressenti, hypothèses de cause, repro minimale — sur les DEUX hosts. Coller ici la synthèse et les actions décidées.
+
+| Date | Host | Friction observée | Cause | Action |
+|------|------|-------------------|-------|--------|
+| — | — | — | — | — |

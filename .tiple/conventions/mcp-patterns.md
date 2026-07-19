@@ -53,8 +53,12 @@ Typical workflows:
 2. <workflow 2>
 
 Rules:
-- Prefer tool results' structuredContent.next_actions to decide what to propose next.
+- Prefer tool results' next_actions to decide what to propose next.
 - Do not paste large entity JSON into the conversation; widgets display it.
+- NEVER claim the widget visually displayed something — you cannot see the user's screen.
+  If the user reports a stuck preview, do NOT retry the same call: use the fallback.
+- Present signed URLs as SHORT markdown links, never raw; mention expiry.
+- For prepare→save flows: produce the result and call the save tool IN THE SAME TURN.
 - All operations are scoped to the authenticated user's organization.`
 ```
 
@@ -95,8 +99,8 @@ Toujours retourner **les deux formes** :
 
 ```typescript
 return {
-  content: [{ type: "text", text: résuméCourtPourLeModèle }],   // 2-4 lignes max
-  structuredContent: {                                          // JSON pour le modèle ET le widget
+  content: [{ type: "text", text: ceQueLeModèleLit }],          // SEULE voie fiable vers le modèle
+  structuredContent: {                                          // canal du WIDGET
     id, title, status,
     next_actions: ["archive_document", "share_document"],       // le modèle proposera la suite
   },
@@ -104,7 +108,9 @@ return {
 }
 ```
 
-- `structuredContent` est **la** donnée : c'est ce que le modèle peut citer et ce que le widget reçoit (contrat identique sur les deux hosts). Compact : ids + résumé, **jamais** l'entité complète si le widget l'affiche (économie de contexte).
+- **⚠️ Le `content` texte est la SEULE voie fiable vers le modèle** (leçon n°1 des rapports agents) : certains hosts MASQUENT `structuredContent` au modèle — qui « n'a reçu ni les données ni les consignes » et reconstruit de mémoire. Tout ce que le modèle doit lire ou exécuter (consignes d'un prepare, données source, texte brut — avec un cap de taille) va dans le texte ; dupliquer dans `structuredContent` ce dont le widget a besoin.
+- `structuredContent` alimente le widget (contrat identique sur les deux hosts) et reste citable quand l'host l'expose. Compact : ids + résumé, **jamais** l'entité complète si le widget l'affiche (économie de contexte).
+- **Liens signés : jamais bruts.** Le texte du tool impose la présentation en lien markdown court (`[Ouvrir le PDF](url)`) + mention de l'expiration — sinon le modèle colle l'URL signée entière dans le chat.
 - `next_actions` : liste des tools pertinents après celui-ci — c'est ce qui rend la conversation fluide et l'AX « guidée ». **Tracer le graphe complet** : chaque chaîne canonique (import → save → transformer → exporter → partager) doit être fermée, sans impasse ni tool inexistant référencé.
 - **Erreurs actionnables** : pas de throw brut. `isError: true` + message qui dit quoi faire ("Aucun document trouvé pour 'X'. Utiliser search_documents pour lister."). Une erreur est une instruction de récupération pour l'agent, pas un stack trace.
 
@@ -112,9 +118,13 @@ return {
 
 **Le canal MCP EST une conversation avec un modèle frontier que l'utilisateur paie déjà** (son abonnement Claude/ChatGPT). Pour toute opération intelligente (structuration, réécriture, traduction, résumé), NE PAS appeler un LLM côté serveur : coût API nul, zéro clé à gérer, et l'utilisateur voit/corrige le travail en direct. À figer par ADR au cadrage. Le pattern :
 
-1. **`prepare_x` (tool)** : le serveur fait sa part **déterministe** (extraction de texte, masquages, calculs) et retourne les données + des **consignes statiques** (constantes versionnées dans `src/mcp/prompts/` — jamais générées par utilisateur, prompt caching oblige).
+1. **`prepare_x` (tool)** : le serveur fait sa part **déterministe** (extraction de texte, masquages, calculs) et retourne les données + des **consignes statiques** (constantes versionnées dans `src/mcp/prompts/` — jamais générées par utilisateur, prompt caching oblige). **Consignes ET données dans le `content` TEXTE** (§4 — certains hosts masquent structuredContent au modèle).
 2. **Le modèle travaille dans le chat** — c'est l'abonnement de l'utilisateur qui paie.
 3. **`save_x` (tool)** : le serveur est le **garde-fou** — validation Zod stricte + **audits déterministes**. Rejet = erreur actionnable listant exactement quoi corriger ; le modèle réessaie.
+
+**Enchaînement MÊME TOUR (leçon vécue)** : sans consigne explicite, l'agent appelle `prepare_x`, répond « c'est prêt »… et ne sauvegarde jamais. Toute consigne de prepare finit par : « produce the result and call `save_x` IN THIS SAME TURN — `prepare_x` alone creates nothing; do not reply to the user before the save succeeded ». À répéter dans les instructions serveur.
+
+**Ingestion : fidélité par défaut (leçon vécue)** : « importe ce document » ≠ « réécris-le ». Les consignes de structuration imposent la transcription fidèle (ton, personne grammaticale, pas de restructuration en bullets, métadonnées/tags uniquement si explicites dans la source) ; l'« optimisation » est une 2ᵉ étape sur demande explicite, après l'import fidèle.
 
 Règles de garde-fous éprouvées (chaque point vient d'un contournement réel trouvé en review) :
 
@@ -123,6 +133,8 @@ Règles de garde-fous éprouvées (chaque point vient d'un contournement réel t
 - **Auditer TOUTE la surface de l'entité** (champs structurés + textes libres aplatis), pas seulement les champs "évidents" — le modèle a pu ne pas partir de la version préparée.
 - **Matching d'audit à frontières de mots Unicode + insensible casse/accents**, cibles < 3 caractères exclues du matching textuel (couvertes par les checks structurels). Un audit par sous-chaîne naïve produit des faux positifs bloquants (« Ali » dans « réalisation ») ou rate « Jose Garcia » pour « José García ».
 - **Anti-invention par INVARIANTS, pas par comptage** : vérifier que les éléments non-traduisibles (noms propres, dates, entités) du résultat appartiennent à l'original (membership), pas seulement que le nombre d'éléments n'a pas augmenté — renommer = inventer. Autoriser le retrait ciblé.
+- **L'INTENTION change les invariants (leçon vécue)** : le validateur reçoit le `kind` de l'opération et adapte ses contrôles. Opération même langue (adaptation, anonymisation) → contrôles par contenu (appariement original↔résultat). Opération changeant la langue (traduction) → les contrôles par contenu produisent des faux positifs sans token commun (« Agents IA » → « AI agents » rejeté) : basculer sur des contrôles **structurels** (comptages par section, pas d'entrée ajoutée) + invariants **indépendants de la langue** (dates, années, noms propres).
+- **Message de rejet = chaîne fautive + pourquoi + comment corriger** — un rejet opaque casse la confiance du modèle ET de l'utilisateur.
 - **Parité des garde-fous entre canaux** : si le web offre la même opération en mode déterministe, il passe par LES MÊMES fonctions d'audit que le save MCP. Un trou bouché côté MCP et laissé ouvert côté web reste un trou.
 
 Les consignes des prepare sont testées par les golden queries ; introduire un appel LLM serveur = rouvrir l'ADR. Implémentation de référence : mcp-cv-editor (import/anonymize/adapt).
@@ -176,6 +188,7 @@ Règle : **aucun fichier hors `widget-meta.ts` ne manipule ces clés**. Quand Ch
   (`autoResize`), `ui/open-link`, `ui/message`, et les requêtes du host (ping). L'entrée
   `app-with-deps` évite le conflit de peer avec le SDK serveur épinglé (mcp-handler).
 - Détection de `window.openai` → délégation aux équivalents Apps SDK quand présent. Les widgets n'importent QUE le bridge, jamais `window.openai` directement.
+- **Écouter TOUS les canaux de données (leçon vécue — loader infini sinon)**, cumulés et défensifs : (a) SDK officiel `ext-apps` (GA) ; (b) lecture synchrone `window.openai.toolOutput` **+ écoute du CustomEvent `openai:set_globals`** — sur ChatGPT les mises à jour post-mount arrivent par LÀ, pas par postMessage ; (c) postMessage legacy pré-GA ; (d) **polling de secours dans le hook de données** (`useToolOutput` : ~400 ms × 30). Jamais casser le rendu si un canal manque.
 - Données d'entrée du widget = le `structuredContent` du tool (contrat §4) — identique sur les deux hosts.
 
 ### 5.3 Contraintes de build (CSP des hosts)
@@ -185,7 +198,7 @@ Règle : **aucun fichier hors `widget-meta.ts` ne manipule ces clés**. Quand Ch
 - **Les deep links du widget pointent les ROUTES RÉELLES de l'app** — attention aux route groups Next.js : `(dashboard)/cvs/[id]` s'atteint via `/cvs/[id]`, pas `/dashboard/cvs/[id]`. Tester chaque lien.
 - Poids cible < 300 Ko par bundle ; **jusqu'à ~600 Ko / gzip < 150 Ko assumé** quand le SDK `ext-apps` + des polices embarquées s'ajoutent (mesure réelle cv-preview : ~527 Ko). Si un rendu existe côté web (composant React), le widget importe **le même composant**, pas une copie.
 - Bundles **inlinés dans un module généré** (`src/mcp/widgets/generated.ts`, produit par `widgets/build.mjs`) : servis en mémoire par le serveur — zéro lecture fs à runtime, zéro config de tracing Vercel.
-- Thème : lire clair/sombre via le bridge, styler les deux. États loading / vide / erreur obligatoires. A11y : zones cliquables focusables au clavier (`role="button"` + `tabIndex` + `onKeyDown`), `aria-label` sur les icônes.
+- Thème : lire clair/sombre via le bridge, styler les deux. **4 états obligatoires : loading / data / vide / erreur — et le loader n'est JAMAIS un état terminal** : timeout (~12 s) qui bascule vers une erreur actionnable disant QUOI demander dans le chat (« demandez le PDF / réessayez »). Un « Chargement… » infini alors que le backend a réussi est le pire ressenti possible. A11y : zones cliquables focusables au clavier (`role="button"` + `tabIndex` + `onKeyDown`), `aria-label` sur les icônes.
 - **Dégradation** : tout tool doit être pleinement utilisable sans widget (le `content` texte suffit). Le widget est un bonus d'ergonomie, jamais le seul canal d'information.
 
 ### 5.3 bis. Appariement widget ↔ tool : le widget vit sur le tool dont le payload le nourrit
@@ -242,6 +255,8 @@ Jeu de prompts versionné dans `docs/mcp-golden-queries.md` (créé depuis `.tip
 - **Négatifs** (hors périmètre) — ne doivent PAS déclencher nos tools.
 
 Règles : seed = les prompts d'exemple du brief ; toute story qui ajoute/modifie un tool ou une description ajoute ses golden queries et **rejoue le jeu sur les deux hosts** (Claude + ChatGPT developer mode) ; en cas de mauvais routage, corriger la description — **un champ de métadonnée à la fois**, et noter la révision dans le fichier.
+
+**Boucle de feedback agent (de l'or — leçon vécue)** : après chaque évolution significative, demander à l'agent hôte lui-même un **rapport de frictions structuré** — déroulé step-by-step de ce qu'il a fait, ressenti/points de blocage, hypothèses de cause, repro minimale — et le faire produire sur les DEUX hosts. Deux rapports d'agents ont trouvé en un test (structuredContent masqué, loader infini, prepare sans save) ce que des reviews de code n'avaient pas vu. ⚠️ Les hosts **cachent** instructions et descriptions : déconnecter/reconnecter le connecteur avant de tester une évolution de métadonnées, sinon on évalue l'ancienne version.
 
 ## 9. Onboarding humain (l'autre moitié de l'AX)
 

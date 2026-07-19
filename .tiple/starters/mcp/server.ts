@@ -21,8 +21,14 @@ Typical workflows:
 2. <workflow 2>
 
 Rules:
-- Prefer tool results' structuredContent.next_actions to decide what to propose next.
+- Prefer tool results' next_actions to decide what to propose next.
 - Do not paste large entity JSON into the conversation; widgets display it.
+- NEVER claim the widget visually displayed something — you cannot see the user's screen.
+  Say the data was returned; if the user reports a stuck preview, do NOT retry the same
+  call: use the text/export fallback and mention the issue.
+- Present signed URLs as SHORT markdown links ("[Open the PDF](url)"), never raw; mention expiry.
+- For prepare→save flows: produce the result and call the save tool IN THE SAME TURN —
+  the prepare alone creates nothing; do not reply to the user before the save succeeded.
 - All operations are scoped to the authenticated user's organization.`
 
 /** Options passées à createMcpHandler (serverInfo + instructions + capabilities). */

@@ -40,7 +40,8 @@ pnpm add -D @modelcontextprotocol/ext-apps vite vite-plugin-singlefile
 | `widgets-vite.config.ts` | `widgets/vite.config.ts` | Build single-file, zéro requête externe (§5.3) |
 | `widgets-build.mjs` | `widgets/build.mjs` | Orchestrateur : vite par widget + génération de generated.ts |
 | `widgets-tsconfig.json` | `widgets/tsconfig.json` | tsconfig dédié widgets (DOM + vite/client) |
-| `widgets-bridge.ts` | `widgets/shared/bridge.ts` | Bridge SDK officiel ext-apps, deux dialectes (§5.2) |
+| `widgets-bridge.ts` | `widgets/shared/bridge.ts` | Bridge SDK officiel ext-apps, TOUS les canaux de données (§5.2) |
+| `widgets-mount.tsx` | `widgets/shared/mount.tsx` | Hook `useToolOutput` (subscription + polling filet) + `mount()` |
 | `widget-status-card-index.html` | `widgets/status-card/index.html` | Widget exemple |
 | `widget-status-card-main.tsx` | `widgets/status-card/main.tsx` | Widget exemple : états, thème (§5.3) |
 | `mcp-server-test.ts` | `tests/unit/mcp-server.test.ts` | Test contrat AX via `InMemoryTransport` (§10) |
@@ -132,4 +133,8 @@ du widget dans `widget-meta.ts` + `build.mjs`, maintenir `instructions` et bump
 > Pièges déjà payés (ne pas re-déboguer) : route dans `api/[transport]` et PAS `api/mcp/[transport]`
 > (404 avec token valide sinon) ; mimeType `text/html;profile=mcp-app` obligatoire (sinon Claude
 > rejette la resource) ; bridge = SDK officiel ext-apps (un `ui/initialize` fait main avec
-> `clientInfo` au lieu d'`appInfo` = widget vide, sans erreur) ; ChatGPT = variante skybridge.
+> `clientInfo` au lieu d'`appInfo` = widget vide, sans erreur) ; ChatGPT = variante skybridge
+> ET updates via le CustomEvent `openai:set_globals` (pas postMessage — sinon loader infini) ;
+> certains hosts MASQUENT `structuredContent` au modèle → consignes et données d'un prepare
+> vont dans le `content` TEXTE ; le loader d'un widget n'est jamais terminal (timeout 12 s
+> → erreur actionnable).
