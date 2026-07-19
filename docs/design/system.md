@@ -1,33 +1,45 @@
-# Design System — Violet Corporate SaaS
+# Design System — Tiple (Vert Mint)
 
 > Preview interactive : `/design-system` (route Next.js)
+> Aligné sur le design system tiple.io (repo `website-tiple`). Version éprouvée dans mcp-cv-editor.
 
 ## Identité visuelle
 
-- **Couleur primaire :** Violet profond corporate (oklch 0.42 0.2 285 ~ #6C2BD9)
-- **Font :** Inter (Google Fonts)
-- **Style :** Clean, corporate, moderne
-- **Dark mode :** Oui (class-based, toggle ou system)
+- **Couleur primaire :** Vert mint Tiple `#06f5a2` (oklch 0.87 0.19 162) — fills, bordures, états actifs.
+- **Vert-accent texte :** `--primary-dark` (`#00b47c` en light, `#06f5a2` en dark) — le mint échoue AA en petit texte sur blanc, ce token le remplace pour le TEXTE-accent.
+- **Neutres :** chauds (teinte oklch 80), pas froids. Fond light `#fefefe`, dark quasi-noirs `#0F0F0F` (fond) / `#202020` (cartes).
+- **Fonts :** Instrument Sans (corps) + JetBrains Mono (labels, chiffres, méta) — `next/font/google`, variables `--font-instrument` / `--font-jetbrains`.
+- **Icônes :** Phosphor (`@phosphor-icons/react`) pour les icônes applicatives (`/dist/ssr` en Server Component) ; lucide-react reste utilisé en interne par les composants Shadcn.
+- **Radius :** surfaces (cards, inputs, popovers) en `0.25rem` (net, éditorial) ; **boutons & badges en pilule** (`rounded-full`, comme les CTA/tags de tiple.io).
+- **Style :** éditorial Tiple — coins nets sur les surfaces, CTA/tags en pilule, labels mono uppercase, `hover-lift`, touches `text-stroke`/`noise-overlay`.
+- **Logo :** `AppLogo` (`src/components/logo.tsx`) — donut quasi-noir sur fond mint dégradé ; favicon `src/app/icon.svg` (même motif en aplat).
+- **Dark mode :** Oui (class-based via `@custom-variant dark` dans `globals.css` ; toggle ou system) ; light par défaut, dark soigné.
 
 ## Tokens
+
+Source unique : `src/app/globals.css` (Tailwind v4 CSS-first — il n'y a PAS de `tailwind.config.ts` ; plugins et keyframes vivent aussi dans le CSS via `@plugin` / `@theme`).
 
 ### Couleurs
 
 | Token | Light | Dark | Usage |
 |-------|-------|------|-------|
-| `--primary` | oklch(0.42 0.2 285) | oklch(0.6 0.2 285) | CTA, liens, actions principales |
-| `--primary-foreground` | oklch(0.98 0.005 285) | oklch(0.13 0.02 285) | Texte sur primary |
-| `--secondary` | oklch(0.94 0.02 285) | oklch(0.22 0.03 285) | Boutons secondaires, badges |
-| `--muted` | oklch(0.95 0.01 285) | oklch(0.2 0.02 285) | Fonds neutres, zones inactives |
-| `--accent` | oklch(0.92 0.04 285) | oklch(0.25 0.05 285) | Hover, sélection, surbrillance |
-| `--destructive` | oklch(0.55 0.2 25) | oklch(0.55 0.2 25) | Erreurs, actions irréversibles |
-| `--success` | oklch(0.55 0.18 155) | oklch(0.55 0.18 155) | Succès, validations |
-| `--warning` | oklch(0.7 0.16 75) | oklch(0.7 0.16 75) | Avertissements |
-| `--card` | oklch(1 0 0) | oklch(0.18 0.02 285) | Fond des cards |
-| `--popover` | oklch(1 0 0) | oklch(0.18 0.02 285) | Fond des popovers/dropdowns |
-| `--border` | oklch(0.9 0.01 285) | oklch(0.26 0.03 285) | Bordures |
-| `--input` | oklch(0.88 0.015 285) | oklch(0.26 0.03 285) | Bordure des inputs |
-| `--ring` | = primary | = primary | Focus ring |
+| `--primary` | oklch(0.87 0.19 162) | oklch(0.87 0.19 162) | Fills, bordures, états actifs (mint) |
+| `--primary-foreground` | oklch(0.15 0.005 80) | oklch(0.15 0.005 80) | Texte sur primary (foncé sur mint clair) |
+| `--primary-dark` | #00b47c | #06f5a2 | **Texte-accent** lisible (AA) sur fond clair |
+| `--secondary` | oklch(0.968 0.003 80) | oklch(0.255 0.004 80) | Boutons secondaires, badges |
+| `--muted` | oklch(0.968 0.003 80) | oklch(0.235 0.003 80) | Fonds neutres, zones inactives |
+| `--accent` | oklch(0.93 0.005 80) | oklch(0.28 0.005 80) | Hover, sélection, surbrillance |
+| `--destructive` | oklch(0.577 0.245 27.3) | oklch(0.62 0.22 27.3) | Erreurs, actions irréversibles |
+| `--success` | oklch(0.62 0.15 158) | oklch(0.72 0.17 160) | Succès, validations |
+| `--warning` | oklch(0.72 0.16 75) | oklch(0.78 0.15 75) | Avertissements |
+| `--card` | oklch(1 0 0) | oklch(0.205 0.003 80) | Fond des cards (#202020 en dark) |
+| `--popover` | oklch(1 0 0) | oklch(0.205 0.003 80) | Fond des popovers/dropdowns |
+| `--border` | oklch(0.9 0.004 80) | oklch(0.275 0.004 80) | Bordures |
+| `--input` | oklch(0.9 0.004 80) | oklch(0.275 0.004 80) | Bordure des inputs |
+| `--ring` | = primary | = primary | Focus ring (3px) |
+| `--background` | oklch(0.99 0.002 80) | oklch(0.145 0.002 80) | Fond (#fefefe / #0F0F0F) |
+
+**Contraste (a11y) :** `--primary` (mint) sert aux **fills/bordures/gros titres**, jamais au texte fin sur blanc (échoue AA). Pour du texte-accent → `--primary-dark` (`text-primary-dark`).
 
 #### Couleurs Sidebar
 
@@ -40,20 +52,21 @@
 
 #### Couleurs Charts (5 niveaux)
 
-`--chart-1` à `--chart-5` — palette dégradée violet → teal pour graphiques.
+`--chart-1` à `--chart-5` — mint en tête puis neutres chauds (lecture « data », pas arc-en-ciel).
 
 ### Typographie
 
 | Style | Classes Tailwind | Usage |
 |-------|------------------|-------|
-| H1 | `text-4xl font-bold tracking-tight` | Titres de page |
+| H1 | `text-2xl font-bold tracking-tight` | Titres de page (rendu par `PageContainer`) |
 | H2 | `text-3xl font-semibold tracking-tight` | Sections |
 | H3 | `text-2xl font-semibold tracking-tight` | Sous-sections |
 | H4 | `text-xl font-medium` | Sous-titres |
 | Body | `text-base leading-7` | Corps de texte |
 | Small | `text-sm text-muted-foreground` | Descriptions, labels |
 | Caption | `text-xs text-muted-foreground` | Métadonnées, timestamps |
-| Font | Inter (`next/font/google`) | Tout le texte |
+| Labels/méta | `font-mono text-xs uppercase tracking-wide` | Signature éditoriale Tiple (labels, chiffres, KPI) |
+| Fonts | Instrument Sans (`font-sans`) + JetBrains Mono (`font-mono`) | `next/font/google` |
 
 ### Spacing
 
@@ -74,12 +87,20 @@ Utilise l'échelle Tailwind standard (multiples de 4px) :
 
 | Token | Valeur | Tailwind | Usage |
 |-------|--------|----------|-------|
-| `--radius` | 0.625rem (10px) | `rounded-lg` | Valeur de base |
-| sm | radius - 4px | `rounded-sm` | Badges, tags |
-| md | radius - 2px | `rounded-md` | Inputs, boutons |
+| `--radius` | 0.25rem (4px) | `rounded-lg` | Surfaces : cards, inputs, popovers (net, éditorial) |
+| sm | radius - 2px | `rounded-sm` | Petits éléments |
+| md | radius - 1px | `rounded-md` | Inputs |
 | lg | radius | `rounded-lg` | Cards, modals |
 | xl | radius + 4px | `rounded-xl` | Panels larges |
-| full | 9999px | `rounded-full` | Avatars, pills |
+| full | 9999px | `rounded-full` | **Boutons, badges (pilules)**, avatars |
+
+### Utilitaires éditoriaux (globals.css)
+
+| Classe | Effet |
+|--------|-------|
+| `hover-lift` | La carte se soulève au survol (micro-interaction) |
+| `text-stroke` | Titre « outline » (contour, remplissage transparent) |
+| `noise-overlay` | Grain fin superposé (texture, SVG inline — zéro requête) |
 
 ### Shadows
 
@@ -108,13 +129,13 @@ Tous installés dans `src/components/ui/`. Style **new-york**.
 ### Formulaires
 | Composant | Fichier | Notes |
 |-----------|---------|-------|
-| Button | `button.tsx` | 6 variants (default, secondary, destructive, outline, ghost, link), 4 sizes |
-| Input | `input.tsx` | Focus ring violet |
+| Button | `button.tsx` | 6 variants (default, secondary, destructive, outline, ghost, link), 4 sizes — **pilule** (`rounded-full`), link en `text-primary-dark` |
+| Input | `input.tsx` | Focus ring mint |
 | Textarea | `textarea.tsx` | Multi-lignes |
 | Select | `select.tsx` | Radix Select complet |
 | Checkbox | `checkbox.tsx` | Radix Checkbox |
 | Switch | `switch.tsx` | Radix Switch |
-| RadioGroup | `radio-group.tsx` | Radix RadioGroup |
+| RadioGroup | `radio-group.tsx` | Radix RadioGroup — `primary-dark` |
 | Label | `label.tsx` | Radix Label |
 | Form | `form.tsx` | Intégration react-hook-form |
 | Slider | `slider.tsx` | Range input stylisé |
@@ -133,11 +154,11 @@ Tous installés dans `src/components/ui/`. Style **new-york**.
 ### Feedback
 | Composant | Fichier | Notes |
 |-----------|---------|-------|
-| Badge | `badge.tsx` | 6 variants (default, secondary, destructive, outline, success, warning) |
+| Badge | `badge.tsx` | 6 variants — **pilule mono uppercase** (tag éditorial) |
 | Alert | `alert.tsx` | Default + destructive |
 | Progress | `progress.tsx` | Barre animée, couleur primary |
 | Skeleton | `skeleton.tsx` | Pulse animation |
-| Spinner | `spinner.tsx` | SVG animé, 3 tailles |
+| Spinner | `spinner.tsx` | SVG animé, 3 tailles, `text-primary-dark` |
 | Sonner | `sonner.tsx` | Toast notifications (thème-aware) |
 
 ### Overlays
@@ -166,11 +187,13 @@ Dans `src/components/` (hors `ui/`) :
 | Composant | Fichier | Props | Usage |
 |-----------|---------|-------|-------|
 | ThemeProvider | `theme-provider.tsx` | children, attribute, defaultTheme | Provider next-themes |
-| ThemeToggle | `theme-toggle.tsx` | — | Bouton toggle light/dark |
+| ThemeToggle | `theme-toggle.tsx` | — | Bouton toggle light/dark (Phosphor) |
 | PageContainer | `page-container.tsx` | heading?, description?, children | Wrapper de page avec max-width |
 | EmptyState | `empty-state.tsx` | icon?, heading, description?, action? | État vide (listes, tables) |
-| StatCard | `stat-card.tsx` | label, value, description?, icon?, trend? | KPI dashboard |
+| StatCard | `stat-card.tsx` | label, value, description?, icon?, trend? | KPI dashboard — hover-lift, valeur mono |
 | DataTable | `data-table.tsx` | columns, data, emptyMessage? | Table de données générique |
+| CopyButton | `copy-button.tsx` | value, label?, size?, variant? | Copie presse-papiers + feedback 2 s |
+| AppLogo | `logo.tsx` | size?, label?, className? | Logo Tiple (SVG mint) — personnaliser `label` par produit |
 
 ## Patterns UI récurrents
 

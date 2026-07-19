@@ -21,7 +21,7 @@
 | Dialog | `src/components/ui/dialog.tsx` | Modal Radix |
 | DropdownMenu | `src/components/ui/dropdown-menu.tsx` | Menu contextuel complet |
 | Form | `src/components/ui/form.tsx` | Integration react-hook-form |
-| Input | `src/components/ui/input.tsx` | Focus ring violet |
+| Input | `src/components/ui/input.tsx` | Focus ring mint |
 | Label | `src/components/ui/label.tsx` | Radix Label |
 | Popover | `src/components/ui/popover.tsx` | Contenu flottant |
 | Progress | `src/components/ui/progress.tsx` | Barre de progression |
@@ -50,8 +50,10 @@
 | ThemeToggle | `src/components/theme-toggle.tsx` | — | Bouton toggle light/dark (client) |
 | PageContainer | `src/components/page-container.tsx` | heading?, description?, children | Wrapper page max-w-7xl |
 | EmptyState | `src/components/empty-state.tsx` | icon?, heading, description?, action? | Etat vide (listes, tables) |
-| StatCard | `src/components/stat-card.tsx` | label, value, description?, icon?, trend? | KPI card pour dashboards |
+| StatCard | `src/components/stat-card.tsx` | label, value, description?, icon?, trend? | KPI card pour dashboards (hover-lift, valeur mono) |
 | DataTable | `src/components/data-table.tsx` | columns, data, emptyMessage? | Table generique typee |
+| CopyButton | `src/components/copy-button.tsx` | value, label?, size?, variant? | Copie presse-papiers + feedback 2s (client) |
+| AppLogo | `src/components/logo.tsx` | size?, label?, className? | Logo Tiple (SVG mint) — `label` = nom du produit |
 
 ## Hooks
 

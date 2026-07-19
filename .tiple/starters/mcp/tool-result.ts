@@ -1,7 +1,7 @@
-// Destination : src/mcp/helpers/tool-result.ts
+// Destination : src/mcp/tool-result.ts
 // Mise en forme des résultats de tools — mcp-patterns §4 : TOUJOURS les deux formes
 // (content texte pour le modèle, structuredContent pour le modèle ET le widget).
-import { widgetMeta, type WidgetName } from "@/mcp/helpers/widget-meta"
+import { widgetMeta, type WidgetName } from "./widget-meta"
 
 interface ToolResultOptions {
   // Résumé 2-4 lignes max : ce que le modèle lit. Le widget affiche le détail.

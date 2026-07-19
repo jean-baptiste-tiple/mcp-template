@@ -189,14 +189,14 @@ Mettre à jour l'inventaire des écrans avec le tableau :
 Si aucune maquette n'est fournie :
 
 **4a. Personnalisation du design system**
-Le template inclut un design system par défaut (Violet Corporate SaaS). Demander à l'utilisateur :
+Le template inclut le design system Tiple par défaut (vert mint #06f5a2, neutres chauds, éditorial). Demander à l'utilisateur :
 - Veut-il personnaliser le design system par défaut ?
 - Si oui → questions ciblées :
-  - Couleur primaire (défaut : Violet #6C2BD9)
+  - Couleur primaire (défaut : vert mint Tiple #06f5a2 — penser au token texte-accent `--primary-dark` si la primaire échoue AA en texte)
   - Couleur secondaire (défaut : dérivée de la primaire)
-  - Font principale (défaut : Inter)
-  - Style général (corporate, playful, minimal, autre)
-- → Mettre à jour `docs/design/system.md` avec les tokens choisis (les fichiers de code `globals.css` et `tailwind.config.ts` seront mis à jour par `/tm-dev` lors de la story de setup)
+  - Fonts (défaut : Instrument Sans + JetBrains Mono)
+  - Style général (éditorial Tiple, corporate, playful, minimal, autre)
+- → Mettre à jour `docs/design/system.md` avec les tokens choisis (le fichier de code `globals.css` — source unique Tailwind v4 — sera mis à jour par `/tm-dev` lors de la story de setup)
 - Si non → garder le design system par défaut tel quel
 
 **4b. Vérifier** que `docs/design/system.md` reflète les tokens choisis

@@ -6,8 +6,8 @@ import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
 
 import { GetStatusInput } from "@/lib/schemas/status"
 import { getStatus } from "@/lib/services/status-service"
-import { toToolResult, toolError } from "@/mcp/helpers/tool-result"
-import { widgetMeta } from "@/mcp/helpers/widget-meta"
+import { toolMeta } from "@/mcp/tool-meta"
+import { toToolResult, toolError } from "@/mcp/tool-result"
 
 // Format imposé (§3) : verbe d'abord, "Use this when…", "Do not use for…",
 // l'essentiel dans la première phrase. Stable (prompt caching des hosts).
@@ -29,9 +29,8 @@ export function registerGetStatusTool(server: McpServer) {
         idempotentHint: true,
         openWorldHint: false,
       },
-      // TODO(S01) avec auth : exigence ChatGPT pour afficher le bouton "Se connecter" (§3)
-      // securitySchemes: [{ type: "oauth2" }],
-      _meta: widgetMeta("status-card"),
+      // securitySchemes (exigence ChatGPT) + triple méta widget — voir src/mcp/tool-meta.ts
+      _meta: toolMeta("status-card"),
     },
     async (input) => {
       try {

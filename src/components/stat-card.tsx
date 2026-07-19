@@ -20,22 +20,24 @@ export function StatCard({
   return (
     <div
       className={cn(
-        "rounded-lg border bg-card p-6 text-card-foreground shadow-sm",
+        "hover-lift rounded-lg border bg-card p-6 text-card-foreground hover:border-primary/40 hover:shadow-md",
         className
       )}
       {...props}
     >
       <div className="flex items-center justify-between">
-        <p className="text-sm font-medium text-muted-foreground">{label}</p>
-        {icon && <div className="text-muted-foreground">{icon}</div>}
+        <p className="font-mono text-xs font-medium uppercase tracking-wide text-muted-foreground">
+          {label}
+        </p>
+        {icon && <div className="text-primary-dark">{icon}</div>}
       </div>
-      <div className="mt-2 flex items-baseline gap-2">
-        <p className="text-2xl font-bold">{value}</p>
+      <div className="mt-3 flex items-baseline gap-2">
+        <p className="font-mono text-3xl font-bold tabular-nums tracking-tight">{value}</p>
         {trend && (
           <span
             className={cn(
-              "text-xs font-medium",
-              trend.positive ? "text-success" : "text-destructive"
+              "font-mono text-xs font-medium tabular-nums",
+              trend.positive ? "text-primary-dark" : "text-destructive"
             )}
           >
             {trend.positive ? "+" : ""}

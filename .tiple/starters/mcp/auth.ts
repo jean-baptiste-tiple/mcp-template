@@ -3,15 +3,24 @@
 // Signature vérifiée via JWKS, puis client Supabase construit AU JWT DE L'UTILISATEUR
 // → RLS active dans les tools exactement comme au web. `service_role` INTERDIT ici.
 import { createRemoteJWKSet, jwtVerify } from "jose"
+import type { AuthInfo } from "@modelcontextprotocol/sdk/server/auth/types.js"
+
+import { supabaseIssuer } from "./config"
 
 // TODO(S01) : décommenter après install du starter supabase-auth.
 // import { createClient, type SupabaseClient } from "@supabase/supabase-js"
+// const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL ?? ""
+// const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? ""
 
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL ?? ""
-const ISSUER = `${SUPABASE_URL}/auth/v1`
-
-// JWKS mis en cache au niveau module (réutilisé entre invocations serverless chaudes)
-const jwks = createRemoteJWKSet(new URL(`${ISSUER}/.well-known/jwks.json`))
+// JWKS Supabase (clés de signature asymétriques). Cache interne à jose, lazy
+// (réutilisé entre invocations serverless chaudes).
+let jwks: ReturnType<typeof createRemoteJWKSet> | null = null
+function getJwks() {
+  if (!jwks) {
+    jwks = createRemoteJWKSet(new URL(`${supabaseIssuer()}/.well-known/jwks.json`))
+  }
+  return jwks
+}
 
 export interface AuthContext {
   userId: string
@@ -20,49 +29,61 @@ export interface AuthContext {
   // supabase: SupabaseClient // TODO(S01) : décommenter avec supabase-auth
 }
 
-// Signature attendue par `withMcpAuth` de mcp-handler : retourne les infos d'auth
-// si le token est valide, `undefined` sinon (→ 401 + WWW-Authenticate géré par le wrapper).
-// TODO(S01) : vérifier la signature exacte (AuthInfo) contre la version épinglée de mcp-handler.
-export async function verifyToken(req: Request, bearerToken?: string) {
+/**
+ * Vérifie un token OAuth Supabase (signature JWKS, issuer, exp/nbf) et renvoie
+ * un AuthInfo. Renvoie `undefined` si absent/invalide → withMcpAuth répond 401.
+ * `extra` porte {userId, orgId?, role?} issus des claims (hook Custom Access Token).
+ */
+export async function verifyToken(
+  _req: Request,
+  bearerToken?: string
+): Promise<AuthInfo | undefined> {
   if (!bearerToken) return undefined
-
   try {
-    const { payload } = await jwtVerify(bearerToken, jwks, { issuer: ISSUER })
+    const { payload } = await jwtVerify(bearerToken, getJwks(), {
+      issuer: supabaseIssuer(),
+    })
+    const userId = typeof payload.sub === "string" ? payload.sub : undefined
+    if (!userId) return undefined
 
-    // Claims custom (org_id, role) : injectés par le Custom Access Token Hook Supabase (§6.4)
+    const orgId = typeof payload.org_id === "string" ? payload.org_id : undefined
+    const role = typeof payload.user_role === "string" ? payload.user_role : undefined
+    const scope = typeof payload.scope === "string" ? payload.scope : ""
+
     return {
       token: bearerToken,
-      clientId: typeof payload.azp === "string" ? payload.azp : "unknown",
-      scopes: typeof payload.scope === "string" ? payload.scope.split(" ") : [],
-      extra: {
-        userId: String(payload.sub),
-        orgId: typeof payload.org_id === "string" ? payload.org_id : null,
-        role: typeof payload.role === "string" ? payload.role : "authenticated",
-      },
+      clientId: userId,
+      scopes: scope ? scope.split(" ") : [],
+      expiresAt: typeof payload.exp === "number" ? payload.exp : undefined,
+      extra: { userId, orgId, role },
     }
   } catch {
-    // Token invalide/expiré : undefined → le wrapper renvoie l'erreur actionnable au host
     return undefined
   }
 }
 
-// À appeler en tête de CHAQUE tool authentifié (§1) : reconstruit le contexte depuis
-// l'authInfo posé par withMcpAuth, et fournit le client Supabase scoped utilisateur.
-export function requireAuthContext(extra: { authInfo?: { token?: string; extra?: Record<string, unknown> } }): AuthContext {
+/**
+ * Résout l'AuthContext d'un tool depuis l'`extra` du handler MCP.
+ * À appeler en tête de CHAQUE tool authentifié (§1). Si le claim org_id manque
+ * (hook Custom Access Token pas encore configuré), fallback : requête org_members
+ * via le JWT (RLS) — voir l'implémentation de référence dans mcp-cv-editor.
+ */
+export function requireAuthContext(extra: { authInfo?: AuthInfo }): AuthContext {
   const info = extra.authInfo
-  if (!info?.token || !info.extra?.userId) {
+  const userId = typeof info?.extra?.userId === "string" ? info.extra.userId : undefined
+  if (!info?.token || !userId) {
     // Erreur actionnable (§4) — le tool la transforme en résultat isError
     throw new Error("Authentication required. Connect your account to use this tool.")
   }
 
   return {
-    userId: String(info.extra.userId),
-    orgId: info.extra.orgId ? String(info.extra.orgId) : null,
-    role: info.extra.role ? String(info.extra.role) : "authenticated",
+    userId,
+    orgId: typeof info.extra?.orgId === "string" ? info.extra.orgId : null,
+    role: typeof info.extra?.role === "string" ? info.extra.role : "authenticated",
     // TODO(S01) : client au JWT de l'utilisateur → RLS active (jamais service_role)
-    // supabase: createClient(SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!, {
+    // supabase: createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
     //   global: { headers: { Authorization: `Bearer ${info.token}` } },
-    //   auth: { persistSession: false },
+    //   auth: { persistSession: false, autoRefreshToken: false },
     // }),
   }
 }

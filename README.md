@@ -16,22 +16,23 @@ Stack : Next.js 15 (App Router) + TypeScript strict + Tailwind CSS + Shadcn/ui. 
 Les invariants que le template impose (détail dans `.tiple/conventions/mcp-patterns.md`) :
 
 1. **Parité par services partagés** — toute capacité métier = 1 fonction dans `lib/services/` + 2 adaptateurs fins (Server Action web, tool MCP). Jamais de logique métier dans un tool.
-2. **Dual-host day one** — widgets déclarés avec les deux metas (`ui/resourceUri` standard SEP-1865 + alias `openai/outputTemplate` pour ChatGPT) via un helper unique ; bridge unique `widgets/shared/bridge.ts` ; matrice de test des deux hosts avant push.
+2. **Dual-host day one** — widgets déclarés avec la triple méta (`ui.resourceUri` standard MCP Apps GA + alias plat pré-GA + `openai/outputTemplate` → variante skybridge pour ChatGPT) via un helper unique ; chaque bundle servi en 2 resources (`text/html;profile=mcp-app` + `text/html+skybridge`) ; bridge unique `widgets/shared/bridge.ts` sur le SDK officiel `ext-apps` ; matrice de test des deux hosts avant push.
 3. **Auth OAuth 2.1 avec Supabase en authorization server** — RFC 9728, 401 `WWW-Authenticate`, `securitySchemes` par tool, client Supabase au JWT de l'utilisateur → RLS active dans les tools. `service_role` interdit.
-4. **Stateless** — Streamable HTTP sans session, tout l'état métier en Postgres. Compatible Vercel.
+4. **Transport figé par ADR** — stateless par défaut (Streamable HTTP sans session, état métier en Postgres, compatible Vercel) ; stateful (sessions + SSE via Redis) si le produit exige push/subscriptions — bloc prêt dans le starter.
 5. **AX mesurée** — `instructions` serveur maintenu, descriptions "Use this when… / Do not use for…", `next_actions` dans chaque résultat, golden queries rejouées à chaque évolution de tool.
 6. **Dégradation** — tout tool fonctionne sans widget ; le widget est un bonus d'ergonomie.
 
 ## Design System
 
-Un design system **violet corporate** complet est inclus, prêt à l'emploi :
+Le design system **Tiple (vert mint, éditorial)** complet est inclus, prêt à l'emploi — éprouvé dans mcp-cv-editor :
 
-- **Thème :** Violet profond corporate avec dark mode (class-based, next-themes)
-- **34 composants Shadcn/ui** installés (style new-york) dans `src/components/ui/`
-- **6 composants métier** : PageContainer, EmptyState, StatCard, DataTable, ThemeToggle, ThemeProvider
-- **Preview interactive** : route `/design-system` pour voir tous les composants
-- **Tokens complets** : couleurs (oklch), typographie (Inter), spacing, radius, shadows
-- **Documentation** : `docs/design/system.md`
+- **Thème :** Vert mint Tiple `#06f5a2` sur neutres chauds, dark mode soigné (class-based, next-themes), token `--primary-dark` pour le texte-accent (contraste AA)
+- **34 composants Shadcn/ui** (style new-york) dans `src/components/ui/` — boutons/badges en pilule, labels mono
+- **8 composants métier** : PageContainer, EmptyState, StatCard, DataTable, ThemeToggle, ThemeProvider, CopyButton, AppLogo (+ favicon)
+- **Preview interactive** : route `/design-system` (sections modulaires)
+- **Tokens complets** : couleurs (oklch), typographie (Instrument Sans + JetBrains Mono), spacing, radius, shadows, utilitaires éditoriaux (hover-lift, text-stroke, noise-overlay)
+- **Icônes** : Phosphor pour l'app, lucide en interne Shadcn
+- **Documentation** : `docs/design/system.md` — source unique des tokens : `src/app/globals.css` (Tailwind v4 CSS-first)
 
 ## Starters
 
@@ -39,7 +40,7 @@ Le template est minimal par défaut. Les starters dans `.tiple/starters/` ajoute
 
 | Starter | Dossier | Ce qu'il ajoute |
 |---------|---------|-----------------|
-| **Canal MCP** | `.tiple/starters/mcp/` | Endpoint `/api/mcp` stateless, tool démo (`schema Zod → service → tool`), helpers dual-meta, auth OAuth 2.1 (RFC 9728), bridge widgets, widget exemple Vite single-file, test `InMemoryTransport` |
+| **Canal MCP** | `.tiple/starters/mcp/` | Endpoint `/api/mcp` (stateless par défaut, stateful prêt), tool démo (`schema Zod → service → tool`), widgets MCP Apps GA (triple méta + skybridge, bundles inlinés), bridge SDK `ext-apps`, auth OAuth 2.1 (RFC 9728), tests `InMemoryTransport` + smoke HTTP |
 | **Supabase + Auth** | `.tiple/starters/supabase-auth/` | Base de données, auth (login/signup/reset), middleware, Server Actions, pages auth, CI migrations |
 
 Pour un produit MCP-first, les deux starters vont ensemble : Supabase + Auth fournit la DB (RLS) et l'authorization server OAuth 2.1 du canal MCP ; le starter Canal MCP fournit le serveur, les widgets et le câblage auth (bloc à décommenter une fois Supabase en place).

@@ -404,7 +404,7 @@ Slash commands dans `.claude/commands/` :
 
 ## Design System
 
-Le projet inclut un design system violet corporate complet. Toujours s'y referer avant de creer un composant UI.
+Le projet inclut le design system Tiple complet (vert mint, editorial). Toujours s'y referer avant de creer un composant UI.
 
 - **Tokens & documentation :** `docs/design/system.md`
 - **Preview interactive :** route `/design-system`

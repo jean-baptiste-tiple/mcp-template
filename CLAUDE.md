@@ -79,8 +79,8 @@ Activé pour tout produit MCP-first. Voir `.tiple/starters/mcp/README.md` pour l
 1. **Parité par services partagés.** Toute capacité métier = 1 fonction dans `lib/services/` + 2 adaptateurs fins (Server Action web, tool MCP). Jamais de logique métier dans un tool.
 2. **Schemas Zod partagés = source de vérité** des entités échangées par les tools (`lib/schemas/`). Mêmes schemas côté form web et côté tool. Inputs de tools = non fiables → Zod partout.
 3. **Un rendu = un composant React unique.** Si une entité est affichée sur plusieurs surfaces (éditeur web, page publique, widget MCP, PDF), c'est le MÊME composant. Ne jamais dupliquer le rendu.
-4. **Tools authentifiés OAuth 2.1 via Supabase** (RFC 9728 + 401 `WWW-Authenticate` + `securitySchemes` par tool), client Supabase au nom de l'utilisateur (RLS active). `service_role` interdit dans les tools. Serveur **stateless** : jamais de sessions/push sans ADR.
-5. **Dual-host day one (Claude + ChatGPT)** : widgets déclarés avec les DEUX metas (`ui/resourceUri` standard + alias `openai/outputTemplate`) via un helper unique ; bridge unique (`widgets/shared/bridge.ts`) ; matrice de test des deux hosts avant push. Tout tool fonctionne sans widget (texte suffisant). Bundles Vite single-file (CSP hosts : zéro requête externe).
+4. **Tools authentifiés OAuth 2.1 via Supabase** (RFC 9728 + 401 `WWW-Authenticate` + `securitySchemes` par tool), client Supabase au nom de l'utilisateur (RLS active). `service_role` interdit dans les tools. Transport **stateless par défaut, stateful (Redis/SSE) si le produit l'exige — choix figé par ADR** ; jamais de sessions/push hors ADR.
+5. **Dual-host day one (Claude + ChatGPT)** : widgets déclarés avec la TRIPLE méta (`ui.resourceUri` GA + alias plat pré-GA + `openai/outputTemplate` → variante skybridge) via un helper unique ; 2 resources par bundle (`text/html;profile=mcp-app` + `text/html+skybridge`) ; bridge unique (`widgets/shared/bridge.ts`) sur le SDK officiel `ext-apps` ; matrice de test des deux hosts avant push. Tout tool fonctionne sans widget (texte suffisant). Bundles Vite single-file inlinés dans `generated.ts` (CSP hosts : zéro requête externe).
 6. **AX** : `instructions` serveur maintenu, descriptions "Use this when… / Do not use for…", `next_actions` dans chaque résultat ; toute évolution de tool/description rejoue les golden queries (`docs/mcp-golden-queries.md`, créé depuis `.tiple/templates/mcp-golden-queries.tmpl.md`) sur les deux hosts.
 7. Détail des patterns : `.tiple/conventions/mcp-patterns.md` (tag `mcp`). Squelette prêt à installer : `.tiple/starters/mcp/` (story S01). Les choix d'auth et de transport sont figés par ADR lors du cadrage (`/tm-plan`).
 
@@ -135,22 +135,23 @@ Slash commands dans `.claude/commands/` :
 
 ## Design System
 
-Le projet inclut un design system violet corporate complet. Toujours s'y référer avant de créer un composant UI.
+Le projet inclut le design system Tiple complet (vert mint, éditorial). Toujours s'y référer avant de créer un composant UI.
 
 - **Tokens & documentation :** `docs/design/system.md` — couleurs, typographie, spacing, radius, shadows
 - **Preview interactive :** route `/design-system` — tous les composants rendus
 - **Composants Shadcn/ui :** `src/components/ui/` — 34 composants installés (style new-york)
-- **Composants métier :** `src/components/` — PageContainer, EmptyState, StatCard, DataTable, ThemeToggle, ThemeProvider
+- **Composants métier :** `src/components/` — PageContainer, EmptyState, StatCard, DataTable, ThemeToggle, ThemeProvider, CopyButton, AppLogo
 - **Registry complet :** `.tiple/conventions/component-registry.md` — TOUJOURS vérifier avant de créer un composant
-- **Thème :** Violet profond corporate, dark mode class-based (next-themes), Inter font
-- **CSS Variables :** `src/app/globals.css` — tous les tokens (light + dark)
-- **Tailwind config :** `tailwind.config.ts` — couleurs, radius, animations
+- **Thème :** Vert mint Tiple (#06f5a2) sur neutres chauds, dark mode class-based (next-themes), Instrument Sans + JetBrains Mono, boutons/badges en pilule
+- **Icônes :** Phosphor (`@phosphor-icons/react`, `/dist/ssr` en Server Component) pour l'app ; lucide-react réservé aux internes Shadcn
+- **CSS Variables & config :** `src/app/globals.css` — SOURCE UNIQUE (Tailwind v4 CSS-first : tokens, dark variant, plugin animate, keyframes — il n'y a pas de `tailwind.config.ts`)
 
 ### Règles UI
 1. **Réutiliser les composants existants** — vérifier le registry et `src/components/ui/` avant de créer
 2. **Respecter les tokens** — utiliser les classes Tailwind sémantiques (`bg-primary`, `text-muted-foreground`, `border-border`)
 3. **Pas de couleurs en dur** — toujours passer par les CSS variables/tokens
-4. **Dark mode compatible** — tester les deux thèmes
+4. **Contraste mint :** le mint (`--primary`) sert aux fills/bordures, JAMAIS au texte fin sur fond clair (échoue AA) → texte-accent = `text-primary-dark`
+5. **Dark mode compatible** — tester les deux thèmes
 
 ## Conventions
 - Index des tags : `.tiple/conventions/_index.md`
