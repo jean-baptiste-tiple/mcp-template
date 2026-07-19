@@ -115,6 +115,14 @@ export async function createProjectAction(formData: FormData) {
 - Server Actions retournent `{ data }` ou `{ error }` — jamais de throw côté client
 - Composants UI : toujours gérer loading + error + empty states
 - Supabase : toujours vérifier le `.error` de la réponse
+- **Narrowing des `ActionResult`** : côté client, tester `if (res.error !== undefined)` — JAMAIS `if (res.error)` (une erreur chaîne vide est falsy → un échec passerait pour un succès). Alternative : une union discriminée `{ ok: boolean }`.
+
+## Patchs partiels (édition d'entités)
+
+- Un schéma de patch est **deep-partial** sur les objets imbriqués (patcher `{identity: {title}}` ne doit pas exiger le reste de l'identité) — `schema.partial()` seul ne suffit pas, étendre les objets imbriqués.
+- **`null` = suppression** d'un champ optionnel ; `undefined`/absent = « ne pas toucher ». Sans cette convention, il est impossible de VIDER un champ via un patch.
+- Le merge préserve ce qui n'est pas fourni (un formulaire qui envoie `links: []` par défaut détruit des données — omettre le champ).
+- Après merge : revalider l'entité COMPLÈTE avec le schéma canonique avant de persister.
 
 ## Error Handling avancé
 

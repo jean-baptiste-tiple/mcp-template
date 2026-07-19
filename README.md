@@ -73,6 +73,7 @@ Le cadrage (`/tm-plan`) remplit la section "Canal MCP" de l'architecture (tools,
 | `/tm-plan` | **Toute planification** | Cadrage complet (brief → PRD → archi → design → epics/stories → gate). Détecte auto le mode **initial** (nouveau projet) vs **évolution** (V2, V3, grosse feature). |
 | `/tm-dev` | **Toute action code** | 5 modes auto-détectés depuis l'argument : **story** (`E01-S01`/`next`), **fix** (bug/corrige/cassé), **feature** (ajoute/implémente), **refacto** (nettoie/factorise), **explore** (comprends/analyse, read-only). |
 | `/tm-review` | Code review agent isolé | Agent autonome séparé passe `code-review.md` point par point. Appelé auto par `/tm-dev`. |
+| `/tm-audit` | Revue totale à chaque jalon | 3 passes parallèles par agents isolés : code (checklist+ADRs), UI/UX (captures Playwright + grille notée), AX (simulation de routage des golden queries) → arbitrage, correction, re-validation. |
 | `/tm-verify` | Vérification triple | `pnpm type-check` + `pnpm lint` + `pnpm test` (debug local). |
 | `/tm-wrap-up` | Après un gros chantier | Capture les apprentissages méta (conventions, ADR, registry). Peut aussi être proposé auto par Claude. |
 | `/commit-push` | Commit & push | Type-check + lint + tests + changelog + commit + push (OBLIGATOIRE pour tout push). |
