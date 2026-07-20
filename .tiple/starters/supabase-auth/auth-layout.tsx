@@ -4,7 +4,8 @@ export default function AuthLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="flex min-h-screen items-center justify-center">
+    // Même fond que les pages du dashboard : halo mint léger + croix + grain fin.
+    <div className="page-canvas noise-overlay flex min-h-screen items-center justify-center">
       <div className="w-full max-w-md p-6">{children}</div>
     </div>
   )

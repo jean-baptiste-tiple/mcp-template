@@ -146,7 +146,7 @@ Le projet inclut le design system Tiple complet (vert mint, éditorial). Toujour
 - **Composants Shadcn/ui :** `src/components/ui/` — 34 composants installés (style new-york)
 - **Composants métier :** `src/components/` — PageContainer, EmptyState, StatCard, DataTable, ThemeToggle, ThemeProvider, CopyButton, AppLogo
 - **Registry complet :** `.tiple/conventions/component-registry.md` — TOUJOURS vérifier avant de créer un composant
-- **Thème :** Vert mint Tiple (#06f5a2) sur neutres chauds, dark mode class-based (next-themes), Instrument Sans + JetBrains Mono, boutons/badges en pilule
+- **Thème :** Vert mint Tiple (#06f5a2) sur neutres chauds, fond de page #FAFAFA (surfaces de contenu opaques `bg-card`), sidebar SOMBRE dans les deux thèmes (item actif pill mint), pattern de page `.page-canvas` (halo mint + croix) + `.noise-overlay`, dark mode class-based (next-themes), Instrument Sans + JetBrains Mono, boutons/badges/inputs en pilule
 - **Icônes :** Phosphor (`@phosphor-icons/react`, `/dist/ssr` en Server Component) pour l'app ; lucide-react réservé aux internes Shadcn
 - **CSS Variables & config :** `src/app/globals.css` — SOURCE UNIQUE (Tailwind v4 CSS-first : tokens, dark variant, plugin animate, keyframes — il n'y a pas de `tailwind.config.ts`)
 

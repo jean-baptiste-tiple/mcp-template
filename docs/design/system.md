@@ -7,7 +7,8 @@
 
 - **Couleur primaire :** Vert mint Tiple `#06f5a2` (oklch 0.87 0.19 162) — fills, bordures, états actifs.
 - **Vert-accent texte :** `--primary-dark` (`#00b47c` en light, `#06f5a2` en dark) — le mint échoue AA en petit texte sur blanc, ce token le remplace pour le TEXTE-accent.
-- **Neutres :** chauds (teinte oklch 80), pas froids. Fond light `#fefefe`, dark quasi-noirs `#0F0F0F` (fond) / `#202020` (cartes).
+- **Neutres :** chauds (teinte oklch 80), pas froids. Fond de page light `#FAFAFA` (surfaces de contenu en blanc `bg-card`), dark quasi-noirs `#0F0F0F` (fond) / `#202020` (cartes).
+- **Pattern graphique de page :** `.page-canvas` — halo mint haut-droite + écho bas-gauche + semis de croix « repères d'ingénierie » SOUS le contenu, couplé au grain `.noise-overlay`. Sidebar **sombre dans les deux thèmes** (item actif en pill mint pleine).
 - **Fonts :** Instrument Sans (corps) + JetBrains Mono (labels, chiffres, méta) — `next/font/google`, variables `--font-instrument` / `--font-jetbrains`.
 - **Icônes :** Phosphor (`@phosphor-icons/react`) pour les icônes applicatives (`/dist/ssr` en Server Component) ; lucide-react reste utilisé en interne par les composants Shadcn.
 - **Radius :** surfaces (cards, inputs, popovers) en `0.25rem` (net, éditorial) ; **boutons & badges en pilule** (`rounded-full`, comme les CTA/tags de tiple.io).
@@ -37,18 +38,30 @@ Source unique : `src/app/globals.css` (Tailwind v4 CSS-first — il n'y a PAS de
 | `--border` | oklch(0.9 0.004 80) | oklch(0.275 0.004 80) | Bordures |
 | `--input` | oklch(0.9 0.004 80) | oklch(0.275 0.004 80) | Bordure des inputs |
 | `--ring` | = primary | = primary | Focus ring (3px) |
-| `--background` | oklch(0.99 0.002 80) | oklch(0.145 0.002 80) | Fond (#fefefe / #0F0F0F) |
+| `--background` | #FAFAFA | oklch(0.145 0.002 80) | Fond (#FAFAFA / #0F0F0F) |
 
 **Contraste (a11y) :** `--primary` (mint) sert aux **fills/bordures/gros titres**, jamais au texte fin sur blanc (échoue AA). Pour du texte-accent → `--primary-dark` (`text-primary-dark`).
 
 #### Couleurs Sidebar
 
+Le sidebar (et la barre/nav mobile) est un panneau **SOMBRE dans les deux thèmes**
+(quasi-noir chaud, signature éditoriale tiple.io) — item actif en pill mint pleine.
+
 | Token | Usage |
 |-------|-------|
-| `--sidebar` | Fond du sidebar |
-| `--sidebar-foreground` | Texte du sidebar |
-| `--sidebar-accent` | Hover/actif dans le sidebar |
+| `--sidebar` | Fond du sidebar — oklch(0.17 0.004 80) light / oklch(0.175 0.003 80) dark |
+| `--sidebar-foreground` | Texte du sidebar (clair) — inactifs en `/65`, labels en `/40` |
+| `--sidebar-accent` | Hover dans le sidebar |
 | `--sidebar-border` | Bordures du sidebar |
+
+#### Fond des corps de page
+
+- `.page-canvas` : halo mint modéré en **haut-droite** (9 %/4 % light, 6 %/3 % dark) + écho bas-gauche, sur `--background` — appliqué au `<main>` du dashboard et au layout auth.
+- `.page-canvas::before` : **semis de petites croix** grises (tuile SVG 20 px, repères d'ingénierie) ancré haut-gauche — opacité faible dès le départ (0.14 light / 0.10 dark) mais estompe douce qui porte loin (masque radial 1500×950, transparent à 90 %). **Sous le contenu** (`z-index: -1` + `isolation: isolate` sur `.page-canvas`) : les croix ne vivent que sur le fond nu — toute surface de contenu (tableau, liste, empty state) est OPAQUE (`bg-card`).
+- **Titres de section (H2)** : tiret vertical mint (`h-5 w-1.5 rounded-full bg-primary`) + titre bold — pas de bandeau de fond.
+- **Inputs & selects en PILL** (`rounded-full`) avec fond BLANC (`bg-card`) — comme les boutons/badges ; textarea garde le radius net (multi-ligne) mais fond blanc aussi.
+- `.noise-overlay` : grain SVG fin (opacité 0.025) par-dessus — texture, jamais gênant.
+- Le sidebar n'a **pas de séparateurs internes** (pas de border sous le logo ni au-dessus de Déconnexion) — les zones respirent par l'espacement seul.
 
 #### Couleurs Charts (5 niveaux)
 
@@ -130,9 +143,9 @@ Tous installés dans `src/components/ui/`. Style **new-york**.
 | Composant | Fichier | Notes |
 |-----------|---------|-------|
 | Button | `button.tsx` | 6 variants (default, secondary, destructive, outline, ghost, link), 4 sizes — **pilule** (`rounded-full`), link en `text-primary-dark` |
-| Input | `input.tsx` | Focus ring mint |
-| Textarea | `textarea.tsx` | Multi-lignes |
-| Select | `select.tsx` | Radix Select complet |
+| Input | `input.tsx` | **Pill** (`rounded-full`), fond `bg-card`, focus ring mint |
+| Textarea | `textarea.tsx` | Multi-lignes — radius net, fond `bg-card` |
+| Select | `select.tsx` | Radix Select complet — trigger **pill**, fond `bg-card` |
 | Checkbox | `checkbox.tsx` | Radix Checkbox |
 | Switch | `switch.tsx` | Radix Switch |
 | RadioGroup | `radio-group.tsx` | Radix RadioGroup — `primary-dark` |
@@ -194,6 +207,7 @@ Dans `src/components/` (hors `ui/`) :
 | DataTable | `data-table.tsx` | columns, data, emptyMessage? | Table de données générique |
 | CopyButton | `copy-button.tsx` | value, label?, size?, variant? | Copie presse-papiers + feedback 2 s |
 | AppLogo | `logo.tsx` | size?, label?, className? | Logo Tiple (SVG mint) — personnaliser `label` par produit |
+| SidebarNav | `sidebar-nav.tsx` | — (items : `nav-items.ts`) | Nav du sidebar sombre — item actif pill mint (client) |
 
 ## Patterns UI récurrents
 
@@ -202,6 +216,15 @@ Dans `src/components/` (hors `ui/`) :
 <PageContainer heading="Titre" description="Description">
   {/* contenu */}
 </PageContainer>
+```
+Le `<main>` du layout porte `page-canvas noise-overlay` (halo + croix + grain) — les pages n'ont rien à faire.
+
+### Titre de section (H2 éditorial)
+```tsx
+<h2 className="flex items-center gap-2.5 text-lg font-bold tracking-tight">
+  <span aria-hidden className="h-5 w-1.5 rounded-full bg-primary" />
+  Titre de section
+</h2>
 ```
 
 ### Dashboard avec stats

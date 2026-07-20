@@ -25,7 +25,7 @@ export function DataTable<T extends Record<string, unknown>>({
   emptyMessage = "Aucune donnée",
 }: DataTableProps<T>) {
   return (
-    <div className="rounded-md border">
+    <div className="rounded-md border bg-card">
       <Table>
         <TableHeader>
           <TableRow>

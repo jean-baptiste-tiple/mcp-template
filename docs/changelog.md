@@ -10,6 +10,17 @@
 **Fichiers :** Liste des fichiers créés/modifiés
 -->
 
+## [2026-07-20] — Design system v2 (backport cv-editor) : sidebar sombre, pattern croix + halo, fond #FAFAFA, inputs pill
+**Quoi :** Port des 7 commits design de mcp-cv-editor (`d468a52` → `0052248`) :
+- **Fond de page `#FAFAFA`** (light) avec surfaces de contenu OPAQUES en blanc (`bg-card` sur Input/Select/Textarea/EmptyState/DataTable).
+- **Pattern graphique de page** : utilitaires `.page-canvas` (halo mint haut-droite + écho bas-gauche, variantes dark) et `.page-canvas::before` (semis de croix « repères d'ingénierie » SOUS le contenu — `isolation: isolate` + `z-index: -1`, masque radial à estompe longue), couplés au grain `.noise-overlay`. Appliqués au `<main>` du layout dashboard et au layout auth du starter supabase.
+- **Sidebar SOMBRE dans les deux thèmes** (tokens `--sidebar*` light passés en quasi-noir chaud) : layout `(dashboard)` refondu — aside sticky avec AppLogo + `SidebarNav` (nouveau composant générique, item actif en pill mint pleine, items dans `nav-items.ts` à personnaliser), barre mobile sombre, sans séparateurs internes.
+- **Inputs & selects en pill** (`rounded-full`, fond `bg-card`) ; textarea radius net fond blanc.
+- **H2 éditorial** : tiret vertical mint + titre bold (encodé dans `section.tsx` de la preview + snippet dans system.md).
+- Docs synchronisées : `docs/design/system.md` (tokens, section « Fond des corps de page », patterns), registry (SidebarNav, notes pill), CLAUDE.md + README (thème).
+**Pourquoi :** JB a fait évoluer l'identité sur cv-editor (branding éditorial complet) — le template repart avec ce niveau de finition par défaut.
+**Fichiers :** `src/app/globals.css`, `src/app/(dashboard)/layout.tsx`, `src/components/{sidebar-nav.tsx,nav-items.ts}` (nouveaux), `src/components/{empty-state,data-table}.tsx`, `src/components/ui/{input,select,textarea}.tsx`, `src/app/design-system/sections/section.tsx`, `.tiple/starters/supabase-auth/auth-layout.tsx`, `docs/design/system.md`, `.tiple/conventions/component-registry.md`, `CLAUDE.md`, `README.md`
+
 ## [2026-07-19] — Rapports agents cv-editor (2ᵉ vague) : content texte roi, même-tour, loader jamais terminal, tous les canaux
 **Quoi :** Backport des correctifs issus des rapports de frictions agents (Claude + ChatGPT) sur mcp-cv-editor (commits `4a8361d`, `9f279c1`) :
 - **Contrat §4 corrigé (leçon n°1)** : le `content` TEXTE est la seule voie fiable vers le modèle — certains hosts masquent `structuredContent` (canal du widget). Consignes + données d'un prepare vont dans le texte (cap de taille), dupliquées dans structuredContent pour le widget. `tool-result.ts` du starter documenté en conséquence.

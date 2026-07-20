@@ -21,7 +21,7 @@
 | Dialog | `src/components/ui/dialog.tsx` | Modal Radix |
 | DropdownMenu | `src/components/ui/dropdown-menu.tsx` | Menu contextuel complet |
 | Form | `src/components/ui/form.tsx` | Integration react-hook-form |
-| Input | `src/components/ui/input.tsx` | Focus ring mint |
+| Input | `src/components/ui/input.tsx` | Pill, fond bg-card, focus ring mint |
 | Label | `src/components/ui/label.tsx` | Radix Label |
 | Popover | `src/components/ui/popover.tsx` | Contenu flottant |
 | Progress | `src/components/ui/progress.tsx` | Barre de progression |
@@ -54,6 +54,7 @@
 | DataTable | `src/components/data-table.tsx` | columns, data, emptyMessage? | Table generique typee |
 | CopyButton | `src/components/copy-button.tsx` | value, label?, size?, variant? | Copie presse-papiers + feedback 2s (client) |
 | AppLogo | `src/components/logo.tsx` | size?, label?, className? | Logo Tiple (SVG mint) — `label` = nom du produit |
+| SidebarNav | `src/components/sidebar-nav.tsx` | — (items : `src/components/nav-items.ts`) | Nav sidebar sombre, item actif pill mint (client, usePathname) |
 
 ## Hooks
 

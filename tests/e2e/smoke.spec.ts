@@ -4,7 +4,8 @@ import { test, expect } from "@playwright/test"
 // Sert aussi de test de la config Playwright elle-même — à étoffer par story.
 test("la home redirige vers /dashboard", async ({ page }) => {
   await page.goto("/")
-  await expect(page).toHaveURL(/\/dashboard$/)
+  // Timeout large : la 1re requête compile /dashboard à froid en dev (turbopack).
+  await expect(page).toHaveURL(/\/dashboard$/, { timeout: 30_000 })
   await expect(page.getByRole("heading", { level: 1, name: "Dashboard" })).toBeVisible()
 })
 

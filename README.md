@@ -26,7 +26,7 @@ Les invariants que le template impose (détail dans `.tiple/conventions/mcp-patt
 
 Le design system **Tiple (vert mint, éditorial)** complet est inclus, prêt à l'emploi — éprouvé dans mcp-cv-editor :
 
-- **Thème :** Vert mint Tiple `#06f5a2` sur neutres chauds, dark mode soigné (class-based, next-themes), token `--primary-dark` pour le texte-accent (contraste AA)
+- **Thème :** Vert mint Tiple `#06f5a2` sur neutres chauds, fond de page `#FAFAFA` avec pattern éditorial (`.page-canvas` : halo mint + semis de croix sous le contenu), sidebar sombre les deux thèmes, dark mode soigné (class-based, next-themes), token `--primary-dark` pour le texte-accent (contraste AA)
 - **34 composants Shadcn/ui** (style new-york) dans `src/components/ui/` — boutons/badges en pilule, labels mono
 - **8 composants métier** : PageContainer, EmptyState, StatCard, DataTable, ThemeToggle, ThemeProvider, CopyButton, AppLogo (+ favicon)
 - **Preview interactive** : route `/design-system` (sections modulaires)

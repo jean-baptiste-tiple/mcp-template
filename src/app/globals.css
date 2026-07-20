@@ -80,7 +80,7 @@
 
 /* ── Light Theme (défaut) — neutres CHAUDS (teinte 80), vert mint en accent ── */
 :root {
-  --background: oklch(0.99 0.002 80);
+  --background: #fafafa;
   --foreground: oklch(0.15 0.005 80);
 
   /* Vert mint Tiple #06f5a2 — fills, bordures, états actifs (texte dark dessus). */
@@ -119,11 +119,13 @@
 
   --radius: 0.25rem;
 
-  --sidebar: oklch(0.985 0.002 80);
-  --sidebar-foreground: oklch(0.2 0.005 80);
-  --sidebar-accent: oklch(0.93 0.005 80);
-  --sidebar-accent-foreground: oklch(0.15 0.005 80);
-  --sidebar-border: oklch(0.9 0.004 80);
+  /* Sidebar SOMBRE même en thème clair (signature éditoriale tiple.io : panneau
+     quasi-noir chaud + mint) — casse le « tout blanc » de l'app. */
+  --sidebar: oklch(0.17 0.004 80);
+  --sidebar-foreground: oklch(0.93 0.004 80);
+  --sidebar-accent: oklch(0.24 0.006 80);
+  --sidebar-accent-foreground: oklch(0.97 0.003 80);
+  --sidebar-border: oklch(0.26 0.006 80);
   --sidebar-ring: oklch(0.87 0.19 162);
 
   /* Charts : mint en tête puis neutres chauds (lecture « data », pas arc-en-ciel). */
@@ -240,6 +242,60 @@ label[for] {
   .text-stroke {
     -webkit-text-stroke: 1.25px currentColor;
     -webkit-text-fill-color: transparent;
+  }
+
+  /* Fond des corps de page : halo mint modéré en HAUT-DROITE + écho discret en
+     bas-gauche, sur le fond neutre. Donne de la profondeur sans jamais gêner la
+     lecture (coupler avec .noise-overlay). */
+  .page-canvas {
+    position: relative;
+    /* Contexte d'empilement local : permet au ::before (croix) de passer SOUS le
+       contenu (z-index -1) tout en restant au-dessus du fond de la page. */
+    isolation: isolate;
+    background-color: var(--background);
+    background-image: radial-gradient(
+        1100px 520px at 88% -12%,
+        color-mix(in oklab, var(--primary) 9%, transparent),
+        transparent 62%
+      ),
+      radial-gradient(
+        900px 420px at -8% 112%,
+        color-mix(in oklab, var(--primary) 4%, transparent),
+        transparent 60%
+      );
+  }
+  .dark .page-canvas {
+    background-image: radial-gradient(
+        1100px 520px at 88% -12%,
+        color-mix(in oklab, var(--primary) 6%, transparent),
+        transparent 62%
+      ),
+      radial-gradient(
+        900px 420px at -8% 112%,
+        color-mix(in oklab, var(--primary) 3%, transparent),
+        transparent 60%
+      );
+  }
+
+  /* Semis de petites croix (repères d'ingénierie) ancré en haut-gauche : discret
+     dès le départ (opacité faible) mais qui porte LOIN — l'estompe du masque est
+     douce et ne s'éteint qu'aux abords du bas de page. */
+  .page-canvas::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    /* SOUS le contenu : les surfaces opaques (cards, tableaux `bg-card`) masquent
+       les croix — elles ne restent visibles que sur le fond nu de la page. */
+    z-index: -1;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Cpath d='M10 7.5v5M7.5 10h5' stroke='%23787870' stroke-width='1' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-size: 20px 20px;
+    opacity: 0.14;
+    -webkit-mask-image: radial-gradient(1500px 950px at 0% 0%, black, transparent 90%);
+    mask-image: radial-gradient(1500px 950px at 0% 0%, black, transparent 90%);
+  }
+  .dark .page-canvas::before {
+    opacity: 0.1;
   }
 
   /* Grain fin superposé (texture, pas de dépendance externe : SVG inline). */
