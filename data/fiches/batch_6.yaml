@@ -1,0 +1,716 @@
+# Batch 6 — fiches normalisées (lignes de données 256-306 de ideas_raw.csv)
+# 51 fiches. Sources : HN/IH/Acquire (C-*), offres d'emploi FR (D-*), cas d'usage Forward (E-*).
+
+- id: C-023
+  douleur: Mon desk de trading d'options tourne encore sur du VBA MS Office dont le plus vieux code date de 1998, fragile et impossible à faire évoluer.
+  acheteur: responsable middle-office / IT d'un desk de trading d'options, société financière 10-100 personnes
+  frequence: quotidien
+  cout_actuel: Maintenance artisanale de macros VBA legacy par les équipes internes ; coût = risque opérationnel + dépendance à quelques sachants, non chiffré dans la source
+  workflow: traitement middle-office des opérations sur options (calculs, rapprochements, reporting)
+  connecteurs: [Excel/VBA legacy, systèmes de marché, référentiels internes, compliance]
+  prix_plausible: 500-1500 €/mois (budget IT finance), mais cycle de vente compliance lourd
+  type: niche
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://news.ycombinator.com/item?id=33611431
+
+- id: C-026
+  douleur: Mon logiciel de caisse n'est que la partie visible — inventaire, reporting des ventes, codes-barres, achats et compta fiscale doivent tous suivre derrière, et rien ne s'intègre.
+  acheteur: gérant de commerce de détail indépendant, 1-10 salariés
+  frequence: quotidien
+  cout_actuel: Patchwork POS + tableurs + ressaisies entre caisse, stock et compta ; temps admin quotidien non chiffré dans la source
+  workflow: encaissement et back-office retail (stock, achats, compta)
+  connecteurs: [POS, gestion de stock, comptabilité, catalogues fournisseurs]
+  prix_plausible: 80-150 €/mois
+  type: niche
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://news.ycombinator.com/item?id=6525511
+
+- id: C-028
+  douleur: Le logiciel d'administration de mes pointeuses/contrôles d'accès biométriques de bureau est catastrophique et l'interface inutilisable.
+  acheteur: office manager / responsable des services généraux, PME de bureau 5-50 salariés
+  frequence: ponctuel
+  cout_actuel: Logiciel constructeur (hardware chinois bon marché) subi tel quel, manipulations manuelles à chaque arrivée/départ ; pas d'alternative
+  workflow: administration des accès bureaux (badges, empreintes, droits)
+  connecteurs: [SDK matériel biométrique, annuaire RH, export logs]
+  prix_plausible: 20-50 €/mois
+  type: niche
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://news.ycombinator.com/item?id=38882314
+
+- id: C-029
+  douleur: Je ne trouve plus de comptables à embaucher (65 % des CPA ont 55 ans ou plus) et mon cabinet sature sur la production courante.
+  acheteur: associé de petit cabinet d'expertise comptable (contexte US), 2-20 collaborateurs
+  frequence: quotidien
+  cout_actuel: Heures supplémentaires, refus de nouveaux clients, recrutement quasi impossible ; un CPA coûte 70-100 k$/an quand on en trouve
+  workflow: production comptable courante (tenue, révision, déclarations)
+  connecteurs: [logiciels compta (QuickBooks/Xero), flux bancaires, email, documents clients]
+  prix_plausible: 200-500 €/mois par cabinet
+  type: niche
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://news.ycombinator.com/item?id=38882314
+
+- id: C-030
+  douleur: Ma scierie/atelier reçoit beaucoup de demandes de pièces usinées CNC sur mesure mais je n'ai personne de compétent pour traiter et chiffrer ces demandes.
+  acheteur: gérant de scierie ou petit atelier d'usinage/menuiserie local, 1-10 salariés
+  frequence: hebdo
+  cout_actuel: Pas résolu — demandes perdues ou traitées lentement faute de personnel qualifié pour l'intake et le chiffrage
+  workflow: prise de demande et chiffrage de devis de pièces sur mesure
+  connecteurs: [email, fichiers plans/CAO, tarifs matières, calendrier atelier]
+  prix_plausible: 50-100 €/mois
+  type: niche
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://news.ycombinator.com/item?id=38882314
+
+- id: C-031
+  douleur: L'outil niche dont je dépendais a été racheté puis abandonné ou dégradé par l'acquéreur, me laissant orphelin.
+  acheteur: utilisateur pro d'un produit niche racheté (tout métier) — signal de sourcing plus qu'un acheteur unique
+  frequence: ponctuel
+  cout_actuel: Rester sur un produit qui se dégrade ou migrer à ses frais ; coût dépendant du produit abandonné
+  workflow: variable — dépend du produit orphelin (signal de stratégie de sourcing)
+  connecteurs: [dépend du produit remplacé]
+  prix_plausible: équivalent à l'abonnement du produit abandonné (signal, pas une douleur achetable en soi)
+  type: generique
+  fit_mcp: faible
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://news.ycombinator.com/item?id=38882314
+
+- id: C-032
+  douleur: Mon back-office (ticketing MSP, facturation, ERP vers Xero, paie) ne tient que par des intégrations cousues main qu'un consultant doit configurer et entretenir.
+  acheteur: dirigeant de MSP / PME de services IT, 5-50 salariés
+  frequence: mensuel
+  cout_actuel: Consultant intégration payé à la prestation — une profession entière existe parce que le plug-and-play échoue ; plusieurs milliers d'€ par chantier
+  workflow: intégration du back-office (ticketing → facturation → compta → paie)
+  connecteurs: [PSA/ticketing, Xero, ERP, paie, APIs diverses]
+  prix_plausible: 100-250 €/mois
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://news.ycombinator.com/item?id=38882314
+
+- id: C-035
+  douleur: Je n'ai aucune trace de qui entre dans mes biens en vente/location — artisans, dépanneurs, livreurs non pré-enregistrés passent par la lockbox sans contrôle.
+  acheteur: agent immobilier ou gestionnaire locatif (contexte US), agence 1-20 personnes
+  frequence: hebdo
+  cout_actuel: Lockbox classique sans audit + déplacements physiques pour ouvrir ; pas résolu côté traçabilité
+  workflow: gestion des accès aux biens (visites, interventions, livraisons)
+  connecteurs: [hardware IoT (lockbox caméra/micro), calendrier, SMS/notifications]
+  prix_plausible: 20-40 €/mois par agent (+ hardware)
+  type: niche
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://news.ycombinator.com/item?id=12567645
+
+- id: C-038
+  douleur: Mes factures partent au mauvais moment de la relation client et dans un format inattendu, ce qui retarde les paiements — c'est un problème de relation, pas de compta.
+  acheteur: freelance ou dirigeant de petite agence de services, 1-10 personnes
+  frequence: mensuel
+  cout_actuel: Logiciel de facturation classique + relances manuelles ; retards de paiement chroniques non résolus par l'outillage actuel
+  workflow: facturation client et recouvrement (timing, format, relances)
+  connecteurs: [facturation (Stripe/QuickBooks), email, CRM]
+  prix_plausible: 20-50 €/mois
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.indiehackers.com/post/i-thought-bookkeeping-software-problems-were-accounting-problems-i-was-wrong-25854191c9
+
+- id: C-040
+  douleur: Suivre les freelances que je paie plus de 600 $/an — montants dus, informations fiscales, formulaires 1099 — est une corvée permanente.
+  acheteur: gérant de petite entreprise US employant des contractors, 1-20 salariés
+  frequence: mensuel
+  cout_actuel: Excel + ressaisie, ou délégation au comptable ; pic annuel de production des 1099
+  workflow: paiement des freelances et administration fiscale (1099)
+  connecteurs: [banque/paiements, comptabilité, e-file IRS, email]
+  prix_plausible: 30-60 €/mois
+  type: generique
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.indiehackers.com/post/pitch-an-easy-way-to-manage-and-pay-freelancers-adb21b2103
+
+- id: C-046
+  douleur: C'est le 3e ticket du même client sur la même commande et la personne qui répond n'a aucun contexte des échanges précédents.
+  acheteur: gérant de boutique Shopify avec support partagé, 1-10 personnes
+  frequence: quotidien
+  cout_actuel: Relecture manuelle de l'historique des tickets à chaque réponse ; réponses incohérentes, temps perdu, clients agacés
+  workflow: support client e-commerce (continuité de contexte entre tickets)
+  connecteurs: [Shopify, helpdesk (Gorgias/Zendesk), email]
+  prix_plausible: 40-80 €/mois
+  type: niche
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.indiehackers.com/post/i-want-to-build-an-ai-support-agent-for-shopify-stores-am-i-solving-a-real-problem-d009ab93b3
+
+- id: C-048
+  douleur: Je veux une connexion fluide entre ma boutique Shopify et mon ERP — les recherches pour ce besoin ont augmenté de 172 %.
+  acheteur: responsable opérations d'un e-commerçant Shopify équipé d'un ERP, 10-100 salariés
+  frequence: quotidien
+  cout_actuel: Connecteurs génériques insuffisants, ressaisie manuelle ou intégrateur payé au projet (plusieurs k€)
+  workflow: synchronisation commandes/stocks/factures Shopify ↔ ERP
+  connecteurs: [Shopify API, ERP (Sage/Dynamics/SAP B1), comptabilité]
+  prix_plausible: 100-300 €/mois
+  type: niche
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.indiehackers.com/post/e-commerce/shopify-just-gave-us-15-viable-shopify-app-ideas-that-we-can-build-WpNiv16g5YP4JCO9lrwi
+
+- id: C-049
+  douleur: Mon équipe boutique a besoin d'alertes commandes en temps réel et d'assignation de tâches — nos outils de com interne ne suivent pas (+161 % de recherches).
+  acheteur: gérant de boutique Shopify avec équipe magasin/logistique, 3-20 personnes
+  frequence: quotidien
+  cout_actuel: WhatsApp/Slack improvisés, commandes ratées ou traitées en double ; temps de coordination non chiffré
+  workflow: coordination interne des équipes boutique (alertes commandes, tâches)
+  connecteurs: [Shopify, messagerie équipe (Slack/WhatsApp), gestion de tâches]
+  prix_plausible: 30-80 €/mois
+  type: niche
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.indiehackers.com/post/e-commerce/shopify-just-gave-us-15-viable-shopify-app-ideas-that-we-can-build-WpNiv16g5YP4JCO9lrwi
+
+- id: C-050
+  douleur: Le feedback de mes clients d'agence est éparpillé entre Gmail, Slack et SMS — il me faut un portail client white-label où ils commentent sans créer de compte.
+  acheteur: dirigeant de petite agence web/marketing, 2-15 personnes
+  frequence: quotidien
+  cout_actuel: Consolidation manuelle du feedback multi-canaux ; rétention passée de 12 % à 41 % quand l'outil a ciblé ce vrai ICP agence
+  workflow: recueil et centralisation du feedback client sur les livrables
+  connecteurs: [email, Slack, outil projet, partage de liens sans compte]
+  prix_plausible: 50-100 €/mois
+  type: niche
+  fit_mcp: moyen
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.indiehackers.com/post/i-spent-6-months-building-for-indie-hackers-my-first-real-customer-taught-me-i-was-wrong-c4c6ac27fc
+
+- id: C-052
+  douleur: Mon SaaS de formation en entreprise fait 3,6 M$ de CA mais je le vends (8,5 M$ demandés) faute de temps pour le faire croître seul.
+  acheteur: fondateur de SaaS vertical corporate learning, équipe 1-5 — signal de marché (vertical solvable, plafond fondateur)
+  frequence: ponctuel
+  cout_actuel: Vente de l'actif sur Acquire.com ; la douleur sous-jacente (ops de formation en entreprise) reste solvable
+  workflow: opérations de formation en entreprise (marché sous-jacent) — signal de sourcing
+  connecteurs: [LMS, RH/SIRH, contenu formation]
+  prix_plausible: non applicable (signal de marché, pas une douleur achetable directement)
+  type: generique
+  fit_mcp: faible
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://blog.acquire.com/top-startups-listings-on-acquire-com-october-edition/
+
+- id: C-053
+  douleur: Mon hybride SaaS/agence à 1,25 M$ de CA plafonne sur ma bande passante de fondateur (vente pour raison de santé) — le logiciel seul ne résout pas la douleur, il faut la couche service.
+  acheteur: fondateur d'hybride service+logiciel, équipe 1-10 — signal de marché
+  frequence: ponctuel
+  cout_actuel: Vente de l'actif ; la couche service humaine signale que le produit seul est insuffisant
+  workflow: modèle hybride service+logiciel (signal structurel, pas un workflow acheteur)
+  connecteurs: [dépend du vertical servi]
+  prix_plausible: non applicable (signal de marché)
+  type: generique
+  fit_mcp: faible
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://blog.acquire.com/top-startup-listings-on-acquire-com-may-edition/
+
+- id: C-054
+  douleur: Ma suite no-code pour professionnels de l'immobilier fait 842 K$ de CA mais se vend à seulement 2,0x — les workflows des agents ne sont que partiellement résolus.
+  acheteur: agent/professionnel de l'immobilier (marché sous-jacent), agences 1-20 personnes — signal via listing Acquire
+  frequence: ponctuel
+  cout_actuel: Outillage no-code existant vendu à bas multiple = plateau de croissance ; douleur agent immobilier partiellement couverte
+  workflow: workflows quotidiens des professionnels de l'immobilier (marché sous-jacent)
+  connecteurs: [portails immobiliers, CRM immobilier, email, documents]
+  prix_plausible: non applicable (signal de marché ; le sous-jacent supporte 50-150 €/mois/agent)
+  type: generique
+  fit_mcp: faible
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://blog.acquire.com/top-startups-listings-on-acquire-com-october-edition/
+
+- id: C-055
+  douleur: Mon SaaS d'engagement collaborateurs plafonne à 278 K$ de CA — la douleur est diffuse et l'acheteur (RH) n'est pas l'utilisateur.
+  acheteur: DRH de PME/ETI (marché sous-jacent) — signal de marché (micro-niche RH qui plafonne)
+  frequence: ponctuel
+  cout_actuel: Vente de l'actif à 2,8x CA ; signal que l'engagement collaborateur est une douleur faible/diffuse
+  workflow: engagement et rétention des collaborateurs (marché sous-jacent)
+  connecteurs: [SIRH, messagerie interne, enquêtes]
+  prix_plausible: non applicable (signal de marché — vertical à éviter en micro-SaaS)
+  type: generique
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://blog.acquire.com/top-startups-listings-on-acquire-com-october-edition/
+
+- id: C-056
+  douleur: Mon outil no-code d'outreach B2B fondé en 2024 fait déjà 500 K$ mais je le revends pour pivoter — le créneau leadgen brûle vite (churn, saturation).
+  acheteur: fondateur d'outil outreach/leadgen — signal de marché (niche saturée à churn élevé)
+  frequence: ponctuel
+  cout_actuel: Revenus rapides puis sortie rapide du fondateur ; signal de saturation du créneau outreach
+  workflow: prospection B2B automatisée (signal de saturation, pas un workflow à adresser tel quel)
+  connecteurs: [LinkedIn, email, CRM]
+  prix_plausible: non applicable (signal de marché — créneau saturé)
+  type: generique
+  fit_mcp: faible
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://blog.acquire.com/top-startups-listings-on-acquire-com-october-edition/
+
+- id: C-057
+  douleur: Le micro-SaaS type plafonne vers 200 K$ de CA et se vend ~2,6x (prix demandé médian ~484 K$) — « revenu stagnant depuis 6+ mois » est un motif de vente courant.
+  acheteur: fondateur de micro-SaaS — signal structurel agrégé (615 listings Acquire.com)
+  frequence: ponctuel
+  cout_actuel: Statistique de marché ; pas un coût acheteur
+  workflow: cycle de vie des micro-SaaS (signal structurel pour le pipeline, pas un workflow acheteur)
+  connecteurs: []
+  prix_plausible: non applicable (signal structurel)
+  type: generique
+  fit_mcp: faible
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://bigideasdb.com/saas-valuation-multiples-2026
+
+- id: C-058
+  douleur: La longue traîne d'outils IA quasi sans revenus mis en vente (tracker d'étude à 280 $/an demandé 2 700 $, resume checker à 864 $ demandé 10 000 $) signale la saturation des wrappers IA horizontaux.
+  acheteur: fondateur de wrapper IA horizontal — signal de saturation, douleur acheteuse ambiguë
+  frequence: ponctuel
+  cout_actuel: Sans objet — signal de marché (offre plétorique, demande faible)
+  workflow: outils IA horizontaux grand public (contre-signal pour le pipeline)
+  connecteurs: []
+  prix_plausible: non applicable (contre-signal — éviter les wrappers IA horizontaux)
+  type: generique
+  fit_mcp: faible
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.microns.io/
+
+- id: C-060
+  douleur: Prospecter et relancer mes cibles MENA sur leurs canaux réels (WhatsApp, LinkedIn) n'est couvert par aucun outil adapté à la région.
+  acheteur: responsable commercial de PME B2B en région MENA, 5-50 salariés
+  frequence: quotidien
+  cout_actuel: Outreach manuel multi-canal ou outils occidentaux mal adaptés ; signal ambigu (148 upvotes PH, audience mismatch)
+  workflow: prospection et outreach commercial multi-canal régional
+  connecteurs: [WhatsApp Business, LinkedIn, CRM, email]
+  prix_plausible: 50-150 €/mois
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.producthunt.com/leaderboard/daily/2026/6/15
+
+- id: C-061
+  douleur: Je perds des mandats parce que je ne réponds pas assez vite aux leads immobiliers — mais le produit voix qui visait cette douleur n'a jamais trouvé son product/market fit.
+  acheteur: agent immobilier indépendant (contexte US), agence 1-10 personnes
+  frequence: quotidien
+  cout_actuel: Réponse manuelle aux leads quand l'agent est disponible ; douleur réelle mais wedge produit (voix) invalidé — signal ambigu
+  workflow: qualification et réponse rapide aux leads immobiliers entrants
+  connecteurs: [portails immobiliers (leads), téléphonie/SMS, CRM immobilier, calendrier]
+  prix_plausible: 50-100 €/mois
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.indiehackers.com/product/realty-voice/shutting-down--NKTdLcDMp1SgZveg70S
+
+- id: C-063
+  douleur: Je gaspille des mois de prospection sur des PME locales qui ont déjà un webmaster, sont freelances elles-mêmes ou déjà équipées — je ne veux contacter que celles qui n'ont personne.
+  acheteur: fondateur de petite agence web locale, 1-5 personnes
+  frequence: hebdo
+  cout_actuel: Heures de prospection manuelle perdues sur des leads non qualifiés (moitié des contacts inutiles)
+  workflow: prospection et qualification de leads PME locales
+  connecteurs: [scraping sites web, annuaires/SIRENE, email, LinkedIn]
+  prix_plausible: 30-80 €/mois
+  type: niche
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.indiehackers.com/post/i-spent-months-chasing-clients-who-already-had-a-webmaster-so-i-built-something-that-only-finds-the-ones-who-dont-a48c4e3581
+
+- id: C-064
+  douleur: La communauté indie-hacker a applaudi mon outil minimal mais n'a jamais payé dans la durée — la validation communautaire est trompeuse.
+  acheteur: fondateur de micro-SaaS — méta-signal de méthode (viser un ICP métier réel, pas les pairs)
+  frequence: ponctuel
+  cout_actuel: Sans objet — méta-signal (rétention 12 % → 41 % après pivot vers un ICP agence réel)
+  workflow: validation produit (signal de méthode pour le pipeline, pas un workflow acheteur)
+  connecteurs: []
+  prix_plausible: non applicable (méta-signal)
+  type: generique
+  fit_mcp: faible
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.indiehackers.com/post/i-spent-6-months-building-for-indie-hackers-my-first-real-customer-taught-me-i-was-wrong-c4c6ac27fc
+
+- id: C-065
+  douleur: Mes utilisateurs de niche se vibe-codent désormais leurs propres solutions avec l'IA et le nombre de builders a explosé — la barre de profondeur de douleur monte.
+  acheteur: fondateur de micro-SaaS — méta-signal structurel (érosion du playbook micro-SaaS)
+  frequence: ponctuel
+  cout_actuel: Sans objet — méta-signal (choisir des douleurs profondes, à connecteurs/données difficiles à self-builder)
+  workflow: sélection d'opportunités (signal de méthode pour le pipeline)
+  connecteurs: []
+  prix_plausible: non applicable (méta-signal)
+  type: generique
+  fit_mcp: faible
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.buildmvpfast.com/blog/saas-only-way-out-indie-hacker-dream-desperation-2026
+
+- id: D-002
+  douleur: Après un changement de logiciel, je paie un intérimaire pour recréer les factures à la main en repêchant prix et numéros de commande sur plusieurs serveurs puis en ressaisissant tout dans Excel.
+  acheteur: responsable administratif/financier de site industriel ou logistique, PME 20-100 salariés (Fresnes-lès-Montauban, 62)
+  frequence: ponctuel
+  cout_actuel: "Intérimaire 14-14,50 € brut/h, 35h, mission 1 mois + tickets resto + marge agence : ~3 000-3 500 € pour la migration"
+  workflow: migration de logiciel de facturation (reprise et ressaisie des données)
+  connecteurs: [ERP/logiciel de facturation source et cible, serveurs de fichiers, Excel]
+  prix_plausible: 200-500 € par migration (usage ponctuel, ancré sur le coût intérim)
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://candidat.francetravail.fr/offres/recherche/detail/211MKKT
+
+- id: D-004
+  douleur: Je paie un assistant administratif pour saisir chaque jour les bons de livraison, les factures reçues au courrier et les CRA, puis classer les documents dans la GED.
+  acheteur: dirigeant de PME de services ou négoce, 10-50 salariés (La Flèche, 72)
+  frequence: quotidien
+  cout_actuel: Poste d'assistant administratif dédié, ~1 800-2 200 €/mois chargés pour un flux quotidien de saisie et classement
+  workflow: saisie administrative (BL, factures, CRA) et classement GED
+  connecteurs: [email, scan/OCR courrier, comptabilité, GED]
+  prix_plausible: 100-300 €/mois
+  type: generique
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://candidat.francetravail.fr/offres/recherche/detail/210QCLC
+
+- id: D-030
+  douleur: Je paie un assistant achats pour relancer chaque jour les fournisseurs sur les commandes en retard, partielles ou non conformes.
+  acheteur: responsable achats de PME industrielle ou logistique, 20-100 salariés (Garons, 30)
+  frequence: quotidien
+  cout_actuel: Part significative d'un poste d'assistant achats (~2 000-2 300 €/mois chargés) consacrée aux relances fournisseurs
+  workflow: suivi des commandes fournisseurs et relances (retards, non-conformités)
+  connecteurs: [ERP/achats, email, données fournisseurs]
+  prix_plausible: 100-250 €/mois
+  type: niche
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://candidat.francetravail.fr/offres/recherche/detail/191WHBQ
+
+- id: D-034
+  douleur: Je paie un assistant marketing pour tenir à jour chaque semaine un calendrier prévisionnel et les tableaux de suivi d'activité.
+  acheteur: responsable marketing de PME, 20-100 salariés (Toulouse, 31)
+  frequence: hebdo
+  cout_actuel: Part d'un poste d'assistant marketing (~2 000 €/mois chargés) sur des mises à jour de calendrier et de tableaux
+  workflow: planification marketing hebdomadaire et reporting d'activité
+  connecteurs: [calendrier, Excel/Sheets, outils marketing, email]
+  prix_plausible: 50-150 €/mois
+  type: generique
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://candidat.francetravail.fr/offres/recherche/detail/210CYDR
+
+- id: D-036
+  douleur: Je paie un assistant pour enregistrer les réclamations livraison (retards, casse, erreurs) et suivre avoirs et indemnisations jusqu'à résolution.
+  acheteur: responsable service clients d'une entreprise de distribution, 50-200 salariés (Gennevilliers, 92)
+  frequence: quotidien
+  cout_actuel: Poste d'assistant service clients (~2 000-2 400 €/mois chargés) dédié au traitement des litiges livraison
+  workflow: gestion des litiges transport/livraison (réclamations, avoirs, indemnisations)
+  connecteurs: [ERP/OMS, portails transporteurs, email, comptabilité (avoirs)]
+  prix_plausible: 150-300 €/mois
+  type: niche
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://candidat.francetravail.fr/offres/recherche/detail/210WXXM
+
+- id: D-042
+  douleur: Je paie une secrétaire de scolarité pour gérer les inscriptions et les dossiers élèves à chaque rentrée.
+  acheteur: chef d'établissement scolaire privé, 20-100 personnels (Sainte-Geneviève-des-Bois, 91)
+  frequence: ponctuel
+  cout_actuel: Poste de secrétaire de scolarité (~1 800-2 200 €/mois chargés) avec pics saisonniers de rentrée + flux annuel
+  workflow: inscriptions et gestion des dossiers élèves (rentrée scolaire)
+  connecteurs: [formulaires en ligne, logiciel de vie scolaire (EcoleDirecte/Charlemagne), GED, email]
+  prix_plausible: 100-200 €/mois
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://candidat.francetravail.fr/offres/recherche/detail/207CLRT
+
+- id: D-051
+  douleur: Je paie des gestionnaires clientèle pour saisir et suivre au quotidien les opérations courantes des comptes clients d'affacturage (flux de factures cédées).
+  acheteur: responsable d'équipe gestion clientèle chez un factor (type BPCE Factor), grande entreprise financière
+  frequence: quotidien
+  cout_actuel: Gestionnaires en CDI (~2 300-2 800 €/mois chargés chacun) sur du traitement de flux quotidien
+  workflow: traitement des opérations d'affacturage (saisie et suivi des comptes clients)
+  connecteurs: [core system affacturage, flux bancaires, email, documents cédants]
+  prix_plausible: 500-1 000 €/mois (acheteur grand compte, cycle de vente long — hors ICP micro-SaaS)
+  type: niche
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.welcometothejungle.com/fr/companies/bpce-factor/jobs/gestionnaire-clientele-f-h_charenton-le-pont
+
+- id: D-052
+  douleur: Je paie une secrétaire médicale pour planifier les visites de médecine du travail et envoyer les convocations aux salariés des entreprises adhérentes.
+  acheteur: directeur de service de prévention et santé au travail interentreprises (SPSTI), 20-200 salariés (Paris 9)
+  frequence: quotidien
+  cout_actuel: Poste de secrétaire médicale (~1 900-2 300 €/mois chargés) sur une planification récurrente purement administrative
+  workflow: planification des visites médicales et convocations des salariés adhérents
+  connecteurs: [logiciel métier SPSTI, agendas médecins, email/courrier, base adhérents]
+  prix_plausible: 200-400 €/mois
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://candidat.francetravail.fr/offres/recherche/detail/207MKNC
+
+- id: E-005
+  douleur: Je m'engage avec un client, un partenaire ou un recrutement clé sans avoir le temps de vraiment vérifier qui il est.
+  acheteur: dirigeant de PME/TPE française, 1-50 salariés
+  frequence: hebdo
+  cout_actuel: Pas résolu, ou 1-2h de recherches Google/Pappers manuelles par dossier ; due diligence formelle réservée aux gros enjeux
+  workflow: due diligence légère avant engagement (client, partenaire, recrutement)
+  connecteurs: [recherche web (LinkUp), registres entreprises (Pappers/SIRENE), presse, LinkedIn]
+  prix_plausible: 30-80 €/mois
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/linkup/
+
+- id: E-008
+  douleur: Je découvre les nouvelles obligations réglementaires de mon secteur une fois le délai déjà passé.
+  acheteur: dirigeant ou DAF de PME française en secteur réglementé, 5-100 salariés
+  frequence: mensuel
+  cout_actuel: Pas résolu, ou veille déléguée ponctuellement à un avocat/expert-comptable ; amendes et mises en conformité en urgence
+  workflow: veille réglementaire sectorielle
+  connecteurs: [sources officielles (Légifrance/JO), presse sectorielle, email]
+  prix_plausible: 50-100 €/mois
+  type: generique
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/linkup/
+
+- id: E-009
+  douleur: J'enchaîne les rendez-vous sans avoir le temps de me renseigner sur qui j'ai en face.
+  acheteur: commercial ou dirigeant de PME/TPE B2B française, 1-50 salariés
+  frequence: quotidien
+  cout_actuel: Pas résolu, ou 10-15 min de Google/LinkedIn par RDV quand le temps le permet
+  workflow: préparation des rendez-vous commerciaux (brief interlocuteur + entreprise)
+  connecteurs: [calendrier, LinkedIn, recherche web, CRM]
+  prix_plausible: 20-50 €/mois
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/linkup/
+
+- id: E-014
+  douleur: Je rate les conversations LinkedIn où l'on parle de mon sujet, faute de pouvoir surveiller le réseau en continu.
+  acheteur: fondateur ou marketeur B2B français, TPE 1-10 salariés
+  frequence: quotidien
+  cout_actuel: Pas résolu, ou scroll manuel aléatoire du feed ; opportunités de conversation perdues
+  workflow: social listening LinkedIn (détection de conversations sur son sujet)
+  connecteurs: [LinkedIn (API tierce type Unipile), mots-clés/veille, notifications]
+  prix_plausible: 30-60 €/mois
+  type: generique
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/unipile/
+
+- id: E-016
+  douleur: Envoyer mes invitations LinkedIn une par une me prend un temps fou et je crains le blocage de mon compte.
+  acheteur: commercial/SDR ou fondateur B2B français, TPE-PME 1-20 salariés
+  frequence: quotidien
+  cout_actuel: Envoi manuel chronophage, ou outils d'automatisation gris avec risque de bannissement du compte
+  workflow: prospection sortante LinkedIn (invitations ciblées)
+  connecteurs: [LinkedIn (API tierce type Unipile), CRM, liste de ciblage]
+  prix_plausible: 50-100 €/mois (ancré sur les outils outreach existants)
+  type: generique
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/unipile/
+
+- id: E-017
+  douleur: Je dois penser à envoyer un message à chaque nouvelle connexion LinkedIn acceptée, et j'en oublie la moitié.
+  acheteur: commercial/SDR ou fondateur B2B français, TPE-PME 1-20 salariés
+  frequence: quotidien
+  cout_actuel: Suivi manuel de mémoire ; la moitié des connexions acceptées ne reçoit jamais de message
+  workflow: enchaînement invitation → message de bienvenue (séquence outreach)
+  connecteurs: [LinkedIn (API tierce type Unipile), CRM]
+  prix_plausible: inclus dans une suite outreach 50-100 €/mois (candidate feature)
+  type: generique
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/unipile/
+
+- id: E-018
+  douleur: Mes prospects LinkedIn restent silencieux et je n'ai pas de système pour les relancer une seule fois, au bon moment, sans harceler.
+  acheteur: commercial/SDR ou fondateur B2B français, TPE-PME 1-20 salariés
+  frequence: hebdo
+  cout_actuel: Relances manuelles oubliées ou au mauvais moment ; pipeline qui refroidit sans suivi
+  workflow: relance des prospects silencieux (une seule relance, personnalisée)
+  connecteurs: [LinkedIn (API tierce type Unipile), CRM, historique conversations]
+  prix_plausible: inclus dans une suite outreach 50-100 €/mois (candidate feature)
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/unipile/
+
+- id: E-019
+  douleur: Je n'ai pas de moyen industrialisé de contacter un prospect hors de mon réseau LinkedIn (InMail).
+  acheteur: commercial/SDR B2B français, TPE-PME 1-20 salariés
+  frequence: hebdo
+  cout_actuel: InMails envoyés un par un via l'interface LinkedIn (licence Sales Navigator ~100 €/mois) ; pas d'industrialisation
+  workflow: contact de prospects hors réseau (InMail à l'échelle)
+  connecteurs: [LinkedIn Sales Navigator/InMail (API tierce), CRM]
+  prix_plausible: inclus dans une suite outreach 50-100 €/mois (candidate feature)
+  type: generique
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/unipile/
+
+- id: E-020
+  douleur: Mes invitations LinkedIn en attente s'accumulent et saturent mon quota sans que je pense à les nettoyer.
+  acheteur: commercial/SDR ou fondateur B2B français, TPE-PME 1-20 salariés
+  frequence: mensuel
+  cout_actuel: Nettoyage manuel oublié ; quota d'invitations saturé qui bloque la prospection
+  workflow: hygiène du compte LinkedIn (retrait des invitations en attente)
+  connecteurs: [LinkedIn (API tierce type Unipile)]
+  prix_plausible: inclus dans une suite outreach 50-100 €/mois (candidate feature)
+  type: generique
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/unipile/
+
+- id: E-021
+  douleur: Je laisse traîner les invitations LinkedIn reçues et je rate l'occasion d'accueillir chaque nouveau contact au bon moment.
+  acheteur: fondateur ou commercial B2B français, TPE-PME 1-20 salariés
+  frequence: hebdo
+  cout_actuel: Acceptation et message d'accueil manuels, faits en retard ou jamais ; opportunités de conversation manquées
+  workflow: acceptation des invitations reçues + message d'accueil
+  connecteurs: [LinkedIn (API tierce type Unipile), CRM]
+  prix_plausible: inclus dans une suite outreach 50-100 €/mois (candidate feature)
+  type: generique
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/unipile/
+
+- id: E-022
+  douleur: Sourcer une shortlist de candidats sur LinkedIn me prend des heures de recherche manuelle.
+  acheteur: consultant ou gérant de cabinet de recrutement, 2-15 consultants (FR)
+  frequence: hebdo
+  cout_actuel: Heures de recherche manuelle sur LinkedIn Recruiter (licence ~150 €/mois) par mission
+  workflow: sourcing candidats et constitution de shortlists
+  connecteurs: [LinkedIn Recruiter (API tierce type Unipile), ATS, email]
+  prix_plausible: 100-200 €/mois
+  type: niche
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/unipile/
+
+- id: E-023
+  douleur: Je n'ai aucun moyen simple de repérer les entreprises qui recrutent le poste que je cible.
+  acheteur: consultant ou gérant de cabinet de recrutement (biz dev), 2-15 consultants (FR)
+  frequence: hebdo
+  cout_actuel: Veille manuelle des job boards et de LinkedIn ; signaux d'embauche ratés, prospection commerciale à froid
+  workflow: détection de signaux d'embauche pour la prospection du cabinet
+  connecteurs: [LinkedIn Jobs, job boards (France Travail/WTTJ), CRM]
+  prix_plausible: 80-150 €/mois
+  type: niche
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/unipile/
+
+- id: E-025
+  douleur: Publier mes offres d'emploi sur LinkedIn depuis mon ATS demande des manipulations manuelles répétées.
+  acheteur: recruteur en cabinet ou RH de PME française, 2-50 salariés
+  frequence: hebdo
+  cout_actuel: Copier-coller manuel ATS → LinkedIn à chaque offre ; quelques heures par mois
+  workflow: multidiffusion des offres d'emploi depuis l'ATS
+  connecteurs: [ATS, LinkedIn Jobs API (via Unipile), job boards]
+  prix_plausible: 30-80 €/mois (candidate feature d'un ATS)
+  type: niche
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/unipile/
+
+- id: E-026
+  douleur: Je dois jongler entre LinkedIn et mes outils pour suivre les candidats d'une offre.
+  acheteur: recruteur en cabinet ou RH de PME française, 2-50 salariés
+  frequence: quotidien
+  cout_actuel: Double saisie et navigation permanente entre LinkedIn et l'ATS ; suivi candidats fragmenté
+  workflow: suivi des candidatures d'une offre (centralisation LinkedIn ↔ ATS)
+  connecteurs: [LinkedIn (API tierce type Unipile), ATS, email]
+  prix_plausible: 50-100 €/mois
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/unipile/
+
+- id: E-027
+  douleur: Publier mes posts LinkedIn manuellement m'empêche de programmer et d'industrialiser mon contenu depuis mes outils.
+  acheteur: créateur de contenu B2B, ghostwriter ou petite agence social media, 1-10 personnes (FR)
+  frequence: hebdo
+  cout_actuel: Publication manuelle post par post, ou outils de scheduling génériques (~30 €/mois) sans intégration aux outils internes
+  workflow: programmation et publication de contenu LinkedIn
+  connecteurs: [LinkedIn (API tierce type Unipile), outil de rédaction/calendrier éditorial]
+  prix_plausible: 30-60 €/mois
+  type: generique
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/unipile/
+
+- id: E-028
+  douleur: Répondre à chaque commentaire sous mes posts LinkedIn me prend un temps que je n'ai pas.
+  acheteur: créateur de contenu B2B ou fondateur français actif sur LinkedIn, solo-TPE
+  frequence: quotidien
+  cout_actuel: Réponses manuelles partielles ou abandonnées ; engagement (et reach) perdu
+  workflow: animation des commentaires sous ses posts LinkedIn
+  connecteurs: [LinkedIn (API tierce type Unipile)]
+  prix_plausible: 20-50 €/mois
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/unipile/
+
+- id: E-029
+  douleur: Entretenir la relation avec mes comptes clés exige un engagement régulier (likes, commentaires, messages) que je n'arrive pas à tenir manuellement.
+  acheteur: commercial grands comptes ou fondateur B2B français, TPE-PME 1-20 salariés
+  frequence: hebdo
+  cout_actuel: Engagement manuel irrégulier de mémoire ; relation comptes clés qui se refroidit entre deux cycles
+  workflow: nurturing relationnel des comptes clés via l'engagement social ciblé
+  connecteurs: [LinkedIn (API tierce type Unipile), CRM, liste comptes clés]
+  prix_plausible: 50-100 €/mois
+  type: generique
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/unipile/

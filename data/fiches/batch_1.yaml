@@ -1,0 +1,715 @@
+# Batch 1 — fiches normalisées D-001 → C-011 (lignes 1-51 de ideas_raw.csv)
+
+- id: D-001
+  douleur: "Je paie quelqu'un à temps plein pour ressaisir les factures fournisseurs dans mon outil comptable/ERP."
+  acheteur: "DAF ou responsable comptable de PME française, 10-100 salariés, tous secteurs à volume de factures fournisseurs"
+  frequence: quotidien
+  cout_actuel: "Opérateur de saisie salarié SMIC-14€/h (~1800-2400€/mois chargés) ; 2000+ offres Indeed FR pour ce poste"
+  workflow: "comptabilité fournisseurs (réception, saisie, imputation dans l'ERP)"
+  connecteurs: [email, "OCR factures PDF", "logiciel comptable/ERP (Sage, Cegid, Pennylane)"]
+  prix_plausible: "200-500€/mois (fraction du coût d'un salarié dédié)"
+  type: generique
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 44
+  source_url: https://fr.indeed.com/q-saisie-facture-emplois.html
+
+- id: D-044
+  douleur: "Je paie un data entry clerk 19,66$/h pour transférer des documents papier dans notre base en ligne et tenir les tableurs à jour."
+  acheteur: "office manager ou dirigeant de PME américaine, 10-50 salariés, back-office administratif"
+  frequence: quotidien
+  cout_actuel: "Clerk salarié à 19,66$/h en moyenne (jusqu'à 25$/h à NY/LA), soit ~3400$/mois ; milliers d'offres"
+  workflow: "saisie de données back-office (documents papier vers base en ligne et tableurs)"
+  connecteurs: ["OCR/scan", "tableurs (Excel, Google Sheets)", "base de données métier"]
+  prix_plausible: "200-400$/mois"
+  type: generique
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 36
+  source_url: https://www.indeed.com/career/data-entry-clerk/salaries
+
+- id: D-047
+  douleur: "Je paie un appointment setter 16-30$/h pour passer 8-10 appels sortants par heure, caler des RDV commerciaux et tout logger dans le CRM."
+  acheteur: "directeur commercial ou patron de PME américaine avec équipe de vente, 5-50 salariés"
+  frequence: quotidien
+  cout_actuel: "Appointment setter salarié 20-25$/h + commissions (~3500-4500$/mois) ; 18 266 offres Indeed"
+  workflow: "prospection téléphonique sortante et prise de rendez-vous commerciaux"
+  connecteurs: [CRM, calendrier, "téléphonie/voix", email]
+  prix_plausible: "300-800$/mois"
+  type: generique
+  fit_mcp: faible
+  interface_requise: mixte
+  occurrences: 15
+  source_url: https://www.indeed.com/q-Hourly-Appointment-Setter-jobs.html
+
+- id: D-016
+  douleur: "Je paie un gestionnaire de planning pour mettre à jour en continu les plannings des intervenants à domicile et gérer les remplacements."
+  acheteur: "directeur de structure d'aide à domicile (SAAD) française, 20-100 intervenants"
+  frequence: quotidien
+  cout_actuel: "Gestionnaire de planning salarié (~24-28K€/an), saisie dans logiciel dédié (Octime) ; 300+ offres Indeed FR"
+  workflow: "planification des interventions à domicile et gestion des absences/remplacements"
+  connecteurs: ["logiciel de planning métier (Octime, Ximi)", "SMS/téléphonie", "RH (absences, congés)"]
+  prix_plausible: "150-400€/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 10
+  source_url: https://fr.indeed.com/q-gestionnaire-planning-aide-a-domicile-emplois.html
+
+- id: D-048
+  douleur: "Je paie un listing coordinator pour saisir les annonces et leurs modifications dans le MLS et tenir les dossiers de vente des agents."
+  acheteur: "broker dirigeant d'agence immobilière américaine, 5-30 agents"
+  frequence: hebdo
+  cout_actuel: "Listing/MLS coordinator salarié (~18-22$/h) ; 1756 offres Indeed ; saisie + suivi admin par transaction"
+  workflow: "publication des annonces dans le MLS et suivi administratif des transactions"
+  connecteurs: [MLS, "CRM immobilier", email, "stockage documents/photos"]
+  prix_plausible: "200-500$/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 9
+  source_url: https://www.indeed.com/q-real-estate-mls-listing-coordinator-jobs.html
+
+- id: C-042
+  douleur: "Quand je vends un article en boutique ou sur un autre canal sans mettre à jour Shopify, il se revend en ligne : remboursement, excuses, client mécontent."
+  acheteur: "micro-commerçant multicanal (Shopify + boutique/marchés/Etsy), 1-5 personnes"
+  frequence: quotidien
+  cout_actuel: "Pas résolu : synchronisation manuelle des stocks, surventes récurrentes, remboursements et clients perdus"
+  workflow: "synchronisation des stocks entre canaux de vente"
+  connecteurs: [Shopify, Etsy, "POS (Square)", marketplaces]
+  prix_plausible: "20-50€/mois (micro-vendeurs, budget serré)"
+  type: niche
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 7
+  source_url: https://www.indiehackers.com/post/built-a-shopify-app-to-stop-small-sellers-from-overselling-across-channels-looking-for-early-feedback-52994bba83
+
+- id: D-009
+  douleur: "Je paie quelqu'un pour facturer mes clients B2B chaque mois/trimestre et courir après les paiements par mail, courrier et téléphone."
+  acheteur: "DAF ou dirigeant de PME B2B française (services, restauration collective), 20-200 salariés"
+  frequence: mensuel
+  cout_actuel: "Gestionnaire ADV/recouvrement salarié (~26-32K€/an) dédié au cycle facturation + relances impayés"
+  workflow: "facturation clients B2B et recouvrement amiable"
+  connecteurs: ["facturation/compta (Sage, Pennylane)", email, banque, téléphone]
+  prix_plausible: "200-500€/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 7
+  source_url: https://www.welcometothejungle.com/fr/companies/foodles/jobs/xxx-f-h_clichy_FOODL_6rpa12j
+
+- id: D-023
+  douleur: "Je paie 34-38K€/an un assistant de gestion locative pour le quittancement, les comptes locataires, les révisions de loyer et les relances."
+  acheteur: "gérant de cabinet d'administration de biens français, 2-15 collaborateurs"
+  frequence: mensuel
+  cout_actuel: "Assistant salarié 34-38K€/an (WTP élevée explicite dans les offres) ; quittancement mensuel récurrent"
+  workflow: "gestion locative (quittancement, comptes locataires, révisions de loyer, relances)"
+  connecteurs: ["logiciel de gestion locative", banque, email, compta]
+  prix_plausible: "300-800€/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 6
+  source_url: https://candidat.francetravail.fr/offres/recherche/detail/210LSXQ
+
+- id: D-031
+  douleur: "Je paie une secrétaire après-vente pour ouvrir, suivre et clôturer les ordres de réparation dans le logiciel et saisir les dossiers de garantie constructeur."
+  acheteur: "patron de concession ou garage automobile français, 5-50 salariés"
+  frequence: quotidien
+  cout_actuel: "Secrétaire APV salariée (~22-28K€/an) : OR, facturation depuis OR, saisie garanties ; offres dans toute la France"
+  workflow: "après-vente atelier (ordres de réparation, facturation, dossiers de garantie constructeur)"
+  connecteurs: ["DMS atelier", "portails garantie constructeurs", facturation, email]
+  prix_plausible: "150-400€/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 6
+  source_url: https://candidat.francetravail.fr/offres/recherche/detail/196RNTF
+
+- id: D-037
+  douleur: "Je paie un assistant import-export pour préparer, vérifier et saisir la liasse documentaire de chaque expédition (factures, douane, certificats d'origine, BL)."
+  acheteur: "dirigeant de PME import-export ou industrielle française, 10-100 salariés"
+  frequence: hebdo
+  cout_actuel: "Assistant import-export salarié (~24-30K€/an), mobilisé à chaque expédition ; offres multi-régions"
+  workflow: "constitution de la liasse documentaire export et déclarations douanières"
+  connecteurs: [ERP, "douane (Delta)", transitaires, email, "OCR documents"]
+  prix_plausible: "200-500€/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 6
+  source_url: https://candidat.francetravail.fr/offres/recherche/detail/204WYPH
+
+- id: D-038
+  douleur: "Je paie 2900-3100€/mois sur 13 mois un assistant syndic pour préparer les convocations d'assemblées générales et diffuser les procès-verbaux."
+  acheteur: "gérant de cabinet de syndic de copropriété français, 5-30 collaborateurs"
+  frequence: hebdo
+  cout_actuel: "Assistant syndic salarié ~40K€/an chargés ; cycle annuel par immeuble mais volume continu en cabinet"
+  workflow: "préparation des AG de copropriété (convocations, tenue, PV, diffusion)"
+  connecteurs: ["logiciel syndic", "email/recommandé électronique (AR24)", "stockage documents"]
+  prix_plausible: "300-800€/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 6
+  source_url: https://candidat.francetravail.fr/offres/recherche/detail/205FCRZ
+
+- id: B-001
+  douleur: "Mon ATS (Bullhorn) est un des plus chers du marché : implémentation coûteuse en customisations et +20% exigés au renouvellement."
+  acheteur: "dirigeant d'agence de staffing/recrutement, 5-50 consultants (marché anglo-saxon)"
+  frequence: ponctuel
+  cout_actuel: "Abonnement Bullhorn premium + customisations d'implémentation + hausses de +20% au renouvellement"
+  workflow: "gestion du cycle candidats/clients dans l'ATS d'agence"
+  connecteurs: ["ATS (Bullhorn)", email, LinkedIn]
+  prix_plausible: "100-300€/mois (alternative ATS légère)"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 5
+  source_url: https://thedailyhire.com/tools/bullhorn-staffing-agency-ats-review
+
+- id: D-010
+  douleur: "Je paie un chargé de recouvrement à temps plein pour relancer les impayés par téléphone et par écrit, dossier par dossier."
+  acheteur: "DAF ou credit manager de PME française, 50-250 salariés, volume d'impayés B2B/B2C"
+  frequence: quotidien
+  cout_actuel: "Chargé de recouvrement salarié (~26-32K€/an) : courriers adaptés à l'ancienneté de la créance, plans de régularisation"
+  workflow: "recouvrement amiable des créances clients"
+  connecteurs: ["compta (balance âgée)", email, téléphone, courrier]
+  prix_plausible: "300-700€/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 5
+  source_url: https://candidat.francetravail.fr/offres/recherche/detail/211MBMW
+
+- id: D-012
+  douleur: "Je paie un assistant ADV pour émettre 150 à 200 factures par mois, saisir les commandes et relancer les impayés."
+  acheteur: "DAF ou dirigeant de PME française (services/BTP avec sous-traitance), 20-100 salariés"
+  frequence: quotidien
+  cout_actuel: "Assistant ADV salarié (~24-28K€/an) ; volume explicite 150-200 factures/mois + saisie contrats de sous-traitance"
+  workflow: "administration des ventes (commandes, facturation, relances)"
+  connecteurs: ["ERP/facturation", email, compta]
+  prix_plausible: "200-500€/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 5
+  source_url: https://candidat.francetravail.fr/offres/recherche/detail/209PLJF
+
+- id: D-018
+  douleur: "Je paie un gestionnaire de paie pour collecter et saisir les variables de paie de chaque salarié tous les mois."
+  acheteur: "responsable RH de PME française 50-250 salariés, ou pôle social de cabinet comptable"
+  frequence: mensuel
+  cout_actuel: "Gestionnaire de paie salarié 24-32K€/an ; collecte + saisie variables + contrôle bulletins, cycle mensuel strict"
+  workflow: "collecte et saisie des variables de paie mensuelles"
+  connecteurs: ["logiciel de paie (Silae, PayFit)", "planning/pointage", email]
+  prix_plausible: "200-500€/mois"
+  type: generique
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 5
+  source_url: https://candidat.francetravail.fr/offres/emploi/gestionnaire-de-paie/val-de-marne/s12m5d94
+
+- id: D-021
+  douleur: "Je paie un assistant formation pour gérer inscriptions, conventions, convocations et dossiers stagiaires de chaque session."
+  acheteur: "dirigeant d'organisme de formation français, 2-20 salariés"
+  frequence: hebdo
+  cout_actuel: "Assistant formation salarié (~24-28K€/an) : inscriptions, prises en charge, convocations, facturation par session"
+  workflow: "administration des sessions de formation (inscription à facturation)"
+  connecteurs: ["logiciel OF (Digiforma)", email, "CPF/EDOF et OPCO", facturation, calendrier]
+  prix_plausible: "150-400€/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 5
+  source_url: https://candidat.francetravail.fr/offres/recherche/detail/207RHZW
+
+- id: D-033
+  douleur: "Je paie un assistant de gestion pour mettre à jour les tableaux de bord Excel, faire les exports et le reporting."
+  acheteur: "dirigeant ou DAF de PME française, 10-100 salariés"
+  frequence: hebdo
+  cout_actuel: "Part d'un poste d'assistant de gestion (~24-28K€/an) consacrée aux exports et tableaux Excel hebdo/mensuels"
+  workflow: "reporting de gestion (exports d'outils, consolidation dans tableaux de bord Excel)"
+  connecteurs: ["Excel/Google Sheets", "ERP/compta", banque]
+  prix_plausible: "100-300€/mois"
+  type: generique
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 5
+  source_url: https://candidat.francetravail.fr/offres/recherche/detail/211KTLQ
+
+- id: D-039
+  douleur: "Je paie 2000€ brut + variables un assistant d'agence d'intérim pour établir les contrats de mission et saisir les relevés d'heures des intérimaires."
+  acheteur: "directeur d'agence d'intérim indépendante française, 2-10 permanents"
+  frequence: hebdo
+  cout_actuel: "Assistant d'agence salarié 2000€ brut/mois + variables ; cycle hebdomadaire calé sur la paie intérim"
+  workflow: "contrats de mission et saisie des relevés d'heures intérimaires"
+  connecteurs: ["logiciel de gestion d'intérim", "OCR relevés d'heures", email, paie]
+  prix_plausible: "200-500€/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 5
+  source_url: https://candidat.francetravail.fr/offres/recherche/detail/209MYJJ
+
+- id: B-002
+  douleur: "L'UI datée et clunky de mon ATS impose double saisie et workflows lourds qui tuent l'efficacité de mes recruteurs au quotidien."
+  acheteur: "dirigeant d'agence de recrutement utilisatrice de Bullhorn, 5-50 recruteurs"
+  frequence: quotidien
+  cout_actuel: "Temps recruteur perdu chaque jour en double saisie dans Bullhorn, en plus d'un abonnement coûteux"
+  workflow: "saisie et mise à jour candidats/clients dans l'ATS"
+  connecteurs: ["ATS (Bullhorn)", email, LinkedIn]
+  prix_plausible: "50-150€/mois par agence (couche d'automatisation)"
+  type: niche
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 4
+  source_url: https://www.g2.com/products/bullhorn/reviews
+
+- id: B-020
+  douleur: "Mon logiciel de gestion locative (AppFolio) impose un minimum ~280$/mois pensé pour 50 lots : je paie ~4x le tarif unitaire affiché."
+  acheteur: "petit gestionnaire immobilier ou bailleur américain, moins de 50 lots, 1-5 personnes"
+  frequence: mensuel
+  cout_actuel: "AppFolio ~280$/mois minimum, surdimensionné et surfacturé pour un petit portefeuille"
+  workflow: "gestion locative d'un petit portefeuille (loyers, locataires, maintenance)"
+  connecteurs: [banque, email, compta, "signature électronique"]
+  prix_plausible: "50-100$/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 4
+  source_url: https://renpro.com/appfolio-vs-rentredi/
+
+- id: B-031
+  douleur: "Mon logiciel field service (ServiceTitan) coûte 245-500$/technicien/mois + frais d'onboarding : plus cher que les gains qu'il me rapporte."
+  acheteur: "patron de petite entreprise HVAC/plomberie américaine, 2-10 techniciens"
+  frequence: mensuel
+  cout_actuel: "ServiceTitan 245-500$/technicien/mois + onboarding ; ROI négatif assumé pour un petit atelier"
+  workflow: "gestion des interventions terrain (devis, dispatch, facturation)"
+  connecteurs: [calendrier, QuickBooks, "SMS/téléphonie", paiements]
+  prix_plausible: "100-250$/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 4
+  source_url: https://fieldcamp.ai/reviews/servicetitan/
+
+- id: C-024
+  douleur: "Toute mon exploitation tourne sur des tableurs car c'est ce que mon équipe maîtrise ; changer d'outil fait peur (coût, apprentissage, pannes)."
+  acheteur: "dirigeant de TPE/PME tous secteurs, 2-50 salariés, opérations pilotées sur tableurs"
+  frequence: quotidien
+  cout_actuel: "Tableurs bricolés + erreurs et temps perdu ; pas résolu — la barrière d'adoption bloque tout remplacement"
+  workflow: "opérations quotidiennes gérées dans des tableurs (stocks, plannings, suivis)"
+  connecteurs: ["Excel/Google Sheets", email]
+  prix_plausible: "50-150€/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 4
+  source_url: https://news.ycombinator.com/item?id=48820230
+
+- id: C-044
+  douleur: "Je passe 2-3 heures par jour à répondre aux mêmes questions 'où est ma commande' et politique de retour."
+  acheteur: "e-commerçant Shopify, 1-10 personnes, volume de commandes soutenu"
+  frequence: quotidien
+  cout_actuel: "2-3h/jour du marchand ou d'un agent support ; 60-70% des tickets sont identiques ; coûts support qui rognent les marges en pic"
+  workflow: "support client e-commerce (suivi de commande, retours)"
+  connecteurs: [Shopify, "helpdesk/email", "transporteurs (tracking)", WhatsApp]
+  prix_plausible: "50-150€/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 4
+  source_url: https://www.indiehackers.com/post/i-want-to-build-an-ai-support-agent-for-shopify-stores-am-i-solving-a-real-problem-d009ab93b3
+
+- id: D-006
+  douleur: "Je paie un collaborateur pour saisir et pointer les pièces des clients puis préparer les TVA, dossier après dossier."
+  acheteur: "expert-comptable gérant de cabinet français, 5-30 collaborateurs"
+  frequence: quotidien
+  cout_actuel: "Assistant comptable salarié SMIC-2200€/mois ; Indeed FR 'Saisie Comptable : plus de 7 000 emplois'"
+  workflow: "production comptable en cabinet (saisie des pièces, pointage, préparation TVA)"
+  connecteurs: ["logiciel de production (ACD, Cegid, Odoo)", "OCR pièces", banque, "portail TVA (impots.gouv)"]
+  prix_plausible: "300-800€/mois (multi-dossiers cabinet)"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 4
+  source_url: https://candidat.francetravail.fr/offres/recherche/detail/208HHBG
+
+- id: D-025
+  douleur: "Je paie un assistant d'exploitation pour saisir les ordres de transport dans le TMS et éditer les tournées."
+  acheteur: "dirigeant de PME de transport routier française, 10-50 conducteurs"
+  frequence: quotidien
+  cout_actuel: "Assistant exploitation salarié (~24-28K€/an) : réception et saisie des OT dans le TMS, édition des tournées"
+  workflow: "saisie des ordres de transport et préparation des tournées"
+  connecteurs: [TMS, "email (OT clients)", télématique]
+  prix_plausible: "200-500€/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 4
+  source_url: https://candidat.francetravail.fr/offres/recherche/detail/210HKVY
+
+- id: D-027
+  douleur: "Je paie un assistant travaux pour suivre les situations de travaux, les bons de commande et les contrats de sous-traitance chantier par chantier."
+  acheteur: "dirigeant de PME du BTP française, 10-80 salariés"
+  frequence: mensuel
+  cout_actuel: "Assistant travaux salarié (~26-32K€/an) : situations mensuelles, clôtures, appels d'offres, sous-traitance"
+  workflow: "suivi administratif de chantier (situations, bons de commande, sous-traitance)"
+  connecteurs: ["ERP BTP", Excel, email, "Chorus Pro"]
+  prix_plausible: "200-500€/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 4
+  source_url: https://candidat.francetravail.fr/offres/recherche/detail/202KZXQ
+
+- id: D-040
+  douleur: "Je paie un assistant RH pour les DPAE, la saisie des heures d'intérim, le contrôle des factures d'agence et les dossiers du personnel."
+  acheteur: "responsable RH de PME industrielle/logistique française, 50-250 salariés"
+  frequence: hebdo
+  cout_actuel: "Assistant RH salarié (~24-28K€/an) : DPAE, variables, absences, DSN, attestations, contrôle factures intérim"
+  workflow: "administration du personnel (DPAE, intérim, attestations, DSN)"
+  connecteurs: ["URSSAF/net-entreprises", "SIRH/paie", "portails agences d'intérim", email]
+  prix_plausible: "150-400€/mois"
+  type: generique
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 4
+  source_url: https://candidat.francetravail.fr/offres/recherche/detail/211BMSZ
+
+- id: D-053
+  douleur: "J'externalise ma saisie comptable à un opérateur freelance payé à la tâche."
+  acheteur: "expert-comptable de petit cabinet ou dirigeant de TPE française externalisant la saisie, 1-10 personnes"
+  frequence: hebdo
+  cout_actuel: "Freelance de saisie comptable à la tâche ; 75+ offres Indeed FR = marché d'externalisation déjà existant"
+  workflow: "saisie comptable externalisée"
+  connecteurs: ["OCR pièces", "logiciel comptable", "email/Drive"]
+  prix_plausible: "100-300€/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 4
+  source_url: https://fr.indeed.com/q-op%C3%A9rateur-saisie-comptable-freelance-emplois.html
+
+- id: A-051
+  douleur: "Je gère les RH de 600+ salariés sur 10 sites avec des dossiers papier et zéro SIRH."
+  acheteur: "DRH ou RH solo d'entreprise multi-sites de 600+ salariés (contexte anglo-saxon, secteurs à main-d'œuvre)"
+  frequence: quotidien
+  cout_actuel: "Dossiers papier + tableurs, pas de SIRH ; temps RH massif et risques de conformité non chiffrés"
+  workflow: "administration RH multi-sites (dossiers salariés, suivis réglementaires)"
+  connecteurs: [paie, tableurs, email, "stockage documents"]
+  prix_plausible: "300-800€/mois (à l'échelle 600 salariés)"
+  type: generique
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 3
+  source_url: https://www.reddit.com/r/humanresources/comments/1gkdlax/
+
+- id: B-004
+  douleur: "Mon ATS accumule lenteurs, timeouts de session et parsing de CV défaillant — mes recruteurs ressaisissent à la main."
+  acheteur: "dirigeant d'agence de recrutement/staffing sous Bullhorn, 5-50 recruteurs"
+  frequence: quotidien
+  cout_actuel: "Temps perdu quotidien en re-saisie de CV et reconnexions, sur un abonnement ATS déjà coûteux"
+  workflow: "parsing et intégration des CV dans l'ATS"
+  connecteurs: [ATS, "parsing CV", email]
+  prix_plausible: "50-200€/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 3
+  source_url: https://www.leonar.app/blog/bullhorn-reviews/
+
+- id: B-009
+  douleur: "Le support de mon ATS (Zoho Recruit) est lent, injoignable et vague — surtout pendant l'onboarding."
+  acheteur: "gérant d'agence de recrutement TPE, 2-15 consultants"
+  frequence: ponctuel
+  cout_actuel: "Heures perdues à attendre le support ; onboarding qui traîne sur l'outil déjà payé"
+  workflow: "paramétrage et prise en main de l'ATS"
+  connecteurs: ["ATS (Zoho Recruit)"]
+  prix_plausible: "50-150€/mois"
+  type: niche
+  fit_mcp: faible
+  interface_requise: mixte
+  occurrences: 3
+  source_url: https://www.capterra.com/p/125768/Zoho-Recruit/reviews/
+
+- id: B-016
+  douleur: "Mon logiciel de gestion locative (Buildium) enchaîne hausses de prix et frais additionnels pour des nouveautés inutilisables dans ma région."
+  acheteur: "property manager américain, portefeuille de 50-500 lots, 2-20 salariés"
+  frequence: ponctuel
+  cout_actuel: "Abonnement Buildium avec hausses fréquentes + add-ons facturés non utilisés"
+  workflow: "gestion locative (outil central du cabinet)"
+  connecteurs: [compta, banque, email]
+  prix_plausible: "100-300$/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 3
+  source_url: https://www.getapp.com/real-estate-property-software/a/buildium-property-management-software/
+
+- id: B-017
+  douleur: "La comptabilité de mon logiciel de gestion locative est confuse : reporting financier, suivi des dépenses et intégration compta laborieux."
+  acheteur: "gestionnaire immobilier américain sous Buildium, 2-20 salariés"
+  frequence: mensuel
+  cout_actuel: "Heures de rapprochement et retraitement manuels chaque clôture ; reporting propriétaires laborieux"
+  workflow: "comptabilité et reporting de gestion locative"
+  connecteurs: [Buildium, QuickBooks, banque]
+  prix_plausible: "100-300$/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 3
+  source_url: https://www.capterra.com/p/47428/Buildium-Property-Management-Software/reviews/
+
+- id: B-021
+  douleur: "Le service client de mon logiciel de gestion locative est passé d'excellent à très mauvais en 12 ans : attentes interminables."
+  acheteur: "property manager américain client AppFolio de longue date, 5-50 salariés"
+  frequence: ponctuel
+  cout_actuel: "Attentes interminables au support AppFolio à chaque blocage, sans alternative simple"
+  workflow: "résolution des blocages sur l'outil de gestion locative"
+  connecteurs: [AppFolio, email]
+  prix_plausible: "100-300$/mois (alternative mieux supportée)"
+  type: niche
+  fit_mcp: faible
+  interface_requise: mixte
+  occurrences: 3
+  source_url: https://appfolio.pissedconsumer.com/review.html
+
+- id: B-024
+  douleur: "Mon logiciel field service (Jobber) me facture par utilisateur : à 20 personnes je paie 145$/mois rien qu'en sièges, avant tout add-on."
+  acheteur: "patron d'entreprise de field service américaine en croissance, 10-30 salariés"
+  frequence: mensuel
+  cout_actuel: "Jobber ~145$/mois de sièges + add-ons ; le coût punit chaque embauche"
+  workflow: "gestion des interventions terrain (planification, devis, facturation)"
+  connecteurs: [calendrier, QuickBooks, SMS, paiements]
+  prix_plausible: "80-200$/mois forfaitaire"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 3
+  source_url: https://servicebusinessacademy.org/jobber-review-2026/
+
+- id: B-026
+  douleur: "Le reporting de mon logiciel field service est la plainte n°1 : pas de first-time-fix rate, pas de LTV client, pas de suivi SLA."
+  acheteur: "patron de société de services terrain américaine sous Jobber, 5-30 techniciens"
+  frequence: hebdo
+  cout_actuel: "Exports manuels vers Excel pour reconstituer les KPIs absents de Jobber, ou pilotage à l'aveugle"
+  workflow: "reporting opérationnel field service (KPIs interventions et clients)"
+  connecteurs: ["Jobber (API)", QuickBooks, "Excel/Sheets"]
+  prix_plausible: "50-150$/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: dashboard
+  occurrences: 3
+  source_url: https://fieldcamp.ai/reviews/jobber/
+
+- id: B-027
+  douleur: "La sync entre mon logiciel field service et QuickBooks casse en masse : erreurs, écritures en doublon, connexions à refaire."
+  acheteur: "contractor américain, 2-20 salariés, Jobber + QuickBooks"
+  frequence: hebdo
+  cout_actuel: "Nettoyage manuel récurrent des doublons et écritures cassées entre Jobber et QuickBooks"
+  workflow: "synchronisation facturation terrain vers comptabilité"
+  connecteurs: [Jobber, QuickBooks]
+  prix_plausible: "30-100$/mois"
+  type: niche
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 3
+  source_url: https://www.getonecrew.com/post/jobber-reviews
+
+- id: B-032
+  douleur: "L'implémentation de mon logiciel field service a pris plusieurs mois, extrêmement chronophage et mal accompagnée."
+  acheteur: "dirigeant ou admin d'entreprise de services terrain américaine migrant vers ServiceTitan, 10-50 salariés"
+  frequence: ponctuel
+  cout_actuel: "Plusieurs mois d'implémentation ServiceTitan en interne, mal accompagnée par l'éditeur"
+  workflow: "implémentation et migration des données vers l'outil field service"
+  connecteurs: [ServiceTitan, "données legacy (CSV/exports)", QuickBooks]
+  prix_plausible: "100-250$/mois (alternative simple à déployer)"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 3
+  source_url: https://www.getonecrew.com/post/servicetitan-reviews
+
+- id: B-035
+  douleur: "Mon logiciel field service est un produit enterprise assumé, vendu et surdimensionné pour ma boîte de moins de 5 techniciens."
+  acheteur: "petit contractor américain (plomberie, HVAC, électricité), 1-5 techniciens"
+  frequence: quotidien
+  cout_actuel: "ServiceTitan payé au prix enterprise pour des besoins simples (devis, planning, facturation)"
+  workflow: "gestion complète d'un petit atelier de services terrain (devis, planning, facturation)"
+  connecteurs: [calendrier, QuickBooks, "SMS/téléphonie", paiements]
+  prix_plausible: "50-150$/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 3
+  source_url: https://contractortoolstack.com/software/servicetitan/
+
+- id: B-039
+  douleur: "Mon outil comptable (Pennylane) produit des bugs récurrents et des incohérences sur mes déclarations fiscales."
+  acheteur: "dirigeant de TPE/PME française ou expert-comptable utilisateur de Pennylane"
+  frequence: mensuel
+  cout_actuel: "Temps de vérification et correction des déclarations + risque fiscal, en plus de l'abonnement"
+  workflow: "déclarations fiscales (TVA) depuis l'outil comptable"
+  connecteurs: [Pennylane, "portail impots.gouv"]
+  prix_plausible: "50-150€/mois (contrôle/fiabilisation)"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 3
+  source_url: https://fr.trustpilot.com/review/pennylane.com
+
+- id: B-046
+  douleur: "Mon outil de pré-comptabilité (Dext) fait des erreurs d'extraction sur les lignes : montants au mauvais endroit après scan, OCR lent."
+  acheteur: "bookkeeper ou petit cabinet de tenue comptable anglo-saxon, 1-10 personnes"
+  frequence: quotidien
+  cout_actuel: "Reprise manuelle des montants mal extraits par Dext sur chaque lot de pièces"
+  workflow: "pré-comptabilité (extraction et codage des pièces)"
+  connecteurs: ["OCR pièces", "compta (Xero, QuickBooks)", email]
+  prix_plausible: "50-200€/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 3
+  source_url: https://fitsmallbusiness.com/dext-prepare-review/
+
+- id: B-049
+  douleur: "Mon outil de facturation freelance (Bonsai) retient mes fonds pendant des semaines après paiement du client, payout sous 10 jours ouvrés."
+  acheteur: "freelance solo (créatif, consultant) facturant via Bonsai"
+  frequence: mensuel
+  cout_actuel: "Trésorerie bloquée des semaines à chaque paiement client ; pas de recours efficace"
+  workflow: "encaissement des paiements clients freelance"
+  connecteurs: ["paiements (Stripe)", banque, facturation]
+  prix_plausible: "20-50€/mois"
+  type: generique
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 3
+  source_url: https://www.trustpilot.com/review/hellobonsai.com
+
+- id: B-051
+  douleur: "Le support de mon outil de gestion freelance est quasi inexistant : impossible d'avoir un humain au téléphone pour un problème basique."
+  acheteur: "freelance ou petite agence (1-5 personnes) sous Bonsai"
+  frequence: ponctuel
+  cout_actuel: "Heures perdues sans interlocuteur humain à chaque blocage sur l'outil payé"
+  workflow: "résolution des blocages sur l'outil de gestion freelance"
+  connecteurs: [Bonsai, email]
+  prix_plausible: "20-50€/mois"
+  type: generique
+  fit_mcp: faible
+  interface_requise: mixte
+  occurrences: 3
+  source_url: https://www.trustpilot.com/review/hellobonsai.com
+
+- id: B-053
+  douleur: "Mon CRM de solopreneur (HoneyBook) a augmenté ses tarifs de +89,5% d'un coup : je cherche activement une alternative."
+  acheteur: "solopreneur créatif américain (photographe, wedding planner, designer), 1-3 personnes"
+  frequence: ponctuel
+  cout_actuel: "Abonnement HoneyBook renchéri de +89,5% (février 2025) ; fuite documentée vers les alternatives"
+  workflow: "gestion clients de solopreneur créatif (devis, contrats, paiements)"
+  connecteurs: [email, calendrier, paiements, "signature/contrats"]
+  prix_plausible: "20-60$/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 3
+  source_url: https://prospeo.io/s/honeybook-alternatives
+
+- id: B-056
+  douleur: "Mon outil de workflows clients (Dubsado) a une courbe d'apprentissage si raide que je dois payer un consultant de setup 300-1500$."
+  acheteur: "solopreneur de services américain (coach, designer, photographe), 1-3 personnes"
+  frequence: ponctuel
+  cout_actuel: "Consultant de setup Dubsado 300-1500$ + semaines d'apprentissage — une industrie s'est créée autour"
+  workflow: "paramétrage des workflows clients (formulaires, contrats, relances automatiques)"
+  connecteurs: [Dubsado, email, calendrier, paiements]
+  prix_plausible: "30-80$/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 3
+  source_url: https://bestaicrmsoftware.com/crm-for-small-business/dubsado-review-definitive
+
+- id: B-065
+  douleur: "La saisie des temps dans mon PSA est si pénible que mes techs attendent le vendredi après-midi pour loguer toute leur semaine."
+  acheteur: "patron de MSP (services IT managés) sous ConnectWise, 5-30 techniciens"
+  frequence: quotidien
+  cout_actuel: "Temps facturables perdus ou reconstruits de mémoire le vendredi ; thread r/msp 70+ commentaires"
+  workflow: "saisie des temps facturables des techniciens"
+  connecteurs: ["PSA (ConnectWise)", ticketing, calendrier, email]
+  prix_plausible: "100-300$/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 3
+  source_url: https://rallied.ai/blog/connectwise-manage-review/
+
+- id: B-068
+  douleur: "Mon PSA a une interface surchargée, des performances lentes aux heures de pointe et un apprentissage raide pour chaque nouveau tech."
+  acheteur: "dirigeant de MSP sous ConnectWise, 5-30 techniciens"
+  frequence: quotidien
+  cout_actuel: "Friction quotidienne des techniciens (lenteurs, complexité) + coût de formation de chaque recrue"
+  workflow: "gestion quotidienne des tickets et opérations dans le PSA"
+  connecteurs: ["PSA (ConnectWise)", ticketing]
+  prix_plausible: "100-300$/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 3
+  source_url: https://www.capterra.com/p/107931/ConnectWise-Manage/reviews/
+
+- id: B-069
+  douleur: "Mon RMM (Atera) manque ou rate des patchs en silence, sans feedback d'erreur, sans contrôle granulaire ni phase de test."
+  acheteur: "patron ou technicien de MSP sous Atera, 2-20 techniciens"
+  frequence: hebdo
+  cout_actuel: "Vérification manuelle des patchs parc par parc ; risque sécurité silencieux chez les clients"
+  workflow: "patch management des parcs clients"
+  connecteurs: ["RMM (Atera)", alerting]
+  prix_plausible: "50-200$/mois"
+  type: niche
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 3
+  source_url: https://medium.com/@ron_at_level/are-atera-users-facing-more-issues-lately-a-look-at-the-reports-and-ateras-response-c5d96b22ae42
+
+- id: B-072
+  douleur: "Mon outil d'expédition (ShipStation) génère des erreurs de facturation, des charges inattendues et des remboursements lents ou absents."
+  acheteur: "e-commerçant PME (1-20 personnes) à volume d'expéditions régulier"
+  frequence: mensuel
+  cout_actuel: "Contrôle manuel des factures ShipStation/transporteurs ; remboursements lents ou jamais obtenus"
+  workflow: "contrôle de la facturation transport et des surcharges"
+  connecteurs: [ShipStation, transporteurs, compta]
+  prix_plausible: "30-100$/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: dashboard
+  occurrences: 3
+  source_url: https://checkthat.ai/brands/shipstation/reviews
+
+- id: B-073
+  douleur: "Le support de mon outil d'expédition est externalisé, lent et incompétent ; je subis des galères récurrentes de login et de 2FA."
+  acheteur: "e-commerçant PME (1-20 personnes) sous ShipStation"
+  frequence: ponctuel
+  cout_actuel: "Expéditions retardées à chaque blocage login/2FA + support lent ; pas résolu"
+  workflow: "expédition quotidienne des commandes"
+  connecteurs: [ShipStation, transporteurs]
+  prix_plausible: "30-100$/mois"
+  type: niche
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 3
+  source_url: https://www.trustpilot.com/review/shipstation.com
+
+- id: C-011
+  douleur: "Reconstituer et logger le temps passé sur chaque tâche pour chaque client est un pensum quotidien que mes consultants repoussent."
+  acheteur: "gérant d'agence ou de cabinet de conseil facturant au temps, 2-20 consultants (contexte anglo-saxon)"
+  frequence: quotidien
+  cout_actuel: "Timesheets reconstitués de mémoire (Jira Tempo, tableurs) ; temps facturables perdus, pas d'outil satisfaisant"
+  workflow: "capture des temps facturables par tâche et par client"
+  connecteurs: [Jira, "git/commits", calendrier, facturation]
+  prix_plausible: "50-150$/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 3
+  source_url: https://news.ycombinator.com/item?id=13337024
