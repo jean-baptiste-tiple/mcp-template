@@ -1,0 +1,715 @@
+# Batch 5 — fiches normalisées (lignes de données 205-255 de ideas_raw.csv)
+
+- id: A-077
+  douleur: Je ne peux pas exposer mon adresse perso pour les retours eBay et les boîtes postales coûtent trop cher.
+  acheteur: auto-entrepreneur vendeur eBay/e-commerce, solo
+  frequence: hebdo
+  cout_actuel: "PO box payante (20-40 €/mois) ou adresse perso exposée ; pas de solution satisfaisante"
+  workflow: logistique des retours e-commerce
+  connecteurs: [eBay, service d'adresse virtuelle, transporteurs]
+  prix_plausible: "10-20 €/mois"
+  type: generique
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.reddit.com/r/ecommerce/comments/1hmmq3i/
+
+- id: A-078
+  douleur: Un colis marqué retourné à l'expéditeur a disparu et je n'ai aucune visibilité sur ce que fait mon partenaire de fulfillment.
+  acheteur: gérant de boutique e-commerce externalisant le fulfillment, TPE 1-10
+  frequence: hebdo
+  cout_actuel: "Pas résolu — relances manuelles du 3PL, colis perdus, temps de support client"
+  workflow: reverse logistics / suivi des retours
+  connecteurs: [tracking transporteurs, API 3PL/fulfillment, email]
+  prix_plausible: "30-60 €/mois"
+  type: niche
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.reddit.com/r/ecommerce/comments/1ibsbv2/
+
+- id: A-080
+  douleur: Ma facturation et ma gestion client sont éclatées entre spreadsheets, Bill.com, HubSpot et QuickBooks et rien ne s'intègre.
+  acheteur: dirigeant d'agence marketing mid-size, 10-50 personnes
+  frequence: hebdo
+  cout_actuel: "4 outils + tableurs, ressaisie manuelle, frais ACH Stripe jugés exorbitants ; plusieurs h/semaine"
+  workflow: facturation client et suivi des encaissements
+  connecteurs: [QuickBooks, HubSpot, Stripe, Bill.com]
+  prix_plausible: "100-200 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/agency/comments/1dzdewi/
+
+- id: A-082
+  douleur: Les handoffs design → validation → digital → média créent des goulots et aucun outil ne couvre le process transverse.
+  acheteur: dirigeant ou directeur des opérations d'agence créative, 20-100 personnes
+  frequence: quotidien
+  cout_actuel: "Monday + Zapier + PageProof insuffisants ; goulots récurrents entre équipes, délais de livraison"
+  workflow: production créative multi-équipes (handoffs)
+  connecteurs: [outils PM (Monday/Asana), Slack, outils de validation créa, DAM]
+  prix_plausible: "100-300 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.reddit.com/r/agency/comments/1bbn24u/
+
+- id: A-086
+  douleur: J'ai besoin de contrats de prestation solides sans payer un avocat à chaque nouveau client.
+  acheteur: freelance/petite agence multi-services, 1-5 personnes
+  frequence: mensuel
+  cout_actuel: "Templates LegalZoom/Bonsai 300-500 $ l'unité, ou avocat au dossier"
+  workflow: contractualisation client (contrats de prestation)
+  connecteurs: [bibliothèque de templates juridiques, e-signature, CRM]
+  prix_plausible: "20-50 €/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.reddit.com/r/agency/comments/1dw5tna/
+
+- id: A-087
+  douleur: Mon staff ne complète pas les checklists de service et un shift lead esquive ses tâches de fermeture depuis deux mois sans que je le voie.
+  acheteur: gérant de restaurant indépendant, 10-30 employés
+  frequence: quotidien
+  cout_actuel: "Checklists papier + supervision manuelle ; pas résolu, dérives détectées avec des mois de retard"
+  workflow: tâches d'ouverture/fermeture et accountability des shifts
+  connecteurs: [planning équipe (type 7shifts/Combo), mobile, notifications]
+  prix_plausible: "30-80 €/mois"
+  type: niche
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.reddit.com/r/restaurantowners/comments/1jd80ng/
+
+- id: A-088
+  douleur: Après 18 mois d'ouverture je n'arrive toujours pas à me payer car mon suivi financier sur spreadsheets ne me donne aucune visibilité.
+  acheteur: patron de restaurant indépendant, 1 établissement
+  frequence: hebdo
+  cout_actuel: "Spreadsheets inefficaces ; évalue MarketMan/R365/xtraCHEF (150-500 $/mois), jugés lourds"
+  workflow: suivi P&L, food cost et trésorerie du restaurant
+  connecteurs: [caisse (POS), compta, factures fournisseurs]
+  prix_plausible: "100-200 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/restaurantowners/comments/1boihd3/
+
+- id: A-089
+  douleur: Mon commerce mixte épicerie + restaurant a besoin d'un système intégré caisse + inventaire dimensionné pour une toute petite structure.
+  acheteur: gérant de commerce mixte épicerie-restaurant en zone rurale, moins de 10 employés
+  frequence: quotidien
+  cout_actuel: "Outils séparés ou suivi manuel ; les solutions intégrées sont pensées pour de plus grosses structures"
+  workflow: encaissement et gestion d'inventaire
+  connecteurs: [POS, catalogue fournisseurs, codes-barres]
+  prix_plausible: "50-100 €/mois"
+  type: niche
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.reddit.com/r/restaurantowners/comments/196763a/
+
+- id: A-091
+  douleur: Ma stack pizzeria (Square, Gusto, QuickBooks, MarginEdge, Uber Eats) crée une complexité opérationnelle que je passe mon temps à réconcilier.
+  acheteur: gérant de pizzeria/restaurant indépendant, 1-2 établissements
+  frequence: quotidien
+  cout_actuel: "5 outils non intégrés, réconciliation manuelle des données entre caisse, paie, compta et livraison"
+  workflow: opérations quotidiennes multi-outils du restaurant
+  connecteurs: [Square, Gusto, QuickBooks, MarginEdge, Uber Eats]
+  prix_plausible: "100-200 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/restaurantowners/comments/1bna35z/
+
+- id: A-092
+  douleur: Avec deux restaurants, la saisie d'inventaire et de comptes déborde la capacité de mon manager en période de rush.
+  acheteur: gérant de restaurants multi-sites, 2 établissements
+  frequence: quotidien
+  cout_actuel: "Saisie manuelle quotidienne/hebdo par le manager, backlog chronique ; plusieurs h/semaine"
+  workflow: saisie d'inventaire et de comptes multi-sites
+  connecteurs: [POS, factures fournisseurs (OCR), compta]
+  prix_plausible: "100-250 €/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/restaurantowners/comments/1beu20l/
+
+- id: A-093
+  douleur: Après export bancaire, aucun outil simple ne me permet d'analyser réellement mes dépenses.
+  acheteur: particulier FR gérant ses finances personnelles (profil r/vosfinances)
+  frequence: mensuel
+  cout_actuel: "Excel, Power BI et Notion essayés, tous insatisfaisants ; 1-2 h/mois de bricolage"
+  workflow: analyse de budget personnel post-export bancaire
+  connecteurs: [exports bancaires CSV, agrégateur bancaire (Bridge/Powens)]
+  prix_plausible: "5-10 €/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.reddit.com/r/vosfinances/comments/1cbsg1j/
+
+- id: A-094
+  douleur: Suivre mon portefeuille réparti chez plusieurs courtiers européens impose une saisie manuelle des secteurs sans aucune agrégation correcte.
+  acheteur: investisseur particulier FR multi-courtiers (UE)
+  frequence: mensuel
+  cout_actuel: "Saisie manuelle ; Portfolio Performance gratuit mais laborieux, pas d'agrégation UE correcte"
+  workflow: agrégation et suivi de portefeuille multi-courtiers
+  connecteurs: [exports/APIs courtiers, données de marché]
+  prix_plausible: "10-20 €/mois"
+  type: generique
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/vosfinances/comments/1f0i72m/
+
+- id: A-095
+  douleur: Modéliser le cashflow de plusieurs biens locatifs est impossible avec les outils mono-bien et mon comptable facture 390 € la simulation.
+  acheteur: investisseur immobilier locatif FR multi-biens (particulier ou SCI)
+  frequence: mensuel
+  cout_actuel: "Comptable à 390 € la simulation ; Lybox limité, Horiz.io/Qlower explorés sans succès"
+  workflow: modélisation cashflow d'un patrimoine locatif
+  connecteurs: [données bancaires, paramètres fiscaux FR, Excel]
+  prix_plausible: "20-50 €/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/vosfinances/comments/1ghuzay/
+
+- id: A-096
+  douleur: En auto-entrepreneur je re-saisis toute ma facturation dans Excel car ma compta est éclatée entre outils.
+  acheteur: auto-entrepreneur/freelance FR, solo
+  frequence: mensuel
+  cout_actuel: "Double saisie facturier → tableur, 1-3 h/mois, risque d'erreurs"
+  workflow: facturation et compta d'auto-entrepreneur
+  connecteurs: [facturier, banque, URSSAF]
+  prix_plausible: "10-20 €/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.reddit.com/r/vosfinances/comments/1bb8k8c/
+
+- id: A-097
+  douleur: Soumettre mon SaaS aux annuaires un par un est long et truffé d'erreurs.
+  acheteur: founder solo de micro-SaaS
+  frequence: ponctuel
+  cout_actuel: "Soumissions manuelles (heures) ou services payants ~75 $ ; douleur énoncée par un builder qui la monétise (à revalider)"
+  workflow: lancement produit / soumission aux annuaires
+  connecteurs: [annuaires SaaS (formulaires), site produit]
+  prix_plausible: "50-100 € one-shot"
+  type: generique
+  fit_mcp: moyen
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.reddit.com/r/microsaas/comments/1hjvb0o
+
+- id: A-098
+  douleur: Chercher manuellement des mots-clés dans les subreddits pour trouver des leads est un gouffre à temps.
+  acheteur: founder solo / growth marketer de micro-SaaS
+  frequence: quotidien
+  cout_actuel: "Veille manuelle Reddit, plusieurs h/semaine ; douleur énoncée par un builder (à revalider)"
+  workflow: prospection par social listening
+  connecteurs: [Reddit API, mots-clés, CRM]
+  prix_plausible: "20-50 €/mois"
+  type: generique
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/microsaas/comments/1kf6vp5
+
+- id: A-100
+  douleur: Caviarder des PDF à la main est épuisant et les outils automatiques sur- ou sous-caviardent.
+  acheteur: juriste/paralegal ou responsable conformité manipulant des documents sensibles, cabinet ou PME
+  frequence: hebdo
+  cout_actuel: "Caviardage manuel (heures par lot) ; outils auto imprécis donc re-vérification humaine ; attention frontière réglementaire selon usage"
+  workflow: caviardage/anonymisation de documents avant diffusion
+  connecteurs: [PDF, OCR, stockage documentaire]
+  prix_plausible: "30-80 €/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.reddit.com/r/microsaas/comments/1kbup4n
+
+- id: A-101
+  douleur: Mes freelances et nouveaux arrivants devinent le ton de marque et se trompent.
+  acheteur: responsable marketing/brand de PME ou d'agence, 5-50 personnes
+  frequence: hebdo
+  cout_actuel: "Guidelines statiques + relectures/corrections manuelles ; douleur énoncée par un builder (à revalider)"
+  workflow: production de contenu conforme à la marque
+  connecteurs: [brand guidelines, documents existants, CMS]
+  prix_plausible: "20-50 €/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.reddit.com/r/microsaas/comments/1kdwr1j
+
+- id: A-102
+  douleur: Mon forfait VOIP annoncé à 29 $ est monté à 63 $ avec les frais cachés, j'ai dû changer de fournisseur.
+  acheteur: gérant de TPE utilisant une ligne pro VOIP
+  frequence: mensuel
+  cout_actuel: "63 $/mois subis vs 29 $ annoncés ; churn vers FreedomVoice à 9,95 $"
+  workflow: téléphonie d'entreprise
+  connecteurs: [VOIP]
+  prix_plausible: "10-15 €/mois"
+  type: generique
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.reddit.com/r/EntrepreneurRideAlong/comments/1fple32/
+
+- id: A-103
+  douleur: Mes pubs Reddit ne génèrent que des clics de bots — 300 visites en quelques minutes, zéro humain.
+  acheteur: founder solo faisant de l'acquisition payante (Reddit/X/Meta)
+  frequence: hebdo
+  cout_actuel: "Pas résolu — budget pub gaspillé sur plusieurs plateformes, détection manuelle a posteriori"
+  workflow: acquisition payante / protection anti-fraude au clic
+  connecteurs: [Reddit Ads, Meta Ads, X Ads, analytics]
+  prix_plausible: "30-100 €/mois"
+  type: generique
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.reddit.com/r/EntrepreneurRideAlong/comments/1kl1wpp/
+
+- id: B-010
+  douleur: Les intégrations de mon ATS sont survendues — le SMS sortant via RingCentral exige un service tiers payant jamais annoncé à la vente.
+  acheteur: dirigeant d'agence de recrutement, 2-15 consultants
+  frequence: quotidien
+  cout_actuel: "Service tiers payant non budgété + friction quotidienne sur les SMS candidats (Zoho Recruit)"
+  workflow: communication SMS avec les candidats
+  connecteurs: [ATS (Zoho Recruit), SMS/RingCentral]
+  prix_plausible: "30-80 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.capterra.com/p/125768/Zoho-Recruit/reviews/
+
+- id: B-015
+  douleur: L'app mobile de mon CRM recrutement est nettement moins capable que le desktop, je ne peux pas travailler en déplacement.
+  acheteur: recruteur terrain en agence de recrutement, 2-15 consultants
+  frequence: quotidien
+  cout_actuel: "Tâches différées jusqu'au retour au bureau ; Recruit CRM mobile bridé"
+  workflow: gestion candidats en mobilité
+  connecteurs: [ATS/CRM recrutement (Recruit CRM)]
+  prix_plausible: "30-60 €/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.softwareadvice.com/staffing-agency/recruit-crm-profile/
+
+- id: B-019
+  douleur: Une erreur système de mon logiciel a supprimé un prélèvement locataire et on m'a sommé de re-saisir 3 paiements à la main.
+  acheteur: gestionnaire de biens locatifs (property manager), agence 1-10 personnes
+  frequence: ponctuel
+  cout_actuel: "Re-saisie manuelle des paiements + escalade support (plainte BBB contre Buildium) ; risque d'erreur comptable"
+  workflow: encaissement des loyers
+  connecteurs: [logiciel de gestion locative (Buildium), paiements/prélèvements, banque]
+  prix_plausible: "50-100 €/mois"
+  type: niche
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.bbb.org/us/ma/boston/profile/computer-software/buildium-llc-0021-28244/complaints
+
+- id: B-029
+  douleur: Mon outil field service n'offre aucune piste d'audit — pas d'historique des emails envoyés ni d'empreinte des modifications de données.
+  acheteur: gérant d'entreprise de field service, 5-20 techniciens
+  frequence: quotidien
+  cout_actuel: "Pas résolu — litiges clients sans preuve, aucune traçabilité dans Jobber"
+  workflow: traçabilité des communications et modifications de données clients
+  connecteurs: [FSM (Jobber), email, logs]
+  prix_plausible: "30-80 €/mois"
+  type: niche
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.getonecrew.com/post/jobber-reviews
+
+- id: B-030
+  douleur: Le job costing est cassé — les coûts des jobs issus des intégrations comme Thumbtack ne remontent pas dans le système.
+  acheteur: contractor/artisan field service, 1-10 personnes
+  frequence: hebdo
+  cout_actuel: "Rapprochement manuel des coûts entre Jobber et les marketplaces de leads ; marge réelle inconnue"
+  workflow: job costing / rentabilité par chantier
+  connecteurs: [FSM (Jobber), marketplaces de leads (Thumbtack), compta]
+  prix_plausible: "30-80 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.getonecrew.com/post/jobber-reviews
+
+- id: B-037
+  douleur: Impossible d'ajouter des photos pour illustrer les ouvrages dans mes devis.
+  acheteur: artisan BTP FR, 1-10 personnes
+  frequence: hebdo
+  cout_actuel: "Devis moins vendeurs ou contournement manuel hors outil (Obat)"
+  workflow: chiffrage et présentation des devis BTP
+  connecteurs: [logiciel devis BTP (Obat), bibliothèque d'ouvrages, photos]
+  prix_plausible: "20-50 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://independant.io/avis/obat/
+
+- id: B-041
+  douleur: Mon plan de base ne propose aucune règle automatique d'affectation des transactions comptables.
+  acheteur: indépendant FR tenant sa compta sur Pennylane
+  frequence: hebdo
+  cout_actuel: "Affectation manuelle de chaque transaction, ou upgrade de plan Pennylane"
+  workflow: catégorisation comptable des transactions
+  connecteurs: [Pennylane, banque]
+  prix_plausible: "10-30 €/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://tool-advisor.fr/logiciel-comptabilite/comparatif/pennylane-compta/
+
+- id: B-043
+  douleur: L'encaissement de chèques est limité à 10 par mois puis facturé 2 € pièce, problématique pour mon commerce.
+  acheteur: commerçant FR encaissant beaucoup de chèques, TPE
+  frequence: mensuel
+  cout_actuel: "2 € par chèque au-delà de 10/mois chez Tiime ; surcoût récurrent"
+  workflow: encaissement de chèques
+  connecteurs: [compte pro/banque (Tiime)]
+  prix_plausible: "10-20 €/mois"
+  type: niche
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://les-experts-comptables.fr/avis-tiime
+
+- id: B-045
+  douleur: Mon outil compta est mal adapté à une PME multi-sites — pas de connecteurs ERP avancés et les verticaux métier sont mal servis.
+  acheteur: dirigeant/DAF de PME multi-sites FR, 20-100 personnes
+  frequence: mensuel
+  cout_actuel: "Ressaisie entre ERP et compta, outil (Tiime) inadapté ; envisage une migration coûteuse"
+  workflow: consolidation comptable multi-sites
+  connecteurs: [ERP, compta, facturation électronique]
+  prix_plausible: "100-300 €/mois"
+  type: generique
+  fit_mcp: moyen
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://ma-facture-electronique.org/plateforme-agreee/liste-officielle/tiime/
+
+- id: B-059
+  douleur: Une erreur de l'app de réservation a nécessité un remboursement client — 3 emails au support et un mois d'attente, au détriment de ma relation client.
+  acheteur: restaurateur indépendant utilisant une plateforme de réservation
+  frequence: ponctuel
+  cout_actuel: "Temps de support (3 emails, 1 mois) + insatisfaction du client final (Zenchef)"
+  workflow: gestion des réservations et incidents de paiement
+  connecteurs: [plateforme de réservation (Zenchef), paiement]
+  prix_plausible: "20-50 €/mois"
+  type: niche
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.trustpilot.com/review/zenchef.com
+
+- id: B-062
+  douleur: Un problème signalé au support de mon outil de planning RH est resté sans résolution pendant plus de 2 mois.
+  acheteur: manager de restaurant utilisant un planning RH (Combo), 10-50 salariés
+  frequence: ponctuel
+  cout_actuel: "Problème bloquant non résolu 2 mois ; contournements manuels"
+  workflow: planning RH restauration
+  connecteurs: [planning RH (Combo)]
+  prix_plausible: "30-60 €/mois"
+  type: niche
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.getapp.fr/reviews/2052141/combo
+
+- id: B-063
+  douleur: Mon outil de planning RH restauration ne gère pas automatiquement les congés payés.
+  acheteur: gérant de restaurant FR, 5-30 salariés
+  frequence: mensuel
+  cout_actuel: "Calcul des CP à la main ou sur Excel malgré l'abonnement Combo ; risque de conformité"
+  workflow: gestion des congés payés / préparation paie
+  connecteurs: [planning RH (Combo), paie, règles CP légales FR]
+  prix_plausible: "30-80 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://conseils-astuces-rh.fr/avis-combo-rh/
+
+- id: B-064
+  douleur: La tarification de mon outil RH ne s'ajuste pas au nombre réel d'employés suivis — je paie pour des effectifs fantômes.
+  acheteur: gérant de restauration multi-sites, 20-100 salariés
+  frequence: mensuel
+  cout_actuel: "Surcoût d'abonnement Combo vs effectif réellement suivi"
+  workflow: gestion des abonnements SaaS RH
+  connecteurs: [planning RH (Combo)]
+  prix_plausible: "n/a (douleur de pricing, pas de produit dédié)"
+  type: generique
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.getapp.fr/reviews/2052141/combo
+
+- id: B-076
+  douleur: L'automatisation d'inventaire incluse dans mon outil est devenue un add-on payant à 19 $/mois.
+  acheteur: e-commerçant multi-canal, TPE 1-10
+  frequence: quotidien
+  cout_actuel: "19 $/mois d'add-on Veeqo, ou retour à la synchronisation manuelle du stock"
+  workflow: synchronisation de stock multi-canal
+  connecteurs: [Veeqo, marketplaces, boutique en ligne]
+  prix_plausible: "15-30 €/mois"
+  type: niche
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://commercelogica.com/reviews/veeqo-review/
+
+- id: B-080
+  douleur: La valorisation de mon stock est fausse — les commandes d'achat incrémentent la valeur mais les ventes ne déduisent pas correctement le coût.
+  acheteur: responsable ops e-commerce, PME 10-50
+  frequence: mensuel
+  cout_actuel: "Corrections manuelles à chaque clôture, marge et COGS faussés (Cin7)"
+  workflow: valorisation de stock et calcul du COGS
+  connecteurs: [gestion de stock (Cin7), compta]
+  prix_plausible: "50-150 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.business.org/finance/inventory-management/cin7-review/
+
+- id: C-001
+  douleur: Rédiger et faire signer les contrats de prestation et statements of work avec les nouveaux fournisseurs est notre plus gros goulot.
+  acheteur: responsable achats/ops en PME pharma, 50-250 personnes
+  frequence: hebdo
+  cout_actuel: "File d'attente juridique, cycles de plusieurs semaines par contrat ; demande de templates + queue + statuts"
+  workflow: contractualisation fournisseurs (SOW)
+  connecteurs: [templates juridiques, e-signature, ERP achats, email]
+  prix_plausible: "100-300 €/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://news.ycombinator.com/item?id=13337024
+
+- id: C-002
+  douleur: Il m'a fallu deux mois de procédure interne pour obtenir un abonnement Pingdom à 11 $/mois.
+  acheteur: responsable IT/achats en organisation publique
+  frequence: ponctuel
+  cout_actuel: "2 mois de process (revue des TOS, pas de CB, pas de paiement récurrent) pour 11 $/mois"
+  workflow: achat et approbation de SaaS (procurement public)
+  connecteurs: [procurement, juridique, facturation]
+  prix_plausible: "50-150 €/mois"
+  type: generique
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://news.ycombinator.com/item?id=13337024
+
+- id: C-003
+  douleur: Je n'ai rien pour tracker les étapes de mise en place quand j'onboarde un nouveau client.
+  acheteur: gérant de PME d'hébergement/services managés, 5-20 personnes
+  frequence: hebdo
+  cout_actuel: "Tous les task/project managers essayés, « good enough » au mieux ; étapes tenues de tête"
+  workflow: onboarding client (checklist/runbook)
+  connecteurs: [CRM, email, runbooks internes]
+  prix_plausible: "30-80 €/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://news.ycombinator.com/item?id=13337024
+
+- id: C-004
+  douleur: Un développeur retape les instructions à chaque installation d'un nouveau site client, en session remote.
+  acheteur: responsable technique d'un éditeur/intégrateur logiciel, PME 10-50
+  frequence: hebdo
+  cout_actuel: "Centaines d'heures perdues en setups manuels ; le script d'automatisation n'est jamais priorisé"
+  workflow: provisioning/installation par client
+  connecteurs: [documentation interne, accès distant, scripts]
+  prix_plausible: "50-150 €/mois"
+  type: generique
+  fit_mcp: moyen
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://news.ycombinator.com/item?id=13337024
+
+- id: C-006
+  douleur: Nous recrutons des vagues de contractors deux fois par an et le screening téléphonique répétitif crée un goulot.
+  acheteur: responsable recrutement d'une entreprise à embauches saisonnières, 50-500 personnes
+  frequence: ponctuel
+  cout_actuel: "Heures de téléphone répétitives 2x/an, aucune méthode de screening consistante"
+  workflow: préqualification téléphonique de candidats en volume
+  connecteurs: [ATS, téléphonie, calendrier, formulaires]
+  prix_plausible: "100-300 €/mois en saison"
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://news.ycombinator.com/item?id=13337024
+
+- id: C-007
+  douleur: Nous assemblons docs, fichiers Excel et graphiques dans InDesign pour produire un PDF soigné — je dois automatiser ce workflow.
+  acheteur: chargé de production documentaire en cabinet d'études/conseil, 5-50 personnes
+  frequence: mensuel
+  cout_actuel: "Assemblage manuel InDesign (texte + graphiques + tableaux), plusieurs jours par rapport ; deux commentateurs offraient de le construire (signal de demande)"
+  workflow: production de rapports brandés récurrents
+  connecteurs: [Word/Excel, générateur de graphiques, templates PDF]
+  prix_plausible: "50-150 €/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://news.ycombinator.com/item?id=13337024
+
+- id: C-008
+  douleur: Les tarifs de fret variant chaque jour, mon commercial doit interrompre la vente pour obtenir une cotation transport.
+  acheteur: dirigeant/commercial de PME vendant de l'équipement lourd (agroalimentaire et spiritueux)
+  frequence: quotidien
+  cout_actuel: "Cotations manuelles auprès des 3PL, cycle de vente interrompu à chaque devis"
+  workflow: cotation de fret palette intégrée au cycle de vente
+  connecteurs: [APIs transporteurs/3PL, CRM, grilles tarifaires]
+  prix_plausible: "100-300 €/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://news.ycombinator.com/item?id=13337024
+
+- id: C-009
+  douleur: Retrouver le bon modèle de document revient à se souvenir qu'« on a fait un deal similaire il y a trois mois — repars de celui-là ».
+  acheteur: avocat/associé en cabinet d'affaires, 10-100 personnes
+  frequence: quotidien
+  cout_actuel: "Recherche manuelle de précédents + tagging manuel des versions ; l'heure facturable désincite à automatiser"
+  workflow: assemblage de documents juridiques depuis des précédents
+  connecteurs: [DMS, bibliothèque de templates, versioning]
+  prix_plausible: "100-300 €/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://news.ycombinator.com/item?id=13337024
+
+- id: C-010
+  douleur: Obtenir des CGU et une politique de confidentialité correctes auprès de mon avocat local est long et coûteux.
+  acheteur: fondateur de startup/TPE web
+  frequence: ponctuel
+  cout_actuel: "Template copié-collé + 2 semaines d'allers-retours email avec l'avocat ; la question de responsabilité bloque l'automatisation"
+  workflow: rédaction des documents légaux du site
+  connecteurs: [templates juridiques, générateur de documents]
+  prix_plausible: "50-200 € one-shot"
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://news.ycombinator.com/item?id=13337024
+
+- id: C-012
+  douleur: J'aimerais qu'un client puisse cliquer « Price Quote » au lieu de « Order » et recevoir un PDF pour son service achats.
+  acheteur: dirigeant de PME e-commerce B2B
+  frequence: hebdo
+  cout_actuel: "Devis rédigés à la main à chaque demande ; « quelques heures de dev » jamais priorisées"
+  workflow: génération de devis B2B self-service
+  connecteurs: [catalogue/formulaire de commande, PDF, CRM]
+  prix_plausible: "30-80 €/mois"
+  type: generique
+  fit_mcp: moyen
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://news.ycombinator.com/item?id=13337024
+
+- id: C-013
+  douleur: Le calcul des remboursements clients était une tâche back-office manuelle nécessitant une étape de vérification.
+  acheteur: responsable back-office/ops d'une PME de services
+  frequence: hebdo
+  cout_actuel: "Calcul manuel + vérification humaine ; partiellement automatisé en interne (signal de faisabilité)"
+  workflow: calcul et validation de remboursements
+  connecteurs: [billing, paiements, CRM]
+  prix_plausible: "30-80 €/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://news.ycombinator.com/item?id=13337024
+
+- id: C-016
+  douleur: On imprimait un rapport HTML, découpait des morceaux aux ciseaux et photocopiait le montage pour l'envoyer au client par courrier.
+  acheteur: gérant de société de support technique, TPE 5-20
+  frequence: mensuel
+  cout_actuel: "Process papier absurde et savoir-faire non transférable (perdu au départ de l'employé)"
+  workflow: production du reporting client
+  connecteurs: [ticketing/monitoring, templates PDF, email]
+  prix_plausible: "30-80 €/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://news.ycombinator.com/item?id=13337024
+
+- id: C-017
+  douleur: Ouvrir un compte bancaire professionnel US depuis l'étranger m'a demandé un effort absurde.
+  acheteur: fondateur non-résident créant une société US
+  frequence: ponctuel
+  cout_actuel: "Effort administratif massif ; sujet réglementaire (KYC) — compliance-heavy, ambigu pour un micro-SaaS"
+  workflow: ouverture de compte bancaire US non-résident
+  connecteurs: [KYC, banques US]
+  prix_plausible: "100-300 € one-shot"
+  type: generique
+  fit_mcp: faible
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://news.ycombinator.com/item?id=13337024
+
+- id: C-019
+  douleur: Toute la coordination de l'usine (compta, achats, entrepôt, atelier, ventes et même un fournisseur) passe par un seul Excel partagé.
+  acheteur: responsable ops/production en PME industrielle, 50-250 personnes
+  frequence: quotidien
+  cout_actuel: "Excel partagé multi-services + fournisseur ; feuilles de coûts vieilles de 30 ans encore en usage"
+  workflow: coordination production-achats-ventes inter-services
+  connecteurs: [Excel, ERP, email fournisseurs]
+  prix_plausible: "100-300 €/mois"
+  type: generique
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://news.ycombinator.com/item?id=33611431
+
+- id: C-020
+  douleur: Nos serveurs hébergent plus de 12 000 bases Access fantômes (20 000 chez JPM) que la migration vers de vrais workflows n'épuise jamais.
+  acheteur: DSI/responsable data de grande entreprise (banque, 1000+ salariés)
+  frequence: quotidien
+  cout_actuel: "Shadow-IT Access/Excel à l'échelle ; programmes de migration sans fin — hors cible micro-SaaS (enterprise)"
+  workflow: rationalisation du shadow-IT (Access/Excel)
+  connecteurs: [Access, Excel, plateformes low-code]
+  prix_plausible: "500+ €/mois (deal enterprise)"
+  type: generique
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://news.ycombinator.com/item?id=33611431
+
+- id: C-022
+  douleur: Les spreadsheets sont très mauvais sur mobile — je paierais même pour un meilleur frontend tableur/DB sur téléphone.
+  acheteur: professionnel nomade travaillant sur tableurs (indépendants/TPE, transverse)
+  frequence: quotidien
+  cout_actuel: "Pas résolu — UX mobile dégradée, macros non fonctionnelles ; willingness to pay explicite"
+  workflow: consultation et édition de données tabulaires en mobilité
+  connecteurs: [Google Sheets, Excel, bases de données]
+  prix_plausible: "5-15 €/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://news.ycombinator.com/item?id=33611431

@@ -1,0 +1,716 @@
+# Batch 2 — fiches normalisées (lignes de données 52-102 de ideas_raw.csv)
+# 51 fiches
+
+- id: C-036
+  douleur: "Je cours après les réponses clients et les justificatifs manquants avant chaque clôture, l'info est éparpillée entre emails, SMS, tableurs et notes QBO."
+  acheteur: "gérant de cabinet de bookkeeping/tenue comptable, 2-10 collaborateurs (anglophone/US)"
+  frequence: quotidien
+  cout_actuel: "Relances manuelles email/SMS + tableurs de suivi maison ; plusieurs heures par client avant chaque clôture mensuelle ; pas d'outil dédié (chaos ops, pas comptable)"
+  workflow: "collecte des justificatifs et clôture mensuelle client"
+  connecteurs: ["email", "QuickBooks Online", "SMS", "stockage fichiers (Drive/Dropbox)"]
+  prix_plausible: "50-150 €/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 3
+  source_url: https://www.indiehackers.com/post/i-thought-bookkeeping-software-problems-were-accounting-problems-i-was-wrong-25854191c9
+
+- id: D-017
+  douleur: "Je paie un assistant e-commerce à l'heure pour créer et mettre en ligne les fiches produits une par une (titre, description, dimensions, variantes, prix, mots-clés)."
+  acheteur: "gérant de PME e-commerce avec flux continu de catalogue, 5-30 salariés, FR"
+  frequence: quotidien
+  cout_actuel: "Assistant e-commerce salarié à 11,88 €/h (CDD 5 mois, ~1 800 €/mois chargé) ; saisie manuelle fiche par fiche ; 3 offres d'emploi similaires observées"
+  workflow: "création et mise en ligne de fiches produits"
+  connecteurs: ["CMS e-commerce (Shopify/PrestaShop/WooCommerce)", "PIM ou tableur catalogue", "banque d'images"]
+  prix_plausible: "100-300 €/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 3
+  source_url: https://candidat.francetravail.fr/offres/recherche/detail/194WTLN
+
+- id: D-019
+  douleur: "Je paie une secrétaire médicale uniquement pour taper les comptes rendus dictés par les médecins."
+  acheteur: "médecin gérant de cabinet ou centre d'imagerie médicale, 2-10 praticiens, FR"
+  frequence: quotidien
+  cout_actuel: "Secrétaire médicale dédiée à la frappe, 25-30 K€/an annoncés sur poste équivalent ; transcription audio→texte quotidienne (3 offres : Paris 8, Levallois, Martigues)"
+  workflow: "transcription et mise en forme des comptes rendus médicaux dictés"
+  connecteurs: ["dictée audio", "logiciel métier médical (DPI/RIS)", "messagerie sécurisée santé"]
+  prix_plausible: "200-500 €/mois (vs 25-30 K€/an de salaire)"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 3
+  source_url: https://candidat.francetravail.fr/offres/recherche/detail/192NNJH
+
+- id: D-029
+  douleur: "Je paie un assistant achats pour saisir et suivre les commandes fournisseurs et rapprocher bons de livraison et factures."
+  acheteur: "responsable achats de PME industrie/négoce, 10-50 salariés, FR"
+  frequence: quotidien
+  cout_actuel: "Assistant achats salarié (~SMIC à 24 K€/an) ; rédaction BC, suivi livraisons et rapprochement BL/factures manuels (3 offres : Villette-de-Vienne, Le Broc, Oisemont)"
+  workflow: "commandes fournisseurs et rapprochement BL/factures"
+  connecteurs: ["ERP/gestion commerciale", "email", "OCR factures", "compta"]
+  prix_plausible: "150-400 €/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 3
+  source_url: https://candidat.francetravail.fr/offres/recherche/detail/196NMPK
+
+- id: D-035
+  douleur: "Je paie un assistant SAV pour enregistrer les retours produits, décider réparation/échange/avoir et monter les dossiers de demande d'avoir."
+  acheteur: "responsable SAV de PME distribution/e-commerce, 10-50 salariés, FR"
+  frequence: quotidien
+  cout_actuel: "Assistant SAV salarié (~SMIC) ; saisie manuelle des retours/échanges/prêts et montage des dossiers d'avoir (3 offres : Nîmes, St-Laurent-de-Mure, La Ricamarie)"
+  workflow: "gestion des retours produits (RMA) et avoirs"
+  connecteurs: ["ERP/OMS", "email", "transporteurs", "facturation"]
+  prix_plausible: "150-300 €/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 3
+  source_url: https://candidat.francetravail.fr/offres/recherche/detail/210PBVL
+
+- id: D-041
+  douleur: "Je paie un assistant communication pour tenir le calendrier éditorial et programmer les publications sur les réseaux sociaux via un outil tiers."
+  acheteur: "dirigeant ou responsable communication de TPE/PME, 5-50 salariés, FR"
+  frequence: hebdo
+  cout_actuel: "Assistant communication salarié ou temps partiel + outils (Later, MailChimp, WordPress) ; planning LinkedIn/Instagram et programmation manuels (3 offres : Paris 17, Avignon, Le Grand-Bornand)"
+  workflow: "calendrier éditorial et programmation réseaux sociaux/newsletter"
+  connecteurs: ["LinkedIn", "Instagram", "outil de programmation (Later)", "MailChimp", "WordPress"]
+  prix_plausible: "50-150 €/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 3
+  source_url: https://candidat.francetravail.fr/offres/recherche/detail/206HWYR
+
+- id: D-043
+  douleur: "Je paie une assistante d'agence pour trier les candidatures, compiler les dossiers candidats et mettre en forme les CV au format cabinet avant envoi aux clients."
+  acheteur: "gérant de cabinet de recrutement, 2-15 consultants, FR"
+  frequence: quotidien
+  cout_actuel: "Assistante d'agence salariée (~22-26 K€/an) ; mise en forme CV au format cabinet = tâche récurrente (400+ offres 'assistante d'agence' sur Indeed FR, preuve indirecte)"
+  workflow: "préparation et envoi des dossiers candidats aux clients"
+  connecteurs: ["ATS", "email", "parsing CV (PDF/Word)", "modèles de documents"]
+  prix_plausible: "100-300 €/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 3
+  source_url: https://fr.indeed.com/q-assistante-d'agence-emplois.html
+
+- id: E-015
+  douleur: "Mon fichier de prospects LinkedIn n'a que des URLs brutes, sans les infos nécessaires pour prioriser et personnaliser."
+  acheteur: "fondateur ou commercial B2B en prospection, startup/TPE 1-20 salariés, FR"
+  frequence: hebdo
+  cout_actuel: "Enrichissement manuel profil par profil ou empilement d'outils (Unipile, Linkup) ; plusieurs heures par liste"
+  connecteurs: ["LinkedIn (API/scraping)", "enrichissement contacts", "CRM"]
+  workflow: "enrichissement de listes de prospects avant campagne"
+  prix_plausible: "50-150 €/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 3
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/unipile/
+
+- id: E-069
+  douleur: "Construire une liste de cibles ICP à la main me coûte des heures sur LinkedIn avant même d'avoir parlé à qui que ce soit."
+  acheteur: "fondateur ou SDR B2B, startup/TPE 1-20 salariés, FR"
+  frequence: hebdo
+  cout_actuel: "Sourcing manuel sur LinkedIn (plusieurs heures par liste) ou outils de sourcing type Airscale ; pas de solution unifiée"
+  workflow: "sourcing et constitution de listes de prospects ICP"
+  connecteurs: ["LinkedIn", "bases entreprises (Sirene/enrichissement)", "CRM"]
+  prix_plausible: "50-200 €/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 3
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/airscale/
+
+- id: E-073
+  douleur: "Réunir email pro, email perso et mobile pour le multicanal me demande trois outils et trois passages."
+  acheteur: "SDR ou growth marketer B2B multicanal, startup/TPE 1-20 salariés, FR"
+  frequence: hebdo
+  cout_actuel: "Trois outils d'enrichissement en cascade passés à la main (waterfall manuel) ; abonnements cumulés + temps de re-traitement"
+  workflow: "enrichissement des coordonnées avant séquence multicanal"
+  connecteurs: ["enrichissement email/téléphone (waterfall)", "LinkedIn", "CRM/outil de séquences"]
+  prix_plausible: "50-150 €/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 3
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/airscale/
+
+- id: E-084
+  douleur: "Les reels d'un créateur regorgent d'idées mais je n'ai pas le temps de tout visionner et transcrire."
+  acheteur: "créateur de contenu / ghostwriter / social media manager, solo à TPE, FR"
+  frequence: hebdo
+  cout_actuel: "Visionnage et transcription manuels, largement non faits faute de temps ; scraping bricolé type Apify pour les plus techniques"
+  workflow: "veille concurrentielle et recherche d'idées de contenu"
+  connecteurs: ["Instagram/TikTok (scraping type Apify)", "transcription audio"]
+  prix_plausible: "20-50 €/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 3
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/apify/
+
+- id: A-031
+  douleur: "Mon reporting de maintenance client repose sur des exports Excel manuels depuis CyberCNS, RMM, backup et M365, sans vue centralisée."
+  acheteur: "dirigeant de MSP (infogérance IT), 5-25 techniciens (anglophone)"
+  frequence: mensuel
+  cout_actuel: "Exports Excel manuels multi-outils, plusieurs heures par client par mois ; solutions du marché jugées trop chères"
+  workflow: "reporting de maintenance mensuel client"
+  connecteurs: ["RMM", "CyberCNS", "solution backup", "Microsoft 365 API"]
+  prix_plausible: "100-300 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 2
+  source_url: https://www.reddit.com/r/msp/comments/1gemuz4/
+
+- id: A-035
+  douleur: "Impossible de voir les finances de toutes mes sociétés d'un coup — QBO et Xero me forcent à naviguer entité par entité."
+  acheteur: "dirigeant multi-sociétés ou expert-comptable de holding, 2-10 entités TPE/PME (anglophone)"
+  frequence: mensuel
+  cout_actuel: "Navigation entité par entité + consolidation manuelle sous Excel avec des plans de comptes différents ; plusieurs heures par clôture"
+  workflow: "consolidation financière multi-entités"
+  connecteurs: ["QuickBooks Online", "Xero", "tableur"]
+  prix_plausible: "100-250 €/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 2
+  source_url: https://www.reddit.com/r/Accounting/comments/1ke4ryl/
+
+- id: A-042
+  douleur: "Composer des messages d'approche personnalisés candidat par candidat est fastidieux et me prend un temps considérable."
+  acheteur: "recruteur/sourceur en cabinet de recrutement, 1-15 consultants"
+  frequence: quotidien
+  cout_actuel: "Rédaction manuelle message par message ; douleur pré-outil, non résolue (corroborée par le catalogue forward)"
+  workflow: "sourcing et approche candidats (outreach)"
+  connecteurs: ["LinkedIn", "ATS", "email"]
+  prix_plausible: "50-150 €/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 2
+  source_url: https://www.reddit.com/r/recruiting/comments/1cog1s5/
+
+- id: A-058
+  douleur: "Taper les devis ligne par ligne avec les prix unitaires est ce qui me bouffe le plus de temps."
+  acheteur: "artisan / entrepreneur général BTP, 1-10 salariés (anglophone, douleur transposable FR)"
+  frequence: hebdo
+  cout_actuel: "Saisie manuelle des devis ligne à ligne ; a testé Handoff (estimation IA) sans satisfaction ; plusieurs heures par semaine"
+  workflow: "chiffrage et rédaction de devis"
+  connecteurs: ["bibliothèque de prix", "logiciel devis/facturation", "email"]
+  prix_plausible: "50-150 €/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 2
+  source_url: https://www.reddit.com/r/Construction/comments/1i19qcc/
+
+- id: A-060
+  douleur: "Analyser une acquisition locative dans un tableur Excel basique est trop rigide pour tester des hypothèses."
+  acheteur: "investisseur immobilier locatif particulier/semi-pro, portefeuille 1-10 biens (US)"
+  frequence: ponctuel
+  cout_actuel: "Tableur Excel maison, rigide pour les scénarios ; pas d'outil adopté ; corroboré par un second thread (rendement locatif vs S&P en spreadsheet)"
+  workflow: "analyse de deals d'acquisition locative"
+  connecteurs: ["données marché immobilier", "tableur", "taux d'emprunt"]
+  prix_plausible: "20-50 €/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 2
+  source_url: https://www.reddit.com/r/realestateinvesting/comments/1j4y6vc/
+
+- id: A-062
+  douleur: "Suivre la performance réelle de mon bien locatif entre vacance locative et changements d'escrow est laborieux."
+  acheteur: "petit bailleur / investisseur locatif, 1-5 biens (US)"
+  frequence: mensuel
+  cout_actuel: "P&L par bien tenu en spreadsheet à la main ; laborieux et source d'erreurs"
+  workflow: "suivi de performance locative (P&L par bien)"
+  connecteurs: ["banque", "logiciel de gestion locative", "tableur"]
+  prix_plausible: "10-30 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 2
+  source_url: https://www.reddit.com/r/realestateinvesting/comments/1hb60v2/
+
+- id: A-079
+  douleur: "Le reporting client manuel me prend plus d'une semaine chaque mois pour 35 clients aux services hétérogènes."
+  acheteur: "dirigeant d'agence marketing, 5-30 salariés, ~35 clients"
+  frequence: mensuel
+  cout_actuel: "Reporting manuel >1 semaine/mois d'une ressource ; SEranking/Looker critiqués, AgencyAnalytics jugé trop cher"
+  workflow: "reporting mensuel client multi-services"
+  connecteurs: ["Google Analytics", "Google/Meta Ads", "outils SEO", "réseaux sociaux"]
+  prix_plausible: "100-300 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 2
+  source_url: https://www.reddit.com/r/agency/comments/1aeqtru/
+
+- id: A-083
+  douleur: "Les clients nous reprochent les retards alors qu'ils viennent d'eux — je n'ai aucune preuve objective d'attribution des délais."
+  acheteur: "dirigeant ou chef de projet d'agence créative/web, 5-30 salariés"
+  frequence: hebdo
+  cout_actuel: "Pas résolu — reconstitution manuelle des échanges en cas de litige (ex. cité : client silencieux 19 jours puis grosses révisions à la deadline)"
+  workflow: "suivi de projet client et attribution des retards"
+  connecteurs: ["outil de gestion de projet (Asana/ClickUp)", "email", "Slack"]
+  prix_plausible: "50-150 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 2
+  source_url: https://www.reddit.com/r/agency/comments/1dseo4k/
+
+- id: A-085
+  douleur: "Il me faut un workflow d'onboarding client unifié — Dubsado et HoneyBook ne font pas l'affaire et je jongle entre Notion, Docs et email."
+  acheteur: "freelance ou petite agence de services créatifs, 1-5 personnes"
+  frequence: ponctuel
+  cout_actuel: "Onboarding géré à la main via Notion/Docs/email ; Dubsado et HoneyBook (~30-80 $/mois) déjà testés et jugés insuffisants"
+  workflow: "onboarding de nouveaux clients"
+  connecteurs: ["email", "Notion/Docs", "signature électronique", "facturation"]
+  prix_plausible: "30-80 €/mois"
+  type: generique
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 2
+  source_url: https://www.reddit.com/r/agency/comments/1hflwgv/
+
+- id: A-090
+  douleur: "Suivre l'inventaire et le food cost avec intégration à ma caisse Toast est un casse-tête permanent, aucun outil ne convient."
+  acheteur: "restaurateur indépendant, 1-3 établissements (US)"
+  frequence: hebdo
+  cout_actuel: "Évaluation Craftable vs MarginEdge (~100-300 $/mois) sans conviction ; suivi partiel en tableur ; repricing manuel lors des hausses fournisseurs"
+  workflow: "gestion d'inventaire et food cost"
+  connecteurs: ["POS Toast", "factures fournisseurs (OCR)", "tableur"]
+  prix_plausible: "100-200 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 2
+  source_url: https://www.reddit.com/r/restaurantowners/comments/1fkufar/
+
+- id: A-099
+  douleur: "Je perds des heures à trier manuellement le feedback utilisateur venant de plusieurs sources."
+  acheteur: "founder SaaS / product manager, startup 1-20 personnes"
+  frequence: hebdo
+  cout_actuel: "Tri manuel multi-sources, plusieurs heures par semaine ; pas d'outil (douleur énoncée par un builder, à revalider)"
+  workflow: "agrégation et tri du feedback produit"
+  connecteurs: ["email", "support (Intercom/Zendesk)", "reviews", "Slack/Discord"]
+  prix_plausible: "30-80 €/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 2
+  source_url: https://www.reddit.com/r/microsaas/comments/1i83gje
+
+- id: A-104
+  douleur: "J'ai codé 16 mois en secret pour gagner 32 dollars — je n'ai aucun moyen fiable de valider la demande avant de construire."
+  acheteur: "indie founder / solo entrepreneur SaaS"
+  frequence: ponctuel
+  cout_actuel: "Pas résolu — validation ad hoc (posts Reddit, intuition) ; coût d'opportunité énorme (16 mois de dev pour 32 $ dans le verbatim)"
+  workflow: "validation de marché avant développement"
+  connecteurs: ["Reddit/forums (scraping)", "outils de sondage", "analytics/SEO"]
+  prix_plausible: "20-50 €/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 2
+  source_url: https://www.reddit.com/r/SaaS/comments/1kfz1pf/
+
+- id: B-003
+  douleur: "Mon ATS (Bullhorn) a des fonctionnalités qui ne marchent pas et le support répond 'working as designed' sans intention de corriger."
+  acheteur: "dirigeant de cabinet de recrutement/staffing utilisant Bullhorn, 5-50 consultants"
+  frequence: quotidien
+  cout_actuel: "Abonnement Bullhorn (~100 $+/user/mois) + contournements manuels des fonctionnalités défaillantes"
+  workflow: "gestion du cycle de recrutement dans l'ATS"
+  connecteurs: ["ATS Bullhorn (API)", "email"]
+  prix_plausible: "100-300 €/mois"
+  type: niche
+  fit_mcp: faible
+  interface_requise: mixte
+  occurrences: 2
+  source_url: https://www.g2.com/products/bullhorn/reviews
+
+- id: B-006
+  douleur: "Les données de contacts de mon outil de sourcing (Loxo) sont obsolètes ou incomplètes dès que je sors du marché US ou sur des rôles de niche."
+  acheteur: "recruteur exécutif hors US (Europe/FR), cabinet 1-10 consultants"
+  frequence: quotidien
+  cout_actuel: "Abonnement Loxo (~100-165 $/user/mois) + recherche manuelle des coordonnées pour compléter les trous hors US"
+  workflow: "sourcing et enrichissement de contacts candidats"
+  connecteurs: ["LinkedIn", "bases d'enrichissement contacts EU", "ATS"]
+  prix_plausible: "100-200 €/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 2
+  source_url: https://peoplemanagingpeople.com/tools/loxo-review/
+
+- id: B-007
+  douleur: "Mes campagnes de sourcing par email subissent des échecs d'automatisation, des pannes intermittentes et des problèmes de délivrabilité."
+  acheteur: "recruteur en cabinet pratiquant l'outreach automatisé, 1-15 consultants"
+  frequence: hebdo
+  cout_actuel: "Abonnement Loxo + relances et vérifications manuelles quand les séquences échouent"
+  workflow: "campagnes d'approche candidats (outreach email)"
+  connecteurs: ["email (Gmail/SMTP)", "ATS", "LinkedIn"]
+  prix_plausible: "50-150 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 2
+  source_url: https://peoplemanagingpeople.com/tools/loxo-review/
+
+- id: B-008
+  douleur: "Le système de crédits contacts de mon outil de sourcing fait grimper la facture réelle à 300 $+/mois au-delà du forfait de base."
+  acheteur: "gérant de cabinet de recrutement à gros volume de sourcing, 2-15 consultants"
+  frequence: quotidien
+  cout_actuel: "Loxo forfait + crédits contacts → 300 $+/mois par gros utilisateur"
+  workflow: "enrichissement des coordonnées candidats"
+  connecteurs: ["LinkedIn", "enrichissement contacts", "ATS"]
+  prix_plausible: "100-250 €/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 2
+  source_url: https://research.com/software/reviews/loxo
+
+- id: B-011
+  douleur: "Mon ATS (Zoho Recruit) impose des champs impossibles à masquer, renommer ou supprimer : la personnalisation des formulaires est rigide et les labels confus."
+  acheteur: "admin RH / responsable recrutement de PME utilisant Zoho Recruit, 10-100 salariés"
+  frequence: hebdo
+  cout_actuel: "Abonnement Zoho Recruit (~25-50 €/user/mois) + contournements et confusion des équipes"
+  workflow: "paramétrage de l'ATS et des formulaires candidats"
+  connecteurs: ["ATS Zoho Recruit (API)"]
+  prix_plausible: "50-150 €/mois"
+  type: niche
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 2
+  source_url: https://peoplemanagingpeople.com/tools/zoho-recruit-review/
+
+- id: B-012
+  douleur: "Mon ATS rame dès que le volume monte : gros datasets et workflows peu fluides pour le staffing haut volume."
+  acheteur: "dirigeant d'agence de staffing haut volume, 10-50 recruteurs"
+  frequence: quotidien
+  cout_actuel: "Abonnement Zoho Recruit + lenteurs subies ; temps perdu quotidien à l'échelle"
+  workflow: "gestion de candidats en haut volume dans l'ATS"
+  connecteurs: ["ATS (API)", "job boards"]
+  prix_plausible: "100-300 €/mois"
+  type: niche
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 2
+  source_url: https://skima.ai/blog/product-deep-dives/zoho-recruit-review
+
+- id: B-013
+  douleur: "Le reporting de mon CRM de recrutement n'est pas assez flexible : je dois retravailler manuellement chaque export."
+  acheteur: "dirigeant de cabinet de recrutement data-driven, 5-20 consultants"
+  frequence: hebdo
+  cout_actuel: "Abonnement Recruit CRM + retraitement Excel manuel de chaque export"
+  workflow: "reporting d'activité du cabinet"
+  connecteurs: ["CRM recrutement (API/exports)", "tableur"]
+  prix_plausible: "50-150 €/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 2
+  source_url: https://skima.ai/blog/product-deep-dives/recruit-crm-reviews
+
+- id: B-014
+  douleur: "Mon CRM de recrutement à 85 $/user/mois pèse lourd en grandissant, et le reporting avancé est verrouillé dans les plans supérieurs."
+  acheteur: "fondateur de cabinet de recrutement en croissance, 3-15 consultants"
+  frequence: mensuel
+  cout_actuel: "Recruit CRM 85 $/user/mois, reporting avancé en surcoût"
+  workflow: "gestion du cabinet dans l'ATS/CRM"
+  connecteurs: ["CRM recrutement (API)"]
+  prix_plausible: "40-80 €/user/mois (sous le prix de l'existant)"
+  type: niche
+  fit_mcp: faible
+  interface_requise: mixte
+  occurrences: 2
+  source_url: https://peoplemanagingpeople.com/tools/recruit-crm-review/
+
+- id: B-018
+  douleur: "La mise en place des paiements de loyers dans mon logiciel de gestion est lente et opaque : délais d'approbation et structure de frais illisible."
+  acheteur: "property manager, portefeuille 50-500 lots (US)"
+  frequence: mensuel
+  cout_actuel: "Abonnement Buildium (~55-375 $/mois) + délais d'encaissement subis et frais mal maîtrisés"
+  workflow: "encaissement des loyers en ligne"
+  connecteurs: ["logiciel de gestion locative (Buildium)", "processeur de paiement", "banque"]
+  prix_plausible: "100-300 €/mois"
+  type: niche
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 2
+  source_url: https://www.getapp.com/real-estate-property-software/a/buildium-property-management-software/
+
+- id: B-022
+  douleur: "Mon outil de gestion locative ne gère pas les baux commerciaux et manque de fonctions avancées pour un portefeuille qui grossit."
+  acheteur: "bailleur particulier ou SCI FR avec baux commerciaux ou portefeuille >10 lots"
+  frequence: mensuel
+  cout_actuel: "Rentila (gratuit/petit abonnement) + gestion manuelle des baux commerciaux sous Word/Excel"
+  workflow: "gestion locative (baux, quittances, indexation)"
+  connecteurs: ["gestion locative", "banque", "modèles de baux", "indices INSEE (ILC/ILAT)"]
+  prix_plausible: "20-50 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 2
+  source_url: https://www.rentilot.fr/avis/rentila/
+
+- id: B-023
+  douleur: "La synchronisation bancaire de mon outil de gestion locative est capricieuse et le support ne suit pas."
+  acheteur: "bailleur particulier FR, 2-10 lots"
+  frequence: mensuel
+  cout_actuel: "Rentila + pointage manuel des loyers quand la synchro bancaire décroche"
+  workflow: "rapprochement des loyers encaissés"
+  connecteurs: ["agrégateur bancaire", "gestion locative"]
+  prix_plausible: "10-30 €/mois"
+  type: niche
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 2
+  source_url: https://lgpimmo.fr/rentila/
+
+- id: B-025
+  douleur: "Les add-ons de mon logiciel de gestion d'interventions facturés à part (AI Receptionist 99 $, Marketing 79 $, Reviews 39 $...) font doubler la note."
+  acheteur: "artisan/contractor services à domicile, 2-10 salariés (US/CA)"
+  frequence: mensuel
+  cout_actuel: "Jobber (~100-200 $/mois) + add-ons cumulés qui doublent la facture"
+  workflow: "gestion d'interventions (devis, planning, facturation, relation client)"
+  connecteurs: ["FSM (Jobber)", "téléphonie", "avis Google", "email/SMS"]
+  prix_plausible: "100-200 €/mois (tout compris)"
+  type: niche
+  fit_mcp: faible
+  interface_requise: mixte
+  occurrences: 2
+  source_url: https://servicebusinessacademy.org/jobber-review-2026/
+
+- id: B-028
+  douleur: "L'app mobile de mon logiciel d'interventions ne fonctionne pas hors ligne : bloquant sur les chantiers sans couverture réseau."
+  acheteur: "artisan avec équipes terrain sur chantiers sans réseau, 2-15 techniciens"
+  frequence: quotidien
+  cout_actuel: "Jobber + saisie différée ou papier sur les chantiers sans couverture, re-saisie au bureau"
+  workflow: "saisie terrain des interventions"
+  connecteurs: ["FSM (API)", "mobile offline"]
+  prix_plausible: "50-150 €/mois"
+  type: niche
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 2
+  source_url: https://www.getonecrew.com/post/jobber-reviews
+
+- id: B-033
+  douleur: "Mon FSM (ServiceTitan) est excessivement rigide : contournements permanents pour toute opération non standard."
+  acheteur: "ops manager d'entreprise de services (CVC/plomberie/élec), 20-100 techniciens (US)"
+  frequence: quotidien
+  cout_actuel: "ServiceTitan (plusieurs centaines de $/mois) + temps quotidien de contournements manuels"
+  workflow: "opérations non standard dans le logiciel de gestion d'interventions"
+  connecteurs: ["FSM ServiceTitan (API)"]
+  prix_plausible: "200-400 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 2
+  source_url: https://www.getonecrew.com/post/servicetitan-reviews
+
+- id: B-034
+  douleur: "Les données sont éparpillées à travers ma plateforme de gestion : extraire l'information dont j'ai besoin est un parcours du combattant."
+  acheteur: "dirigeant/ops d'entreprise de services utilisant ServiceTitan, 20-100 techniciens (US)"
+  frequence: hebdo
+  cout_actuel: "Navigation manuelle dans ServiceTitan + exports bricolés pour chaque question"
+  workflow: "extraction et analyse des données opérationnelles"
+  connecteurs: ["FSM ServiceTitan (API)", "tableur/BI"]
+  prix_plausible: "100-300 €/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 2
+  source_url: https://www.getonecrew.com/post/servicetitan-reviews
+
+- id: B-036
+  douleur: "Mon logiciel de devis/facturation BTP est 100% en ligne sans mode hors connexion : limitant sur le terrain, avec des instabilités qui m'imposent des sauvegardes fréquentes."
+  acheteur: "artisan BTP FR, 1-10 salariés"
+  frequence: quotidien
+  cout_actuel: "Obat (~25-60 €/mois) + sauvegardes manuelles fréquentes et saisie différée hors couverture"
+  workflow: "devis et facturation sur le terrain"
+  connecteurs: ["logiciel devis/facturation BTP", "mobile offline"]
+  prix_plausible: "25-60 €/mois"
+  type: niche
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 2
+  source_url: https://tool-advisor.fr/logiciel-facturation/comparatif/obat/
+
+- id: B-038
+  douleur: "Sur les vraies questions comptables ou cas métier, le support de mon outil compta renvoie systématiquement vers 'votre expert-comptable'."
+  acheteur: "dirigeant de TPE FR utilisant Pennylane, 1-10 salariés"
+  frequence: hebdo
+  cout_actuel: "Abonnement Pennylane (~20-50 €/mois) + questions restées sans réponse ou honoraires supplémentaires d'expert-comptable"
+  workflow: "questions comptables du quotidien (TVA, écritures, cas métier)"
+  connecteurs: ["compta (Pennylane API)", "base réglementaire fiscale FR"]
+  prix_plausible: "30-80 €/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 2
+  source_url: https://www.impli.fr/avis/pennylane
+
+- id: B-040
+  douleur: "La navigation de mon outil compta est lourde et lente, sans multi-fenêtre : il m'a fallu 2 mois pour le maîtriser."
+  acheteur: "dirigeant de TPE / indépendant FR utilisant Pennylane"
+  frequence: quotidien
+  cout_actuel: "Abonnement Pennylane + ~2 mois de courbe d'apprentissage et lenteurs quotidiennes"
+  workflow: "saisie et consultation comptable quotidienne"
+  connecteurs: ["compta (Pennylane API)"]
+  prix_plausible: "20-50 €/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 2
+  source_url: https://fr.trustpilot.com/review/pennylane.com
+
+- id: B-042
+  douleur: "Des fonctionnalités de mon outil compta sont inexploitables sans cabinet comptable partenaire : une dépendance qui m'est imposée."
+  acheteur: "dirigeant de TPE FR autonome (sans cabinet partenaire Pennylane)"
+  frequence: mensuel
+  cout_actuel: "Abonnement Pennylane + fonctionnalités payées mais inaccessibles, ou honoraires d'un cabinet partenaire imposé"
+  workflow: "tenue comptable en autonomie"
+  connecteurs: ["compta (API)", "banque"]
+  prix_plausible: "30-80 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 2
+  source_url: https://www.formalive.fr/avis-pennylane/
+
+- id: B-044
+  douleur: "Le support téléphonique de mon outil compta est long aux heures de pointe et le service est limité pour mon activité à l'international."
+  acheteur: "indépendant/freelance FR avec activité internationale, utilisateur Tiime"
+  frequence: mensuel
+  cout_actuel: "Abonnement Tiime (freemium à ~50 €/mois) + attente support et bricolage pour les opérations internationales"
+  workflow: "facturation et comptabilité de l'indépendant"
+  connecteurs: ["compta/facturation (Tiime)", "banque"]
+  prix_plausible: "20-50 €/mois"
+  type: niche
+  fit_mcp: faible
+  interface_requise: mixte
+  occurrences: 2
+  source_url: https://tool-advisor.fr/logiciel-facturation/comparatif/tiime/
+
+- id: B-047
+  douleur: "La collecte et l'OCR des pièces clients me coûtent 235 à 850 $/mois : trop lourd pour un petit cabinet comptable."
+  acheteur: "expert-comptable, petit cabinet 1-5 collaborateurs"
+  frequence: quotidien
+  cout_actuel: "Dext 235-850 $/mois selon le volume"
+  workflow: "collecte et OCR des pièces comptables clients"
+  connecteurs: ["email", "OCR documents", "logiciels compta (QBO/Xero)"]
+  prix_plausible: "100-250 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 2
+  source_url: https://crm.org/news/dext-review
+
+- id: B-048
+  douleur: "Le support de mon outil de collecte de pièces est médiocre et lent, alors que mon cabinet en dépend au quotidien."
+  acheteur: "cabinet comptable utilisant Dext, 2-20 collaborateurs"
+  frequence: hebdo
+  cout_actuel: "Abonnement Dext + incidents non résolus et temps perdu à relancer le support"
+  workflow: "collecte de pièces comptables clients"
+  connecteurs: ["OCR documents", "logiciels compta"]
+  prix_plausible: "100-200 €/mois"
+  type: niche
+  fit_mcp: faible
+  interface_requise: mixte
+  occurrences: 2
+  source_url: https://www.softwareadvice.com/accounting/receipt-bank-profile/
+
+- id: B-050
+  douleur: "Mon compte de facturation/paiement a été bloqué puis fermé après vérification, sans explication ni recours."
+  acheteur: "freelance services utilisant Bonsai pour facturer et encaisser (international)"
+  frequence: ponctuel
+  cout_actuel: "Abonnement Bonsai (~25-79 $/mois) + fonds bloqués et migration d'urgence vers un autre outil"
+  workflow: "facturation et encaissement freelance"
+  connecteurs: ["facturation", "processeur de paiement", "banque"]
+  prix_plausible: "20-50 €/mois"
+  type: generique
+  fit_mcp: faible
+  interface_requise: mixte
+  occurrences: 2
+  source_url: https://www.trustpilot.com/review/hellobonsai.com
+
+- id: B-052
+  douleur: "Les frais de transaction de mon outil de facturation sont abusifs malgré le 'zéro frais cachés' affiché."
+  acheteur: "freelance services facturant via Bonsai (international)"
+  frequence: mensuel
+  cout_actuel: "Frais de transaction (~2-3%) prélevés sur chaque paiement client, en plus de l'abonnement"
+  workflow: "encaissement des factures clients"
+  connecteurs: ["facturation", "processeur de paiement"]
+  prix_plausible: "20-50 €/mois"
+  type: generique
+  fit_mcp: faible
+  interface_requise: mixte
+  occurrences: 2
+  source_url: https://www.trustpilot.com/review/hellobonsai.com
+
+- id: B-054
+  douleur: "Je paie 145 $ de frais de processing sur un mariage à 5 000 $ — soit 4 000-6 000 $/an de frais en plus de l'abonnement."
+  acheteur: "photographe de mariage indépendant, solo (US)"
+  frequence: mensuel
+  cout_actuel: "HoneyBook (~36-79 $/mois) + ~2,9% de frais de processing → 4 000-6 000 $/an pour un photographe"
+  workflow: "contrats, facturation et encaissement des prestations mariage"
+  connecteurs: ["paiement (Stripe/virement)", "contrats/signature électronique", "email", "calendrier"]
+  prix_plausible: "50-100 €/mois (justifié par les milliers de $ de frais évités)"
+  type: niche
+  fit_mcp: faible
+  interface_requise: mixte
+  occurrences: 2
+  source_url: https://solofinancehub.com/blog/honeybook-review-2026/
+
+- id: B-055
+  douleur: "Les automations et le reporting de mon CRM client deviennent trop limités dès qu'on dépasse quelques collaborateurs."
+  acheteur: "fondateur de studio de services créatifs en croissance, 3-10 personnes"
+  frequence: hebdo
+  cout_actuel: "Abonnement HoneyBook + processus manuels pour compenser les automations manquantes"
+  workflow: "gestion de la relation client (pipeline, automations, reporting)"
+  connecteurs: ["CRM services (API)", "email", "facturation"]
+  prix_plausible: "50-150 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 2
+  source_url: https://assembly.com/blog/honeybook-reviews
+
+- id: B-057
+  douleur: "Mon outil de gestion client freelance accumule bugs et pages lentes, signalés régulièrement sans amélioration."
+  acheteur: "freelance/solopreneur services utilisant Dubsado"
+  frequence: quotidien
+  cout_actuel: "Abonnement Dubsado (~20-40 $/mois) + temps perdu sur les bugs et lenteurs"
+  workflow: "gestion client freelance (devis, contrats, workflows)"
+  connecteurs: ["CRM freelance (API)", "email"]
+  prix_plausible: "20-50 €/mois"
+  type: generique
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 2
+  source_url: https://www.g2.com/products/dubsado/reviews
+
+- id: B-058
+  douleur: "Mes workflows client n'ont pas de vraie logique conditionnelle et les emails sont limités à un seul contact client."
+  acheteur: "freelance services avec onboarding client structuré, 1-3 personnes"
+  frequence: hebdo
+  cout_actuel: "Abonnement Dubsado + branches de workflow gérées à la main et emails dupliqués contact par contact"
+  workflow: "automatisation de l'onboarding et du suivi client"
+  connecteurs: ["CRM freelance (API)", "email", "signature électronique"]
+  prix_plausible: "30-60 €/mois"
+  type: generique
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 2
+  source_url: https://freelancertrail.com/dubsado-review-2026/

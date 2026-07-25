@@ -1,0 +1,702 @@
+# Batch 7 — fiches normalisées (lignes de données 307-356, ids E-030 → E-096)
+# Source dominante : cas d'usage forward-ai.fr (familles Unipile/LinkedIn, WhatsApp, Airscale, Apify)
+
+- id: E-030
+  douleur: Je n'ai aucun suivi jour après jour de la performance de mes posts LinkedIn.
+  acheteur: "consultant/créateur de contenu B2B indépendant (FR), solo ou petite agence 1-5 pers."
+  frequence: quotidien
+  cout_actuel: "consultation manuelle des stats LinkedIn natives, ou pas résolu ; ~10-15 min/jour sans historique consolidé"
+  workflow: "création et pilotage de contenu LinkedIn"
+  connecteurs: [LinkedIn API (Unipile)]
+  prix_plausible: "15-30 €/mois"
+  type: generique
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/unipile/
+
+- id: E-031
+  douleur: Surveiller manuellement le contenu de mes concurrents et des influenceurs sur LinkedIn est intenable.
+  acheteur: "responsable marketing/growth de PME B2B ou consultant solo (FR), 1-20 pers."
+  frequence: hebdo
+  cout_actuel: "veille manuelle en scrollant les profils, ou pas résolu ; ~1-2 h/semaine"
+  workflow: "veille concurrentielle et éditoriale LinkedIn"
+  connecteurs: [LinkedIn API (Unipile)]
+  prix_plausible: "20-40 €/mois"
+  type: generique
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/unipile/
+
+- id: E-032
+  douleur: Je contacte mes prospects sans connaître leur activité récente et mes accroches tombent à plat.
+  acheteur: "commercial/SDR ou indépendant B2B prospectant sur LinkedIn (FR), entreprise 1-20 pers."
+  frequence: quotidien
+  cout_actuel: "lecture manuelle du profil et des posts avant chaque message, ~5-10 min/prospect, souvent sauté faute de temps"
+  workflow: "préparation d'approche commerciale (icebreaker)"
+  connecteurs: [LinkedIn API (Unipile), CRM]
+  prix_plausible: "30-50 €/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/unipile/
+
+- id: E-033
+  douleur: Des prospects visitent mon profil LinkedIn et je ne les convertis jamais en leads entrants.
+  acheteur: "indépendant/fondateur B2B en prospection LinkedIn (FR), 1-10 pers."
+  frequence: hebdo
+  cout_actuel: "consultation manuelle de la liste des visiteurs, pas de qualification ni de suivi ; opportunités perdues non chiffrées"
+  workflow: "génération de leads entrants LinkedIn"
+  connecteurs: [LinkedIn API (Unipile), CRM]
+  prix_plausible: "20-40 €/mois"
+  type: generique
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/unipile/
+
+- id: E-034
+  douleur: Je ne peux pas exporter mon réseau LinkedIn complet dans un tableau exploitable.
+  acheteur: "indépendant/commercial B2B gérant son réseau LinkedIn (FR), 1-10 pers."
+  frequence: ponctuel
+  cout_actuel: "export natif LinkedIn incomplet ou copier-coller manuel ; plusieurs heures par export"
+  workflow: "exploitation du réseau relationnel (CRM personnel)"
+  connecteurs: [LinkedIn API (Unipile), Google Sheets/CSV]
+  prix_plausible: "10-20 €/mois"
+  type: generique
+  fit_mcp: moyen
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/unipile/
+
+- id: E-035
+  douleur: Je n'ai aucune visibilité structurée sur mes abonnés et abonnements LinkedIn.
+  acheteur: "créateur de contenu/consultant B2B indépendant (FR), solo"
+  frequence: mensuel
+  cout_actuel: "pas résolu — LinkedIn n'offre pas de vue exploitable ; audit manuel impraticable"
+  workflow: "gestion d'audience LinkedIn"
+  connecteurs: [LinkedIn API (Unipile)]
+  prix_plausible: "10-20 €/mois"
+  type: generique
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/unipile/
+
+- id: E-036
+  douleur: Gérer mes suivis, désabonnements et blocages LinkedIn membre par membre est fastidieux.
+  acheteur: "créateur de contenu/commercial B2B actif sur LinkedIn (FR), solo"
+  frequence: ponctuel
+  cout_actuel: "clics manuels profil par profil ; ~1 h par session de nettoyage"
+  workflow: "hygiène et curation du réseau LinkedIn"
+  connecteurs: [LinkedIn API (Unipile)]
+  prix_plausible: "5-15 €/mois"
+  type: generique
+  fit_mcp: moyen
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/unipile/
+
+- id: E-037
+  douleur: Entretenir mes relations LinkedIn par des attentions comme la recommandation de compétences demande un effort manuel constant.
+  acheteur: "indépendant/commercial B2B en nurturing relationnel (FR), solo"
+  frequence: hebdo
+  cout_actuel: "fait à la main de façon irrégulière, ou pas fait du tout ; ~30 min/semaine quand pratiqué"
+  workflow: "nurturing du réseau professionnel"
+  connecteurs: [LinkedIn API (Unipile)]
+  prix_plausible: "10-20 €/mois"
+  type: generique
+  fit_mcp: moyen
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/unipile/
+
+- id: E-038
+  douleur: Je n'ai pas de moyen léger de me rappeler au bon souvenir d'un prospect avant de le contacter.
+  acheteur: "commercial/SDR ou indépendant B2B (FR), 1-10 pers."
+  frequence: quotidien
+  cout_actuel: "visites de profil manuelles (warm touch) prospect par prospect ; quelques minutes chacune, non systématisé"
+  workflow: "réchauffage de prospects avant prise de contact"
+  connecteurs: [LinkedIn API (Unipile)]
+  prix_plausible: "15-30 €/mois"
+  type: generique
+  fit_mcp: moyen
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/unipile/
+
+- id: E-039
+  douleur: Ma messagerie LinkedIn est un silo séparé de mes outils et de mon assistant IA.
+  acheteur: "indépendant/commercial B2B pilotant sa prospection depuis un assistant IA (FR), solo"
+  frequence: quotidien
+  cout_actuel: "allers-retours permanents entre LinkedIn et les autres outils ; ~20-30 min/jour de friction"
+  workflow: "gestion de la messagerie commerciale LinkedIn"
+  connecteurs: [LinkedIn API (Unipile), assistant IA (MCP)]
+  prix_plausible: "20-40 €/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/unipile/
+
+- id: E-040
+  douleur: Je découvre les réponses LinkedIn de mes prospects des heures trop tard, faute de notification temps réel.
+  acheteur: "commercial/SDR B2B en prospection active (FR), 1-10 pers."
+  frequence: quotidien
+  cout_actuel: "rafraîchissement manuel de l'inbox LinkedIn ; réactivité dégradée, deals refroidis"
+  workflow: "suivi des réponses en prospection sortante"
+  connecteurs: [LinkedIn API (Unipile), Slack/email (notifications)]
+  prix_plausible: "10-25 €/mois"
+  type: generique
+  fit_mcp: faible
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/unipile/
+
+- id: E-041
+  douleur: Je ne peux pas envoyer automatiquement des documents dans mes messages LinkedIn.
+  acheteur: "commercial B2B envoyant plaquettes/devis via LinkedIn (FR), 1-10 pers."
+  frequence: hebdo
+  cout_actuel: "envoi manuel pièce par pièce depuis l'interface LinkedIn ; quelques minutes par envoi, non automatisable"
+  workflow: "envoi de supports commerciaux en messagerie"
+  connecteurs: [LinkedIn API (Unipile), stockage documents (Drive)]
+  prix_plausible: "10-20 €/mois"
+  type: generique
+  fit_mcp: moyen
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/unipile/
+
+- id: E-042
+  douleur: Je dois retourner dans LinkedIn pour la moindre action sur mes messages (réagir, éditer, gérer).
+  acheteur: "indépendant/commercial B2B multi-outils (FR), solo"
+  frequence: quotidien
+  cout_actuel: "changements de contexte répétés vers LinkedIn ; ~15-20 min/jour de friction cumulée"
+  workflow: "gestion quotidienne de la messagerie LinkedIn"
+  connecteurs: [LinkedIn API (Unipile)]
+  prix_plausible: "15-30 €/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/unipile/
+
+- id: E-043
+  douleur: Je ne sais pas si mes messages LinkedIn sont lus ni où en est chaque conversation.
+  acheteur: "commercial/SDR B2B en suivi de pipeline conversationnel (FR), 1-10 pers."
+  frequence: quotidien
+  cout_actuel: "relecture manuelle des fils pour deviner l'état ; pas de vue consolidée, relances ratées"
+  workflow: "suivi du cycle de vie des conversations commerciales"
+  connecteurs: [LinkedIn API (Unipile), CRM]
+  prix_plausible: "15-30 €/mois"
+  type: generique
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/unipile/
+
+- id: E-044
+  douleur: Mes nouvelles connexions LinkedIn n'arrivent jamais dans mon CRM sans saisie manuelle.
+  acheteur: "commercial/fondateur B2B équipé d'un CRM (FR), 1-20 pers."
+  frequence: quotidien
+  cout_actuel: "ressaisie manuelle des contacts dans le CRM, ou CRM jamais à jour ; ~2-3 min/contact"
+  workflow: "alimentation du CRM depuis LinkedIn"
+  connecteurs: [LinkedIn API (Unipile), CRM (HubSpot/Pipedrive)]
+  prix_plausible: "20-40 €/mois"
+  type: generique
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/unipile/
+
+- id: E-046
+  douleur: Connecter et gérer les comptes LinkedIn de toute mon équipe est un casse-tête sans gestion centralisée.
+  acheteur: "responsable sales ops/growth d'agence ou PME B2B (FR), 5-30 pers."
+  frequence: mensuel
+  cout_actuel: "gestion artisanale compte par compte (sessions, reconnexions) ; plusieurs heures/mois"
+  workflow: "administration des comptes LinkedIn de l'équipe commerciale"
+  connecteurs: [LinkedIn API multi-comptes (Unipile)]
+  prix_plausible: "50-100 €/mois (par équipe)"
+  type: generique
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/unipile/
+
+- id: E-047
+  douleur: Un compte LinkedIn de l'équipe se déconnecte et mes automatisations tombent sans que je le sache.
+  acheteur: "responsable growth/sales ops de PME ou agence outbound (FR), 5-30 pers."
+  frequence: hebdo
+  cout_actuel: "découverte a posteriori (séquences muettes pendant des jours) ; campagnes perdues, pas résolu"
+  workflow: "fiabilité des automatisations de prospection"
+  connecteurs: [LinkedIn API (Unipile), Slack/email (alertes)]
+  prix_plausible: "15-30 €/mois"
+  type: generique
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/unipile/
+
+- id: E-048
+  douleur: Mes clients m'écrivent sur WhatsApp mais les messages restent bloqués dans un téléphone, hors de portée de l'équipe.
+  acheteur: "gérant de TPE de services locale (salon, garage, agence immo…) (FR), 2-10 pers."
+  frequence: quotidien
+  cout_actuel: "un seul téléphone qui circule, transmission orale ; messages ratés et clients perdus, non chiffré"
+  workflow: "service client WhatsApp partagé en équipe"
+  connecteurs: [WhatsApp Business API]
+  prix_plausible: "30-60 €/mois"
+  type: generique
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/whatsapp/
+
+- id: E-050
+  douleur: Tout arrive dans la même conversation WhatsApp — SAV, commandes, réservations, spam — sans tri ni routage vers la bonne personne.
+  acheteur: "gérant de TPE/commerce local multi-activités (FR), 2-10 pers."
+  frequence: quotidien
+  cout_actuel: "tri mental au fil de l'eau par le gérant ; ~30 min/jour et erreurs d'aiguillage"
+  workflow: "triage et routage des demandes clients entrantes"
+  connecteurs: [WhatsApp Business API]
+  prix_plausible: "30-60 €/mois"
+  type: generique
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/whatsapp/
+
+- id: E-051
+  douleur: Un client m'écrit sur WhatsApp le soir ou le week-end et n'a aucun signe que son message a bien été reçu.
+  acheteur: "gérant de commerce/TPE de services locale (FR), 1-10 pers."
+  frequence: quotidien
+  cout_actuel: "pas résolu (silence jusqu'à la réouverture) ou réponse manuelle hors horaires par le gérant"
+  workflow: "accusé de réception hors heures d'ouverture"
+  connecteurs: [WhatsApp Business API, agenda/horaires]
+  prix_plausible: "10-25 €/mois"
+  type: generique
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/whatsapp/
+
+- id: E-052
+  douleur: Un dossier client s'étale sur trente messages WhatsApp et je dois tout relire pour m'y retrouver.
+  acheteur: "gérant/artisan de TPE gérant ses dossiers clients sur WhatsApp (FR), 1-10 pers."
+  frequence: quotidien
+  cout_actuel: "relecture manuelle des fils avant chaque réponse ; ~10-15 min/dossier"
+  workflow: "reprise de contexte sur un dossier client"
+  connecteurs: [WhatsApp Business API]
+  prix_plausible: "20-40 €/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/whatsapp/
+
+- id: E-053
+  douleur: Un client furieux m'a écrit sur WhatsApp et son message s'est noyé dans le flux avant que je le repère.
+  acheteur: "gérant de TPE/commerce local à fort flux WhatsApp (FR), 2-10 pers."
+  frequence: hebdo
+  cout_actuel: "pas résolu — détection au hasard de la relecture ; clients perdus et avis négatifs"
+  workflow: "détection et priorisation des clients mécontents"
+  connecteurs: [WhatsApp Business API, alertes (Slack/notification)]
+  prix_plausible: "20-40 €/mois"
+  type: generique
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/whatsapp/
+
+- id: E-054
+  douleur: Mes clients prennent rendez-vous puis oublient de venir, et je perds des créneaux.
+  acheteur: "praticien/gérant d'activité sur rendez-vous (salon, cabinet, coach sportif) (FR), 1-5 pers."
+  frequence: quotidien
+  cout_actuel: "rappels manuels irréguliers ou pas résolu ; chaque no-show = créneau perdu (30-80 € de CA selon métier)"
+  workflow: "rappel et confirmation de rendez-vous"
+  connecteurs: [WhatsApp Business API, agenda (Google Calendar/logiciel de résa)]
+  prix_plausible: "20-50 €/mois"
+  type: generique
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/whatsapp/
+
+- id: E-055
+  douleur: J'envoie des devis qui restent sans réponse et relancer chacun au bon moment à la main est ingérable.
+  acheteur: "artisan/gérant de TPE fonctionnant au devis (bâtiment, services) (FR), 1-10 pers."
+  frequence: hebdo
+  cout_actuel: "relances manuelles au fil de la mémoire, la plupart oubliées ; devis signables perdus (centaines à milliers d'€)"
+  workflow: "relance de devis en attente"
+  connecteurs: [WhatsApp Business API, outil de devis/facturation]
+  prix_plausible: "30-60 €/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/whatsapp/
+
+- id: E-056
+  douleur: Après l'achat, mes nouveaux clients sont livrés à eux-mêmes faute d'onboarding structuré.
+  acheteur: "gérant de TPE de services ou d'offre à abonnement (FR), 1-10 pers."
+  frequence: hebdo
+  cout_actuel: "accueil improvisé au cas par cas, ou rien ; churn précoce non mesuré"
+  workflow: "onboarding client post-achat"
+  connecteurs: [WhatsApp Business API, CRM/outil de vente]
+  prix_plausible: "20-40 €/mois"
+  type: generique
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/whatsapp/
+
+- id: E-057
+  douleur: Mes clients satisfaits ne laissent jamais d'avis parce que je n'ose pas les relancer.
+  acheteur: "gérant de commerce/TPE locale dépendant des avis Google (FR), 1-10 pers."
+  frequence: hebdo
+  cout_actuel: "pas résolu — demandes d'avis rares et gênées ; visibilité locale stagnante"
+  workflow: "collecte d'avis clients"
+  connecteurs: [WhatsApp Business API, Google Business Profile]
+  prix_plausible: "15-30 €/mois"
+  type: generique
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/whatsapp/
+
+- id: E-058
+  douleur: Des clients remplissent leur panier ou commencent une réservation puis abandonnent, et je ne les rattrape pas à temps.
+  acheteur: "e-commerçant ou gérant d'activité à réservation en ligne (FR), 1-10 pers."
+  frequence: quotidien
+  cout_actuel: "pas résolu ou emails de relance génériques peu lus ; CA abandonné estimé à plusieurs % des ventes"
+  workflow: "récupération de paniers/réservations abandonnés"
+  connecteurs: [WhatsApp Business API, plateforme e-commerce (Shopify/résa)]
+  prix_plausible: "30-60 €/mois"
+  type: generique
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/whatsapp/
+
+- id: E-059
+  douleur: Mes coachés décrochent entre deux séances faute d'un rappel régulier.
+  acheteur: "coach indépendant (sportif, nutrition, business) (FR), solo ou 2-5 coachs"
+  frequence: quotidien
+  cout_actuel: "check-ins manuels WhatsApp quand le coach y pense ; irrégulier, churn de coachés"
+  workflow: "suivi d'engagement entre séances"
+  connecteurs: [WhatsApp Business API]
+  prix_plausible: "30-60 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/whatsapp/
+
+- id: E-060
+  douleur: Mes coachés m'envoient leur avancement à toute heure et une réponse qui tarde casse la dynamique.
+  acheteur: "coach indépendant (sportif, nutrition, business) (FR), solo"
+  frequence: quotidien
+  cout_actuel: "réponses manuelles à toute heure par le coach ; ~1-2 h/jour d'astreinte diffuse"
+  workflow: "réponse aux points d'avancement des coachés"
+  connecteurs: [WhatsApp Business API]
+  prix_plausible: "40-80 €/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/whatsapp/
+
+- id: E-061
+  douleur: Je veux dérouler mon programme jour après jour mais chaque coaché commence à une date différente.
+  acheteur: "coach indépendant vendant un programme structuré (FR), solo ou 2-5 coachs"
+  frequence: quotidien
+  cout_actuel: "envois manuels décalés par coaché ou tableur de suivi ; ~30 min/jour, erreurs de séquence"
+  workflow: "diffusion goutte-à-goutte d'un programme de coaching"
+  connecteurs: [WhatsApp Business API, base programme (Notion/Sheets)]
+  prix_plausible: "30-60 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/whatsapp/
+
+- id: E-062
+  douleur: Avant chaque séance je relis des jours de conversation WhatsApp pour me rappeler où en est le coaché.
+  acheteur: "coach indépendant suivant 10-40 coachés (FR), solo"
+  frequence: quotidien
+  cout_actuel: "relecture manuelle des fils avant chaque séance ; ~10-15 min/séance"
+  workflow: "préparation de séance de coaching"
+  connecteurs: [WhatsApp Business API]
+  prix_plausible: "30-60 €/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/whatsapp/
+
+- id: E-063
+  douleur: Mes coachés disent avoir fait leur exercice mais je n'ai aucune preuve concrète.
+  acheteur: "coach indépendant (sportif, nutrition, habitudes) (FR), solo"
+  frequence: quotidien
+  cout_actuel: "confiance déclarative, ou demande de photos gérée à la main ; suivi peu fiable"
+  workflow: "vérification des exercices entre séances"
+  connecteurs: [WhatsApp Business API (médias)]
+  prix_plausible: "20-40 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/whatsapp/
+
+- id: E-064
+  douleur: Mes coachés me parlent en notes vocales et réécouter chaque message de deux minutes me coûte un temps fou.
+  acheteur: "coach indépendant à forte volumétrie de notes vocales (FR), solo"
+  frequence: quotidien
+  cout_actuel: "réécoute intégrale des vocaux ; ~30-60 min/jour selon nombre de coachés"
+  workflow: "traitement des notes vocales de coachés"
+  connecteurs: [WhatsApp Business API, transcription audio]
+  prix_plausible: "30-60 €/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/whatsapp/
+
+- id: E-065
+  douleur: Quelqu'un m'a donné une info clé sur WhatsApp il y a trois semaines et je ne la retrouve plus.
+  acheteur: "gérant de TPE/indépendant pilotant son activité sur WhatsApp (FR), 1-10 pers."
+  frequence: hebdo
+  cout_actuel: "scroll et recherche mot-clé native WhatsApp ; ~10-20 min par recherche, souvent en échec"
+  workflow: "recherche d'information dans l'historique de messagerie"
+  connecteurs: [WhatsApp Business API]
+  prix_plausible: "10-25 €/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/whatsapp/
+
+- id: E-066
+  douleur: Mes clients m'envoient adresses, montants et coordonnées sur WhatsApp et je ressaisis tout à la main.
+  acheteur: "gérant/artisan de TPE prenant les commandes sur WhatsApp (FR), 1-10 pers."
+  frequence: quotidien
+  cout_actuel: "ressaisie manuelle vers tableur/outil métier ; ~20-30 min/jour, erreurs de saisie"
+  workflow: "extraction de données clients depuis la messagerie"
+  connecteurs: [WhatsApp Business API, Google Sheets/CRM]
+  prix_plausible: "20-40 €/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/whatsapp/
+
+- id: E-067
+  douleur: On me demande sans arrêt des choses sur WhatsApp et certaines demandes finissent par me filer entre les doigts.
+  acheteur: "gérant de TPE/indépendant sursollicité sur WhatsApp (FR), 1-10 pers."
+  frequence: quotidien
+  cout_actuel: "mémoire et captures d'écran ; demandes oubliées, clients mécontents"
+  workflow: "conversion des demandes en tâches suivies"
+  connecteurs: [WhatsApp Business API, gestionnaire de tâches (Todoist/Notion)]
+  prix_plausible: "15-30 €/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/whatsapp/
+
+- id: E-068
+  douleur: Mes messages arrivent sur WhatsApp, LinkedIn, Instagram et par email, et je jongle entre quatre inbox.
+  acheteur: "indépendant/gérant de TPE multi-canaux (FR), 1-5 pers."
+  frequence: quotidien
+  cout_actuel: "bascule permanente entre 4 applications ; ~30-45 min/jour de friction et messages ratés"
+  workflow: "gestion unifiée des messageries clients"
+  connecteurs: [WhatsApp Business API, LinkedIn API (Unipile), Instagram DM, email]
+  prix_plausible: "30-60 €/mois"
+  type: generique
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/whatsapp/
+
+- id: E-070
+  douleur: Je démarche tout le monde au même moment et je gaspille mon énergie sur des comptes qui n'achètent pas maintenant.
+  acheteur: "responsable commercial/growth de PME B2B (FR), 5-30 pers."
+  frequence: hebdo
+  cout_actuel: "priorisation au feeling, sans signaux d'achat ; taux de réponse faible, énergie commerciale gaspillée"
+  workflow: "priorisation des comptes à prospecter (signaux d'achat)"
+  connecteurs: [LinkedIn, données entreprises (SIRENE/annonces), offres d'emploi, CRM]
+  prix_plausible: "50-100 €/mois"
+  type: generique
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/airscale/
+
+- id: E-074
+  douleur: Avant une approche ABM, rassembler la firmographie et les bons interlocuteurs, c'est dix onglets ouverts par compte.
+  acheteur: "commercial/growth B2B en approche ABM, PME ou agence (FR), 2-20 pers."
+  frequence: hebdo
+  cout_actuel: "recherche manuelle multi-sources (LinkedIn, site, registres) ; ~15-30 min/compte"
+  workflow: "préparation de fiche compte avant approche ABM"
+  connecteurs: [LinkedIn, bases entreprises (SIRENE/Pappers), enrichissement (Airscale), CRM]
+  prix_plausible: "50-100 €/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/airscale/
+
+- id: E-075
+  douleur: Beaucoup d'enrichissements partent de l'URL LinkedIn et mon fichier qui ne l'a pas est bloqué à l'entrée.
+  acheteur: "growth/ops de PME ou agence outbound B2B (FR), 2-20 pers."
+  frequence: mensuel
+  cout_actuel: "recherche manuelle des profils LinkedIn ligne par ligne, ou fichier abandonné ; plusieurs heures par fichier"
+  workflow: "préparation de fichiers de prospection (résolution d'URLs LinkedIn)"
+  connecteurs: [LinkedIn, enrichissement (Airscale), CSV/Sheets]
+  prix_plausible: "30-60 €/mois"
+  type: generique
+  fit_mcp: moyen
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/airscale/
+
+- id: E-076
+  douleur: Un formulaire entrant ne me laisse qu'un email, un appel manqué qu'un numéro, sans aucun contexte sur qui est derrière.
+  acheteur: "commercial/fondateur B2B traitant des leads entrants (FR), 1-20 pers."
+  frequence: quotidien
+  cout_actuel: "recherche manuelle Google/LinkedIn par lead ; ~5-10 min/lead, souvent sautée"
+  workflow: "qualification de leads entrants (reverse lookup)"
+  connecteurs: [enrichissement inversé email/téléphone (Airscale), LinkedIn, CRM]
+  prix_plausible: "30-60 €/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/airscale/
+
+- id: E-077
+  douleur: Certaines données ne tiennent pas dans un filtre — je dois chercher une info précise, la vérifier et la sourcer à la main.
+  acheteur: "growth/analyste de PME B2B ou consultant data-sales (FR), 2-20 pers."
+  frequence: hebdo
+  cout_actuel: "recherches web manuelles avec vérification et sourçage ; ~15-30 min/question"
+  workflow: "recherche data ad hoc vérifiée et sourcée"
+  connecteurs: [recherche web/scraping, LinkedIn, bases entreprises]
+  prix_plausible: "40-80 €/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/airscale/
+
+- id: E-078
+  douleur: Démarcher tous les commerces d'un métier sur une zone exige de constituer la liste et les coordonnées à la main.
+  acheteur: "indépendant/agence ciblant les commerces locaux (web, assurance, équipement) (FR), 1-10 pers."
+  frequence: mensuel
+  cout_actuel: "constitution manuelle via Google Maps et annuaires ; plusieurs heures par zone, ou achat de fichiers"
+  workflow: "constitution de listes de prospection locale"
+  connecteurs: [scraping Google Maps (Apify), enrichissement coordonnées, CSV/CRM]
+  prix_plausible: "30-60 €/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/apify/
+
+- id: E-079
+  douleur: J'ouvre ou j'audite une activité locale sans savoir précisément qui est en face et ce que disent ses avis.
+  acheteur: "porteur de projet, repreneur ou consultant en commerce local (FR), solo"
+  frequence: ponctuel
+  cout_actuel: "repérage terrain et lecture manuelle des fiches/avis ; plusieurs heures par étude"
+  workflow: "étude de concurrence locale avant ouverture/audit"
+  connecteurs: [scraping Google Maps + avis (Apify)]
+  prix_plausible: "20-50 €/mois (ou à l'étude)"
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/apify/
+
+- id: E-080
+  douleur: Je veux comprendre ce que disent vraiment les clients d'un lieu, mais dépouiller tous les avis Google Maps est ingérable.
+  acheteur: "gérant de commerce local ou consultant en expérience client (FR), 1-10 pers."
+  frequence: mensuel
+  cout_actuel: "lecture manuelle partielle des avis ; plusieurs heures pour un dépouillement complet, jamais fait en entier"
+  workflow: "analyse de la voix du client (avis en ligne)"
+  connecteurs: [scraping avis Google Maps (Apify)]
+  prix_plausible: "20-40 €/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/apify/
+
+- id: E-081
+  douleur: Jauger un compte Instagram (le mien, un prospect, un concurrent) et le suivre dans le temps se fait entièrement à la main.
+  acheteur: "social media manager freelance ou petite agence social media (FR), 1-10 pers."
+  frequence: hebdo
+  cout_actuel: "audit manuel des profils et captures d'écran ; ~1-2 h/audit, suivi temporel inexistant"
+  workflow: "audit et veille de comptes Instagram"
+  connecteurs: [scraping Instagram (Apify)]
+  prix_plausible: "20-50 €/mois"
+  type: generique
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/apify/
+
+- id: E-085
+  douleur: Je suis une dizaine de chaînes YouTube pour ma veille mais il m'est impossible de tout regarder.
+  acheteur: "consultant/créateur de contenu faisant de la veille sectorielle (FR), solo"
+  frequence: hebdo
+  cout_actuel: "visionnage partiel ou abandon de la veille ; plusieurs heures/semaine si fait sérieusement"
+  workflow: "veille de contenu vidéo (synthèse de transcripts)"
+  connecteurs: [YouTube (transcripts via Apify)]
+  prix_plausible: "15-30 €/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/apify/
+
+- id: E-087
+  douleur: Je regarde les compteurs YouTube un jour donné, sans suivi de la performance de la chaîne dans le temps.
+  acheteur: "créateur YouTube ou responsable contenu de PME (FR), 1-10 pers."
+  frequence: hebdo
+  cout_actuel: "relevés manuels ponctuels sans historique ; pas résolu au-delà des stats natives"
+  workflow: "suivi de performance d'une chaîne YouTube"
+  connecteurs: [YouTube (données publiques via Apify)]
+  prix_plausible: "10-25 €/mois"
+  type: generique
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/apify/
+
+- id: E-095
+  douleur: Je veux me lancer sur une catégorie Amazon sans vue structurée du marché produit.
+  acheteur: "vendeur Amazon/e-commerçant en lancement de produit (FR), solo ou 2-5 pers."
+  frequence: ponctuel
+  cout_actuel: "recherche manuelle fiche par fiche ou outils US coûteux (Helium 10 ~80-230 €/mois) ; plusieurs jours par étude"
+  workflow: "étude de marché produit avant lancement Amazon"
+  connecteurs: [scraping Amazon (Apify)]
+  prix_plausible: "30-80 €/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/apify/
+
+- id: E-096
+  douleur: Le prix d'un concurrent bouge sur Amazon et je le découvre trop tard.
+  acheteur: "vendeur Amazon/e-commerçant établi (FR), solo ou 2-5 pers."
+  frequence: quotidien
+  cout_actuel: "vérification manuelle des fiches concurrentes, ou pas résolu ; ventes perdues le temps de réagir"
+  workflow: "surveillance tarifaire concurrentielle Amazon"
+  connecteurs: [scraping Amazon (Apify), alertes]
+  prix_plausible: "20-50 €/mois"
+  type: niche
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.forward-ai.fr/cas-d-usage/famille/apify/
