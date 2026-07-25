@@ -1,0 +1,663 @@
+- id: A-013
+  douleur: "Je perds des heures à vérifier manuellement les permis de taxe de vente sur le site de chaque État."
+  acheteur: "dirigeant ou responsable compta de PME e-commerce US multi-états, 1-20 salariés"
+  frequence: ponctuel
+  cout_actuel: "Vérification manuelle site par site (pas d'outil) ; plusieurs heures par campagne de vérification, alternatives type Avalara jugées chères"
+  workflow: "conformité fiscale sales tax multi-états"
+  connecteurs: ["portails fiscaux des États (scraping)", "registre interne des permis", "tableur"]
+  prix_plausible: "50-100 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/smallbusiness/comments/1iu2omc/
+- id: A-014
+  douleur: "Consolider les analytics social media de plusieurs plateformes me prend un temps fou sans produire d'insight actionnable."
+  acheteur: "gérant ou marketeur solo de PME, 1-20 salariés"
+  frequence: hebdo
+  cout_actuel: "Export et compilation manuels par plateforme ; plusieurs heures par semaine, espace scheduling adjacent sur-servi mais la consolidation reste non résolue"
+  workflow: "reporting marketing social media"
+  connecteurs: ["APIs Meta/Instagram", "LinkedIn", "TikTok", "X"]
+  prix_plausible: "20-50 €/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/smallbusiness/comments/1hr3frf/
+- id: A-015
+  douleur: "Je veux partager un calculateur type Excel avec mes clients sans les forcer à créer un compte."
+  acheteur: "consultant ou gérant de PME de services, 1-10 salariés"
+  frequence: ponctuel
+  cout_actuel: "Envoi de fichiers Excel par email ou liens Google Sheets peu contrôlés ; friction client, pas d'outil dédié identifié"
+  workflow: "partage d'outils de calcul avec les clients"
+  connecteurs: ["tableur (import Excel)", "hébergement web", "email"]
+  prix_plausible: "10-30 €/mois"
+  type: generique
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.reddit.com/r/smallbusiness/comments/1g888hs/
+- id: A-016
+  douleur: "Aucun outil de facturation ne gère mes paiements échelonnés avec relances automatiques à chaque échéance."
+  acheteur: "gérant de PME de services facturant à jalons, 1-20 salariés"
+  frequence: mensuel
+  cout_actuel: "Suivi manuel des échéances (import Excel souhaité) + relances à la main ; heures par mois et risques d'oublis d'encaissement"
+  workflow: "facturation échelonnée et relances d'impayés"
+  connecteurs: ["facturation/compta (QuickBooks, Stripe)", "email", "import Excel"]
+  prix_plausible: "30-60 €/mois"
+  type: generique
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/smallbusiness/comments/1k641t1/
+- id: A-017
+  douleur: "Choisir un logiciel en équipe se noie dans des chaînes d'emails, douze versions de spreadsheet et zéro clarté décisionnelle."
+  acheteur: "dirigeant ou responsable ops de PME, 10-50 salariés"
+  frequence: ponctuel
+  cout_actuel: "Emails + spreadsheets multiples, pas d'outil de décision ; semaines de cycle d'achat et décisions opaques"
+  workflow: "évaluation et achat de logiciels"
+  connecteurs: ["email", "tableur", "comparateurs logiciels (scraping)"]
+  prix_plausible: "20-50 €/mois"
+  type: generique
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/smallbusiness/comments/1kg2tb9/
+- id: A-018
+  douleur: "Le mapping manuel de contrôles de conformité multi-référentiels dans des spreadsheets m'épuise et casse à chaque évolution réglementaire."
+  acheteur: "dirigeant de MSP avec offre compliance/vCISO, 5-50 salariés"
+  frequence: mensuel
+  cout_actuel: "Spreadsheets de mapping maintenus à la main ; dizaines d'heures par référentiel et retravail complet à chaque mise à jour réglementaire"
+  workflow: "mapping de contrôles de conformité multi-référentiels"
+  connecteurs: ["référentiels (NIST, ISO, CIS)", "outil GRC", "tableur"]
+  prix_plausible: "100-300 €/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/msp/comments/1je0bdp/
+- id: A-019
+  douleur: "Basculer manuellement entre 125 tenants Microsoft me ralentit, et Lighthouse est trop limité pour un solo."
+  acheteur: "consultant M365 solo gérant un parc multi-tenants (125 tenants)"
+  frequence: quotidien
+  cout_actuel: "Bascule manuelle tenant par tenant ; MS Lighthouse jugé limité, alternatives citées CIPP/N-able ; friction quotidienne significative"
+  workflow: "administration multi-tenants Microsoft 365"
+  connecteurs: ["Microsoft Graph", "Partner Center", "Entra ID"]
+  prix_plausible: "50-150 €/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/msp/comments/1fvtsoy/
+- id: A-020
+  douleur: "Synchroniser à la main les configurations NinjaRMM vers ConnectWise pour 100+ clients est d'un pénible absolu."
+  acheteur: "responsable ops de MSP, 10-50 salariés, 100+ clients"
+  frequence: hebdo
+  cout_actuel: "Ressaisie manuelle RMM vers PSA (verbatim : tedious as hell) ; heures récurrentes et données PSA désynchronisées"
+  workflow: "synchronisation RMM vers PSA (documentation clients)"
+  connecteurs: ["API NinjaRMM", "API ConnectWise"]
+  prix_plausible: "100-250 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.reddit.com/r/msp/comments/1irun0x/
+- id: A-021
+  douleur: "Migrer des comptes desktop locaux vers Entra reste un process manuel fastidieux, poste par poste."
+  acheteur: "technicien ou gérant de MSP migrant des TPE vers M365 Business Premium, 1-20 salariés"
+  frequence: ponctuel
+  cout_actuel: "Intervention manuelle sur chaque poste ; environ une heure par poste, multiplié par la taille du parc à chaque migration"
+  workflow: "migration de postes vers Entra ID / M365"
+  connecteurs: ["Entra ID / Microsoft Graph", "outillage poste Windows (scripts)"]
+  prix_plausible: "50-100 €/mois"
+  type: niche
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.reddit.com/r/msp/comments/1gl56oh/
+- id: A-023
+  douleur: "Rédiger des Statements of Work détaillés me prend des heures et j'oublie des éléments de périmètre."
+  acheteur: "dirigeant ou avant-vente de MSP, 5-30 salariés"
+  frequence: hebdo
+  cout_actuel: "Rédaction manuelle depuis d'anciens SoW ; plusieurs heures par document, oublis de périmètre qui coûtent en projet"
+  workflow: "chiffrage et rédaction de SoW/devis projets"
+  connecteurs: ["PSA (ConnectWise)", "bibliothèque de templates", "CRM"]
+  prix_plausible: "50-150 €/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.reddit.com/r/msp/comments/1f1vopm/
+- id: A-025
+  douleur: "Exporter 794 boîtes mail une par une depuis Datto SaaS Backup est fastidieux et le portail rame."
+  acheteur: "technicien ou gérant de MSP, 5-30 salariés"
+  frequence: ponctuel
+  cout_actuel: "Export manuel boîte par boîte via un portail lent ; des jours de manipulation pour un gros volume"
+  workflow: "sortie/migration de backups SaaS M365"
+  connecteurs: ["API Datto SaaS Protection", "Microsoft 365"]
+  prix_plausible: "0-50 €/mois (besoin ponctuel, paiement à l'usage plus plausible)"
+  type: niche
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.reddit.com/r/msp/comments/1dnfdrp/
+- id: A-026
+  douleur: "Me connecter chez chaque client pour vérifier que les backups sont bien partis offsite est un rituel manuel pénible."
+  acheteur: "gérant de petit MSP, 1-10 salariés"
+  frequence: quotidien
+  cout_actuel: "Connexion manuelle chez chaque client (StorageCraft/Wasabi) ; 30-60 min par jour de vérification répétitive"
+  workflow: "supervision quotidienne des backups clients"
+  connecteurs: ["APIs backup (StorageCraft)", "stockage cloud (Wasabi)", "email/alerting"]
+  prix_plausible: "50-100 €/mois"
+  type: niche
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.reddit.com/r/msp/comments/1cd6log/
+- id: A-027
+  douleur: "Configurer 25+ iPads partagés avec les mêmes réglages, encore et encore, est fastidieux."
+  acheteur: "technicien de MSP ou IT manager gérant une flotte de tablettes partagées, 1-20 salariés"
+  frequence: ponctuel
+  cout_actuel: "Paramétrage manuel appareil par appareil ; heures par vague de déploiement, MDM existants jugés inadaptés au cas partagé"
+  workflow: "provisioning MDM de flottes de tablettes partagées"
+  connecteurs: ["Apple Business Manager", "MDM"]
+  prix_plausible: "30-80 €/mois"
+  type: niche
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.reddit.com/r/msp/comments/1de6nlx/
+- id: A-028
+  douleur: "Suivre et refacturer la consommation O365/Azure de nombreux petits clients est douloureux et pas rentable."
+  acheteur: "gérant de petit MSP revendeur cloud, 1-15 salariés"
+  frequence: mensuel
+  cout_actuel: "Rapprochement manuel des factures Microsoft et de la facturation clients ; heures chaque mois, marges rognées par les erreurs"
+  workflow: "refacturation cloud multi-clients"
+  connecteurs: ["Microsoft Partner Center", "PSA/compta", "facturation"]
+  prix_plausible: "100-200 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/msp/comments/18woggp/
+- id: A-029
+  douleur: "Reproduire un layout de bureau, menu démarrer et programmes par défaut identiques pour chaque utilisateur est fastidieux."
+  acheteur: "technicien de MSP déployant des postes Windows standardisés, 1-20 salariés"
+  frequence: ponctuel
+  cout_actuel: "Paramétrage manuel par poste ou scripts bricolés ; temps par onboarding utilisateur, non capitalisé"
+  workflow: "standardisation de postes Windows à l'onboarding"
+  connecteurs: ["Intune", "GPO/scripts Windows"]
+  prix_plausible: "20-50 €/mois"
+  type: niche
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.reddit.com/r/msp/comments/1eoeggv/
+- id: A-030
+  douleur: "Ma plateforme de documentation MSP (Hudu) me bloque dès qu'on sort du basique : IPAM pauvre, recherche et filtrage insuffisants."
+  acheteur: "gérant ou technicien de MSP, 5-30 salariés"
+  frequence: quotidien
+  cout_actuel: "Hudu payé mais contourné ; recherche manuelle d'informations dispersées, minutes perdues à chaque intervention"
+  workflow: "documentation technique clients (IPAM, procédures, assets)"
+  connecteurs: ["Hudu/documentation", "RMM", "réseau (IPAM)"]
+  prix_plausible: "50-150 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/msp/comments/1j5bte4/
+- id: A-032
+  douleur: "Le provisioning manuel des licences cloud et on-prem crée des erreurs de facturation et des ratés d'équipe."
+  acheteur: "responsable ops de MSP, 5-30 salariés"
+  frequence: hebdo
+  cout_actuel: "Suivi licences hors PSA (rien ne colle dans l'existant) ; erreurs de facturation récurrentes, licences payées non refacturées"
+  workflow: "gestion et refacturation des licences logicielles clients"
+  connecteurs: ["Microsoft Partner Center", "distributeurs (Pax8)", "PSA"]
+  prix_plausible: "100-200 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/msp/comments/1i850gx/
+- id: A-033
+  douleur: "Ma stack sécurité est éclatée entre SIEM, EDR, vuln, IAM, email et BDR — trop de vendors à piloter."
+  acheteur: "dirigeant de MSP/MSSP, 10-50 salariés"
+  frequence: quotidien
+  cout_actuel: "Gestion multi-consoles et multi-contrats ; temps d'administration éclaté et coûts de licences cumulés élevés"
+  workflow: "pilotage de la stack cybersécurité managée"
+  connecteurs: ["SIEM", "EDR", "scanner vuln", "IAM", "sécurité email"]
+  prix_plausible: "200-500 €/mois"
+  type: niche
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.reddit.com/r/msp/comments/1hkcgqr/
+- id: A-034
+  douleur: "Gérer la reconnaissance de revenus des frais de scolarité dans Excel devient ingérable avec la croissance."
+  acheteur: "comptable ou DAF d'établissement d'enseignement privé en croissance, 20-200 salariés"
+  frequence: mensuel
+  cout_actuel: "Excel maison + gaps d'intégration Xero ; heures de clôture mensuelle et risque d'erreurs comptables croissant"
+  workflow: "clôture comptable et reconnaissance de revenus (rev rec)"
+  connecteurs: ["Xero", "système de gestion de scolarité", "tableur"]
+  prix_plausible: "100-200 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/Accounting/comments/1e0i1m5/
+- id: A-036
+  douleur: "Les batchs décalés du terminal de paiement (14h) et de la caisse (minuit) font que ma réconciliation quotidienne ne tombe jamais juste."
+  acheteur: "comptable de commerce ou restauration multi-sites, PME 10-100 salariés"
+  frequence: quotidien
+  cout_actuel: "Rapprochement manuel quotidien avec écarts systématiques à expliquer ; 30-60 min par jour de pointage"
+  workflow: "réconciliation quotidienne paiements / caisse"
+  connecteurs: ["processeur de paiement", "POS/caisse", "compta"]
+  prix_plausible: "50-150 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/Accounting/comments/1i6rixv/
+- id: A-037
+  douleur: "En solo, je jongle entre cinq plateformes (compta, Excel, Word, e-signature, drive) — inefficace et coûteux."
+  acheteur: "expert-comptable solo (cabinet unipersonnel)"
+  frequence: quotidien
+  cout_actuel: "Cinq abonnements + ressaisies entre outils ; coût cumulé des licences et temps perdu en bascules quotidiennes"
+  workflow: "practice management de cabinet comptable solo"
+  connecteurs: ["compta", "e-signature", "drive/GED", "email", "tableur"]
+  prix_plausible: "50-100 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/Accounting/comments/1emvek8/
+- id: A-038
+  douleur: "Excel s'écroule sur mes fichiers de plusieurs millions de lignes et je ne veux pas apprendre SQL."
+  acheteur: "comptable ou analyste en cabinet/PME manipulant de gros volumes, sans compétence SQL"
+  frequence: hebdo
+  cout_actuel: "Excel qui plante, découpage des fichiers à la main ; heures perdues par analyse, pas de montée en compétence SQL envisagée"
+  workflow: "analyse de données comptables volumineuses"
+  connecteurs: ["fichiers CSV/Excel", "moteur de requête local (type DuckDB)"]
+  prix_plausible: "20-50 €/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.reddit.com/r/Accounting/comments/1ba6048/
+- id: A-039
+  douleur: "Écrire des fiches de poste me prend un temps fou et le résultat n'est jamais satisfaisant."
+  acheteur: "recruteur in-house de PME/ETI, 50-500 salariés"
+  frequence: hebdo
+  cout_actuel: "Rédaction manuelle depuis d'anciennes JD ; 1-2 h par fiche pour un résultat jugé médiocre"
+  workflow: "rédaction et publication de fiches de poste"
+  connecteurs: ["ATS", "job boards", "bibliothèque de JD"]
+  prix_plausible: "20-50 €/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.reddit.com/r/recruiting/comments/1g3homu/
+- id: A-040
+  douleur: "Je suis 75-100 candidats avec 15-20 credentials chacun et des relances hebdo — la charge admin m'écrase."
+  acheteur: "recruteur en staffing healthcare (credentialing), agence 2-20 consultants"
+  frequence: quotidien
+  cout_actuel: "ATS jugé compliqué + suivi manuel des credentials et relances hebdo ; plusieurs heures par jour d'admin pure"
+  workflow: "credentialing et suivi administratif des candidats healthcare"
+  connecteurs: ["ATS", "email", "bases de vérification de credentials"]
+  prix_plausible: "100-200 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/recruiting/comments/1k7orxv/
+- id: A-041
+  douleur: "La base candidats de mon ATS est si mauvaise qu'on retombe sur des spreadsheets pour les notes."
+  acheteur: "consultant d'agence de recrutement, 2-15 consultants"
+  frequence: quotidien
+  cout_actuel: "ATS payé (ex-Bullhorn/Crelate) doublé de spreadsheets parallèles ; double saisie et notes candidats éparpillées"
+  workflow: "gestion de la base candidats et des notes d'entretien"
+  connecteurs: ["ATS", "email", "tableur"]
+  prix_plausible: "50-100 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/recruiting/comments/1def14n/
+- id: A-043
+  douleur: "Mon sourcing de leads (éplucher Indeed, qualifier, rechercher l'entreprise, saisir au CRM) est fastidieux et lourd."
+  acheteur: "gérant d'agence de recrutement, 1-10 consultants"
+  frequence: quotidien
+  cout_actuel: "Process manuel bout en bout sur Pipedrive (CRM généraliste non spécialisé recrutement) ; 1-2 h par jour de sourcing/saisie"
+  workflow: "prospection commerciale de mandats de recrutement"
+  connecteurs: ["job boards (Indeed, scraping)", "LinkedIn", "CRM (Pipedrive)", "enrichissement entreprise"]
+  prix_plausible: "100-200 €/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/recruiting/comments/1g7hcxw/
+- id: A-044
+  douleur: "Gérer un repo GitHub personnalisé par candidat pour les take-home tests est fastidieux."
+  acheteur: "responsable technique ou recruteur tech de startup/scale-up, 10-100 salariés"
+  frequence: hebdo
+  cout_actuel: "Création, personnalisation et nettoyage manuels des repos par candidat ; 15-30 min par candidat, récurrent en période de hiring"
+  workflow: "logistique des tests techniques candidats"
+  connecteurs: ["API GitHub", "ATS", "email"]
+  prix_plausible: "20-50 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.reddit.com/r/recruiting/comments/1bk6coz/
+- id: A-045
+  douleur: "Planifier les appels de référence tourne aux allers-retours d'emails sans fin ; il me faudrait un Calendly pour des tiers."
+  acheteur: "recruteur en agence ou in-house, 1-20 consultants"
+  frequence: hebdo
+  cout_actuel: "Coordination manuelle par email à trois parties (candidat, référent, recruteur) ; dizaines de minutes par référence, délais allongés"
+  workflow: "prise de références candidats (scheduling tiers)"
+  connecteurs: ["calendrier", "email"]
+  prix_plausible: "10-30 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/recruiting/comments/1k01v1u/
+- id: A-046
+  douleur: "Mon staffing médical tourne sur six outils non intégrés (Deputy, Zoho, Sheets, Jotform, SignNow, OpenPhone) et l'éclatement nous ralentit."
+  acheteur: "dirigeant d'agence de staffing healthcare, 5-30 salariés"
+  frequence: quotidien
+  cout_actuel: "Six abonnements non intégrés, ressaisies entre planning, CRM, formulaires et signature ; coût cumulé et friction quotidienne"
+  workflow: "opérations de staffing médical (planning, dossiers, contrats)"
+  connecteurs: ["planning (Deputy)", "CRM (Zoho)", "Google Sheets", "e-signature", "téléphonie"]
+  prix_plausible: "200-400 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/recruiting/comments/1j55hr9/
+- id: A-047
+  douleur: "Les ATS existants (Greenhouse, Pinpoint, Ashby) sont pensés pour l'in-house et ne collent pas à mon agence."
+  acheteur: "dirigeant d'agence de recrutement, 2-20 consultants"
+  frequence: quotidien
+  cout_actuel: "ATS in-house détournés ou spreadsheets ; workflows agence (multi-clients, placements) bricolés, automatisation absente"
+  workflow: "gestion des mandats et placements en agence"
+  connecteurs: ["email", "LinkedIn", "job boards", "CRM"]
+  prix_plausible: "100-300 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/recruiting/comments/1hsym8t/
+- id: A-048
+  douleur: "Mon ATS d'entreprise est sur-compliqué, bourré de fonctions inutiles et pénible à naviguer."
+  acheteur: "recruteur ou TA manager en entreprise, 100-1000 salariés"
+  frequence: quotidien
+  cout_actuel: "ATS enterprise subi (licence payée par l'entreprise) ; minutes perdues à chaque opération, contournements officieux"
+  workflow: "gestion quotidienne du pipeline de recrutement"
+  connecteurs: ["ATS", "email", "calendrier"]
+  prix_plausible: "50-150 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/recruiting/comments/1ibxill/
+- id: A-050
+  douleur: "L'onboarding de mon logiciel de paie (ADP) a été horrible : spreadsheets à remplir à la main, appels interminables, et 3500 £ de frais de résiliation."
+  acheteur: "responsable RH de PME UK, 20-100 salariés"
+  frequence: ponctuel
+  cout_actuel: "Migration paie manuelle (spreadsheets + appels de setup) ; semaines de charge, frais de sortie cités : 3500 £"
+  workflow: "migration et onboarding de solution de paie"
+  connecteurs: ["paie", "SIRH", "tableur"]
+  prix_plausible: "50-150 €/mois"
+  type: niche
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.reddit.com/r/humanresources/comments/1gfu0m9/
+- id: A-052
+  douleur: "Notre process de rémunération (augmentations, bonus) pour 700 personnes tourne sur des formules Excel maison."
+  acheteur: "responsable comp & benefits d'ETI, 500-1000 salariés"
+  frequence: ponctuel
+  cout_actuel: "Excel maison avec formules fragiles ; semaines de campagne annuelle, risque d'erreurs sur des données de rémunération sensibles"
+  workflow: "campagne annuelle de révision salariale et bonus"
+  connecteurs: ["SIRH", "paie", "tableur"]
+  prix_plausible: "200-500 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.reddit.com/r/humanresources/comments/1axf7i6/
+- id: A-053
+  douleur: "Je n'arrive pas à suivre les documents des nouveaux embauchés malgré mon spreadsheet de tracking."
+  acheteur: "coordinateur RH de PME, 50-200 salariés"
+  frequence: hebdo
+  cout_actuel: "Spreadsheet de tracking + relances manuelles ; documents manquants découverts tard, heures de relance par vague d'embauche"
+  workflow: "collecte des documents d'onboarding salarié"
+  connecteurs: ["SIRH", "email", "e-signature", "drive"]
+  prix_plausible: "30-80 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/humanresources/comments/1g4jah3/
+- id: A-054
+  douleur: "Le self-billing de mon assureur santé (MetLife) est très manuel et génère des erreurs de facturation."
+  acheteur: "benefits administrator RH d'ETI US, 200-1000 salariés"
+  frequence: mensuel
+  cout_actuel: "Rapprochement manuel effectifs/factures assureur dans un tableur ; heures par mois et erreurs de facturation à la clé"
+  workflow: "réconciliation mensuelle des factures d'assurance benefits"
+  connecteurs: ["fichiers assureur", "paie/SIRH", "tableur"]
+  prix_plausible: "50-150 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/humanresources/comments/1f2654c/
+- id: A-055
+  douleur: "Gérer les pièces jointes email de chantier (RFI, avenants, certificats de paiement, plans) me bouffe un temps énorme."
+  acheteur: "conducteur de travaux ou gérant de PME BTP, 5-50 salariés"
+  frequence: quotidien
+  cout_actuel: "Tri et classement manuels depuis la boîte mail, pas de GED structurée ; environ une heure par jour, documents perdus"
+  workflow: "gestion documentaire de chantier depuis l'email"
+  connecteurs: ["email", "drive/GED", "outil de gestion de chantier"]
+  prix_plausible: "50-100 €/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/Construction/comments/1abk6qe/
+- id: A-056
+  douleur: "On passe 5M+ de CA avec une équipe squelettique et aucun système — tout repose sur ma tête."
+  acheteur: "entrepreneur BTP en croissance, 5-15 salariés, 5M+ de CA"
+  frequence: quotidien
+  cout_actuel: "Aucun système structuré (recherche de job management software) ; dépendance totale au dirigeant, risque opérationnel majeur"
+  workflow: "pilotage global des chantiers et de l'entreprise"
+  connecteurs: ["devis", "compta", "planning", "email"]
+  prix_plausible: "100-300 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/Construction/comments/1hg1d5s/
+- id: A-059
+  douleur: "Entre Stack, QuickBooks et QB Time, je perds le fil de l'affectation matériaux et main-d'oeuvre par chantier."
+  acheteur: "gérant de sous-traitance BTP, 2-10 salariés"
+  frequence: hebdo
+  cout_actuel: "Trois outils non intégrés (devis, compta, temps) ; rentabilité par chantier reconstituée à la main ou pas du tout"
+  workflow: "suivi de coûts par chantier (job costing)"
+  connecteurs: ["QuickBooks", "QB Time", "outil de devis (Stack)"]
+  prix_plausible: "50-150 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/Construction/comments/1b88k96/
+- id: A-061
+  douleur: "Évaluer méthodiquement des marchés immobiliers hors de mon État exige une consolidation de données manuelle."
+  acheteur: "investisseur immobilier locatif US (particulier ou semi-pro, out-of-state)"
+  frequence: ponctuel
+  cout_actuel: "Recherches manuelles multi-sources (prix, loyers, démographie) compilées en tableur ; heures par ville étudiée"
+  workflow: "sélection de marché avant investissement locatif"
+  connecteurs: ["données marché immobilier (Zillow/portails)", "données démographiques publiques", "scraping"]
+  prix_plausible: "20-50 €/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.reddit.com/r/realestateinvesting/comments/1eq4gv8/
+- id: A-064
+  douleur: "Avec 100+ lots, je cherche quoi automatiser en property management — AppFolio ne suffit pas."
+  acheteur: "bailleur ou gestionnaire immobilier, portefeuille 100+ lots"
+  frequence: quotidien
+  cout_actuel: "AppFolio payé mais insuffisant + frais de gestion externes 10%+ cités ; tâches résiduelles manuelles (comms, suivi, arbitrages)"
+  workflow: "gestion locative courante d'un portefeuille"
+  connecteurs: ["AppFolio", "email/SMS", "paiements", "maintenance"]
+  prix_plausible: "200-500 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/realestateinvesting/comments/1iteqrr/
+- id: A-066
+  douleur: "Je viens de signer mes premiers clients et je patauge sur mes prix et le choix du logiciel."
+  acheteur: "créateur d'entreprise de services à domicile, solo"
+  frequence: ponctuel
+  cout_actuel: "Tâtonnement (Jobber pris par défaut), pricing au doigt mouillé ; marge laissée sur la table faute de méthode"
+  workflow: "structuration initiale : pricing et outillage"
+  connecteurs: ["outil de field service (Jobber)", "compta", "données de prix marché"]
+  prix_plausible: "20-50 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.reddit.com/r/sweatystartup/comments/1fov6z0/
+- id: A-067
+  douleur: "Je lance une menuiserie commerciale et le chiffrage/takeoff est mon gros point noir."
+  acheteur: "fondateur de menuiserie commerciale B2B, 1-5 salariés"
+  frequence: hebdo
+  cout_actuel: "Takeoff et chiffrage manuels sans outil maîtrisé ; heures par devis, risque d'erreurs de marge dès le lancement"
+  workflow: "chiffrage et takeoff de devis menuiserie"
+  connecteurs: ["plans (PDF)", "bibliothèque de prix matériaux", "devis/facturation"]
+  prix_plausible: "100-200 €/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/sweatystartup/comments/1kjhlfd/
+- id: A-068
+  douleur: "En solo, il me faut booking, facturation et blocage de créneaux par zone géographique — sans usine à gaz."
+  acheteur: "artisan/prestataire de services à domicile solo"
+  frequence: quotidien
+  cout_actuel: "Outils généralistes sans time-blocking géographique ; tournées inefficaces et gestion manuelle du planning"
+  workflow: "prise de rendez-vous et tournées géographiques"
+  connecteurs: ["calendrier", "paiement", "cartographie (maps)"]
+  prix_plausible: "20-50 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/sweatystartup/comments/1kgyprw/
+- id: A-069
+  douleur: "La charge admin (réservations manuelles, paiements, comms clients) tue ma productivité au salon."
+  acheteur: "gérante de salon (beauté/coiffure), 1-5 personnes"
+  frequence: quotidien
+  cout_actuel: "Square + Google Calendar gérés à la main ; heures hebdo d'admin prises sur le temps facturable en salon"
+  workflow: "gestion des réservations et de la relation client du salon"
+  connecteurs: ["Square", "Google Calendar", "SMS/email"]
+  prix_plausible: "30-80 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/sweatystartup/comments/1kotwuz/
+- id: A-070
+  douleur: "Ma boîte de ménage grossit et je ne sais pas quel stack gérer bookings, intervenantes et organisation."
+  acheteur: "gérant d'entreprise de ménage en croissance, 5-20 intervenants"
+  frequence: quotidien
+  cout_actuel: "GHL (outil marketing généraliste) détourné ; organisation bookings/équipes bricolée, temps de coordination croissant"
+  workflow: "dispatch des interventions et gestion des équipes de ménage"
+  connecteurs: ["planning", "paiement", "SMS", "CRM (GHL)"]
+  prix_plausible: "50-150 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/sweatystartup/comments/1k5zwp0/
+- id: A-071
+  douleur: "Mon outil de booking (BookingKoala) est tombé 4h30 : clients bloqués et revenus perdus."
+  acheteur: "gérant d'entreprise de ménage/services à domicile, 1-20 salariés"
+  frequence: ponctuel
+  cout_actuel: "Dépendance à un SaaS de booking sans plan B ; 4h30 d'indisponibilité = réservations et revenus perdus"
+  workflow: "prise de réservations en ligne"
+  connecteurs: ["plateforme de booking", "paiement"]
+  prix_plausible: "30-80 €/mois"
+  type: niche
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.reddit.com/r/sweatystartup/comments/1je9t70/
+- id: A-072
+  douleur: "Je passe de solo à un modèle avec sous-traitants et je n'ai ni logiciel ni process pour gérer une équipe."
+  acheteur: "gérant d'entreprise de ménage passant en sous-traitance, 1-10 intervenants"
+  frequence: hebdo
+  cout_actuel: "Pas résolu : évalue Zenmaid/Launch27/BookingKoala ; dispatch et paie des sous-traitants gérés à la main"
+  workflow: "structuration du dispatch et de la gestion de sous-traitants"
+  connecteurs: ["planning", "paiement sous-traitants", "SMS"]
+  prix_plausible: "50-100 €/mois"
+  type: niche
+  fit_mcp: moyen
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/sweatystartup/comments/1ivn28a/
+- id: A-073
+  douleur: "Analyser mes données Shopify dans des spreadsheets est fastidieux, et les outils clés en main sont trop rigides."
+  acheteur: "marchand Shopify, 1-10 salariés"
+  frequence: hebdo
+  cout_actuel: "Exports Shopify retraités en spreadsheets ; heures par semaine, outils analytics du marché jugés trop rigides"
+  workflow: "analyse des ventes et de la performance e-commerce"
+  connecteurs: ["API Shopify", "plateformes ads (Meta, Google)", "tableur"]
+  prix_plausible: "30-80 €/mois"
+  type: niche
+  fit_mcp: fort
+  interface_requise: mixte
+  occurrences: 1
+  source_url: https://www.reddit.com/r/ecommerce/comments/1buicm7/
+- id: A-074
+  douleur: "Créer les comptes, suivre et renouveler manuellement chaque abonnement vendu n'est plus tenable avec la demande."
+  acheteur: "vendeur d'abonnements en ligne, solo à 5 personnes"
+  frequence: quotidien
+  cout_actuel: "Création de comptes et renouvellements à la main pour chaque vente ; charge proportionnelle au volume, non scalable"
+  workflow: "provisioning et cycle de vie des abonnements clients"
+  connecteurs: ["paiement (Stripe)", "plateforme de comptes/licences", "email"]
+  prix_plausible: "30-80 €/mois"
+  type: niche
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.reddit.com/r/ecommerce/comments/1kgsy2z/
+- id: A-075
+  douleur: "Stripe a gelé mon compte sans prévenir : 145 000 $ de payouts bloqués malgré de bonnes métriques."
+  acheteur: "e-commerçant dépendant d'un PSP unique, 1-20 salariés"
+  frequence: ponctuel
+  cout_actuel: "Pas résolu : négociation directe avec Stripe, trésorerie bloquée (145 000 $ cités) ; pas d'outil de prévention/défense"
+  workflow: "gestion du risque prestataire de paiement (holds, gel de compte)"
+  connecteurs: ["Stripe", "PSP alternatifs", "compta"]
+  prix_plausible: "50-100 €/mois"
+  type: generique
+  fit_mcp: faible
+  interface_requise: dashboard
+  occurrences: 1
+  source_url: https://www.reddit.com/r/ecommerce/comments/1iplxup/
+- id: A-076
+  douleur: "Un client pourtant satisfait a lancé un chargeback de 1675 $ et menace de garder la marchandise."
+  acheteur: "e-commerçant PME, 1-20 salariés"
+  frequence: ponctuel
+  cout_actuel: "Réponse manuelle au litige (système perçu pro-consommateur) ; 1675 $ en jeu + marchandise, heures pour constituer le dossier"
+  workflow: "contestation de chargebacks (representment)"
+  connecteurs: ["processeur de paiement (Stripe)", "commandes (Shopify)", "preuves de livraison (transporteur)"]
+  prix_plausible: "30-100 €/mois"
+  type: generique
+  fit_mcp: fort
+  interface_requise: conversationnel
+  occurrences: 1
+  source_url: https://www.reddit.com/r/ecommerce/comments/1hmzs42/
