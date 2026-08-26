@@ -4,16 +4,16 @@ Template Git pour bootstrapper un **produit MCP-first** avec la Tiple Method : u
 
 C'est le Tiple Method Template de base (structure, templates de docs, checklists, conventions, slash commands Claude Code, design system) **spécialisé MCP** :
 
-- **Conventions MCP** (`.tiple/conventions/mcp-patterns.md`, tag `mcp`) : parité web/MCP par services partagés, AX (découverte par l'agent), design des tools, widgets MCP Apps **dual-host Claude + ChatGPT**, auth OAuth 2.1 via Supabase, serveur stateless, golden queries
-- **Section "Canal MCP"** dans le template d'architecture (`.tiple/templates/architecture.tmpl.md`) : tables tools / widgets / auth à remplir au cadrage
-- **Template de golden queries** (`.tiple/templates/mcp-golden-queries.tmpl.md`) : l'éval anti-régression du routage des tools, à rejouer sur les deux hosts
+- **Conventions MCP** (`.claude/conventions/mcp-patterns.md`, tag `mcp`) : parité web/MCP par services partagés, AX (découverte par l'agent), design des tools, widgets MCP Apps **dual-host Claude + ChatGPT**, auth OAuth 2.1 via Supabase, serveur stateless, golden queries
+- **Section "Canal MCP"** dans le template d'architecture (`.claude/templates/architecture.tmpl.md`) : tables tools / widgets / auth à remplir au cadrage
+- **Template de golden queries** (`.claude/templates/mcp-golden-queries.tmpl.md`) : l'éval anti-régression du routage des tools, à rejouer sur les deux hosts
 - **Règles MCP dans `CLAUDE.md`** + skill `mcp` auto-déclenché dès qu'on touche `src/mcp/` ou `widgets/`
 
 Stack : Next.js 15 (App Router) + TypeScript strict + Tailwind CSS + Shadcn/ui. Backend Supabase via starter (DB + RLS + Auth + Storage — c'est aussi l'authorization server OAuth 2.1 du canal MCP). Canal MCP : `@modelcontextprotocol/sdk` + `mcp-handler` (endpoint `/api/mcp`), widgets buildés par Vite en HTML single-file. IA optionnelle : Claude API (`@anthropic-ai/sdk`).
 
 ## Le canal MCP en bref
 
-Les invariants que le template impose (détail dans `.tiple/conventions/mcp-patterns.md`) :
+Les invariants que le template impose (détail dans `.claude/conventions/mcp-patterns.md`) :
 
 1. **Parité par services partagés** — toute capacité métier = 1 fonction dans `lib/services/` + 2 adaptateurs fins (Server Action web, tool MCP). Jamais de logique métier dans un tool.
 2. **Dual-host day one** — widgets déclarés avec la triple méta (`ui.resourceUri` standard MCP Apps GA + alias plat pré-GA + `openai/outputTemplate` → variante skybridge pour ChatGPT) via un helper unique ; chaque bundle servi en 2 resources (`text/html;profile=mcp-app` + `text/html+skybridge`) ; bridge unique `widgets/shared/bridge.ts` sur le SDK officiel `ext-apps` ; matrice de test des deux hosts avant push.
@@ -36,12 +36,12 @@ Le design system **Tiple (vert mint, éditorial)** complet est inclus, prêt à 
 
 ## Starters
 
-Le template est minimal par défaut. Les starters dans `.tiple/starters/` ajoutent des fonctionnalités complètes. Ils sont identifiés par `/tm-plan` (Phase 0) et installés lors de la story de setup.
+Le template est minimal par défaut. Les starters dans `.claude/starters/` ajoutent des fonctionnalités complètes. Ils sont identifiés par `/tm-plan` (Phase 0) et installés lors de la story de setup.
 
 | Starter | Dossier | Ce qu'il ajoute |
 |---------|---------|-----------------|
-| **Canal MCP** | `.tiple/starters/mcp/` | Endpoint `/api/mcp` (stateless par défaut, stateful prêt), tool démo (`schema Zod → service → tool`), widgets MCP Apps GA (triple méta + skybridge, bundles inlinés), bridge SDK `ext-apps`, auth OAuth 2.1 (RFC 9728), tests `InMemoryTransport` + smoke HTTP |
-| **Supabase + Auth** | `.tiple/starters/supabase-auth/` | Base de données, auth (login/signup/reset), middleware, Server Actions, pages auth, CI migrations |
+| **Canal MCP** | `.claude/starters/mcp/` | Endpoint `/api/mcp` (stateless par défaut, stateful prêt), tool démo (`schema Zod → service → tool`), widgets MCP Apps GA (triple méta + skybridge, bundles inlinés), bridge SDK `ext-apps`, auth OAuth 2.1 (RFC 9728), tests `InMemoryTransport` + smoke HTTP |
+| **Supabase + Auth** | `.claude/starters/supabase-auth/` | Base de données, auth (login/signup/reset), middleware, Server Actions, pages auth, CI migrations |
 
 Pour un produit MCP-first, les deux starters vont ensemble : Supabase + Auth fournit la DB (RLS) et l'authorization server OAuth 2.1 du canal MCP ; le starter Canal MCP fournit le serveur, les widgets et le câblage auth (bloc à décommenter une fois Supabase en place).
 
@@ -92,7 +92,7 @@ Le cadrage (`/tm-plan`) remplit la section "Canal MCP" de l'architecture (tools,
 
 ### Skills auto-déclenchés
 
-`.claude/skills/` contient 23 skills "shim" (un par tag de `.tiple/conventions/_index.md`, dont `mcp`) qui s'auto-activent selon le contexte — même **hors** de `/tm-dev`. Exemple : toucher `src/mcp/` ou `widgets/` déclenche le skill `mcp` qui charge `.tiple/conventions/mcp-patterns.md`. Les descriptions sont bilingues FR+EN pour un trigger robuste.
+`.claude/skills/` contient 23 skills "shim" (un par tag de `.claude/conventions/_index.md`, dont `mcp`) qui s'auto-activent selon le contexte — même **hors** de `/tm-dev`. Exemple : toucher `src/mcp/` ou `widgets/` déclenche le skill `mcp` qui charge `.claude/conventions/mcp-patterns.md`. Les descriptions sont bilingues FR+EN pour un trigger robuste.
 
 ## Structure
 
@@ -102,7 +102,7 @@ Le cadrage (`/tm-plan`) remplit la section "Canal MCP" de l'architecture (tools,
 │   ├── commands/                # 8 slash commands (tm-plan, tm-dev, tm-review, tm-verify, tm-wrap-up, commit-push, ...)
 │   ├── skills/                  # 23 skills shim (dont mcp) + tm-wrap-up
 │   └── hooks/                   # enforce-bash-rules.sh
-├── .tiple/
+├── .claude/
 │   ├── templates/               # Templates de documents (dont architecture avec section MCP, golden queries)
 │   ├── checklists/              # 5 checklists quality gates
 │   ├── conventions/             # Conventions par tags (23 fichiers dont mcp-patterns.md + _index.md)
@@ -126,7 +126,7 @@ Le cadrage (`/tm-plan`) remplit la section "Canal MCP" de l'architecture (tools,
 └── tests/                       # Unit, integration, e2e (smoke fournis)
 ```
 
-Les dossiers marqués "starter mcp" ne sont pas pré-générés : le squelette complet vit dans `.tiple/starters/mcp/` et s'installe lors de la story de setup (mapping fichier par fichier dans son README), guidé par `.tiple/conventions/mcp-patterns.md`.
+Les dossiers marqués "starter mcp" ne sont pas pré-générés : le squelette complet vit dans `.claude/starters/mcp/` et s'installe lors de la story de setup (mapping fichier par fichier dans son README), guidé par `.claude/conventions/mcp-patterns.md`.
 
 ## Personnaliser le template
 
@@ -134,18 +134,18 @@ Après le clone :
 
 1. **`CLAUDE.md`** — Section "Projet" : nom et description
 2. **`docs/design/system.md`** — Ajuster les tokens si besoin (couleurs, radius)
-3. **`.tiple/conventions/tech-stack.md`** — Figer les versions MCP et ajouter les libs spécifiques
+3. **`.claude/conventions/tech-stack.md`** — Figer les versions MCP et ajouter les libs spécifiques
 4. **`package.json`** — Nom du projet
 
 Puis lancer `/tm-plan` pour le cadrage (qui activera les starters et créera les ADRs nécessaires).
 
 ## Conventions par tags
 
-Les conventions techniques sont dans `.tiple/conventions/` et chargées **automatiquement** selon le contexte :
+Les conventions techniques sont dans `.claude/conventions/` et chargées **automatiquement** selon le contexte :
 
 - **Base (toujours chargées)** : `coding-standards.md`, `component-registry.md`, `tech-stack.md`
 - **Par tags** : chaque story déclare ses tags (ex: `mcp`, `auth`, `database`) → les fichiers correspondants sont chargés
-- **Index** : `.tiple/conventions/_index.md`
+- **Index** : `.claude/conventions/_index.md`
 
 | Mode | Chargement des conventions |
 |------|----------------------------|

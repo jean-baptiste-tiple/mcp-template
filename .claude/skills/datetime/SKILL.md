@@ -3,7 +3,7 @@ name: datetime
 description: "Dates & argent : dates, heures, timezones, formatage, devises, montants, date-fns, Intl. FR : date, heure, fuseau horaire, UTC, formatage, devise, prix, montant, argent."
 ---
 
-Consult [.tiple/conventions/datetime-patterns.md](.tiple/conventions/datetime-patterns.md) for the full patterns. Load it before writing date/money code.
+Consult [.claude/conventions/datetime-patterns.md](.claude/conventions/datetime-patterns.md) for the full patterns. Load it before writing date/money code.
 
 Key invariants:
 - Stockage toujours en UTC (`timestamptz`), affichage toujours en locale utilisateur via `Intl`

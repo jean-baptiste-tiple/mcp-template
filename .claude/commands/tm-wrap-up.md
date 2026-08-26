@@ -35,12 +35,12 @@ Parcourir le diff + la conversation, mapper chaque apprentissage vers son lieu d
 
 | Type d'apprentissage | Destination |
 |---|---|
-| Nouvelle règle / invariant technique | `.tiple/conventions/<tag>.md` (section Règles) |
+| Nouvelle règle / invariant technique | `.claude/conventions/<tag>.md` (section Règles) |
 | Décision d'architecture non-triviale | Nouveau ADR dans `docs/decisions/` |
 | Gotcha / config / commande projet-spécifique | `CLAUDE.md` (section appropriée) |
-| Composant/hook/util réutilisable créé | `.tiple/conventions/component-registry.md` |
-| Pattern récurrent propre au projet | `.tiple/conventions/<tag>.md` ou nouvelle section |
-| Story/bug découvert pendant la session | `docs/stories/` ou `.tiple/sprint/status.md` |
+| Composant/hook/util réutilisable créé | `.claude/conventions/component-registry.md` |
+| Pattern récurrent propre au projet | `.claude/conventions/<tag>.md` ou nouvelle section |
+| Story/bug découvert pendant la session | `docs/stories/` ou `.claude/sprint/status.md` |
 
 **Règles de sélection :**
 - Une seule occurrence = pas encore un pattern. Attendre 2+ avant de promouvoir en convention.
@@ -49,22 +49,28 @@ Parcourir le diff + la conversation, mapper chaque apprentissage vers son lieu d
 
 ---
 
-## Phase 3 — Proposer à l'utilisateur
+## Phase 3 — Appliquer
 
-**NE PAS ÉCRIRE DIRECTEMENT.** Présenter un récap structuré :
+Écrire directement — pas de validation préalable. Pour chaque candidat retenu :
+- Éditer le fichier cible (prefer Edit > Write)
+- Si création d'un ADR : utiliser `.claude/templates/adr.tmpl.md`
+
+## Phase 4 — Récap
+
+Présenter ce qui a été écrit et ce qui a été rejeté :
 
 ```
 ## Apprentissages de la session
 
-**Candidats à capturer :**
+**Capturés :**
 
-1. [CONVENTION] `.tiple/conventions/api-patterns.md` — Ajouter section "Error handling"
+1. [CONVENTION] `.claude/conventions/api-patterns.md` — Ajouter section "Error handling"
    → Pourquoi : découvert que Supabase error codes doivent être mappés à des messages user
 
 2. [ADR] `docs/decisions/adr-004-rls-soft-delete.md` — Nouvelle décision
    → Pourquoi : on a choisi soft delete via `deleted_at` plutôt que hard delete, impact RLS
 
-3. [REGISTRY] `.tiple/conventions/component-registry.md` — Ajouter `<ConfirmDialog>`
+3. [REGISTRY] `.claude/conventions/component-registry.md` — Ajouter `<ConfirmDialog>`
    → Pourquoi : nouveau composant utilisé 3× cette session
 
 **Rejetés (ne revient pas) :**
@@ -72,16 +78,7 @@ Parcourir le diff + la conversation, mapper chaque apprentissage vers son lieu d
 - Nom de variable mal choisi → déjà fixé
 ```
 
-Attendre la validation utilisateur avant d'écrire.
-
----
-
-## Phase 4 — Application (après validation)
-
-Pour chaque candidat validé :
-- Éditer le fichier cible (prefer Edit > Write)
-- Si création d'un ADR : utiliser `.tiple/templates/adr.tmpl.md`
-- Signaler chaque fichier modifié
+L'utilisateur relit le diff et annule ce qu'il ne veut pas.
 
 ---
 
@@ -91,9 +88,9 @@ Afficher :
 
 ```
 ✅ Apprentissages capturés :
-- Modifié : .tiple/conventions/api-patterns.md
+- Modifié : .claude/conventions/api-patterns.md
 - Créé : docs/decisions/adr-004-rls-soft-delete.md
-- Modifié : .tiple/conventions/component-registry.md
+- Modifié : .claude/conventions/component-registry.md
 
 ⏭️ Non retenu : 2 items (one-off, pas de valeur future)
 ```
@@ -108,9 +105,9 @@ Ou si rien à capturer :
 
 ## Règles
 
-1. **Ne JAMAIS écrire sans validation utilisateur** — toujours proposer d'abord
+1. **Écrire directement, puis rendre compte** — le diff est la proposition ; l'utilisateur annule ce qu'il ne veut pas
 2. **Ne pas capturer le one-off** — attendre 2+ occurrences avant de promouvoir une règle
 3. **Privilégier l'update** d'un fichier existant à la création d'un nouveau
-4. **Ne pas doublonner** — si l'info existe déjà dans `.tiple/` ou `CLAUDE.md`, ne pas la redire
+4. **Ne pas doublonner** — si l'info existe déjà dans `.claude/` ou `CLAUDE.md`, ne pas la redire
 5. **Scope-aware** — si `$ARGUMENTS` est fourni (ex: `/tm-wrap-up auth`), limiter la réflexion à ce scope
 6. **Pas de remplissage** — mieux vaut 0 capture qu'un faux positif qui pollue les conventions

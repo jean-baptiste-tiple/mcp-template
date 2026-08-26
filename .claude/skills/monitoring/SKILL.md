@@ -3,7 +3,7 @@ name: monitoring
 description: "Observability : error tracking (Sentry), analytics, health checks, logging, instrumentation. FR : monitoring, erreurs, logs, suivi d'erreurs, analyse, santé, observabilité."
 ---
 
-Consult [.tiple/conventions/monitoring-patterns.md](.tiple/conventions/monitoring-patterns.md) for the full patterns. Load it before writing logging/tracking code.
+Consult [.claude/conventions/monitoring-patterns.md](.claude/conventions/monitoring-patterns.md) for the full patterns. Load it before writing logging/tracking code.
 
 Key invariants:
 - Capturer les erreurs inattendues (catch blocks, error boundaries) ; pas les erreurs de validation attendues

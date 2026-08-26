@@ -6,7 +6,7 @@
 ## Code
 
 - [ ] Le code est écrit et commité
-- [ ] Le code respecte les conventions de `.tiple/conventions/coding-standards.md`
+- [ ] Le code respecte les conventions de `.claude/conventions/coding-standards.md`
 - [ ] Pas de code dupliqué (DRY vérifié via component-registry)
 - [ ] Pas de TODO/FIXME/HACK laissé sans explication
 

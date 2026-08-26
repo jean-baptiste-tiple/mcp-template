@@ -3,7 +3,7 @@ name: testing
 description: "Tests : unit/integration/E2E, Vitest, Playwright, mocks Supabase, fixtures, coverage. FR : tests, unitaire, intégration, E2E, mock, fixture, couverture de test."
 ---
 
-Consult [.tiple/conventions/testing-strategy.md](.tiple/conventions/testing-strategy.md) for the full patterns. Load it before writing tests.
+Consult [.claude/conventions/testing-strategy.md](.claude/conventions/testing-strategy.md) for the full patterns. Load it before writing tests.
 
 Key invariants:
 - Placement strict : unit → `tests/unit/` ; integration → `tests/integration/` ; e2e → `tests/e2e/`. Ne JAMAIS mélanger.

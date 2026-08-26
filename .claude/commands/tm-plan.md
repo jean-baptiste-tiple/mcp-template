@@ -5,7 +5,7 @@ Pas un formulaire — un dialogue naturel.
 
 > **🚫 RÈGLE CRITIQUE — `/tm-plan` = ZÉRO code, ZÉRO commande système**
 >
-> Cette commande produit UNIQUEMENT des fichiers Markdown dans `docs/` et `.tiple/sprint/`.
+> Cette commande produit UNIQUEMENT des fichiers Markdown dans `docs/` et `.claude/sprint/`.
 > Pendant toute la durée du `/tm-plan`, il est INTERDIT de :
 > - Exécuter `pnpm add`, `pnpm install`, `npm install`, `npx`, ou toute installation de dépendances
 > - Créer ou modifier des fichiers `.ts`, `.tsx`, `.js`, `.css`, `.json` (sauf les Markdown de docs)
@@ -36,13 +36,13 @@ Au démarrage, détecter :
 
 | Aspect | Mode initial | Mode évolution |
 |---|---|---|
-| `docs/brief.md` | Créé depuis `.tiple/templates/brief.tmpl.md` | Lu + mis à jour (ajouter section "V2" / nouveaux personas / nouveau scope) |
+| `docs/brief.md` | Créé depuis `.claude/templates/brief.tmpl.md` | Lu + mis à jour (ajouter section "V2" / nouveaux personas / nouveau scope) |
 | `docs/prd.md` | Créé depuis template | Édité — nouvelles sections marquées 🔶 Draft, parcours existants conservés sauf demande explicite |
 | `docs/architecture.md` | Créé depuis template | Édité + **ADR obligatoire** dans `docs/decisions/` pour chaque invariant touché |
 | `docs/design/` | Design system personnalisé ou par défaut ; toutes les maquettes créées | Ajout des maquettes pour les **nouveaux écrans** uniquement |
 | `docs/epics/` | Tous les epics créés | UNIQUEMENT les nouveaux epics ajoutés (les existants ne sont pas touchés sauf si leur scope change) |
 | `docs/stories/` | Toutes les stories créées | UNIQUEMENT les nouvelles stories de la version |
-| Gate | `.tiple/checklists/readiness-gate.md` | `.tiple/checklists/readiness-gate.md` **+** `.tiple/checklists/prd-evolution.md` |
+| Gate | `.claude/checklists/readiness-gate.md` | `.claude/checklists/readiness-gate.md` **+** `.claude/checklists/prd-evolution.md` |
 
 ### Règles absolues en mode évolution
 
@@ -50,7 +50,7 @@ Au démarrage, détecter :
 2. **Préserver** tout contenu existant sauf demande explicite de l'utilisateur.
 3. **ADR obligatoire** pour tout changement d'invariant d'architecture (structure, sécurité, modèle de données).
 4. **Les stories/epics existants ne sont PAS retouchés**, sauf si la V2 change explicitement leur scope (et alors marquer le changement dans leur section "Historique").
-5. **Passer `.tiple/checklists/prd-evolution.md`** en plus du readiness-gate avant de clore la phase 6.
+5. **Passer `.claude/checklists/prd-evolution.md`** en plus du readiness-gate avant de clore la phase 6.
 
 ---
 
@@ -78,7 +78,7 @@ Identifier les besoins techniques du projet et **documenter** les starters à ac
 > - Ne JAMAIS créer ou modifier de fichiers de code (`.ts`, `.tsx`, `.js`, `.css`)
 > - Ne JAMAIS exécuter de commandes de build, lint ou test
 > - Ne JAMAIS copier les fichiers du starter
-> - Seuls les fichiers dans `docs/` et `.tiple/sprint/` sont modifiés par `/tm-plan`
+> - Seuls les fichiers dans `docs/` et `.claude/sprint/` sont modifiés par `/tm-plan`
 >
 > L'installation des starters est faite par `/tm-dev` lors de la première story (typiquement E01-S01 "Setup technique").
 
@@ -86,7 +86,7 @@ Identifier les besoins techniques du projet et **documenter** les starters à ac
 
 #### Si oui → Documenter l'activation du starter Supabase + Auth
 
-1. Lire `.tiple/starters/supabase-auth/README.md` pour comprendre ce qui sera installé
+1. Lire `.claude/starters/supabase-auth/README.md` pour comprendre ce qui sera installé
 2. **Créer une story E01-S01 "Setup technique"** dans la Phase 5 qui inclura :
    - Installation des dépendances Supabase
    - Copie des fichiers du starter vers leur destination
@@ -113,7 +113,7 @@ Lire l'app spec fournie par le framework Design, puis compléter par des questio
 
 Quantifier la douleur : "perd 2h/semaine" > "c'est lent".
 
-→ Générer `docs/brief.md` depuis `.tiple/templates/brief.tmpl.md`
+→ Générer `docs/brief.md` depuis `.claude/templates/brief.tmpl.md`
 
 ### Phase 2 — Structurer le PRD par parcours (→ docs/prd.md)
 
@@ -133,7 +133,7 @@ Transformer le brief + les livrables Design en PRD organisé par **parcours util
    - Chaque FR est testable
 4. **Résumé du modèle de données** : entités inférées des parcours
 
-→ Générer `docs/prd.md` depuis `.tiple/templates/prd.tmpl.md`
+→ Générer `docs/prd.md` depuis `.claude/templates/prd.tmpl.md`
 
 ### Phase 3 — Concevoir l'architecture (→ docs/architecture.md)
 
@@ -145,8 +145,8 @@ Définir :
 
 Commencer simple. RLS dès le jour 1. Un schema Zod = une source de vérité.
 
-→ Générer `docs/architecture.md` depuis `.tiple/templates/architecture.tmpl.md`
-→ Consulter `.tiple/conventions/_index.md` pour identifier les conventions techniques à respecter
+→ Générer `docs/architecture.md` depuis `.claude/templates/architecture.tmpl.md`
+→ Consulter `.claude/conventions/_index.md` pour identifier les conventions techniques à respecter
 
 ### Phase 4 — Design (→ docs/design/)
 
@@ -206,13 +206,13 @@ Le template inclut le design system Tiple par défaut (vert mint #06f5a2, neutre
 ### Phase 5 — Découper en stories (→ docs/epics/ + docs/stories/)
 
 Depuis le PRD :
-- Créer les epics dans `docs/epics/` depuis `.tiple/templates/epic.tmpl.md`
+- Créer les epics dans `docs/epics/` depuis `.claude/templates/epic.tmpl.md`
   - Chaque epic référence son parcours et sa référence UI
-- Découper chaque epic en stories dans `docs/stories/` depuis `.tiple/templates/story.tmpl.md`
+- Découper chaque epic en stories dans `docs/stories/` depuis `.claude/templates/story.tmpl.md`
   - Chaque story référence : parcours, FR, référence UI, architecture
   - Chaque story a : contexte, AC en Given/When/Then, fichiers à créer, tests attendus
   - **Chaque story déclare ses tags Conventions** dans le champ Meta :
-    - Lire `.tiple/conventions/_index.md` pour la liste des tags disponibles
+    - Lire `.claude/conventions/_index.md` pour la liste des tags disponibles
     - Sélectionner les tags pertinents selon le périmètre technique de la story
     - Exemples : story de formulaire → `api, forms, security` / story de dashboard → `nextjs, state, performance`
     - Ces tags seront utilisés par `/tm-dev` pour charger automatiquement les conventions
@@ -224,9 +224,9 @@ Une story = un déploiement possible. Taille S/M/L, pas XL.
 
 ### Phase 6 — Gate de validation
 
-Passer `.tiple/checklists/readiness-gate.md` point par point.
+Passer `.claude/checklists/readiness-gate.md` point par point.
 Vérifier la cohérence PRD (parcours) ↔ architecture ↔ design (référence UI) ↔ stories.
 Si KO : corriger avant de continuer.
 
 → Résumer : prêt à coder, première story à implémenter.
-→ Initialiser `.tiple/sprint/status.md` via `/tm-sprint`.
+→ Initialiser `.claude/sprint/status.md` via `/tm-sprint`.

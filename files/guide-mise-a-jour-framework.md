@@ -312,7 +312,7 @@ ATTENTION : si la section "Projet" a deja ete remplie dans ton projet, recopie-l
 ## Stack
 Next.js 15 (App Router) + TypeScript strict + Tailwind CSS + Shadcn/ui
 Backend/DB optionnel : Supabase (a ajouter selon le projet — voir section "Supabase" ci-dessous).
-Voir `.tiple/conventions/tech-stack.md` pour les versions exactes.
+Voir `.claude/conventions/tech-stack.md` pour les versions exactes.
 
 ## Methode
 Ce projet suit la Tiple Method. La documentation dans `docs/` est la source de verite. Lis les fichiers pertinents avant chaque action.
@@ -324,8 +324,8 @@ Ce projet suit la Tiple Method. La documentation dans `docs/` est la source de v
 4. Ne JAMAIS modifier un invariant d'architecture sans creer un ADR dans `docs/decisions/`
 5. Les tests sont ecrits AVEC le code, pas apres — unit tests d'abord, puis integration, puis e2e si applicable
 6. Apres implementation : remplir la section "Post-implementation" de la story
-7. Apres implementation : passer `.tiple/checklists/code-review.md` point par point
-8. **`/tm-plan` = documentation uniquement.** Ne JAMAIS installer de dependances, creer de fichiers de code ou executer de builds pendant un cadrage. Seuls les fichiers dans `docs/` et `.tiple/sprint/` sont modifies.
+7. Apres implementation : passer `.claude/checklists/code-review.md` point par point
+8. **`/tm-plan` = documentation uniquement.** Ne JAMAIS installer de dependances, creer de fichiers de code ou executer de builds pendant un cadrage. Seuls les fichiers dans `docs/` et `.claude/sprint/` sont modifies.
 
 ## Regles d'execution Bash (TOUTES les commandes)
 
@@ -341,9 +341,9 @@ Ce projet suit la Tiple Method. La documentation dans `docs/` est la source de v
 
 ## Conventions par tags (chargement intelligent)
 
-Les conventions techniques sont dans `.tiple/conventions/`. Elles sont chargees **automatiquement** selon le contexte :
+Les conventions techniques sont dans `.claude/conventions/`. Elles sont chargees **automatiquement** selon le contexte :
 
-- **Index :** `.tiple/conventions/_index.md` liste tous les tags et les fichiers associes
+- **Index :** `.claude/conventions/_index.md` liste tous les tags et les fichiers associes
 - **Base (toujours lues) :** `coding-standards.md`, `component-registry.md`, `tech-stack.md`
 - **Mode story (`/tm-dev E01-S01`) :** le champ `Conventions` de la story declare les tags → les fichiers correspondants sont charges
 - **Mode libre (`/tm-dev` ou `/tm-fix`) :** les tags sont deduits des fichiers touches (ex: `lib/actions/` → `api`, `supabase/migrations/` → `database`)
@@ -364,12 +364,12 @@ Tags disponibles : `auth`, `database`, `supabase`, `api`, `forms`, `realtime`, `
 
 ## Starters
 
-Le template est minimal par defaut. Les starters dans `.tiple/starters/` ajoutent des fonctionnalites completes. Ils sont **identifies** par `/tm-plan` (Phase 0) et **installes** par `/tm-dev` lors de la story E01-S01 (Setup technique).
+Le template est minimal par defaut. Les starters dans `.claude/starters/` ajoutent des fonctionnalites completes. Ils sont **identifies** par `/tm-plan` (Phase 0) et **installes** par `/tm-dev` lors de la story E01-S01 (Setup technique).
 
-### Supabase + Auth (`.tiple/starters/supabase-auth/`)
+### Supabase + Auth (`.claude/starters/supabase-auth/`)
 Ajoute : base de donnees, auth (login/signup/reset), middleware, Server Actions, pages auth, CI migrations.
 Active quand le projet a besoin d'une base de donnees et/ou d'authentification.
-Voir `.tiple/starters/supabase-auth/README.md` pour le detail.
+Voir `.claude/starters/supabase-auth/README.md` pour le detail.
 
 ### Regles Supabase (quand active)
 - **Supabase cote serveur uniquement pour les mutations.** Le browser client est reserve au realtime et a l'auth listener. Jamais de `.insert()/.update()/.delete()` depuis un Client Component.
@@ -378,17 +378,17 @@ Voir `.tiple/starters/supabase-auth/README.md` pour le detail.
 - **Auth verifiee dans chaque Server Action** (pas seulement le middleware).
 
 ## Workflow quotidien
-1. Lire `.tiple/sprint/status.md` → identifier la prochaine story 🟢 Ready
+1. Lire `.claude/sprint/status.md` → identifier la prochaine story 🟢 Ready
 2. Lire la story complete + ses refs (parcours PRD, reference UI, archi, conventions)
-3. Verifier `.tiple/checklists/story-ready.md`
+3. Verifier `.claude/checklists/story-ready.md`
 4. Implementer : schemas Zod → backend → tests unit → UI → tests unit UI → page → tests integ
 5. Ecrire les tests (unit + integ) au fur et a mesure
 6. Verifier que les tests de la story passent
 7. **Type-check** (OBLIGATOIRE) : `pnpm type-check` → doit passer sans erreur
 8. **Code Review en agent isole** (OBLIGATOIRE — `/tm-review`)
 9. Mettre a jour la story (post-implementation)
-10. Mettre a jour `.tiple/conventions/component-registry.md` si nouveaux composants
-11. Mettre a jour `.tiple/sprint/status.md` → story ✅ Done
+10. Mettre a jour `.claude/conventions/component-registry.md` si nouveaux composants
+11. Mettre a jour `.claude/sprint/status.md` → story ✅ Done
 12. `/commit-push` pour envoyer sur le remote
 
 ## Commandes disponibles
@@ -410,7 +410,7 @@ Le projet inclut le design system Tiple complet (vert mint, editorial). Toujours
 - **Preview interactive :** route `/design-system`
 - **Composants Shadcn/ui :** `src/components/ui/` — 34 composants installes (style new-york)
 - **Composants metier :** `src/components/` — PageContainer, EmptyState, StatCard, DataTable, ThemeToggle, ThemeProvider
-- **Registry complet :** `.tiple/conventions/component-registry.md` — TOUJOURS verifier avant de creer un composant
+- **Registry complet :** `.claude/conventions/component-registry.md` — TOUJOURS verifier avant de creer un composant
 
 ### Regles UI
 1. **Reutiliser les composants existants**
@@ -419,12 +419,12 @@ Le projet inclut le design system Tiple complet (vert mint, editorial). Toujours
 4. **Dark mode compatible** — tester les deux themes
 
 ## Conventions
-- Index des tags : `.tiple/conventions/_index.md`
-- Coding standards : `.tiple/conventions/coding-standards.md`
-- Stack technique : `.tiple/conventions/tech-stack.md`
-- Strategie de tests : `.tiple/conventions/testing-strategy.md`
-- Registry composants : `.tiple/conventions/component-registry.md`
-- Patterns API : `.tiple/conventions/api-patterns.md`
+- Index des tags : `.claude/conventions/_index.md`
+- Coding standards : `.claude/conventions/coding-standards.md`
+- Stack technique : `.claude/conventions/tech-stack.md`
+- Strategie de tests : `.claude/conventions/testing-strategy.md`
+- Registry composants : `.claude/conventions/component-registry.md`
+- Patterns API : `.claude/conventions/api-patterns.md`
 
 ---
 
@@ -454,7 +454,7 @@ Juste apres "Pas un formulaire — un dialogue naturel.", ajouter :
 
 > **🚫 REGLE CRITIQUE — `/tm-plan` = ZERO code, ZERO commande systeme**
 >
-> Cette commande produit UNIQUEMENT des fichiers Markdown dans `docs/` et `.tiple/sprint/`.
+> Cette commande produit UNIQUEMENT des fichiers Markdown dans `docs/` et `.claude/sprint/`.
 > Pendant toute la duree du `/tm-plan`, il est INTERDIT de :
 > - Executer `pnpm add`, `pnpm install`, `npm install`, `npx`, ou toute installation de dependances
 > - Creer ou modifier des fichiers `.ts`, `.tsx`, `.js`, `.css`, `.json` (sauf les Markdown de docs)

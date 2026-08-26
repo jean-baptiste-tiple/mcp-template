@@ -3,7 +3,7 @@ name: deploy
 description: "Déploiement : environnements, migrations staging/prod, rollback, secrets deploy, Vercel, CI. FR : déploiement, environnement, staging, production, rollback, retour arrière, déployer."
 ---
 
-Consult [.tiple/conventions/deployment-patterns.md](.tiple/conventions/deployment-patterns.md) for the full patterns. Load it before deploying.
+Consult [.claude/conventions/deployment-patterns.md](.claude/conventions/deployment-patterns.md) for the full patterns. Load it before deploying.
 
 Key invariants:
 - Jamais de migration destructive sans rollback prévu (code ET database)

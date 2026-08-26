@@ -28,9 +28,9 @@ Le prompt envoyé à l'agent doit contenir :
 
 ## Contexte à charger (par l'agent reviewer)
 
-1. Lire `.tiple/checklists/code-review.md` — c'est la checklist de référence
-2. Lire `.tiple/conventions/coding-standards.md` — pour vérifier les conventions
-3. Lire `.tiple/conventions/component-registry.md` — pour vérifier DRY/réutilisation
+1. Lire `.claude/checklists/code-review.md` — c'est la checklist de référence
+2. Lire `.claude/conventions/coding-standards.md` — pour vérifier les conventions
+3. Lire `.claude/conventions/component-registry.md` — pour vérifier DRY/réutilisation
 4. Si story spécifiée : lire la story dans `docs/stories/` pour connaître le scope et les AC
 5. Identifier les fichiers modifiés : `git diff --name-only HEAD~1` (ou utiliser la liste fournie)
 6. Lire CHAQUE fichier modifié en entier — ne pas se contenter du diff
@@ -52,6 +52,7 @@ Passer CHAQUE section de `code-review.md` dans l'ordre :
 - Vérifier que les schemas Zod sont dans `lib/schemas/` et partagés
 - Chercher du code copié-collé entre fichiers (factoriser si ≥ 2 occurrences)
 - Vérifier que les types Supabase sont utilisés (pas redéfinis)
+- Pour chaque surface nouvelle du diff (fichier, composant, hook, util, abstraction, prop optionnelle, option de config, table, colonne, flag, dépendance) : trouver ce qui casse sans elle aujourd'hui. Absent ou formulé au futur → **[MOYENNE] surface injustifiée** → proposer le retrait (coding-standards §Surfaces nouvelles)
 
 ### 2. Qualité du code
 - Nommage cohérent (kebab-case fichiers, PascalCase composants, camelCase fonctions)
@@ -99,6 +100,7 @@ Passer CHAQUE section de `code-review.md` dans l'ordre :
 ### 7. Documentation
 - Component-registry à jour
 - Story post-implémentation remplie
+- Entrée changelog : au-delà d'un changement trivial, le champ `**Écarté :**` nomme l'option plus simple écartée et la raison. Absent → **[MOYENNE] aucun arbitrage rendu**
 - ADRs créés si nécessaire
 
 ## Output de la review

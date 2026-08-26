@@ -20,7 +20,7 @@
 
 ## Canal MCP (si le produit expose un serveur MCP)
 
-> Squelette prêt : `.tiple/starters/mcp/` (endpoint, tool démo, widgets, bridge, test) — installé en S01.
+> Squelette prêt : `.claude/starters/mcp/` (endpoint, tool démo, widgets, bridge, test) — installé en S01.
 > Versions `1.x` / `latest` à figer lors de l'installation (story S01 Setup) — mettre à jour ce tableau avec les versions exactes.
 
 | Techno | Version | Rôle | Justification |

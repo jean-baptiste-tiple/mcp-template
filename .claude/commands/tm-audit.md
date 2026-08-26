@@ -4,7 +4,7 @@ Lance une revue complète du produit en **3 passes parallèles par agents isolé
 
 ## Passe 1 — Code review (agent « auditeur »)
 
-Dérouler `.tiple/checklists/code-review.md` point par point sur TOUT le code produit, avec les invariants (`docs/architecture.md`) et les ADRs comme lois :
+Dérouler `.claude/checklists/code-review.md` point par point sur TOUT le code produit, avec les invariants (`docs/architecture.md`) et les ADRs comme lois :
 
 1. **Sécurité** : RLS org-scopée partout, zéro `service_role` runtime, inputs Zod (tools + actions), pas d'erreur brute exposée, secrets serveur uniquement, SSRF/uploads/ilike (voir `security-patterns.md`), PII hors logs.
 2. **Garde-fous prepare→save** (si MCP) : chaque `save_*` re-valide sans confiance au modèle ; paramètres d'audit re-dérivés serveur ; audit sur toute la surface ; parité web ↔ MCP.

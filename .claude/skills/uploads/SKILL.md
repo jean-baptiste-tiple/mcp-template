@@ -3,7 +3,7 @@ name: uploads
 description: "Uploads de fichiers : file upload, Supabase Storage, validation taille/mime, drag and drop. FR : upload, téléversement, fichier, image, pièce jointe, validation fichier."
 ---
 
-Consult [.tiple/conventions/api-patterns.md](.tiple/conventions/api-patterns.md) (section Uploads) for the full patterns. Load it before writing upload code.
+Consult [.claude/conventions/api-patterns.md](.claude/conventions/api-patterns.md) (section Uploads) for the full patterns. Load it before writing upload code.
 
 Key invariants:
 - Validation côté serveur : taille max, mime-type (pas seulement l'extension)

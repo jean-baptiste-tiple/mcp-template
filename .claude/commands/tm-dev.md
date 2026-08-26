@@ -33,11 +33,11 @@ Workflow complet quand une story `docs/stories/` pilote l'implémentation.
 
 ### Phase 1 — Contexte
 
-1. Si `next` : lire `.tiple/sprint/status.md`, trouver la prochaine story 🟢 Ready
+1. Si `next` : lire `.claude/sprint/status.md`, trouver la prochaine story 🟢 Ready
 2. Lire la story complète dans `docs/stories/`
-3. Vérifier `.tiple/checklists/story-ready.md` — si KO, signaler et s'arrêter
+3. Vérifier `.claude/checklists/story-ready.md` — si KO, signaler et s'arrêter
 4. **Charger les conventions pertinentes :**
-   - Lire `.tiple/conventions/_index.md` (index des conventions)
+   - Lire `.claude/conventions/_index.md` (index des conventions)
    - Lire les **conventions de base** (toujours) : `coding-standards.md`, `component-registry.md`
    - Lire le champ **Conventions** de la story → charger les fichiers correspondants aux tags
    - Exemple : tags `auth, database, forms` → lire `auth-patterns.md`, `database-patterns.md`, `api-patterns.md`
@@ -77,7 +77,7 @@ Workflow complet quand une story `docs/stories/` pilote l'implémentation.
      .claude/commands/tm-review.md comme guide.
      Story: [STORY_ID]
      Fichiers modifiés: [LISTE_FICHIERS]
-     Lis chaque fichier modifié, lis la checklist .tiple/checklists/code-review.md,
+     Lis chaque fichier modifié, lis la checklist .claude/checklists/code-review.md,
      et produis une review structurée avec verdict par section."
    )
    ```
@@ -89,8 +89,8 @@ Workflow complet quand une story `docs/stories/` pilote l'implémentation.
 
 11. Entrée dans `docs/changelog.md`
 12. Mettre à jour la story : section Post-implémentation
-13. Mettre à jour `.tiple/conventions/component-registry.md` si nouveaux composants
-14. Mettre à jour `.tiple/sprint/status.md` (story → ✅ Done)
+13. Mettre à jour `.claude/conventions/component-registry.md` si nouveaux composants
+14. Mettre à jour `.claude/sprint/status.md` (story → ✅ Done)
 
 ---
 
@@ -102,7 +102,7 @@ Ces trois modes partagent le même squelette (Phases 1-5 ci-dessous) avec des **
 
 1. L'utilisateur décrit le besoin (le mode est détecté depuis sa description)
 2. **Charger les conventions pertinentes :**
-   - Lire `.tiple/conventions/_index.md`
+   - Lire `.claude/conventions/_index.md`
    - Lire les conventions de base (toujours) : `coding-standards.md`, `component-registry.md`
    - Déduire les tags depuis les fichiers concernés :
      - `lib/actions/` ou `lib/schemas/` → `api`, `forms`
@@ -223,6 +223,7 @@ Ce mode **n'écrit rien**. Pas de type-check, pas de review agent, pas de finali
 **Quoi :** Ce qui a été fait (concis)
 **Pourquoi :** La raison
 **Problèmes :** Ce qui a bloqué (si applicable)
+**Écarté :** L'option d'un cran plus simple non retenue, et pourquoi (obligatoire au-delà d'un changement trivial)
 **Fichiers :** Liste des fichiers créés/modifiés
 ```
 
@@ -237,4 +238,4 @@ Ce mode **n'écrit rien**. Pas de type-check, pas de review agent, pas de finali
 - Schema Zod partagé = une seule source de vérité
 - RLS sur toute nouvelle table
 - Gérer les 3 états UI : loading, error, empty
-- Pas d'abstraction prématurée (factoriser à 2+ occurrences)
+- Pas d'abstraction prématurée (factoriser à 2+ occurrences) ; toute surface nouvelle porte ce qui casse sans elle aujourd'hui, sinon elle se retire (coding-standards §Surfaces nouvelles)

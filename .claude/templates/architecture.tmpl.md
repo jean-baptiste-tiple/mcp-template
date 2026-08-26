@@ -98,7 +98,7 @@ erDiagram
 
 <!-- À REMPLIR si le produit expose un serveur MCP. Sinon écrire "N/A".
      Règle de parité : chaque tool = adaptateur fin vers le même service que la Server Action.
-     Patterns : .tiple/conventions/mcp-patterns.md (tag mcp) -->
+     Patterns : .claude/conventions/mcp-patterns.md (tag mcp) -->
 
 ### Tools
 | Tool | Input (Zod) | Effet | Widget associé | Parcours |

@@ -7,8 +7,15 @@
 **Quoi :** Ce qui a été fait
 **Pourquoi :** La raison / la story / le bug
 **Problèmes :** Ce qui a bloqué et comment c'a été résolu (si applicable)
+**Écarté :** L'option d'un cran plus simple non retenue, et pourquoi (obligatoire au-delà d'un changement trivial)
 **Fichiers :** Liste des fichiers créés/modifiés
 -->
+
+## [2026-08-26] — Règle « trace de l’arbitrage », Fable pilote / Opus écrit, .tiple → .claude
+**Quoi :** (1) Règle anti-over-engineering rendue observable : toute surface nouvelle porte ce qui casse sans elle aujourd’hui (sinon retrait), et au-delà d’un changement trivial l’entrée changelog nomme l’option plus simple écartée (champ `**Écarté :**`). Texte canonique dans coding-standards §Surfaces nouvelles, relayé par CLAUDE.md, contrôlé par la checklist code-review et l’agent /tm-review ([MOYENNE]). (2) Section « Qui exécute : Fable pilote, Opus écrit » dans CLAUDE.md. (3) /tm-wrap-up écrit directement dans conventions/ADR/CLAUDE.md — plus de validation préalable. (4) `.tiple/` fusionné dans `.claude/` (checklists, conventions, sprint, starters, templates), toutes les références de chemin réécrites.
+**Pourquoi :** Sous sa forme littérale (« rester simple ») la règle ne se contrôle pas sur un diff ; ce qui se contrôle est la trace de l’arbitrage. Un seul dossier de méthode au lieu de deux.
+**Écarté :** Créer un template de PR / CONTRIBUTING.md pour porter le contrôle — écarté : ils n’existent pas ici, la CI ne fait que `pnpm build`, et le contrôle de review vit déjà dans l’agent /tm-review ; créer ces fichiers serait exactement la surface injustifiée que la règle interdit.
+**Fichiers :** `CLAUDE.md`, `.claude/conventions/coding-standards.md`, `.claude/checklists/code-review.md`, `.claude/commands/{tm-review,tm-dev,commit-push,tm-wrap-up}.md`, `.claude/skills/tm-wrap-up/SKILL.md`, `.claude/templates/story.tmpl.md`, `docs/changelog.md`, déplacement `.tiple/**` → `.claude/**` + réécriture des chemins (README, docs/, files/, skills)
 
 ## [2026-07-20] — Design system v2 (backport cv-editor) : sidebar sombre, pattern croix + halo, fond #FAFAFA, inputs pill
 **Quoi :** Port des 7 commits design de mcp-cv-editor (`d468a52` → `0052248`) :
@@ -19,7 +26,7 @@
 - **H2 éditorial** : tiret vertical mint + titre bold (encodé dans `section.tsx` de la preview + snippet dans system.md).
 - Docs synchronisées : `docs/design/system.md` (tokens, section « Fond des corps de page », patterns), registry (SidebarNav, notes pill), CLAUDE.md + README (thème).
 **Pourquoi :** JB a fait évoluer l'identité sur cv-editor (branding éditorial complet) — le template repart avec ce niveau de finition par défaut.
-**Fichiers :** `src/app/globals.css`, `src/app/(dashboard)/layout.tsx`, `src/components/{sidebar-nav.tsx,nav-items.ts}` (nouveaux), `src/components/{empty-state,data-table}.tsx`, `src/components/ui/{input,select,textarea}.tsx`, `src/app/design-system/sections/section.tsx`, `.tiple/starters/supabase-auth/auth-layout.tsx`, `docs/design/system.md`, `.tiple/conventions/component-registry.md`, `CLAUDE.md`, `README.md`
+**Fichiers :** `src/app/globals.css`, `src/app/(dashboard)/layout.tsx`, `src/components/{sidebar-nav.tsx,nav-items.ts}` (nouveaux), `src/components/{empty-state,data-table}.tsx`, `src/components/ui/{input,select,textarea}.tsx`, `src/app/design-system/sections/section.tsx`, `.claude/starters/supabase-auth/auth-layout.tsx`, `docs/design/system.md`, `.claude/conventions/component-registry.md`, `CLAUDE.md`, `README.md`
 
 ## [2026-07-19] — Rapports agents cv-editor (2ᵉ vague) : content texte roi, même-tour, loader jamais terminal, tous les canaux
 **Quoi :** Backport des correctifs issus des rapports de frictions agents (Claude + ChatGPT) sur mcp-cv-editor (commits `4a8361d`, `9f279c1`) :
@@ -29,12 +36,12 @@
 - **Instructions serveur (starter + §2.1)** : ne jamais affirmer que le widget a affiché quelque chose (fallback si aperçu bloqué, pas de retry identique) ; liens signés toujours en markdown court + expiration ; règle même-tour.
 - **Boucle de feedback agent institutionnalisée (§8 + CLAUDE.md règle 6 + template golden queries)** : rapport de frictions structuré demandé à l'agent hôte sur les DEUX hosts après chaque évolution, section dédiée dans le template golden-queries, rappel que les hosts cachent les métadonnées (déconnecter/reconnecter avant de tester).
 **Pourquoi :** deux rapports d'agents ont trouvé en un test ce que les reviews de code n'avaient pas vu — ces règles évitent de repayer les mêmes frictions sur le prochain produit.
-**Fichiers :** `.tiple/conventions/mcp-patterns.md`, `.tiple/starters/mcp/{widgets-bridge.ts,widgets-mount.tsx (nouveau),widget-status-card-main.tsx,tool-result.ts,server.ts,README.md}`, `.tiple/templates/mcp-golden-queries.tmpl.md`, `CLAUDE.md`, `docs/changelog.md`
+**Fichiers :** `.claude/conventions/mcp-patterns.md`, `.claude/starters/mcp/{widgets-bridge.ts,widgets-mount.tsx (nouveau),widget-status-card-main.tsx,tool-result.ts,server.ts,README.md}`, `.claude/templates/mcp-golden-queries.tmpl.md`, `CLAUDE.md`, `docs/changelog.md`
 
 ## [2026-07-19] — Fusion branche `template-mcp-learnings` (apprentissages docs MCP CV Editor)
 **Quoi :** Fusion sur main de la branche d'apprentissages doc : `mcp-patterns.md` §4 bis « zéro IA serveur » enrichi (garde-fous re-dérivés serveur, audits Unicode/accents, anti-invention par invariants, parité web/MCP), nouveau §4 ter « éditions en deltas » (ops par nom, lecture partielle, économie de tokens), §3 durci (annotations honnêtes, résolution par nom accents/ilike, tools destructifs jamais dans next_actions), §5.3 (URLs absolues widgets, deep links vs route groups, a11y), §5.3 bis (appariement widget↔tool), §6 bis (SSRF, uploads signés, middleware, RGPD, ilike/secrets) ; règles MCP 6-9 du CLAUDE.md ; nouvelle commande `/tm-audit` (revue totale Code × UI/UX × AX) ; checklist code-review, coding-standards, security-patterns et skill `mcp` enrichis. Conflits résolus en combinant avec le backport du jour (transport stateless/stateful conservé, triple méta conservée, §4 bis fusionné vers la version la plus riche).
 **Pourquoi :** deux sessions avaient capturé les apprentissages cv-editor en parallèle (code+design d'un côté, doctrine/review de l'autre) — main porte maintenant les deux.
-**Fichiers :** `.tiple/conventions/{mcp-patterns,coding-standards,security-patterns}.md`, `.tiple/checklists/code-review.md`, `.claude/commands/tm-audit.md` (nouveau), `.claude/skills/mcp/SKILL.md`, `CLAUDE.md`, `README.md` (table commandes), `docs/changelog.md`
+**Fichiers :** `.claude/conventions/{mcp-patterns,coding-standards,security-patterns}.md`, `.claude/checklists/code-review.md`, `.claude/commands/tm-audit.md` (nouveau), `.claude/skills/mcp/SKILL.md`, `CLAUDE.md`, `README.md` (table commandes), `docs/changelog.md`
 
 ## [2026-07-19] — Backport mcp-cv-editor : design system Tiple mint + fixes MCP Apps prod + transport au choix
 **Quoi :**
@@ -45,11 +52,11 @@
 
 **Pourquoi :** rapatrier dans le template tout ce que mcp-cv-editor a appris en allant en prod (design Tiple + debugging MCP Apps sur Claude ET ChatGPT), pour que le prochain produit démarre avec ces pièges déjà payés.
 
-**Fichiers :** `src/app/globals.css`, `src/app/layout.tsx`, `src/app/error.tsx`, `src/app/loading.tsx`, `src/app/icon.svg`, `src/app/design-system/**`, `src/components/{ui/button,ui/badge,ui/radio-group,ui/spinner,stat-card,theme-toggle,copy-button,logo}.tsx`, `src/app/(dashboard)/dashboard/page.tsx`, `tailwind.config.ts` (supprimé), `components.json`, `tsconfig.json`, `package.json` (+@phosphor-icons/react), `.env.example`, `.tiple/starters/mcp/**` (réécrit, +7 fichiers), `.tiple/conventions/{mcp-patterns,tech-stack,component-registry}.md`, `docs/design/system.md`, `CLAUDE.md`, `README.md`, `.claude/commands/tm-plan.md`, `files/guide-mise-a-jour-framework.md`
+**Fichiers :** `src/app/globals.css`, `src/app/layout.tsx`, `src/app/error.tsx`, `src/app/loading.tsx`, `src/app/icon.svg`, `src/app/design-system/**`, `src/components/{ui/button,ui/badge,ui/radio-group,ui/spinner,stat-card,theme-toggle,copy-button,logo}.tsx`, `src/app/(dashboard)/dashboard/page.tsx`, `tailwind.config.ts` (supprimé), `components.json`, `tsconfig.json`, `package.json` (+@phosphor-icons/react), `.env.example`, `.claude/starters/mcp/**` (réécrit, +7 fichiers), `.claude/conventions/{mcp-patterns,tech-stack,component-registry}.md`, `docs/design/system.md`, `CLAUDE.md`, `README.md`, `.claude/commands/tm-plan.md`, `files/guide-mise-a-jour-framework.md`
 
 ## [2026-07-17] — Starter Canal MCP + tests smoke + error.tsx + hook durci
 **Quoi :**
-- Nouveau starter `.tiple/starters/mcp/` (15 fichiers) : endpoint `/api/mcp` stateless (mcp-handler), chaîne démo complète `schema Zod partagé → service → tool get_status`, helpers `widget-meta` (dual-meta `ui/resourceUri` + `openai/outputTemplate`) et `tool-result` (deux formes + erreurs actionnables), `auth.ts` OAuth 2.1 (JWKS Supabase, à activer avec supabase-auth), route RFC 9728, bridge widgets unique deux dialectes, widget exemple `status-card` (états + thème) buildé par Vite single-file, test unit `InMemoryTransport`. Chaque fichier référence la section de `mcp-patterns.md` qu'il implémente, avec `TODO(S01)` sur les points à valider contre les versions épinglées.
+- Nouveau starter `.claude/starters/mcp/` (15 fichiers) : endpoint `/api/mcp` stateless (mcp-handler), chaîne démo complète `schema Zod partagé → service → tool get_status`, helpers `widget-meta` (dual-meta `ui/resourceUri` + `openai/outputTemplate`) et `tool-result` (deux formes + erreurs actionnables), `auth.ts` OAuth 2.1 (JWKS Supabase, à activer avec supabase-auth), route RFC 9728, bridge widgets unique deux dialectes, widget exemple `status-card` (états + thème) buildé par Vite single-file, test unit `InMemoryTransport`. Chaque fichier référence la section de `mcp-patterns.md` qu'il implémente, avec `TODO(S01)` sur les points à valider contre les versions épinglées.
 - Tests smoke ajoutés : `tests/e2e/smoke.spec.ts` (redirect home → /dashboard + design system, valide la config Playwright) et `tests/integration/dashboard-page.test.tsx` (RTL + jsdom + jest-dom). `tests/setup.ts` existait mais n'était pas branché — `setupFiles` câblé dans `vitest.config.ts`.
 - `src/app/error.tsx` global ajouté (EmptyState + Button, reset).
 - Hook `enforce-bash-rules.sh` durci : l'extraction de `tool_input.command` gérait mal les guillemets échappés (une commande avec `"…"` tronquait l'extraction au premier `\"` → un pipe interdit passait). Extraction via jq, fallback perl, dernier recours historique. Vérifié sur 3 cas (pipe caché par guillemets bloqué, commande propre OK, pipe dans `description` seule OK).
@@ -59,11 +66,11 @@
 **Pourquoi :** suite de l'audit boilerplate — le cœur MCP du template ("mcp-template") était entièrement "à créer en S01" à chaque projet. Le starter fait gagner la story de setup et fixe les patterns par l'exemple.
 
 **Fichiers :**
-- `.tiple/starters/mcp/` (15 nouveaux fichiers)
+- `.claude/starters/mcp/` (15 nouveaux fichiers)
 - `tests/e2e/smoke.spec.ts`, `tests/integration/dashboard-page.test.tsx`, `vitest.config.ts`
 - `src/app/error.tsx`
 - `.claude/hooks/enforce-bash-rules.sh`, `.claude/commands/commit-push.md`
-- `README.md`, `CLAUDE.md`, `.tiple/conventions/tech-stack.md`, `.tiple/conventions/mcp-patterns.md`
+- `README.md`, `CLAUDE.md`, `.claude/conventions/tech-stack.md`, `.claude/conventions/mcp-patterns.md`
 
 ## [2026-07-17] — Audit boilerplate : 3 fixes (route `/` 404, config Tailwind morte, lint du build output)
 **Quoi :**
@@ -151,8 +158,8 @@
 - `CLAUDE.md` (ajout de `/tm-wrap-up` dans la table des commandes)
 
 ## [2026-04-19] — Template : skills "shim" pour conventions
-**Quoi :** Ajout de 22 skills Claude Code (un par tag de `.tiple/conventions/_index.md`) dans `.claude/skills/`. Chaque skill est un shim ~8 lignes (frontmatter `name`+`description` + pointeur vers `.tiple/conventions/<file>.md` + 2-3 invariants-clés).
-**Pourquoi :** Les conventions étaient chargées uniquement par `/tm-dev` / `/tm-fix` via déduction de tags manuelle. Hors de ces workflows (édit libre, Q&A), elles étaient ignorées. Les skills permettent à Claude de les auto-déclencher contextuellement sans toucher à la source de vérité (`.tiple/conventions/` inchangé) ni aux slash commands.
+**Quoi :** Ajout de 22 skills Claude Code (un par tag de `.claude/conventions/_index.md`) dans `.claude/skills/`. Chaque skill est un shim ~8 lignes (frontmatter `name`+`description` + pointeur vers `.claude/conventions/<file>.md` + 2-3 invariants-clés).
+**Pourquoi :** Les conventions étaient chargées uniquement par `/tm-dev` / `/tm-fix` via déduction de tags manuelle. Hors de ces workflows (édit libre, Q&A), elles étaient ignorées. Les skills permettent à Claude de les auto-déclencher contextuellement sans toucher à la source de vérité (`.claude/conventions/` inchangé) ni aux slash commands.
 **Fichiers :**
 - `.claude/skills/{auth,database,supabase,api,forms,realtime,security,nextjs,typescript,state,feedback,performance,tables,uploads,seo,a11y,i18n,datetime,monitoring,flags,deploy,testing}/SKILL.md` (22 nouveaux shims)
 - `.gitignore` : whitelist `!.claude/skills/`

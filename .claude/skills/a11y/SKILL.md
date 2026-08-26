@@ -3,7 +3,7 @@ name: a11y
 description: "Accessibilité WCAG : ARIA, keyboard nav, focus management, screen readers, contraste, labels. FR : accessibilité, a11y, clavier, lecteur d'écran, contraste, label, navigation clavier."
 ---
 
-Consult [.tiple/conventions/accessibility-patterns.md](.tiple/conventions/accessibility-patterns.md) for the full patterns. Load it before writing interactive components.
+Consult [.claude/conventions/accessibility-patterns.md](.claude/conventions/accessibility-patterns.md) for the full patterns. Load it before writing interactive components.
 
 Key invariants:
 - HTML sémantique d'abord (`<button>`, `<nav>`, `<main>`), ARIA seulement en complément

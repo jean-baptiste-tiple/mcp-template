@@ -9,7 +9,25 @@
 - **Surfacer les hypothèses, pas les masquer.** Si la story/fix est ambigu ou admet plusieurs interprétations : nommer le doute, proposer les options, demander — ne pas trancher en silence.
 - **Edits chirurgicaux.** Chaque ligne changée doit tracer à la demande. Pas de cleanup adjacent, pas de reformatage opportuniste, pas de refacto non demandé. Dead code repéré : le mentionner, pas le supprimer.
 - **Critères de succès vérifiables avant d'implémenter.** Reformuler la tâche en checks concrets (test qui reproduit le bug, assertion qui valide la feature, type-check qui passe). Pas de "make it work" flou.
-- **Push back quand justifié.** Si une approche plus simple existe ou si la demande crée une dette évidente, le dire avant d'exécuter.
+- **Ne pas over-engineer — laisser la trace de l'arbitrage.** Toute surface nouvelle (fichier, composant, hook, util, abstraction, prop optionnelle, option de config, table, colonne, flag, dépendance) porte ce qui casse sans elle **aujourd'hui** ; un besoin au futur n'en est pas une → la surface se retire. Au-delà d'un changement trivial, l'entrée changelog nomme l'option d'un cran plus simple écartée et pourquoi (champ `**Écarté :**`). Règle complète : `.claude/conventions/coding-standards.md` §Surfaces nouvelles ; contrôlée par `/tm-review`.
+- **Push back quand justifié.** Si la demande elle-même crée une dette évidente, le dire avant d'exécuter.
+
+## Qui exécute : Fable pilote, Opus écrit
+
+Le **modèle de la session** décide du rôle, pas la taille de la demande.
+
+- **Session Fable** — Fable ne modifie **jamais** `src/` ni `tests/` lui-même. Il découpe le
+  travail en lots indépendants, écrit pour chacun les critères vérifiables, lance des `Agent`
+  avec `model: "opus"` — tous dans le même message quand les lots ne se touchent pas, pour
+  qu'ils tournent en parallèle — puis relit les diffs, arbitre, et porte la finalisation :
+  review, changelog, registry, `commit-push`. Restent à sa main : `docs/`, `.claude/`, les
+  vérifications, les décisions.
+- **Session Opus** — pas de délégation imposée : Opus écrit lui-même, et délègue quand un lot
+  est réellement parallélisable, pas par principe.
+- **`model: "opus"` s'écrit explicitement** sur chaque `Agent` lancé depuis une session Fable :
+  sans ce champ le sous-agent hérite du modèle du parent, et le pilotage ne sert à rien.
+- **Un sous-agent reçoit la méthode, pas seulement la tâche** : échelle annoncée, conventions
+  routées à charger, critères de succès, interdiction de commiter. Le commit reste au pilote.
 
 ## Projet
 <!-- À REMPLIR : Nom du projet, description en 1 ligne -->
@@ -19,7 +37,7 @@ Next.js 15 (App Router) + TypeScript strict + Tailwind CSS + Shadcn/ui
 Backend/DB optionnel : Supabase (à ajouter selon le projet — voir section "Supabase" ci-dessous).
 Canal MCP (si produit MCP-first) : `@modelcontextprotocol/sdk` + `mcp-handler` (endpoint `/api/mcp`), widgets MCP Apps buildés par Vite.
 IA : **par défaut, zéro IA serveur** — les opérations intelligentes sont faites par le modèle de l'host (l'abonnement Claude/ChatGPT de l'utilisateur) via le pattern `prepare → modèle → save validé` (mcp-patterns §4 bis). Un appel LLM côté serveur (`@anthropic-ai/sdk`) = décision explicite par ADR au cadrage.
-Voir `.tiple/conventions/tech-stack.md` pour les versions exactes.
+Voir `.claude/conventions/tech-stack.md` pour les versions exactes.
 
 ## Méthode
 Ce projet suit la Tiple Method. La documentation dans `docs/` est la source de vérité. Lis les fichiers pertinents avant chaque action.
@@ -31,14 +49,14 @@ Ce projet suit la Tiple Method. La documentation dans `docs/` est la source de v
 4. Ne JAMAIS modifier un invariant d'architecture sans créer un ADR dans `docs/decisions/`
 5. Les tests sont écrits AVEC le code, pas après — unit tests d'abord, puis intégration, puis e2e si applicable
 6. Après implémentation : remplir la section "Post-implémentation" de la story
-7. Après implémentation : passer `.tiple/checklists/code-review.md` point par point
-8. **`/tm-plan` = documentation uniquement.** Ne JAMAIS installer de dépendances, créer de fichiers de code ou exécuter de builds pendant un cadrage. Seuls les fichiers dans `docs/` et `.tiple/sprint/` sont modifiés.
+7. Après implémentation : passer `.claude/checklists/code-review.md` point par point
+8. **`/tm-plan` = documentation uniquement.** Ne JAMAIS installer de dépendances, créer de fichiers de code ou exécuter de builds pendant un cadrage. Seuls les fichiers dans `docs/` et `.claude/sprint/` sont modifiés.
 
 ## Conventions par tags (chargement intelligent)
 
-Les conventions techniques sont dans `.tiple/conventions/`. Elles sont chargées **automatiquement** selon le contexte :
+Les conventions techniques sont dans `.claude/conventions/`. Claude les met à jour directement quand un apprentissage le justifie (`/tm-wrap-up`), sans validation préalable. Elles sont chargées **automatiquement** selon le contexte :
 
-- **Index :** `.tiple/conventions/_index.md` liste tous les tags et les fichiers associés
+- **Index :** `.claude/conventions/_index.md` liste tous les tags et les fichiers associés
 - **Base (toujours lues) :** `coding-standards.md`, `component-registry.md`, `tech-stack.md`
 - **Mode story (`/tm-dev E01-S01`) :** le champ `Conventions` de la story déclare les tags → les fichiers correspondants sont chargés
 - **Mode libre (`/tm-dev` sans story) :** les tags sont déduits des fichiers touchés (ex: `lib/actions/` → `api`, `supabase/migrations/` → `database`)
@@ -58,16 +76,16 @@ Tags disponibles : `auth`, `mcp`, `database`, `supabase`, `api`, `forms`, `realt
 
 ## Starters
 
-Le template est minimal par défaut. Les starters dans `.tiple/starters/` ajoutent des fonctionnalités complètes. Ils sont **identifiés** par `/tm-plan` (Phase 0) et **installés** par `/tm-dev` lors de la story E01-S01 (Setup technique).
+Le template est minimal par défaut. Les starters dans `.claude/starters/` ajoutent des fonctionnalités complètes. Ils sont **identifiés** par `/tm-plan` (Phase 0) et **installés** par `/tm-dev` lors de la story E01-S01 (Setup technique).
 
-### Supabase + Auth (`.tiple/starters/supabase-auth/`)
+### Supabase + Auth (`.claude/starters/supabase-auth/`)
 Ajoute : base de données, auth (login/signup/reset), middleware, Server Actions, pages auth, CI migrations.
 Activé quand le projet a besoin d'une base de données et/ou d'authentification.
-Voir `.tiple/starters/supabase-auth/README.md` pour le détail.
+Voir `.claude/starters/supabase-auth/README.md` pour le détail.
 
-### Canal MCP (`.tiple/starters/mcp/`)
+### Canal MCP (`.claude/starters/mcp/`)
 Ajoute : endpoint `/api/mcp` (Streamable HTTP stateless), tool démo câblé `schema Zod → service → tool`, helpers dual-meta + résultats, auth OAuth 2.1 (à activer avec supabase-auth), bridge widgets unique, widget exemple buildé par Vite (single-file), test unit `InMemoryTransport`.
-Activé pour tout produit MCP-first. Voir `.tiple/starters/mcp/README.md` pour le détail.
+Activé pour tout produit MCP-first. Voir `.claude/starters/mcp/README.md` pour le détail.
 
 ### Règles Supabase (quand activé)
 - **Supabase côté serveur uniquement pour les mutations.** Le browser client est réservé au realtime et à l'auth listener. Jamais de `.insert()/.update()/.delete()` depuis un Client Component.
@@ -82,33 +100,33 @@ Activé pour tout produit MCP-first. Voir `.tiple/starters/mcp/README.md` pour l
 3. **Un rendu = un composant React unique.** Si une entité est affichée sur plusieurs surfaces (éditeur web, page publique, widget MCP, PDF), c'est le MÊME composant. Ne jamais dupliquer le rendu.
 4. **Tools authentifiés OAuth 2.1 via Supabase** (RFC 9728 + 401 `WWW-Authenticate` + `securitySchemes` par tool), client Supabase au nom de l'utilisateur (RLS active). `service_role` interdit dans les tools. Transport **stateless par défaut, stateful (Redis/SSE) si le produit l'exige — choix figé par ADR** ; jamais de sessions/push hors ADR.
 5. **Dual-host day one (Claude + ChatGPT)** : widgets déclarés avec la TRIPLE méta (`ui.resourceUri` GA + alias plat pré-GA + `openai/outputTemplate` → variante skybridge) via un helper unique ; 2 resources par bundle (`text/html;profile=mcp-app` + `text/html+skybridge`) ; bridge unique (`widgets/shared/bridge.ts`) sur le SDK officiel `ext-apps` ; matrice de test des deux hosts avant push. Tout tool fonctionne sans widget (texte suffisant). Bundles Vite single-file inlinés dans `generated.ts` (CSP hosts : zéro requête externe).
-6. **AX** : `instructions` serveur maintenu, descriptions "Use this when… / Do not use for…" avec `.describe()` sur CHAQUE champ, `next_actions` dans chaque résultat (graphe fermé, jamais de tool destructif proposé) ; toute évolution de tool/description rejoue les golden queries (`docs/mcp-golden-queries.md`, créé depuis `.tiple/templates/mcp-golden-queries.tmpl.md`) sur les deux hosts + **rapport de frictions demandé à l'agent hôte** (les hosts cachent les métadonnées : déconnecter/reconnecter le connecteur avant de tester). ⚠️ Le `content` TEXTE est la seule voie fiable vers le modèle — certains hosts masquent `structuredContent` (canal du widget).
+6. **AX** : `instructions` serveur maintenu, descriptions "Use this when… / Do not use for…" avec `.describe()` sur CHAQUE champ, `next_actions` dans chaque résultat (graphe fermé, jamais de tool destructif proposé) ; toute évolution de tool/description rejoue les golden queries (`docs/mcp-golden-queries.md`, créé depuis `.claude/templates/mcp-golden-queries.tmpl.md`) sur les deux hosts + **rapport de frictions demandé à l'agent hôte** (les hosts cachent les métadonnées : déconnecter/reconnecter le connecteur avant de tester). ⚠️ Le `content` TEXTE est la seule voie fiable vers le modèle — certains hosts masquent `structuredContent` (canal du widget).
 7. **Zéro IA serveur par défaut (ADR au cadrage)** : opérations intelligentes = pattern `prepare (tool) → modèle de l'host → save (tool validé)`. Consignes + données du prepare dans le `content` texte, enchaînement prepare→save **dans le même tour** (consigne explicite, sinon l'agent s'arrête avant le save). Le save ne fait JAMAIS confiance au modèle : Zod + audits déterministes dont les paramètres sont **re-dérivés côté serveur** (jamais pris du modèle) et dont les invariants **s'adaptent à l'intention** (`kind` — une traduction ne s'audite pas comme une adaptation), sur TOUTE la surface de l'entité, à frontières de mots Unicode/accents. Mêmes fonctions d'audit sur le canal web (parité des garde-fous). Détail : mcp-patterns §4 bis.
 8. **Économie de tokens** : les éditions sont des **deltas** (`ops` par section adressées par nom + `patch` deep-partial avec `null` = suppression), lecture partielle (`sections`), `structuredContent` compact, instructions/descriptions statiques (prompt caching). Le modèle ne relit ni ne réécrit jamais l'entité complète pour une mise à jour. Détail : mcp-patterns §4 ter.
-9. Détail des patterns : `.tiple/conventions/mcp-patterns.md` (tag `mcp`). Squelette prêt à installer : `.tiple/starters/mcp/` (story S01). Les choix d'auth et de transport sont figés par ADR lors du cadrage (`/tm-plan`).
+9. Détail des patterns : `.claude/conventions/mcp-patterns.md` (tag `mcp`). Squelette prêt à installer : `.claude/starters/mcp/` (story S01). Les choix d'auth et de transport sont figés par ADR lors du cadrage (`/tm-plan`).
 
 ## Workflow quotidien
-1. Lire `.tiple/sprint/status.md` → identifier la prochaine story 🟢 Ready
+1. Lire `.claude/sprint/status.md` → identifier la prochaine story 🟢 Ready
 2. Lire la story complète + ses refs (parcours PRD, référence UI, archi, conventions)
-3. Vérifier `.tiple/checklists/story-ready.md`
+3. Vérifier `.claude/checklists/story-ready.md`
 4. Implémenter : schemas Zod → backend → tests unit → UI → tests unit UI → page → tests integ
 5. Écrire les tests (unit + integ) au fur et à mesure
 6. Vérifier que les tests de la story passent
 7. **Type-check** (OBLIGATOIRE) : `pnpm type-check` → doit passer sans erreur
 8. **Code Review en agent isolé** (OBLIGATOIRE — `/tm-review`) :
    - Lancer un agent autonome séparé (regard neuf, sans biais d'implémentation)
-   - L'agent passe `.tiple/checklists/code-review.md` point par point
+   - L'agent passe `.claude/checklists/code-review.md` point par point
    - Couvrir : sécurité, qualité, DRY, tests, conventions, architecture, documentation
    - Si problèmes HAUTE/MOYENNE → corriger puis relancer l'étape 7, puis nouveau review agent
 9. Mettre à jour la story (post-implémentation)
-10. Mettre à jour `.tiple/conventions/component-registry.md` si nouveaux composants
-11. Mettre à jour `.tiple/sprint/status.md` → story ✅ Done
+10. Mettre à jour `.claude/conventions/component-registry.md` si nouveaux composants
+11. Mettre à jour `.claude/sprint/status.md` → story ✅ Done
 12. Ajouter une entrée dans `docs/changelog.md` si changement significatif
-13. Résumer ce qui a été fait
+13. Résumer ce qui a été fait — avec l'option plus simple écartée (voir « Avant de coder »)
 
 ## Quand le PRD évolue
 1. Modifier `docs/prd.md` — parcours concerné, statut 🔶 Draft
-2. Passer `.tiple/checklists/prd-evolution.md` point par point
+2. Passer `.claude/checklists/prd-evolution.md` point par point
 3. Identifier les impacts : parcours, maquettes/références UI (si applicable), architecture, epics, stories, DB
 4. Mettre à jour `docs/architecture.md` (+ ADR si invariant touché)
 5. (si maquettes) Mettre à jour les maquettes si nécessaire (`docs/design/screens/`)
@@ -117,8 +135,8 @@ Activé pour tout produit MCP-first. Voir `.tiple/starters/mcp/README.md` pour l
 8. Lister les nouvelles stories à créer
 
 ## Quand on crée un nouveau composant
-1. Vérifier `.tiple/conventions/component-registry.md` — s'il existe déjà, réutiliser
-2. Implémenter en suivant `.tiple/conventions/coding-standards.md`
+1. Vérifier `.claude/conventions/component-registry.md` — s'il existe déjà, réutiliser
+2. Implémenter en suivant `.claude/conventions/coding-standards.md`
 3. Ajouter au component-registry (nom, path, props, notes)
 4. Respecter `docs/design/system.md` pour les tokens visuels
 
@@ -145,7 +163,7 @@ Le projet inclut le design system Tiple complet (vert mint, éditorial). Toujour
 - **Preview interactive :** route `/design-system` — tous les composants rendus
 - **Composants Shadcn/ui :** `src/components/ui/` — 34 composants installés (style new-york)
 - **Composants métier :** `src/components/` — PageContainer, EmptyState, StatCard, DataTable, ThemeToggle, ThemeProvider, CopyButton, AppLogo
-- **Registry complet :** `.tiple/conventions/component-registry.md` — TOUJOURS vérifier avant de créer un composant
+- **Registry complet :** `.claude/conventions/component-registry.md` — TOUJOURS vérifier avant de créer un composant
 - **Thème :** Vert mint Tiple (#06f5a2) sur neutres chauds, fond de page #FAFAFA (surfaces de contenu opaques `bg-card`), sidebar SOMBRE dans les deux thèmes (item actif pill mint), pattern de page `.page-canvas` (halo mint + croix) + `.noise-overlay`, dark mode class-based (next-themes), Instrument Sans + JetBrains Mono, boutons/badges/inputs en pilule
 - **Icônes :** Phosphor (`@phosphor-icons/react`, `/dist/ssr` en Server Component) pour l'app ; lucide-react réservé aux internes Shadcn
 - **CSS Variables & config :** `src/app/globals.css` — SOURCE UNIQUE (Tailwind v4 CSS-first : tokens, dark variant, plugin animate, keyframes — il n'y a pas de `tailwind.config.ts`)
@@ -158,9 +176,9 @@ Le projet inclut le design system Tiple complet (vert mint, éditorial). Toujour
 5. **Dark mode compatible** — tester les deux thèmes
 
 ## Conventions
-- Index des tags : `.tiple/conventions/_index.md`
-- Coding standards : `.tiple/conventions/coding-standards.md`
-- Stack technique : `.tiple/conventions/tech-stack.md`
-- Stratégie de tests : `.tiple/conventions/testing-strategy.md`
-- Registry composants : `.tiple/conventions/component-registry.md`
-- Patterns API : `.tiple/conventions/api-patterns.md`
+- Index des tags : `.claude/conventions/_index.md`
+- Coding standards : `.claude/conventions/coding-standards.md`
+- Stack technique : `.claude/conventions/tech-stack.md`
+- Stratégie de tests : `.claude/conventions/testing-strategy.md`
+- Registry composants : `.claude/conventions/component-registry.md`
+- Patterns API : `.claude/conventions/api-patterns.md`

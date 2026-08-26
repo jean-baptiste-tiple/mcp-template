@@ -2,7 +2,7 @@
 
 > Tag : `mcp`
 > Lire ce fichier avant d'écrire un tool MCP, un widget MCP Apps, ou de toucher à `src/mcp/` / `widgets/`.
-> Squelette d'implémentation prêt : `.tiple/starters/mcp/` (installé en S01) — chaque fichier du starter référence la section qu'il implémente.
+> Squelette d'implémentation prêt : `.claude/starters/mcp/` (installé en S01) — chaque fichier du starter référence la section qu'il implémente.
 > Les exemples ci-dessous utilisent un domaine fictif (gestion de documents) — adapter au domaine du projet.
 > Cibles : **Claude ET ChatGPT dès la V1** — toute règle ci-dessous s'applique aux deux hosts.
 
@@ -248,7 +248,7 @@ Le choix est **figé par ADR** (`docs/decisions/`) lors du cadrage — en change
 
 ## 8. Golden queries — l'éval AX obligatoire
 
-Jeu de prompts versionné dans `docs/mcp-golden-queries.md` (créé depuis `.tiple/templates/mcp-golden-queries.tmpl.md`), trois catégories :
+Jeu de prompts versionné dans `docs/mcp-golden-queries.md` (créé depuis `.claude/templates/mcp-golden-queries.tmpl.md`), trois catégories :
 
 - **Directs** (nomment l'action) — doivent router vers les bons tools, dans le bon ordre ;
 - **Indirects** (décrivent le résultat attendu) — doivent quand même router ;

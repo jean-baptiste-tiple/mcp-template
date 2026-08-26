@@ -26,6 +26,7 @@ Ajouter une entrée en haut de `docs/changelog.md` (après le commentaire HTML) 
 ## [YYYY-MM-DD] — [Scope court]
 **Quoi :** Description concise de ce qui a été fait
 **Pourquoi :** La raison / le contexte / la story
+**Écarté :** L'option d'un cran plus simple non retenue, et pourquoi (obligatoire au-delà d'un changement trivial — coding-standards §Surfaces nouvelles)
 **Fichiers :** Liste des fichiers créés/modifiés (chemins relatifs)
 ```
 

@@ -8,6 +8,7 @@
 - [ ] Les schemas Zod sont partagés (pas de double validation manuelle)
 - [ ] Les types sont réutilisés depuis `types/` (pas de types inline redondants)
 - [ ] Factorisation à partir de 2 occurrences (pas d'abstraction prématurée)
+- [ ] Chaque surface nouvelle (fichier, composant, hook, util, abstraction, prop optionnelle, option de config, table, colonne, flag, dépendance) porte ce qui casse sans elle aujourd'hui — justification au futur (« on pourrait vouloir ») = ❌ retirer (coding-standards §Surfaces nouvelles)
 
 ## Qualité du code
 
@@ -97,5 +98,6 @@
 ## Documentation
 
 - [ ] Le changelog est à jour
+- [ ] Au-delà d'un changement trivial : l'entrée changelog nomme l'option plus simple écartée et pourquoi (champ `**Écarté :**`) — une seule solution présentée = ❌
 - [ ] Le component-registry est à jour
 - [ ] La story post-implémentation est remplie (si mode story)

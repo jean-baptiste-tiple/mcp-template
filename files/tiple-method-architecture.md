@@ -14,7 +14,7 @@ Ce n'est pas une application — c'est un template Git. Il n'y a pas de backend 
 
 ```mermaid
 graph TB
-    subgraph "Méthode (.tiple/)"
+    subgraph "Méthode (.claude/)"
         T[templates/] --> |"nourrit"| CMD[.claude/commands/]
         CK[checklists/] --> |"vérifié par"| CMD
         CV[conventions/] --> |"lu par"| CMD
@@ -76,7 +76,7 @@ tiple-method-template/
 │
 ├── CLAUDE.md                          # [FICHIER CLÉ] Instructions permanentes Claude Code
 ├── README.md                          # Guide d'utilisation du template
-├── .gitignore                         # Adapté Next.js + Supabase + .tiple
+├── .gitignore                         # Adapté Next.js + Supabase + .claude
 ├── .env.example                       # Variables requises avec commentaires
 │
 │── ─── MÉTHODE ──────────────────────
@@ -89,7 +89,7 @@ tiple-method-template/
 │   ├── tm-status.md                   # Sprint status
 │   └── tm-sprint.md                   # Nouveau sprint
 │
-├── .tiple/
+├── .claude/
 │   ├── templates/                     # 6 templates de documents markdown (brief, prd, architecture, epic, story, adr)
 │   ├── checklists/                    # 5 checklists quality gates (readiness, story-ready, story-done, code-review, prd-evolution)
 │   ├── conventions/                   # 5 fichiers conventions pré-remplis (tech-stack, coding-standards, testing, registry, api-patterns)
@@ -300,7 +300,7 @@ Les commandes ne sont PAS du code exécutable. Ce sont des instructions que Clau
 **Commandes transversales (à tout moment) :**
 - `/tm-evolve` → modifie docs/prd.md + cascade vers architecture/design system/epics/stories + nouvelles stories
 - `/tm-status` → affiche le sprint en cours, propose la prochaine action
-- `/tm-sprint` → initialise un nouveau sprint dans .tiple/sprint/status.md
+- `/tm-sprint` → initialise un nouveau sprint dans .claude/sprint/status.md
 
 ---
 

@@ -3,7 +3,7 @@
 Ce starter installe le squelette complet du canal MCP : endpoint `/api/mcp` (Streamable HTTP, stateless par défaut), un tool démo câblé selon les patterns (`schema Zod partagé → service → adaptateur tool → résultat structuré`), les widgets MCP Apps GA (triple méta + variante skybridge, bundles inlinés), le bridge officiel `ext-apps`, l'auth OAuth 2.1, le test unit `InMemoryTransport` et un smoke test HTTP.
 
 Il est activé par `/tm-plan` (Phase 0) pour tout produit MCP-first et installé lors de la story E01-S01.
-Chaque fichier implémente une section de `.tiple/conventions/mcp-patterns.md` — lire les deux en parallèle.
+Chaque fichier implémente une section de `.claude/conventions/mcp-patterns.md` — lire les deux en parallèle.
 Les fichiers sont issus du code **éprouvé en prod** de `mcp-cv-editor` (fixes dual-host inclus).
 
 ## Ce que ce starter installe
@@ -15,7 +15,7 @@ pnpm add @modelcontextprotocol/sdk mcp-handler jose
 pnpm add -D @modelcontextprotocol/ext-apps vite vite-plugin-singlefile
 ```
 
-> Figer les versions exactes dans `.tiple/conventions/tech-stack.md` après install (S01).
+> Figer les versions exactes dans `.claude/conventions/tech-stack.md` après install (S01).
 > Référence connue-bonne (mcp-cv-editor, 2026-07) : sdk 1.26.0 (épinglé sur le peer de
 > mcp-handler), mcp-handler 1.1.0, ext-apps **1.7.4 figé** (entrée `app-with-deps`), jose 6.x.
 > `zod`, `react` et `@vitejs/plugin-react` sont déjà dans le template.
@@ -121,7 +121,7 @@ bloc commenté dans `mcp-route.ts` (`withMcpAuth` + `verifyToken` de `src/mcp/au
    tool `get_status` visible, resources `ui://widgets/status-card.html` (profile=mcp-app)
    ET `…-skybridge.html` listées.
 5. Matrice dual-host (mcp-patterns §5.4) sur Claude + ChatGPT developer mode.
-6. Créer `docs/mcp-golden-queries.md` depuis `.tiple/templates/mcp-golden-queries.tmpl.md` (§8).
+6. Créer `docs/mcp-golden-queries.md` depuis `.claude/templates/mcp-golden-queries.tmpl.md` (§8).
 
 ## Après le squelette
 

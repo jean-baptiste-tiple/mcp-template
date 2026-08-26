@@ -3,7 +3,7 @@
 <!-- INSTRUCTIONS : Créé par /tm-plan (phase 5) ou /tm-evolve.
      Ce template est le plus important — il doit contenir TOUT ce dont
      Claude Code a besoin pour implémenter de manière autonome.
-     IMPORTANT : Vérifier .tiple/conventions/component-registry.md avant de créer. -->
+     IMPORTANT : Vérifier .claude/conventions/component-registry.md avant de créer. -->
 
 ## Meta
 
@@ -14,7 +14,7 @@
 | **Statut** | ⬜ Draft / 🟢 Ready / 🔵 In Progress / ✅ Done |
 | **Priorité** | Must / Should / Could |
 | **Référence UI** | _Fichier JSX, lien Figma, wireframe, description texte, ou N/A_ |
-| **Conventions** | auth, database, forms, security (tags depuis `.tiple/conventions/_index.md`) |
+| **Conventions** | auth, database, forms, security (tags depuis `.claude/conventions/_index.md`) |
 | **Estimation** | S / M / L |
 
 ## Contexte
@@ -43,8 +43,8 @@
 - `src/...`
 
 ### Patterns à suivre
-- Voir `.tiple/conventions/coding-standards.md` — section [X]
-- Voir `.tiple/conventions/api-patterns.md` — section [X]
+- Voir `.claude/conventions/coding-standards.md` — section [X]
+- Voir `.claude/conventions/api-patterns.md` — section [X]
 
 ## Tests attendus
 
@@ -72,6 +72,9 @@
 <!-- Lister pour ajout au component-registry -->
 | Composant/Hook/Action | Path | Notes |
 |----------------------|------|-------|
+
+### Option plus simple écartée
+<!-- L'option d'un cran plus simple non retenue, et pourquoi. Une seule solution = aucun arbitrage rendu. -->
 
 ### Notes
 <!-- Observations, dette technique identifiée, suggestions -->

@@ -104,6 +104,17 @@ export async function createProjectAction(formData: FormData) {
 - Composants : vérifier `component-registry.md` AVANT de créer
 - Factoriser à partir de 2 occurrences, pas avant (pas d'abstraction prématurée)
 
+## Surfaces nouvelles — la trace de l'arbitrage
+
+La règle DRY ci-dessus dit *quand factoriser* ; celle-ci dit *quand créer tout court*. Elle ne se contrôle pas sur l'intention mais sur le diff.
+
+**Surface nouvelle** = fichier, composant, hook, util, abstraction, prop optionnelle, option de config, table, colonne, flag, dépendance.
+
+1. **Chaque surface nouvelle porte ce qui casse sans elle AUJOURD'HUI**, au point de création : commentaire de tête (fichier, abstraction), JSDoc ou `.describe()` (prop, option), commentaire de migration (table, colonne), entrée changelog (dépendance). Un besoin au futur — « on pourrait vouloir », « pour rester générique », « ce sera utile quand » — n'est pas une justification : la surface se **retire**, elle ne se documente pas.
+2. **Au-delà d'un changement trivial** (≥ 2 fichiers impactés, nouveau parcours UI, modification DB, nouvelle dépendance — même échelle que le mode Feature de `/tm-dev`), **l'entrée `docs/changelog.md` nomme l'option d'un cran plus simple qui a été écartée et la raison** (champ `**Écarté :**`). Une seule solution présentée = aucun arbitrage rendu.
+
+Contrôle en review : `.claude/checklists/code-review.md` (§DRY & Réutilisation, §Documentation).
+
 ## Imports
 
 - Alias : `@/` pointe vers `src/`

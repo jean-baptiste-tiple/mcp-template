@@ -11,5 +11,5 @@
 - [ ] Les refs PRD (parcours + FR) et architecture sont renseignées
 - [ ] La référence UI est renseignée (fichier JSX, lien Figma, description texte, ou N/A)
 - [ ] Les dépendances avec d'autres stories sont résolues (stories prérequises = ✅ Done)
-- [ ] Le champ **Conventions** (tags) est renseigné dans la section Meta (voir `.tiple/conventions/_index.md`)
+- [ ] Le champ **Conventions** (tags) est renseigné dans la section Meta (voir `.claude/conventions/_index.md`)
 - [ ] Le component-registry a été vérifié (pas de composant à dupliquer)
