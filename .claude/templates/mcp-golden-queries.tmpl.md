@@ -27,7 +27,7 @@
 
 ## Journal des révisions de métadonnées
 
-> ⚠️ Les hosts CACHENT instructions et descriptions : déconnecter/reconnecter le connecteur avant de tester une révision, sinon on évalue l'ancienne version.
+> ⚠️ Les hosts figent instructions et descriptions : avant de tester une révision, faire le geste de rafraîchissement du host (mcp-patterns §8), sinon on évalue l'ancienne version. Claude Code : nouvelle session. claude.ai : « Actualiser la liste d'outils » (menu ⋯ de la fiche du connecteur), puis nouvelle conversation dont le premier message part quelques secondes après l'ouverture de la page. ChatGPT : bouton « Actualiser » en bas de la fiche du connecteur, puis nouvelle conversation avec le connecteur sélectionné (`@nom`). Déconnecter/reconnecter ne rafraîchit rien de façon fiable.
 
 | Date | Champ modifié | Raison (quel prompt échouait) | Résultat |
 |------|---------------|-------------------------------|----------|

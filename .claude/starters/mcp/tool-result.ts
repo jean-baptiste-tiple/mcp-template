@@ -1,18 +1,19 @@
 // Destination : src/mcp/tool-result.ts
 // Mise en forme des résultats de tools — mcp-patterns §4 : TOUJOURS les deux formes.
-// ⚠️ CONTRAT (retour agents) : le `content` texte est la SEULE voie fiable vers le
-// modèle — certains hosts lui masquent `structuredContent` (qui alimente le widget).
+// ⚠️ CONTRAT (banc mcp-test, 2026-09-22) : claude.ai et ChatGPT montrent le `content`
+// texte au modèle ; Claude Code ne lui montre QUE `structuredContent` quand il existe.
 // Tout ce que le modèle doit lire ou exécuter (consignes, données source d'un
-// prepare, texte brut) va dans `text` ; dupliquer dans `structured` si le widget
-// en a besoin.
+// prepare, texte brut) va dans `text` ET dans `structured` (champ `message` ou
+// `instructions`), en plus de ce dont le widget a besoin.
 import { widgetMeta, type WidgetName } from "./widget-meta"
 
 interface ToolResultOptions {
-  // Ce que le modèle LIT. Résultat simple : résumé 2-4 lignes. Tool "prepare" :
-  // consignes complètes + données source (le modèle ne verra rien d'autre).
+  // Ce que le modèle LIT sur claude.ai et ChatGPT. Résultat simple : résumé 2-4 lignes.
+  // Tool "prepare" : consignes complètes + données source.
   text: string
-  // Canal du WIDGET (+ citable quand l'host l'expose) : ids + résumé + next_actions.
-  // JAMAIS l'entité complète si le widget l'affiche.
+  // Canal du WIDGET, et seul canal lu par Claude Code : ids + résumé + next_actions
+  // + le même texte que `text` (champ `message`). JAMAIS l'entité complète si le
+  // widget l'affiche.
   structured: Record<string, unknown> & { next_actions?: string[] }
   widget?: WidgetName
 }

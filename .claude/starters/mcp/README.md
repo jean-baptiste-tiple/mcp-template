@@ -135,6 +135,6 @@ du widget dans `widget-meta.ts` + `build.mjs`, maintenir `instructions` et bump
 > rejette la resource) ; bridge = SDK officiel ext-apps (un `ui/initialize` fait main avec
 > `clientInfo` au lieu d'`appInfo` = widget vide, sans erreur) ; ChatGPT = variante skybridge
 > ET updates via le CustomEvent `openai:set_globals` (pas postMessage — sinon loader infini) ;
-> certains hosts MASQUENT `structuredContent` au modèle → consignes et données d'un prepare
-> vont dans le `content` TEXTE ; le loader d'un widget n'est jamais terminal (timeout 12 s
-> → erreur actionnable).
+> consignes et données d'un prepare vont dans le `content` TEXTE (lu par claude.ai et ChatGPT)
+> ET dans `structuredContent` (seul canal lu par Claude Code quand il existe, mcp-patterns §4) ;
+> le loader d'un widget n'est jamais terminal (timeout 12 s → erreur actionnable).

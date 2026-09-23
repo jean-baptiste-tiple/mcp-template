@@ -38,8 +38,10 @@ L'« Agent Experience » commence à l'`initialize` : c'est là que le modèle a
 
 ### 2.1 `serverInfo` + `instructions` (niveau serveur)
 
-- `serverInfo` : `name` court et stable, `title` humain, `version` (semver, bumpé à chaque évolution de tools).
-- **`instructions` est OBLIGATOIRE et maintenu** — c'est le "system prompt" du serveur, injecté chez l'host. Il décrit : mission, entités, workflow type, conventions. À rédiger **en anglais** (robustesse cross-host ; les utilisateurs parlent leur langue, le modèle fait le pont). Structure à suivre :
+> Statuts ci-dessous : mesurés sur le banc `mcp-test` (Claude Code 2.1.263/2.1.278, claude.ai, Claude Desktop/Cowork, ChatGPT developer mode), format `[statut · date · scénario]`, détail dans `docs/bench/results.md` du banc.
+
+- `serverInfo` : `name` court et stable, `title` humain, `version` (semver, bumpée à chaque évolution de tools). **Aucun host ne les montre au modèle** `[infirmé · 2026-09-22 · M6, server_identity]` : le modèle voit le nom local du serveur (Claude Code) ou le nom du connecteur saisi par l'utilisateur (claude.ai, ChatGPT), jamais `title` ni `version`. Ils servent aux interfaces et au journal ; le domaine du produit doit donc être dans les noms et les descriptions des tools (§3).
+- **`instructions` est OBLIGATOIRE et maintenu**, mais ce n'est **pas un canal fiable** `[précisé · 2026-09-22 · readme_instructions, instr_len_*]` : Claude Code les injecte au démarrage de session seulement (serveur déjà connecté au premier message) et les coupe à **2 048 caractères** ; ChatGPT les transmet ; **claude.ai et Claude Desktop (chat) ne les montrent jamais au modèle**. Donc : ≤ 2 000 caractères, et **toute règle vitale est AUSSI dans la description du tool qu'elle concerne** (première phrase) ou dans son schéma (champ requis). Les instructions restent le récapitulatif : mission, entités, workflow type, conventions. À rédiger **en anglais** (robustesse cross-host ; les utilisateurs parlent leur langue, le modèle fait le pont). Structure à suivre :
 
 ```typescript
 instructions: `<Product> manages <entities> for <audience> (multi-tenant).
@@ -63,6 +65,7 @@ Rules:
 ```
 
 - Interdits dans `instructions` et les descriptions : date du jour, contenu par utilisateur, compteurs — tout ce qui varie casse le prompt caching de l'host et pollue la découverte.
+- Les règles de l'exemple ci-dessus qui conditionnent un enchaînement (prepare → save dans le même tour, résolution par nom, pas de retry) se répètent dans la description du tool concerné : sur claude.ai, elles n'existent que là.
 
 ### 2.2 Métadonnées de tools (niveau tool)
 
@@ -73,12 +76,23 @@ Voir §3. Le modèle décide **uniquement** sur `name` + `title` + `description`
 - Exposer des **prompts MCP** (capability `prompts`) pour les parcours canoniques du produit. Dans Claude ils apparaissent comme commandes cliquables → découvrabilité immédiate des cas d'usage.
 - Côté ChatGPT, renseigner les starter prompts / golden queries dans les métadonnées de l'app (soumission Apps SDK).
 
+### 2.4 Notice d'usage lue à chaque conversation (readme + ack)
+
+Quand un protocole d'usage ne tient pas dans les descriptions (règles de domaine, ordre d'appel) et que les instructions ne suffisent pas (claude.ai ne les montre pas, §2.1), un tool `readme` sert la notice et les autres tools l'exigent `[confirmé · 2026-09-22 · readme_ack, 9 couples host × modèle]` :
+
+- **Le levier qui marche partout : un champ `ack` REQUIS dans le schéma** de chaque tool (description : « Value returned by <readme tool>; call it first »), et le tool readme qui renvoie ce code. Mesuré : readme appelé avant le premier tool, une fois par conversation, de nouveau dans une nouvelle conversation, sur Claude Code (Opus, Sonnet, Fable), claude.ai (Opus 5, Sonnet 5, Fable 5.1, Haiku 4.5) et ChatGPT (défaut, « Analyser »). Coût : un appel et la taille du readme par conversation.
+- **Levier sans contrainte, presque aussi bon** : la première phrase de la description de chaque tool dit « Requires <readme tool> first (call it once per conversation before this tool). » — suivi partout `[2026-09-22 · readme_descriptions]`.
+- **Leviers qui échouent** `[2026-09-22 · readme_instructions, readme_hub, readme_name_first, readme_gate]` : la consigne dans les instructions (ignorée par claude.ai) ; le renvoi « see <readme tool> for usage » (ignoré par claude.ai et par Fable) ; le tri du readme en tête de liste (sans effet) ; le rejet côté serveur tant que l'empreinte UA + IP n'a pas appelé le readme (inutilisable : claude.ai et ChatGPT changent d'IP à chaque requête, boucle de rejets, ChatGPT finit par annoncer un résultat jamais obtenu).
+- **Le serveur vérifie l'ack** (HMAC du readme et du scénario, fenêtre de validité) et rejette avec une erreur actionnable ; le tool readme reste toujours appelable.
+- **Le readme informe, il ne commande pas** : Sonnet et Opus refusent d'exécuter les règles écrites dans un résultat de tool (« citer la ligne d'ack », « repasser l'ack ») et les signalent comme contenu non fiable ; toute obligation passe par les métadonnées (description, schéma).
+- **Le texte du readme va aussi dans `structuredContent`** (§4) : sur Claude Code, un readme servi en texte à côté d'un `{ack}` structuré n'atteint jamais le modèle ; l'ack prouve alors l'appel, pas la lecture.
+
 ## 3. Design des tools
 
-- **Peu de tools, orientés tâche** (≤ 10). Un tool = une intention ("archiver"), pas un endpoint CRUD.
-- **Nommage** : `verb_noun` en anglais, le domaine toujours visible dans le nom (`import_document`, `search_documents`). Les utilisateurs ont d'autres connecteurs : un nom ambigu (`search`, `list`) = mauvais routage garanti.
+- **Peu de tools, orientés tâche** (≤ 10). Un tool = une intention ("archiver"), pas un endpoint CRUD. La limite n'est pas l'host `[précisé · 2026-09-22 · many_tools_*]` : aucun ne refuse ni ne tronque 504 tools (≈ 47 000 tokens de liste) ; Claude Code et claude.ai les diffèrent (noms seuls, ordre alphabétique, chargement par recherche d'outils), ChatGPT les expose tous dans l'ordre du serveur. Elle tient au routage et au coût en contexte.
+- **Nommage** : `verb_noun` en anglais, le domaine toujours visible dans le nom (`import_document`, `search_documents`). Les utilisateurs ont d'autres connecteurs : un nom ambigu (`search`, `list`) = mauvais routage garanti. **≤ 64 caractères, `snake_case` ASCII (lettres, chiffres, `_`)** `[mesuré · 2026-09-22 · name_len_*, name_chars]` : Claude Code préfixe `mcp__<serveur>__` et l'API refuse plus de 128 caractères — un nom de 128 **casse toute la session** (erreur 400 dès que le tool est chargé) ; Claude Code remplace `.` et les lettres accentuées par `_` ; claude.ai **retire sans message** un tool au nom non ASCII ; ChatGPT accepte tout.
 - **`title` humain** dans la langue des utilisateurs (affiché dans les UI des hosts) ; `name` stable à jamais (voir §10).
-- **Descriptions : format imposé** — verbe d'abord, « Use this when… », puis « Do not use for… », l'essentiel dans la première phrase (les modèles tronquent) :
+- **Descriptions : format imposé** — verbe d'abord, « Use this when… », puis « Do not use for… », l'essentiel dans la première phrase. **Ce sont les hosts qui tronquent** `[confirmé et précisé · 2026-09-22 · desc_len_*]` : claude.ai (web et Desktop) ne montre que la **première phrase** tant que le tool n'est pas chargé par sa recherche d'outils ; Claude Code coupe toute description à **2 048 caractères** ; ChatGPT la livre entière (32 000 caractères testés). Une description de plusieurs milliers de caractères nuit aussi à la recherche d'outils (claude.ai ne retrouve plus le tool par son nom exact à 32 000). Viser moins de 1 000 caractères :
 
 ```typescript
 const SEARCH_DESC = `Searches the organization's documents by title, author or date range.
@@ -87,7 +101,8 @@ a document name before get_document. Do not use to read a document's content (us
 Returns a paginated list (id, title, updated_at).`
 ```
 
-- **Inputs** : Zod avec `.describe()` sur CHAQUE champ — **y compris les champs d'identifiants** (`"Document id (or pass name)"`, `"Variant id (default: the latest)"`) : un champ nu est un champ que le modèle remplit mal. Enums pour les valeurs fermées, exemples dans la description du champ, défauts explicites. Champs optionnels vraiment optionnels.
+- **Un prérequis s'écrit en consigne impérative dans la première phrase** (« Requires X first… ») **ou en champ requis du schéma**, jamais en renvoi (« see X for usage ») `[mesuré · 2026-09-22 · readme_descriptions, readme_hub]` : la consigne impérative est suivie par les 5 modèles testés sur les 3 hosts ; le renvoi est ignoré sur claude.ai et par Fable.
+- **Inputs** : Zod avec `.describe()` sur CHAQUE champ — **y compris les champs d'identifiants** (`"Document id (or pass name)"`, `"Variant id (default: the latest)"`) : un champ nu est un champ que le modèle remplit mal. Enums pour les valeurs fermées, exemples dans la description du champ, défauts explicites. Champs optionnels vraiment optionnels. Deux limites mesurées `[2026-09-22 · M3, schema_shape]` : **un champ requis sans valeur sûre est inventé** (les trois hosts ont complété un `mode` requis par `"fast"`, ChatGPT en prétendant l'inverse) → optionnel + défaut explicite ; **ChatGPT ne montre pas au modèle les descriptions des propriétés imbriquées** (structure, enums et `required` vus, 0 description sur 27) → ce qu'un champ imbriqué exige se répète dans la description du tool.
 - **Annotations HONNÊTES** sur chaque tool : `readOnlyHint: true` pour les lectures **ET pour les tools "prepare" qui ne persistent rien** (un prepare est un calcul pur — le déclarer mutant fait sur-confirmer les hosts) ; `destructiveHint` si suppression ; `openWorldHint: false` sauf accès réseau externe réel (fetch d'URL, service tiers) ; `idempotentHint` quand vrai.
 - **`securitySchemes` par tool** (exigence ChatGPT pour déclencher l'UI de connexion) : tools authentifiés = `oauth2`. Sans cette déclaration, ChatGPT n'affiche jamais le bouton "Se connecter". Centraliser dans un helper `toolMeta()` — jamais à la main par tool.
 - **Résolution par nom** : les tools acceptent un nom en plus des ids (matching insensible casse **et accents**, métacaractères `%`/`_` échappés avant `ilike`). Ambiguïté (≥2 résultats) → retourner les candidats dans `structuredContent` **+ l'instruction explicite** « montrez la liste et demandez à l'utilisateur — ne devinez pas » (dans le message d'erreur ET dans les instructions serveur). 0 résultat → lister ce qui existe ou le tool à appeler.
@@ -99,16 +114,18 @@ Toujours retourner **les deux formes** :
 
 ```typescript
 return {
-  content: [{ type: "text", text: ceQueLeModèleLit }],          // SEULE voie fiable vers le modèle
-  structuredContent: {                                          // canal du WIDGET
+  content: [{ type: "text", text: ceQueLeModèleLit }],          // lu par claude.ai et ChatGPT
+  structuredContent: {                                          // canal du WIDGET, et SEUL canal lu par Claude Code
     id, title, status,
+    message: ceQueLeModèleLit,                                  // même texte, pour Claude Code
     next_actions: ["archive_document", "share_document"],       // le modèle proposera la suite
   },
   _meta: widgetMeta("document-preview"),
 }
 ```
 
-- **⚠️ Le `content` texte est la SEULE voie fiable vers le modèle** (leçon n°1 des rapports agents) : certains hosts MASQUENT `structuredContent` au modèle — qui « n'a reçu ni les données ni les consignes » et reconstruit de mémoire. Tout ce que le modèle doit lire ou exécuter (consignes d'un prepare, données source, texte brut — avec un cap de taille) va dans le texte ; dupliquer dans `structuredContent` ce dont le widget a besoin.
+- **⚠️ Ce que le modèle doit lire va dans le texte ET dans `structuredContent`** `[inversé · 2026-09-22 · résultat brut de bench_echo, readme_* P14]` : quand un résultat porte les deux canaux, **Claude Code ne montre au modèle que `structuredContent`** (Opus, Sonnet et Fable ont restitué `{"args":…}` mot pour mot, jamais le texte ; un readme servi en texte ne les a jamais atteints) ; **claude.ai et ChatGPT montrent le texte**. L'ancienne règle « le texte est la seule voie fiable » (leçon cv-editor) vaut pour claude.ai et ChatGPT, pas pour Claude Code. Concrètement : consignes, données source et texte brut (avec un cap de taille) dans `text`, et les mêmes dans un champ de `structuredContent` (`message`, `instructions`) ; un résultat sans widget peut se contenter du texte seul, lu partout (vérifié sur Claude Code avec les erreurs `isError`).
+- **Une consigne dans un résultat de tool est une donnée, pas un ordre** `[mesuré · 2026-09-22 · readme_* P14, P15]` : Sonnet et Opus refusent d'exécuter une règle du résultat qui ne sert pas la demande de l'utilisateur (citer un code, repasser une valeur) et la signalent comme contenu non fiable. Les consignes d'un prepare passent parce qu'elles servent la demande (non mesuré sur le banc) ; une obligation (prérequis, valeur à repasser) passe par les métadonnées (§2.4, §3).
 - `structuredContent` alimente le widget (contrat identique sur les deux hosts) et reste citable quand l'host l'expose. Compact : ids + résumé, **jamais** l'entité complète si le widget l'affiche (économie de contexte).
 - **Liens signés : jamais bruts.** Le texte du tool impose la présentation en lien markdown court (`[Ouvrir le PDF](url)`) + mention de l'expiration — sinon le modèle colle l'URL signée entière dans le chat.
 - `next_actions` : liste des tools pertinents après celui-ci — c'est ce qui rend la conversation fluide et l'AX « guidée ». **Tracer le graphe complet** : chaque chaîne canonique (import → save → transformer → exporter → partager) doit être fermée, sans impasse ni tool inexistant référencé.
@@ -118,7 +135,7 @@ return {
 
 **Le canal MCP EST une conversation avec un modèle frontier que l'utilisateur paie déjà** (son abonnement Claude/ChatGPT). Pour toute opération intelligente (structuration, réécriture, traduction, résumé), NE PAS appeler un LLM côté serveur : coût API nul, zéro clé à gérer, et l'utilisateur voit/corrige le travail en direct. À figer par ADR au cadrage. Le pattern :
 
-1. **`prepare_x` (tool)** : le serveur fait sa part **déterministe** (extraction de texte, masquages, calculs) et retourne les données + des **consignes statiques** (constantes versionnées dans `src/mcp/prompts/` — jamais générées par utilisateur, prompt caching oblige). **Consignes ET données dans le `content` TEXTE** (§4 — certains hosts masquent structuredContent au modèle).
+1. **`prepare_x` (tool)** : le serveur fait sa part **déterministe** (extraction de texte, masquages, calculs) et retourne les données + des **consignes statiques** (constantes versionnées dans `src/mcp/prompts/` — jamais générées par utilisateur, prompt caching oblige). **Consignes ET données dans le texte ET dans `structuredContent`** (§4 : Claude Code ne lit que `structuredContent` quand il existe, claude.ai et ChatGPT lisent le texte).
 2. **Le modèle travaille dans le chat** — c'est l'abonnement de l'utilisateur qui paie.
 3. **`save_x` (tool)** : le serveur est le **garde-fou** — validation Zod stricte + **audits déterministes**. Rejet = erreur actionnable listant exactement quoi corriger ; le modèle réessaie.
 
@@ -239,7 +256,9 @@ Notre serveur = **resource server** ; Supabase Auth = **authorization server** (
 ## 7. Transport : stateless (défaut) ou stateful — ADR obligatoire au cadrage
 
 **Stateless (le défaut du starter)** : Streamable HTTP **sans session** — pas de `Mcp-Session-Id` persisté, pas de Redis, chaque requête reconstruit le serveur (`disableSse: true`). Tout l'état métier est en Postgres ; l'état conversationnel appartient à l'host. Simple, scale-to-zero, parfait Vercel.
-- Conséquences : pas de notifications server→client ni de subscriptions resources — ne PAS en introduire sans rouvrir l'ADR. Une opération longue tient dans la requête (`maxDuration` ajusté sur la route) ; si un jour > 60 s → pattern "job + tool de statut", pas du push.
+- Conséquences : pas de notifications server→client hors requête ni de subscriptions resources — ne PAS en introduire sans rouvrir l'ADR. Une opération longue tient dans la requête (`maxDuration` ajusté sur la route) ; si un jour > 60 s → pattern "job + tool de statut", pas du push.
+- **Notification dans la réponse** `[précisé · 2026-09-22 · grille B, bench_mutate]` : en stateless, un tool qui modifie la surface peut écrire `notifications/tools/list_changed` dans le flux de réponse de sa propre requête (`relatedRequestId`). Claude Code la reçoit et relit la liste en 0,5 s ; claude.ai et ChatGPT l'ignorent.
+- **Aucune affinité réseau** `[mesuré · 2026-09-22 · readme_gate]` : claude.ai et ChatGPT appellent depuis des pools d'IP tournants (une IP différente presque à chaque requête). Aucun état ne s'attache à une empreinte UA + IP ; un état « a déjà fait X » passe dans l'appel (champ requis, §2.4) ou dans une session OAuth.
 
 **Stateful (si le produit l'exige)** : sessions `Mcp-Session-Id` + SSE via `redisUrl` dans la config mcp-handler (Redis Upstash/Vercel KV — y stocke sessions et flux entre invocations serverless). À choisir quand le produit a besoin de : notifications server→client, subscriptions de resources (updates temps réel, `listChanged` poussé), elicitation, état de session côté serveur.
 - Conséquences : coût Redis, plus de scale-to-zero pur, gestion d'invalidation de session, tests plus lourds. Le bloc de config prêt est en commentaire dans la route du starter.
@@ -256,7 +275,16 @@ Jeu de prompts versionné dans `docs/mcp-golden-queries.md` (créé depuis `.cla
 
 Règles : seed = les prompts d'exemple du brief ; toute story qui ajoute/modifie un tool ou une description ajoute ses golden queries et **rejoue le jeu sur les deux hosts** (Claude + ChatGPT developer mode) ; en cas de mauvais routage, corriger la description — **un champ de métadonnée à la fois**, et noter la révision dans le fichier.
 
-**Boucle de feedback agent (de l'or — leçon vécue)** : après chaque évolution significative, demander à l'agent hôte lui-même un **rapport de frictions structuré** — déroulé step-by-step de ce qu'il a fait, ressenti/points de blocage, hypothèses de cause, repro minimale — et le faire produire sur les DEUX hosts. Deux rapports d'agents ont trouvé en un test (structuredContent masqué, loader infini, prepare sans save) ce que des reviews de code n'avaient pas vu. ⚠️ Les hosts **cachent** instructions et descriptions : déconnecter/reconnecter le connecteur avant de tester une évolution de métadonnées, sinon on évalue l'ancienne version.
+**Boucle de feedback agent (de l'or — leçon vécue)** : après chaque évolution significative, demander à l'agent hôte lui-même un **rapport de frictions structuré** — déroulé step-by-step de ce qu'il a fait, ressenti/points de blocage, hypothèses de cause, repro minimale — et le faire produire sur les DEUX hosts. Deux rapports d'agents ont trouvé en un test (structuredContent masqué, loader infini, prepare sans save) ce que des reviews de code n'avaient pas vu. Un rapport donne des hypothèses, pas des faits : ChatGPT réécrit l'historique (il appelle un tool au moment de la question puis affirme l'avoir appelé avant, ou annonce un résultat jamais obtenu) `[mesuré · 2026-09-22 · baseline, readme_gate]` — recouper chaque fait avec le journal du serveur.
+
+**Voir une évolution de métadonnées : geste minimal par host** `[infirmé (le geste « déconnecter/reconnecter ») et précisé (le cache) · 2026-09-22 · grille B M1–M6, baseline 15:08–15:40]`. Sans ce geste, on évalue l'ancienne version :
+
+| Host | Ce qui est figé | Geste minimal | Mesure |
+|------|-----------------|---------------|--------|
+| Claude Code | Définitions (description, schéma) des tools déjà chargés et instructions, pour toute la session ; les noms se mettent à jour par `list_changed` | Nouvelle session, serveur `connected` dans `/mcp` avant le premier message ; `/mcp` reconnect ne suffit pas | claude-code@2.1.278 |
+| Cowork (Desktop) | Rien entre deux tâches : handshake complet à chaque tâche | Nouvelle tâche | claude-code@2.1.278 via Claude-User |
+| claude.ai web et Desktop (chat) | Liste au niveau du connecteur, plus un **instantané local du navigateur** (`claudeai.mcpBootstrapSnapshot.v1`) qui fige une conversation dont le premier message part avant la relecture | « Actualiser la liste d'outils » (menu ⋯ de la fiche du connecteur), puis nouvelle conversation dont le premier message part **quelques secondes après** l'ouverture de la page (ou recharger) ; ne pas déconnecter/reconnecter (vide l'instantané sans le réécrire : plus aucun tool visible dans les premiers messages) | claude-ai@0.1.0, Anthropic/ClaudeAI@1.0.0 |
+| ChatGPT (developer mode) | Définition du connecteur (version « dev mode ») | Bouton « Actualiser » en bas de la fiche du connecteur, puis nouvelle conversation avec le connecteur sélectionné (`@nom`) ; le commutateur et « Déconnecter / Reconnecter » n'envoient rien ; sans sélection, une question qui ne demande pas d'agir ne voit pas les tools | openai-mcp@1.0.0 |
 
 ## 9. Onboarding humain (l'autre moitié de l'AX)
 
@@ -269,5 +297,5 @@ Règles : seed = les prompts d'exemple du brief ; toute story qui ajoute/modifie
 - **Unit** : services sans MCP ; tools via `InMemoryTransport.createLinkedPair()` + `Client` (auth mockée) — vérifier schéma, `structuredContent`, `next_actions`, erreurs actionnables, metas widget (la TRIPLE clé §5.1) et les deux resources (mcp-app + skybridge).
 - **Smoke HTTP scripté** : `scripts/smoke-mcp.mjs` (fourni par le starter) — initialize + tools/list + tool d'appel contre `next start` local ou une URL de prod ; à lancer après chaque déploiement.
 - **Manuel** : MCP Inspector sur `http://localhost:3000/api/mcp` (tools, auth, resources) + matrice §5.4.
-- **Évolution** : ajouter un champ optionnel = OK. Renommer/supprimer un tool ou rendre un champ requis = **breaking** → ADR + dépréciation (le tool répond encore avec un message de migration) + notification `listChanged`. Bump `serverInfo.version` à chaque changement de surface.
+- **Évolution** : ajouter un champ optionnel = OK. Renommer/supprimer un tool ou rendre un champ requis = **breaking** → ADR + dépréciation (le tool répond encore avec un message de migration) + notification `listChanged` (effet sur Claude Code seulement, §7). Bump `serverInfo.version` à chaque changement de surface : utile au journal, mais aucun host ne le montre et il ne rafraîchit aucun cache `[précisé · 2026-09-22 · M6, baseline 15:12]`. Un contrat modifié en place (schéma, prérequis) n'atteint pas de façon fiable les conversations claude.ai (instantané local, §8) : un changement de contrat = **nouveau nom de tool** + dépréciation de l'ancien.
 - Descriptions/schemas **stables** (prompt caching des hosts) ; golden queries rejouées à chaque évolution (§8).

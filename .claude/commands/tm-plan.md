@@ -99,6 +99,15 @@ Identifier les besoins techniques du projet et **documenter** les starters à ac
 
 Le template fonctionne tel quel sans base de données. Passer directement à la Phase 1.
 
+**Question suivante :** Le produit expose-t-il un serveur MCP (Claude ou ChatGPT comme interface) ?
+
+#### Si oui → Documenter l'activation du starter MCP
+
+1. Lire `.claude/starters/mcp/README.md` et `.claude/conventions/mcp-patterns.md`
+2. Passer `.claude/checklists/mcp-design.md` pendant les phases 1 et 2 : phrases réelles des utilisateurs, une fiche par outil (une FR par outil dans le PRD), golden queries
+3. Figer par ADR l'auth, le transport et l'absence d'IA serveur (règles MCP 4 et 7 de `CLAUDE.md`)
+4. La story E01-S01 « Setup technique » inclut l'installation du starter MCP
+
 ---
 
 ### Phase 1 — Comprendre le problème (→ docs/brief.md)
