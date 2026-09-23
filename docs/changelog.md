@@ -11,6 +11,12 @@
 **Fichiers :** Liste des fichiers créés/modifiés
 -->
 
+## [2026-09-23] — mcp-patterns : mesures des bancs E04 et E03
+**Quoi :** report dans `mcp-patterns.md` des mesures du banc E04 (serveur proto, 23/09/2026 : prompts par host, code expiré à rappeler « avec la même demande », borne de description entre plusieurs serveurs, annotations et autorisations claude.ai, `confirm` accepté après approbation du contenu, blocages OpenAI, plafond de 45 000 caractères lus en entier, données en champs dans `structuredContent`, ton suivi à 100 %, consigne des candidats question/action, geste de rafraîchissement confirmé, phrase de préférences) et du banc E03 (OAuth, 23/09 : découverte par la forme suffixée, enregistrement par host, Supabase suffit, organisation par l'adresse et appartenance à chaque appel, jeton non lié à la ressource, révocation au rafraîchissement). Checklist de conception `mcp-design.md` mise à jour en conséquence, lien vers la nouvelle page Recette.
+**Pourquoi :** le template repart avec les faits mesurés par les deux campagnes du dépôt `mcp-test`, datés et statués.
+**Écarté :** réécrire les sections existantes ; seuls des ajouts datés et statués.
+**Fichiers :** `.claude/conventions/mcp-patterns.md`, `.claude/checklists/mcp-design.md`, `docs/changelog.md`
+
 ## [2026-09-23] — Restitution du banc MCP et checklist de conception
 **Quoi :** (1) Report des mesures du banc MCP (dépôt `mcp-test`, campagne du 22/09/2026, commit `b40ed65`, qui part exactement de la version actuelle du template) : `mcp-patterns.md` (§2.1 notice serveur non fiable et plafonnée, §2.4 notice lue à chaque conversation par un outil « mode d'emploi » dont le code est exigé, §3 nombre et noms d'outils, troncatures par host, première phrase, champs obligatoires inventés, descriptions imbriquées invisibles sur ChatGPT, §4 contenu en texte ET en `structuredContent`, consignes des résultats traitées comme des données, §7, §8 geste de rafraîchissement par host, §10), règles MCP 6 et 7 de `CLAUDE.md`, gabarit des golden queries, README et `tool-result.ts` du starter MCP. (2) Nouvelle checklist `.claude/checklists/mcp-design.md`, tirée de la « Recette : concevoir un bon MCP », appelée par `/tm-plan` (phase 0, starter MCP) et par la règle MCP 9.
 **Pourquoi :** Les conventions affirmaient des comportements d'hosts sans mesure ; le banc les a mesurés et fait foi. Le template repart avec des faits datés, et le cadrage d'un produit MCP-first suit la même recette que la version produit.
