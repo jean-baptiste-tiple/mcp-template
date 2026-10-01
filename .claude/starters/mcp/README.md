@@ -108,6 +108,8 @@ bloc commenté dans `mcp-route.ts` (`withMcpAuth` + `verifyToken` de `src/mcp/au
 4. Vérifier `/.well-known/oauth-protected-resource` (+ les 2 variantes rewrites).
 5. Figer le choix par ADR (`docs/decisions/`) — exigé par la règle MCP 4.
 
+Supabase self-hosted (Scaleway ou autre) : l'étape 3 passe par des variables d'env + routes Kong/Caddy, voir `.claude/conventions/deployment-scaleway.md`.
+
 **Ne jamais** livrer un serveur MCP public en "mode dégradé anonyme" : 401 + `WWW-Authenticate` partout.
 
 ## Vérification après install (S01)

@@ -11,6 +11,13 @@
 **Fichiers :** Liste des fichiers créés/modifiés
 -->
 
+## [2026-10-01] — Option de déploiement Supabase self-hosted sur Scaleway
+**Quoi :** nouvelle convention `deployment-scaleway.md` : deux options (Supabase sur Instance Scaleway + app sur Vercel ; tout sur Scaleway avec Serverless Containers), socle (TLS Caddy, SMTP Transactional Email, Object Storage en backend S3), les 5 réglages bloquants pour que l'OAuth 2.1 du canal MCP tourne sur GoTrue self-hosted (URLs/issuer, serveur OAuth + DCR, clés asymétriques, hook Custom Access Token, routes Kong et Caddy ouvertes), adaptations du template (migrations par `--db-url`, `db:types`, pas de branching), checklist curl et risques. Pointeurs depuis `deployment-patterns.md` et le README du starter MCP.
+**Pourquoi :** vérifier que le template app + MCP tourne de bout en bout avec Supabase Auth open source hébergé chez Scaleway ; le compose officiel ne l'active pas par défaut (Kong exige une `apikey` sur `/auth/v1/oauth/*`, HS256 par défaut, serveur OAuth désactivé).
+**Problèmes :** analyse sur les sources (compose officiel, code GoTrue v2.196.0, docs Supabase et Scaleway), non éprouvée sur une instance : les points « à valider » passent par la checklist avant le premier host.
+**Écarté :** un starter `supabase-selfhosted/` avec fichiers à copier (compose, kong.yml) — rien ne l'installe aujourd'hui et ces fichiers suivent le compose officiel, qu'on dupliquerait ; Managed PostgreSQL Scaleway comme base Supabase — image et extensions Supabase absentes ; Kapsule — sans besoin actuel.
+**Fichiers :** `.claude/conventions/deployment-scaleway.md` (nouveau), `.claude/conventions/deployment-patterns.md`, `.claude/starters/mcp/README.md`, `docs/changelog.md`
+
 ## [2026-09-23] — mcp-patterns : mesures des bancs E04 et E03
 **Quoi :** report dans `mcp-patterns.md` des mesures du banc E04 (serveur proto, 23/09/2026 : prompts par host, code expiré à rappeler « avec la même demande », borne de description entre plusieurs serveurs, annotations et autorisations claude.ai, `confirm` accepté après approbation du contenu, blocages OpenAI, plafond de 45 000 caractères lus en entier, données en champs dans `structuredContent`, ton suivi à 100 %, consigne des candidats question/action, geste de rafraîchissement confirmé, phrase de préférences) et du banc E03 (OAuth, 23/09 : découverte par la forme suffixée, enregistrement par host, Supabase suffit, organisation par l'adresse et appartenance à chaque appel, jeton non lié à la ressource, révocation au rafraîchissement). Checklist de conception `mcp-design.md` mise à jour en conséquence, lien vers la nouvelle page Recette.
 **Pourquoi :** le template repart avec les faits mesurés par les deux campagnes du dépôt `mcp-test`, datés et statués.
