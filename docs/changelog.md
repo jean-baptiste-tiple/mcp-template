@@ -11,9 +11,9 @@
 **Fichiers :** Liste des fichiers créés/modifiés
 -->
 
-## [2026-10-01] — Archivage : fusion dans dev-framework-template
-**Quoi :** bandeau d'archivage en tête du README, pointant vers `dev-framework-template`.
-**Pourquoi :** les deux templates divergeaient et chaque correctif était reporté à la main ; tous les projets étant désormais MCP, `dev-framework-template` reçoit le canal MCP installé par défaut et devient la seule source.
+## [2026-10-01] — Archivage : fusion dans app-mcp-template
+**Quoi :** bandeau d'archivage en tête du README, pointant vers `app-mcp-template`.
+**Pourquoi :** les deux templates divergeaient et chaque correctif était reporté à la main ; tous les projets étant désormais MCP, `dev-framework-template`, renommé `app-mcp-template`, reçoit le canal MCP installé par défaut et devient la seule source.
 **Écarté :** garder ce dépôt actif comme variante — double maintenance sans projet qui en ait besoin.
 **Fichiers :** `README.md`, `docs/changelog.md`
 
