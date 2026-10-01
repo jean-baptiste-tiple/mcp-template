@@ -1,5 +1,10 @@
 # MCP Template — Tiple Method
 
+> **Archivé (2026-10-01).** Fusionné dans [`dev-framework-template`](https://github.com/jean-baptiste-tiple/dev-framework-template) :
+> méthode v2.1 (skills, gate de commit, `check:framework`), canal MCP installé par défaut dans
+> `src/mcp/`, thème neutre à personnaliser, option Supabase self-hosted souverain (Scaleway).
+> Nouveaux projets : partir de `dev-framework-template`. Ce dépôt ne reçoit plus de correctifs.
+
 Template Git pour bootstrapper un **produit MCP-first** avec la Tiple Method : un SaaS dont le canal principal est un **serveur MCP** consommé depuis Claude et ChatGPT (tools + widgets MCP Apps), avec une app web Next.js en canal secondaire.
 
 C'est le Tiple Method Template de base (structure, templates de docs, checklists, conventions, slash commands Claude Code, design system) **spécialisé MCP** :
